@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="GetQuote">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="documentNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringHeaderP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringLinesP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetQuote_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringHeaderP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringLinesP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SendQuote">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isUpdateP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringHeaderP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringLinesP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="creditLimitOverdoP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SendQuote_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="creditLimitOverdoP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetCustomerCreditLimit">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="creditLimitP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="usedCreditLimitP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetCustomerCreditLimit_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="creditLimitP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="usedCreditLimitP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemInformation">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNoa47BarCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemInformation_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemUnitsOfMeasure">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNoa47BarCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemUnitsOfMeasure_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItems">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastDateModifiedP" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItems_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetCustomers">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastDateModifiedP" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetCustomers_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="GetQuote">
+    <part name="parameters" element="tns:GetQuote" />
+  </message>
+  <message name="GetQuote_Result">
+    <part name="parameters" element="tns:GetQuote_Result" />
+  </message>
+  <message name="SendQuote">
+    <part name="parameters" element="tns:SendQuote" />
+  </message>
+  <message name="SendQuote_Result">
+    <part name="parameters" element="tns:SendQuote_Result" />
+  </message>
+  <message name="GetCustomerCreditLimit">
+    <part name="parameters" element="tns:GetCustomerCreditLimit" />
+  </message>
+  <message name="GetCustomerCreditLimit_Result">
+    <part name="parameters" element="tns:GetCustomerCreditLimit_Result" />
+  </message>
+  <message name="GetItemInformation">
+    <part name="parameters" element="tns:GetItemInformation" />
+  </message>
+  <message name="GetItemInformation_Result">
+    <part name="parameters" element="tns:GetItemInformation_Result" />
+  </message>
+  <message name="GetItemUnitsOfMeasure">
+    <part name="parameters" element="tns:GetItemUnitsOfMeasure" />
+  </message>
+  <message name="GetItemUnitsOfMeasure_Result">
+    <part name="parameters" element="tns:GetItemUnitsOfMeasure_Result" />
+  </message>
+  <message name="GetItems">
+    <part name="parameters" element="tns:GetItems" />
+  </message>
+  <message name="GetItems_Result">
+    <part name="parameters" element="tns:GetItems_Result" />
+  </message>
+  <message name="GetCustomers">
+    <part name="parameters" element="tns:GetCustomers" />
+  </message>
+  <message name="GetCustomers_Result">
+    <part name="parameters" element="tns:GetCustomers_Result" />
+  </message>
+  <portType name="KIPS_wms_Port">
+    <operation name="GetQuote">
+      <input name="GetQuote" message="tns:GetQuote" />
+      <output name="GetQuote_Result" message="tns:GetQuote_Result" />
+    </operation>
+    <operation name="SendQuote">
+      <input name="SendQuote" message="tns:SendQuote" />
+      <output name="SendQuote_Result" message="tns:SendQuote_Result" />
+    </operation>
+    <operation name="GetCustomerCreditLimit">
+      <input name="GetCustomerCreditLimit" message="tns:GetCustomerCreditLimit" />
+      <output name="GetCustomerCreditLimit_Result" message="tns:GetCustomerCreditLimit_Result" />
+    </operation>
+    <operation name="GetItemInformation">
+      <input name="GetItemInformation" message="tns:GetItemInformation" />
+      <output name="GetItemInformation_Result" message="tns:GetItemInformation_Result" />
+    </operation>
+    <operation name="GetItemUnitsOfMeasure">
+      <input name="GetItemUnitsOfMeasure" message="tns:GetItemUnitsOfMeasure" />
+      <output name="GetItemUnitsOfMeasure_Result" message="tns:GetItemUnitsOfMeasure_Result" />
+    </operation>
+    <operation name="GetItems">
+      <input name="GetItems" message="tns:GetItems" />
+      <output name="GetItems_Result" message="tns:GetItems_Result" />
+    </operation>
+    <operation name="GetCustomers">
+      <input name="GetCustomers" message="tns:GetCustomers" />
+      <output name="GetCustomers_Result" message="tns:GetCustomers_Result" />
+    </operation>
+  </portType>
+  <binding name="KIPS_wms_Binding" type="tns:KIPS_wms_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="GetQuote">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetQuote" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetQuote">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetQuote_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SendQuote">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:SendQuote" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SendQuote">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SendQuote_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetCustomerCreditLimit">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetCustomerCreditLimit" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetCustomerCreditLimit">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetCustomerCreditLimit_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetItemInformation">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemInformation" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItemInformation">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItemInformation_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetItemUnitsOfMeasure">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemUnitsOfMeasure" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItemUnitsOfMeasure">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItemUnitsOfMeasure_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetItems">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItems" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItems">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItems_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetCustomers">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetCustomers" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetCustomers">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetCustomers_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="KIPS_wms">
+    <port name="KIPS_wms_Port" binding="tns:KIPS_wms_Binding">
+      <address location="http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/KIPS_wms" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

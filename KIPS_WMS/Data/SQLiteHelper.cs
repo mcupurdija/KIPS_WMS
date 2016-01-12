@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using WM6._5_W_RS;
 
-namespace WM_W_RS.Data
+namespace KIPS_WMS.Data
 {
     public class SQLiteHelper
     {
         public static DataSet query(String select, Object[] args, String tableName)
         {
-            var sqliteCon = new SQLiteConnection(Util.GetDbCnnectionString());
+            var sqliteCon = new SQLiteConnection(Util.GetDbConnectionString());
             try
             {
                 sqliteCon.Open();
@@ -46,7 +45,7 @@ namespace WM_W_RS.Data
 
         public static Object simpleQuery(String select, Object[] args)
         {
-            var sqliteCon = new SQLiteConnection(Util.GetDbCnnectionString());
+            var sqliteCon = new SQLiteConnection(Util.GetDbConnectionString());
             try
             {
                 Object result = null;
@@ -94,7 +93,7 @@ namespace WM_W_RS.Data
 
         public static List<Object[]> multiRowQuery(String select, Object[] args)
         {
-            var sqliteCon = new SQLiteConnection(Util.GetDbCnnectionString());
+            var sqliteCon = new SQLiteConnection(Util.GetDbConnectionString());
             try
             {
                 sqliteCon.Open();
@@ -158,7 +157,7 @@ namespace WM_W_RS.Data
         /// <returns></returns>
         public static List<Object> oneRowQuery(String select, Object[] args)
         {
-            var sqliteCon = new SQLiteConnection(Util.GetDbCnnectionString());
+            var sqliteCon = new SQLiteConnection(Util.GetDbConnectionString());
             try
             {
                 sqliteCon.Open();
@@ -211,7 +210,7 @@ namespace WM_W_RS.Data
         public static int nonQuery(String statement, Object[] args)
         {
             int result = -1;
-            var sqliteCon = new SQLiteConnection(Util.GetDbCnnectionString());
+            var sqliteCon = new SQLiteConnection(Util.GetDbConnectionString());
             try
             {
                 sqliteCon.Open();
@@ -244,7 +243,7 @@ namespace WM_W_RS.Data
         public static int insertQuery(String statement, Object[] args)
         {
             int result = -1;
-            var sqliteCon = new SQLiteConnection(Util.GetDbCnnectionString());
+            var sqliteCon = new SQLiteConnection(Util.GetDbConnectionString());
             try
             {
                 sqliteCon.Open();

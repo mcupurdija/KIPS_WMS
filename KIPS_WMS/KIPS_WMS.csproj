@@ -56,6 +56,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Downloads\sqlite-netFx35-binary-PocketPC-ARM-2008-1.0.99.0\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -64,6 +65,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CsvImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CsvImport.Designer.cs">
+      <DependentUpon>CsvImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DbStatements.cs" />
     <Compile Include="Data\SQLiteHelper.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -71,21 +79,60 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Meni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Meni.Designer.cs">
+      <DependentUpon>Meni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ItemModel.cs" />
+    <Compile Include="Model\CsvImportModel.cs" />
+    <Compile Include="Model\CustomerModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CsvImport.resx">
+      <DependentUpon>CsvImport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Meni.resx">
+      <DependentUpon>Meni.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ponude\NovaPonuda.resx">
+      <DependentUpon>NovaPonuda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ponude\Ponude.resx">
+      <DependentUpon>Ponude.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UI\Ponude\NovaPonuda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Ponude\NovaPonuda.Designer.cs">
+      <DependentUpon>NovaPonuda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ponude\Ponude.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Ponude\Ponude.Designer.cs">
+      <DependentUpon>Ponude.cs</DependentUpon>
+    </Compile>
     <Compile Include="Util.cs" />
+    <Compile Include="Web References\NAV_WS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web\WebServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SQLite.Interop.099.dll">
@@ -93,9 +140,32 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/KIPS_wms">
+      <UrlBehavior>Static</UrlBehavior>
+      <RelPath>Web References\NAV_WS\</RelPath>
+      <UpdateFromURL>http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/KIPS_wms</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Data\database.s3db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Web References\NAV_WS\KIPS_wms.wsdl" />
+    <None Include="Web References\NAV_WS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>
