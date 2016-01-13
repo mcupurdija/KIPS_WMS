@@ -149,22 +149,50 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemUnitsOfMeasure", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItemUnitsOfMeasure_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetItemUnitsOfMeasure(string itemNoa47BarCodeP, ref string cSVStringP) {
+        public void GetItemUnitsOfMeasure(string itemNoP, ref string cSVStringP) {
             object[] results = this.Invoke("GetItemUnitsOfMeasure", new object[] {
-                        itemNoa47BarCodeP,
+                        itemNoP,
                         cSVStringP});
             cSVStringP = ((string)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetItemUnitsOfMeasure(string itemNoa47BarCodeP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginGetItemUnitsOfMeasure(string itemNoP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("GetItemUnitsOfMeasure", new object[] {
-                        itemNoa47BarCodeP,
+                        itemNoP,
                         cSVStringP}, callback, asyncState);
         }
         
         /// <remarks/>
         public void EndGetItemUnitsOfMeasure(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemLagerList", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItemLagerList_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetItemLagerList(string itemNoP, string variantCodeP, string trackingCodeP, string locationCodeP, ref string cSVStringP) {
+            object[] results = this.Invoke("GetItemLagerList", new object[] {
+                        itemNoP,
+                        variantCodeP,
+                        trackingCodeP,
+                        locationCodeP,
+                        cSVStringP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetItemLagerList(string itemNoP, string variantCodeP, string trackingCodeP, string locationCodeP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetItemLagerList", new object[] {
+                        itemNoP,
+                        variantCodeP,
+                        trackingCodeP,
+                        locationCodeP,
+                        cSVStringP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetItemLagerList(System.IAsyncResult asyncResult, out string cSVStringP) {
             object[] results = this.EndInvoke(asyncResult);
             cSVStringP = ((string)(results[0]));
         }

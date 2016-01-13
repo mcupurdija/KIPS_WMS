@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using KIPS_WMS.Data;
 using KIPS_WMS.NAV_WS;
-using KIPS_WMS.UI;
+using KIPS_WMS.UI.Ponude;
 using KIPS_WMS.Web;
 
 namespace KIPS_WMS
@@ -20,7 +18,7 @@ namespace KIPS_WMS
 
         private void Test()
         {
-            new Meni().Show();
+            new NovaPonuda().Show();
 
             try
             {

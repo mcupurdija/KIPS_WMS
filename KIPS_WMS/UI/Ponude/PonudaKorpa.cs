@@ -9,19 +9,11 @@ using System.Windows.Forms;
 
 namespace KIPS_WMS.UI.Ponude
 {
-    public partial class NovaPonuda : Form
+    public partial class PonudaKorpa : Form
     {
-        public NovaPonuda()
+        public PonudaKorpa()
         {
             InitializeComponent();
-        }
-
-        private void NovaPonuda_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                Close();
-            }
         }
     }
 }

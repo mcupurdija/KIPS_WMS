@@ -30,6 +30,9 @@
         private void InitializeComponent()
         {
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.bUnosBarkoda = new System.Windows.Forms.MenuItem();
+            this.bCrossDocking = new System.Windows.Forms.MenuItem();
             this.bPonude = new System.Windows.Forms.Button();
             this.bPreklasifikacija = new System.Windows.Forms.Button();
             this.bMagPrijemnice = new System.Windows.Forms.Button();
@@ -39,15 +42,26 @@
             this.bBarkodTest = new System.Windows.Forms.Button();
             this.bKontrolnaCena = new System.Windows.Forms.Button();
             this.bLagerLista = new System.Windows.Forms.Button();
-            this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.bPopis = new System.Windows.Forms.Button();
-            this.bUnosBarkoda = new System.Windows.Forms.MenuItem();
-            this.bCrossDocking = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu1
             // 
             this.mainMenu1.MenuItems.Add(this.menuItem1);
+            // 
+            // menuItem1
+            // 
+            this.menuItem1.MenuItems.Add(this.bUnosBarkoda);
+            this.menuItem1.MenuItems.Add(this.bCrossDocking);
+            this.menuItem1.Text = "Ostalo";
+            // 
+            // bUnosBarkoda
+            // 
+            this.bUnosBarkoda.Text = "Unos barkoda";
+            // 
+            // bCrossDocking
+            // 
+            this.bCrossDocking.Text = "Cross Docking";
             // 
             // bPonude
             // 
@@ -56,6 +70,7 @@
             this.bPonude.Size = new System.Drawing.Size(114, 30);
             this.bPonude.TabIndex = 0;
             this.bPonude.Text = "Ponude";
+            this.bPonude.Click += new System.EventHandler(this.bPonude_Click);
             // 
             // bPreklasifikacija
             // 
@@ -121,12 +136,6 @@
             this.bLagerLista.TabIndex = 8;
             this.bLagerLista.Text = "Lager lista";
             // 
-            // menuItem1
-            // 
-            this.menuItem1.MenuItems.Add(this.bUnosBarkoda);
-            this.menuItem1.MenuItems.Add(this.bCrossDocking);
-            this.menuItem1.Text = "Ostalo";
-            // 
             // bPopis
             // 
             this.bPopis.Location = new System.Drawing.Point(123, 147);
@@ -135,15 +144,7 @@
             this.bPopis.TabIndex = 9;
             this.bPopis.Text = "Popis";
             // 
-            // bUnosBarkoda
-            // 
-            this.bUnosBarkoda.Text = "Unos barkoda";
-            // 
-            // bCrossDocking
-            // 
-            this.bCrossDocking.Text = "Cross Docking";
-            // 
-            // Menu
+            // Meni
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -160,7 +161,7 @@
             this.Controls.Add(this.bPreklasifikacija);
             this.Controls.Add(this.bPonude);
             this.Menu = this.mainMenu1;
-            this.Name = "Menu";
+            this.Name = "Meni";
             this.Text = "Meni";
             this.ResumeLayout(false);
 

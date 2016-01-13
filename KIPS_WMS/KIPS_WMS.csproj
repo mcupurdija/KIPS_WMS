@@ -65,10 +65,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CsvImport.cs">
+    <Compile Include="UI\CsvImport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CsvImport.Designer.cs">
+    <Compile Include="UI\CsvImport.Designer.cs">
       <DependentUpon>CsvImport.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\DbStatements.cs" />
@@ -79,6 +79,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\ItemLagerListModel.cs" />
+    <Compile Include="Model\ItemUnitOfMeasureModel.cs" />
     <Compile Include="UI\Meni.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,7 +92,7 @@
     <Compile Include="Model\CustomerModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CsvImport.resx">
+    <EmbeddedResource Include="UI\CsvImport.resx">
       <DependentUpon>CsvImport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
@@ -107,8 +109,14 @@
     <EmbeddedResource Include="UI\Ponude\NovaPonuda.resx">
       <DependentUpon>NovaPonuda.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Ponude\Ponude.resx">
-      <DependentUpon>Ponude.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Ponude\PonudaKorpa.resx">
+      <DependentUpon>PonudaKorpa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ponude\PonudaLinija.resx">
+      <DependentUpon>PonudaLinija.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ponude\PonudePocetna.resx">
+      <DependentUpon>PonudePocetna.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -120,11 +128,23 @@
     <Compile Include="UI\Ponude\NovaPonuda.Designer.cs">
       <DependentUpon>NovaPonuda.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Ponude\Ponude.cs">
+    <Compile Include="UI\Ponude\PonudaKorpa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Ponude\Ponude.Designer.cs">
-      <DependentUpon>Ponude.cs</DependentUpon>
+    <Compile Include="UI\Ponude\PonudaKorpa.Designer.cs">
+      <DependentUpon>PonudaKorpa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ponude\PonudaLinija.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Ponude\PonudaLinija.Designer.cs">
+      <DependentUpon>PonudaLinija.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ponude\PonudePocetna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Ponude\PonudePocetna.Designer.cs">
+      <DependentUpon>PonudePocetna.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
     <Compile Include="Web References\NAV_WS\Reference.cs">

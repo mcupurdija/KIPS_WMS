@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using KIPS_WMS.UI;
 
 namespace KIPS_WMS
 {
@@ -11,7 +12,7 @@ namespace KIPS_WMS
         [MTAThread]
         static void Main()
         {
-            Application.Run(new Form1());
+            Application.Run(new Meni());
         }
     }
 }

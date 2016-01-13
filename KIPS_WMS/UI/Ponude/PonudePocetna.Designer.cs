@@ -1,6 +1,6 @@
 ﻿namespace KIPS_WMS.UI.Ponude
 {
-    partial class Ponude
+    partial class PonudePocetna
     {
         /// <summary>
         /// Required designer variable.
@@ -52,13 +52,14 @@
             // 
             // bNova
             // 
-            this.bNova.Location = new System.Drawing.Point(3, 145);
+            this.bNova.Location = new System.Drawing.Point(3, 143);
             this.bNova.Name = "bNova";
-            this.bNova.Size = new System.Drawing.Size(234, 40);
+            this.bNova.Size = new System.Drawing.Size(234, 42);
             this.bNova.TabIndex = 2;
             this.bNova.Text = "Nova";
+            this.bNova.Click += new System.EventHandler(this.bNova_Click);
             // 
-            // Ponude
+            // PonudePocetna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -68,7 +69,7 @@
             this.Controls.Add(this.bUcitaj);
             this.Controls.Add(this.tbUcitaj);
             this.Menu = this.mainMenu1;
-            this.Name = "Ponude";
+            this.Name = "PonudePocetna";
             this.Text = "Ponude";
             this.ResumeLayout(false);
 

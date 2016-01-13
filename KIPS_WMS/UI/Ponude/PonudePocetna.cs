@@ -9,11 +9,16 @@ using System.Windows.Forms;
 
 namespace KIPS_WMS.UI.Ponude
 {
-    public partial class Ponude : Form
+    public partial class PonudePocetna : Form
     {
-        public Ponude()
+        public PonudePocetna()
         {
             InitializeComponent();
+        }
+
+        private void bNova_Click(object sender, EventArgs e)
+        {
+            new NovaPonuda().Show();
         }
     }
 }

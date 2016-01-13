@@ -79,12 +79,30 @@
       <element name="GetItemUnitsOfMeasure">
         <complexType>
           <sequence>
-            <element minOccurs="1" maxOccurs="1" name="itemNoa47BarCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
           </sequence>
         </complexType>
       </element>
       <element name="GetItemUnitsOfMeasure_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemLagerList">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="variantCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="trackingCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemLagerList_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
@@ -155,6 +173,12 @@
   <message name="GetItemUnitsOfMeasure_Result">
     <part name="parameters" element="tns:GetItemUnitsOfMeasure_Result" />
   </message>
+  <message name="GetItemLagerList">
+    <part name="parameters" element="tns:GetItemLagerList" />
+  </message>
+  <message name="GetItemLagerList_Result">
+    <part name="parameters" element="tns:GetItemLagerList_Result" />
+  </message>
   <message name="GetItems">
     <part name="parameters" element="tns:GetItems" />
   </message>
@@ -187,6 +211,10 @@
     <operation name="GetItemUnitsOfMeasure">
       <input name="GetItemUnitsOfMeasure" message="tns:GetItemUnitsOfMeasure" />
       <output name="GetItemUnitsOfMeasure_Result" message="tns:GetItemUnitsOfMeasure_Result" />
+    </operation>
+    <operation name="GetItemLagerList">
+      <input name="GetItemLagerList" message="tns:GetItemLagerList" />
+      <output name="GetItemLagerList_Result" message="tns:GetItemLagerList_Result" />
     </operation>
     <operation name="GetItems">
       <input name="GetItems" message="tns:GetItems" />
@@ -241,6 +269,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="GetItemUnitsOfMeasure_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetItemLagerList">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemLagerList" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItemLagerList">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItemLagerList_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

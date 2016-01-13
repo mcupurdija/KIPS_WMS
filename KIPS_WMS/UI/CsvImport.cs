@@ -4,7 +4,7 @@ using FileHelpers;
 using KIPS_WMS.Data;
 using KIPS_WMS.Model;
 
-namespace KIPS_WMS
+namespace KIPS_WMS.UI
 {
     public partial class CsvImport : Form
     {

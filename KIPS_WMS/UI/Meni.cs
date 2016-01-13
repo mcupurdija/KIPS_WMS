@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using KIPS_WMS.UI.Ponude;
 
 namespace KIPS_WMS.UI
 {
@@ -7,6 +8,11 @@ namespace KIPS_WMS.UI
         public Meni()
         {
             InitializeComponent();
+        }
+
+        private void bPonude_Click(object sender, System.EventArgs e)
+        {
+            new PonudePocetna().Show();
         }
     }
 }

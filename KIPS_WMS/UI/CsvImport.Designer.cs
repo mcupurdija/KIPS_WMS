@@ -1,4 +1,4 @@
-﻿namespace KIPS_WMS
+﻿namespace KIPS_WMS.UI
 {
     partial class CsvImport
     {
