@@ -49,6 +49,7 @@
             this.bUcitaj.Size = new System.Drawing.Size(72, 21);
             this.bUcitaj.TabIndex = 1;
             this.bUcitaj.Text = "Učitaj";
+            this.bUcitaj.Click += new System.EventHandler(this.bUcitaj_Click);
             // 
             // bNova
             // 

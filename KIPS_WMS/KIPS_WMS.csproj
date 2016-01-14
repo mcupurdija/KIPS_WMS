@@ -65,6 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\ItemQuoteModel.cs" />
+    <Compile Include="Model\ItemInformationModel.cs" />
     <Compile Include="UI\CsvImport.cs">
       <SubType>Form</SubType>
     </Compile>

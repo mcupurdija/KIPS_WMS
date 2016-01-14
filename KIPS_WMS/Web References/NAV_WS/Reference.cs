@@ -33,30 +33,40 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetQuote", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetQuote_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetQuote(string documentNoP, string userIdP, ref string cSVStringHeaderP, ref string cSVStringLinesP) {
+        public void GetQuote(string documentNoP, string userIdP, string locationCodeP, ref string customerCodeP, ref string customerNameP, ref int isAuthenticatedCustomerP, ref string cSVStringP) {
             object[] results = this.Invoke("GetQuote", new object[] {
                         documentNoP,
                         userIdP,
-                        cSVStringHeaderP,
-                        cSVStringLinesP});
-            cSVStringHeaderP = ((string)(results[0]));
-            cSVStringLinesP = ((string)(results[1]));
+                        locationCodeP,
+                        customerCodeP,
+                        customerNameP,
+                        isAuthenticatedCustomerP,
+                        cSVStringP});
+            customerCodeP = ((string)(results[0]));
+            customerNameP = ((string)(results[1]));
+            isAuthenticatedCustomerP = ((int)(results[2]));
+            cSVStringP = ((string)(results[3]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetQuote(string documentNoP, string userIdP, string cSVStringHeaderP, string cSVStringLinesP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginGetQuote(string documentNoP, string userIdP, string locationCodeP, string customerCodeP, string customerNameP, int isAuthenticatedCustomerP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("GetQuote", new object[] {
                         documentNoP,
                         userIdP,
-                        cSVStringHeaderP,
-                        cSVStringLinesP}, callback, asyncState);
+                        locationCodeP,
+                        customerCodeP,
+                        customerNameP,
+                        isAuthenticatedCustomerP,
+                        cSVStringP}, callback, asyncState);
         }
         
         /// <remarks/>
-        public void EndGetQuote(System.IAsyncResult asyncResult, out string cSVStringHeaderP, out string cSVStringLinesP) {
+        public void EndGetQuote(System.IAsyncResult asyncResult, out string customerCodeP, out string customerNameP, out int isAuthenticatedCustomerP, out string cSVStringP) {
             object[] results = this.EndInvoke(asyncResult);
-            cSVStringHeaderP = ((string)(results[0]));
-            cSVStringLinesP = ((string)(results[1]));
+            customerCodeP = ((string)(results[0]));
+            customerNameP = ((string)(results[1]));
+            isAuthenticatedCustomerP = ((int)(results[2]));
+            cSVStringP = ((string)(results[3]));
         }
         
         /// <remarks/>
@@ -121,22 +131,26 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemInformation", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItemInformation_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetItemInformation(string itemNoa47BarCodeP, string customerNo, string locationCode, string userIdP, ref string cSVStringP) {
+        public void GetItemInformation(string itemNoa47BarCodeP, string variantCodeP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, ref string cSVStringP) {
             object[] results = this.Invoke("GetItemInformation", new object[] {
                         itemNoa47BarCodeP,
-                        customerNo,
-                        locationCode,
+                        variantCodeP,
+                        customerNoP,
+                        isAuthenticatedCustomerP,
+                        locationCodeP,
                         userIdP,
                         cSVStringP});
             cSVStringP = ((string)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetItemInformation(string itemNoa47BarCodeP, string customerNo, string locationCode, string userIdP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginGetItemInformation(string itemNoa47BarCodeP, string variantCodeP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("GetItemInformation", new object[] {
                         itemNoa47BarCodeP,
-                        customerNo,
-                        locationCode,
+                        variantCodeP,
+                        customerNoP,
+                        isAuthenticatedCustomerP,
+                        locationCodeP,
                         userIdP,
                         cSVStringP}, callback, asyncState);
         }
@@ -149,17 +163,19 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemUnitsOfMeasure", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItemUnitsOfMeasure_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetItemUnitsOfMeasure(string itemNoP, ref string cSVStringP) {
+        public void GetItemUnitsOfMeasure(string itemNoP, string userIdP, ref string cSVStringP) {
             object[] results = this.Invoke("GetItemUnitsOfMeasure", new object[] {
                         itemNoP,
+                        userIdP,
                         cSVStringP});
             cSVStringP = ((string)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetItemUnitsOfMeasure(string itemNoP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginGetItemUnitsOfMeasure(string itemNoP, string userIdP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("GetItemUnitsOfMeasure", new object[] {
                         itemNoP,
+                        userIdP,
                         cSVStringP}, callback, asyncState);
         }
         

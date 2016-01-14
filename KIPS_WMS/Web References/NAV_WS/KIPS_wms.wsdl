@@ -7,16 +7,21 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="documentNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="cSVStringHeaderP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="cSVStringLinesP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNameP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isAuthenticatedCustomerP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
           </sequence>
         </complexType>
       </element>
       <element name="GetQuote_Result">
         <complexType>
           <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringHeaderP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="cSVStringLinesP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNameP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isAuthenticatedCustomerP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -62,8 +67,10 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="itemNoa47BarCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="customerNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="locationCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="variantCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isAuthenticatedCustomerP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
           </sequence>
@@ -80,6 +87,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
           </sequence>
         </complexType>

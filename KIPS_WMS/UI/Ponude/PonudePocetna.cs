@@ -20,5 +20,10 @@ namespace KIPS_WMS.UI.Ponude
         {
             new NovaPonuda().Show();
         }
+
+        private void bUcitaj_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
