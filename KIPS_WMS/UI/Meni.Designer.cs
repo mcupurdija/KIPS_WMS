@@ -43,6 +43,7 @@
             this.bKontrolnaCena = new System.Windows.Forms.Button();
             this.bLagerLista = new System.Windows.Forms.Button();
             this.bPopis = new System.Windows.Forms.Button();
+            this.bPodesavanja = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -53,6 +54,7 @@
             // 
             this.menuItem1.MenuItems.Add(this.bUnosBarkoda);
             this.menuItem1.MenuItems.Add(this.bCrossDocking);
+            this.menuItem1.MenuItems.Add(this.bPodesavanja);
             this.menuItem1.Text = "Ostalo";
             // 
             // bUnosBarkoda
@@ -144,6 +146,11 @@
             this.bPopis.TabIndex = 9;
             this.bPopis.Text = "Popis";
             // 
+            // bPodesavanja
+            // 
+            this.bPodesavanja.Text = "Podešavanja";
+            this.bPodesavanja.Click += new System.EventHandler(this.bPodesavanja_Click);
+            // 
             // Meni
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -182,5 +189,6 @@
         private System.Windows.Forms.Button bPopis;
         private System.Windows.Forms.MenuItem bUnosBarkoda;
         private System.Windows.Forms.MenuItem bCrossDocking;
+        private System.Windows.Forms.MenuItem bPodesavanja;
     }
 }
