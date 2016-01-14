@@ -14,5 +14,10 @@ namespace KIPS_WMS.UI
         {
             new PonudePocetna().Show();
         }
+
+        private void bPodesavanja_Click(object sender, System.EventArgs e)
+        {
+            new Settings().Show();
+        }
     }
 }
