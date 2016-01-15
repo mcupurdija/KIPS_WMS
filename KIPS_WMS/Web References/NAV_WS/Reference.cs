@@ -71,34 +71,40 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:SendQuote", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="SendQuote_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SendQuote(string userIdP, int isUpdateP, string cSVStringHeaderP, string cSVStringLinesP, ref int statusP, ref int creditLimitOverdoP) {
+        public void SendQuote(string userIdP, string locationCodeP, ref string documentNoP, string customerNoP, int isAuthenticatedCustomerP, string cSVStringLinesP, ref int statusP, ref int creditLimitOverdoP) {
             object[] results = this.Invoke("SendQuote", new object[] {
                         userIdP,
-                        isUpdateP,
-                        cSVStringHeaderP,
+                        locationCodeP,
+                        documentNoP,
+                        customerNoP,
+                        isAuthenticatedCustomerP,
                         cSVStringLinesP,
                         statusP,
                         creditLimitOverdoP});
-            statusP = ((int)(results[0]));
-            creditLimitOverdoP = ((int)(results[1]));
+            documentNoP = ((string)(results[0]));
+            statusP = ((int)(results[1]));
+            creditLimitOverdoP = ((int)(results[2]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginSendQuote(string userIdP, int isUpdateP, string cSVStringHeaderP, string cSVStringLinesP, int statusP, int creditLimitOverdoP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginSendQuote(string userIdP, string locationCodeP, string documentNoP, string customerNoP, int isAuthenticatedCustomerP, string cSVStringLinesP, int statusP, int creditLimitOverdoP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("SendQuote", new object[] {
                         userIdP,
-                        isUpdateP,
-                        cSVStringHeaderP,
+                        locationCodeP,
+                        documentNoP,
+                        customerNoP,
+                        isAuthenticatedCustomerP,
                         cSVStringLinesP,
                         statusP,
                         creditLimitOverdoP}, callback, asyncState);
         }
         
         /// <remarks/>
-        public void EndSendQuote(System.IAsyncResult asyncResult, out int statusP, out int creditLimitOverdoP) {
+        public void EndSendQuote(System.IAsyncResult asyncResult, out string documentNoP, out int statusP, out int creditLimitOverdoP) {
             object[] results = this.EndInvoke(asyncResult);
-            statusP = ((int)(results[0]));
-            creditLimitOverdoP = ((int)(results[1]));
+            documentNoP = ((string)(results[0]));
+            statusP = ((int)(results[1]));
+            creditLimitOverdoP = ((int)(results[2]));
         }
         
         /// <remarks/>
@@ -157,6 +163,42 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         public void EndGetItemInformation(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemPriceAndInventory", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItemPriceAndInventory_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetItemPriceAndInventory(string itemNoP, string variantCodeP, string unitOfMeasureP, string salesQtyP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, ref string cSVStringP) {
+            object[] results = this.Invoke("GetItemPriceAndInventory", new object[] {
+                        itemNoP,
+                        variantCodeP,
+                        unitOfMeasureP,
+                        salesQtyP,
+                        customerNoP,
+                        isAuthenticatedCustomerP,
+                        locationCodeP,
+                        userIdP,
+                        cSVStringP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetItemPriceAndInventory(string itemNoP, string variantCodeP, string unitOfMeasureP, string salesQtyP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetItemPriceAndInventory", new object[] {
+                        itemNoP,
+                        variantCodeP,
+                        unitOfMeasureP,
+                        salesQtyP,
+                        customerNoP,
+                        isAuthenticatedCustomerP,
+                        locationCodeP,
+                        userIdP,
+                        cSVStringP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetItemPriceAndInventory(System.IAsyncResult asyncResult, out string cSVStringP) {
             object[] results = this.EndInvoke(asyncResult);
             cSVStringP = ((string)(results[0]));
         }

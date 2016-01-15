@@ -34,13 +34,13 @@
             this.bIzmeni = new System.Windows.Forms.MenuItem();
             this.bObrisi = new System.Windows.Forms.MenuItem();
             this.bUcitajNoveArtikle = new System.Windows.Forms.MenuItem();
+            this.bPosalji = new System.Windows.Forms.MenuItem();
             this.tbPronadji = new System.Windows.Forms.TextBox();
             this.bPronadji = new System.Windows.Forms.Button();
             this.bResetuj = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.bPosalji = new System.Windows.Forms.MenuItem();
-            this.bDodaj = new System.Windows.Forms.MenuItem();
             this.lKupac = new System.Windows.Forms.Label();
+            this.bDodaj = new System.Windows.Forms.Button();
             this.lUkupno = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -48,7 +48,6 @@
             // 
             this.mainMenu1.MenuItems.Add(this.bOpcije);
             this.mainMenu1.MenuItems.Add(this.bPosalji);
-            this.mainMenu1.MenuItems.Add(this.bDodaj);
             // 
             // bOpcije
             // 
@@ -69,6 +68,10 @@
             // 
             this.bUcitajNoveArtikle.Text = "Učitaj nove artikle";
             // 
+            // bPosalji
+            // 
+            this.bPosalji.Text = "Pošalji";
+            // 
             // tbPronadji
             // 
             this.tbPronadji.Location = new System.Drawing.Point(3, 24);
@@ -80,7 +83,7 @@
             // 
             this.bPronadji.Location = new System.Drawing.Point(134, 24);
             this.bPronadji.Name = "bPronadji";
-            this.bPronadji.Size = new System.Drawing.Size(72, 21);
+            this.bPronadji.Size = new System.Drawing.Size(72, 20);
             this.bPronadji.TabIndex = 1;
             this.bPronadji.Text = "Pronađi";
             // 
@@ -88,41 +91,42 @@
             // 
             this.bResetuj.Location = new System.Drawing.Point(212, 24);
             this.bResetuj.Name = "bResetuj";
-            this.bResetuj.Size = new System.Drawing.Size(25, 21);
+            this.bResetuj.Size = new System.Drawing.Size(25, 20);
             this.bResetuj.TabIndex = 2;
             this.bResetuj.Text = "X";
             // 
             // listView1
             // 
             this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(0, 51);
+            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listView1.Location = new System.Drawing.Point(0, 50);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(240, 134);
+            this.listView1.Size = new System.Drawing.Size(240, 112);
             this.listView1.TabIndex = 5;
             this.listView1.View = System.Windows.Forms.View.List;
             // 
-            // bPosalji
+            // lKupac
             // 
-            this.bPosalji.Text = "|   Pošalji";
+            this.lKupac.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.lKupac.Location = new System.Drawing.Point(3, 4);
+            this.lKupac.Name = "lKupac";
+            this.lKupac.Size = new System.Drawing.Size(234, 17);
+            this.lKupac.Text = "Kupac";
             // 
             // bDodaj
             // 
-            this.bDodaj.Text = "|   Dodaj";
-            // 
-            // lKupac
-            // 
-            this.lKupac.Location = new System.Drawing.Point(4, 4);
-            this.lKupac.Name = "lKupac";
-            this.lKupac.Size = new System.Drawing.Size(134, 20);
-            this.lKupac.Text = "Kupac";
+            this.bDodaj.Location = new System.Drawing.Point(134, 165);
+            this.bDodaj.Name = "bDodaj";
+            this.bDodaj.Size = new System.Drawing.Size(103, 20);
+            this.bDodaj.TabIndex = 7;
+            this.bDodaj.Text = "Dodaj";
             // 
             // lUkupno
             // 
-            this.lUkupno.Location = new System.Drawing.Point(144, 4);
+            this.lUkupno.Location = new System.Drawing.Point(4, 165);
             this.lUkupno.Name = "lUkupno";
-            this.lUkupno.Size = new System.Drawing.Size(93, 20);
-            this.lUkupno.Text = "Ukupno: 123,45";
-            this.lUkupno.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lUkupno.Size = new System.Drawing.Size(124, 20);
+            this.lUkupno.Text = "Ukupno: 0,00";
             // 
             // PonudaKorpa
             // 
@@ -131,6 +135,7 @@
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
             this.Controls.Add(this.lUkupno);
+            this.Controls.Add(this.bDodaj);
             this.Controls.Add(this.lKupac);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bResetuj);
@@ -138,7 +143,7 @@
             this.Controls.Add(this.tbPronadji);
             this.Menu = this.mainMenu1;
             this.Name = "PonudaKorpa";
-            this.Text = "Ponuda 123";
+            this.Text = "Nova ponuda";
             this.ResumeLayout(false);
 
         }
@@ -153,9 +158,9 @@
         private System.Windows.Forms.MenuItem bObrisi;
         private System.Windows.Forms.MenuItem bUcitajNoveArtikle;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.MenuItem bPosalji;
-        private System.Windows.Forms.MenuItem bDodaj;
         private System.Windows.Forms.Label lKupac;
+        private System.Windows.Forms.Button bDodaj;
+        private System.Windows.Forms.MenuItem bPosalji;
         private System.Windows.Forms.Label lUkupno;
     }
 }

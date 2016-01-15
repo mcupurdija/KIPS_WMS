@@ -41,6 +41,7 @@
             this.tbUcitaj.Name = "tbUcitaj";
             this.tbUcitaj.Size = new System.Drawing.Size(156, 21);
             this.tbUcitaj.TabIndex = 0;
+            this.tbUcitaj.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbUcitaj_KeyUp);
             // 
             // bUcitaj
             // 
@@ -55,7 +56,7 @@
             // 
             this.bNova.Location = new System.Drawing.Point(3, 30);
             this.bNova.Name = "bNova";
-            this.bNova.Size = new System.Drawing.Size(156, 42);
+            this.bNova.Size = new System.Drawing.Size(110, 42);
             this.bNova.TabIndex = 2;
             this.bNova.Text = "Nova";
             this.bNova.Click += new System.EventHandler(this.bNova_Click);

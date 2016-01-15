@@ -3,34 +3,49 @@
 namespace KIPS_WMS.Model
 {
     [DelimitedRecord(";")]
-    internal class ItemQuoteModel
+    [IgnoreFirst(1)]
+    public class ItemQuoteModel
     {
-        public string ItemCode { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
+        public string ItemCode;
 
-        public string ItemDescription { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string ItemDescription;
 
-        public string VariantCode { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string VariantCode;
 
-        public string UnitOfMeasureCode { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string UnitOfMeasureCode;
 
-        public string WarehouseCode { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string LocationCode;
 
-        public string BaseQuantityForSale { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string Quantity;
 
-        public double UnitPrice { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string UnitPrice;
 
-        public double UnitPriceWithDiscount { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string UnitPriceWithDiscount;
 
-        public string UnitOfMeasureForConversion { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string UnitOfMeasureForConversion;
 
-        public double ConversionCoeficient { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string ConversionCoeficient;
 
-        public double TotalWarehouseQuantity { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string TotalWarehouseQuantity;
 
-        public double AvailableWarehouseQuantity { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string AvailableWarehouseQuantity;
 
-        public double TotalLinkedWarehouseQuantity { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string TotalLinkedWarehouseQuantity;
 
-        public double AvailableLinkedWarehouseQuantity { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string AvailableLinkedWarehouseQuantity;
     }
 }

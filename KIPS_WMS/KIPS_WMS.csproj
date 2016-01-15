@@ -47,14 +47,14 @@
   <ItemGroup>
     <Reference Include="FileHelpersPPC, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\FileHelpersPPC\FileHelpersPPC.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\FileHelpersPPC\FileHelpersPPC.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.99.0, Culture=neutral, PublicKeyToken=1fdb50b1b62b4c84, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\sqlite-netFx35-binary-PocketPC-ARM-2008-1.0.99.0\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\sqlite-netFx35-binary-PocketPC-ARM-2008-1.0.99.0\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.SR, Version=3.5.0.0, Culture=neutral, PublicKeyToken=969db8053d3322ac, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Model\ItemQuoteModel.cs" />
     <Compile Include="Model\ItemInformationModel.cs" />
+    <Compile Include="Model\SendQuoteModel.cs" />
     <Compile Include="UI\CsvImport.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -21,3 +21,26 @@ C:\Users\petar.milisavljevic\Documents\Projekti\KIPS_WMS\KIPS_WMS\bin\Debug\Syst
 C:\Users\petar.milisavljevic\Documents\Projekti\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.exe
 C:\Users\petar.milisavljevic\Documents\Projekti\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.pdb
 C:\Users\petar.milisavljevic\Documents\Projekti\KIPS_WMS\KIPS_WMS\bin\Debug\System.SR.dll
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\SQLite.Interop.099.dll
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\Data\database.s3db
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\KIPS_WMS.exe
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\KIPS_WMS.pdb
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\FileHelpersPPC.dll
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\System.Data.SQLite.dll
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\System.SR.dll
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\FileHelpersPPC.xml
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\System.Data.SQLite.pdb
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\System.Data.SQLite.xml
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.CsvImport.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.Form1.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Meni.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.Properties.Resources.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.NovaPonuda.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.PonudaKorpa.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.PonudaLinija.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.PonudePocetna.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Settings.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.csproj.GenerateResource.Cache
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.exe
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.pdb

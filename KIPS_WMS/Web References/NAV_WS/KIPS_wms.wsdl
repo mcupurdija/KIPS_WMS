@@ -29,8 +29,10 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="isUpdateP" type="int" />
-            <element minOccurs="1" maxOccurs="1" name="cSVStringHeaderP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isAuthenticatedCustomerP" type="int" />
             <element minOccurs="1" maxOccurs="1" name="cSVStringLinesP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
             <element minOccurs="1" maxOccurs="1" name="creditLimitOverdoP" type="int" />
@@ -40,6 +42,7 @@
       <element name="SendQuote_Result">
         <complexType>
           <sequence>
+            <element minOccurs="1" maxOccurs="1" name="documentNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
             <element minOccurs="1" maxOccurs="1" name="creditLimitOverdoP" type="int" />
           </sequence>
@@ -77,6 +80,28 @@
         </complexType>
       </element>
       <element name="GetItemInformation_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemPriceAndInventory">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="variantCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="unitOfMeasureP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="salesQtyP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isAuthenticatedCustomerP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemPriceAndInventory_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
@@ -175,6 +200,12 @@
   <message name="GetItemInformation_Result">
     <part name="parameters" element="tns:GetItemInformation_Result" />
   </message>
+  <message name="GetItemPriceAndInventory">
+    <part name="parameters" element="tns:GetItemPriceAndInventory" />
+  </message>
+  <message name="GetItemPriceAndInventory_Result">
+    <part name="parameters" element="tns:GetItemPriceAndInventory_Result" />
+  </message>
   <message name="GetItemUnitsOfMeasure">
     <part name="parameters" element="tns:GetItemUnitsOfMeasure" />
   </message>
@@ -215,6 +246,10 @@
     <operation name="GetItemInformation">
       <input name="GetItemInformation" message="tns:GetItemInformation" />
       <output name="GetItemInformation_Result" message="tns:GetItemInformation_Result" />
+    </operation>
+    <operation name="GetItemPriceAndInventory">
+      <input name="GetItemPriceAndInventory" message="tns:GetItemPriceAndInventory" />
+      <output name="GetItemPriceAndInventory_Result" message="tns:GetItemPriceAndInventory_Result" />
     </operation>
     <operation name="GetItemUnitsOfMeasure">
       <input name="GetItemUnitsOfMeasure" message="tns:GetItemUnitsOfMeasure" />
@@ -268,6 +303,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="GetItemInformation_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetItemPriceAndInventory">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemPriceAndInventory" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItemPriceAndInventory">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItemPriceAndInventory_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
