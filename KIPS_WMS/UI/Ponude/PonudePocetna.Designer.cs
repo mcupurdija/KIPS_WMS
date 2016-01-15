@@ -53,9 +53,9 @@
             // 
             // bNova
             // 
-            this.bNova.Location = new System.Drawing.Point(3, 143);
+            this.bNova.Location = new System.Drawing.Point(3, 30);
             this.bNova.Name = "bNova";
-            this.bNova.Size = new System.Drawing.Size(234, 42);
+            this.bNova.Size = new System.Drawing.Size(156, 42);
             this.bNova.TabIndex = 2;
             this.bNova.Text = "Nova";
             this.bNova.Click += new System.EventHandler(this.bNova_Click);

@@ -30,31 +30,22 @@
         private void InitializeComponent()
         {
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
-            this.bNepoznatKupac = new System.Windows.Forms.MenuItem();
             this.bNoviKupci = new System.Windows.Forms.MenuItem();
-            this.bKreiraj = new System.Windows.Forms.MenuItem();
             this.tbPronadji = new System.Windows.Forms.TextBox();
             this.bPronadji = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.bNepoznatKupac = new System.Windows.Forms.Button();
+            this.bKreiraj = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainMenu1
             // 
-            this.mainMenu1.MenuItems.Add(this.bNepoznatKupac);
             this.mainMenu1.MenuItems.Add(this.bNoviKupci);
-            this.mainMenu1.MenuItems.Add(this.bKreiraj);
-            // 
-            // bNepoznatKupac
-            // 
-            this.bNepoznatKupac.Text = "Nepoznat kupac";
             // 
             // bNoviKupci
             // 
-            this.bNoviKupci.Text = "|   Novi kupci";
-            // 
-            // bKreiraj
-            // 
-            this.bKreiraj.Text = "|   Kreiraj";
+            this.bNoviKupci.Text = "Novi kupci";
+            this.bNoviKupci.Click += new System.EventHandler(this.bNoviKupci_Click);
             // 
             // tbPronadji
             // 
@@ -62,6 +53,7 @@
             this.tbPronadji.Name = "tbPronadji";
             this.tbPronadji.Size = new System.Drawing.Size(156, 21);
             this.tbPronadji.TabIndex = 0;
+            this.tbPronadji.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPronadji_KeyUp);
             // 
             // bPronadji
             // 
@@ -70,13 +62,32 @@
             this.bPronadji.Size = new System.Drawing.Size(72, 21);
             this.bPronadji.TabIndex = 1;
             this.bPronadji.Text = "Pronadji";
+            this.bPronadji.Click += new System.EventHandler(this.bPronadji_Click);
             // 
             // listView1
             // 
             this.listView1.Location = new System.Drawing.Point(0, 31);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(240, 154);
+            this.listView1.Size = new System.Drawing.Size(240, 127);
             this.listView1.TabIndex = 4;
+            // 
+            // bNepoznatKupac
+            // 
+            this.bNepoznatKupac.Location = new System.Drawing.Point(3, 164);
+            this.bNepoznatKupac.Name = "bNepoznatKupac";
+            this.bNepoznatKupac.Size = new System.Drawing.Size(114, 21);
+            this.bNepoznatKupac.TabIndex = 5;
+            this.bNepoznatKupac.Text = "Nepoznat kupac";
+            this.bNepoznatKupac.Click += new System.EventHandler(this.bNepoznatKupac_Click);
+            // 
+            // bKreiraj
+            // 
+            this.bKreiraj.Location = new System.Drawing.Point(123, 164);
+            this.bKreiraj.Name = "bKreiraj";
+            this.bKreiraj.Size = new System.Drawing.Size(114, 21);
+            this.bKreiraj.TabIndex = 6;
+            this.bKreiraj.Text = "Kreiraj";
+            this.bKreiraj.Click += new System.EventHandler(this.bKreiraj_Click);
             // 
             // NovaPonuda
             // 
@@ -84,6 +95,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
+            this.Controls.Add(this.bKreiraj);
+            this.Controls.Add(this.bNepoznatKupac);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbPronadji);
@@ -100,8 +113,8 @@
         private System.Windows.Forms.TextBox tbPronadji;
         private System.Windows.Forms.Button bPronadji;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.MenuItem bNepoznatKupac;
         private System.Windows.Forms.MenuItem bNoviKupci;
-        private System.Windows.Forms.MenuItem bKreiraj;
+        private System.Windows.Forms.Button bNepoznatKupac;
+        private System.Windows.Forms.Button bKreiraj;
     }
 }

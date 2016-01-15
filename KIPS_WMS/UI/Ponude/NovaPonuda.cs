@@ -23,5 +23,33 @@ namespace KIPS_WMS.UI.Ponude
                 Close();
             }
         }
+
+        private void bPronadji_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bNepoznatKupac_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bKreiraj_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bNoviKupci_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbPronadji_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // SA SKENERA
+            }
+        }
     }
 }

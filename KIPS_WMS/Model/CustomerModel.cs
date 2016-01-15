@@ -3,6 +3,7 @@
 namespace KIPS_WMS.Model
 {
     [DelimitedRecord(";")]
+    [IgnoreFirst(1)]
     internal class CustomerModel
     {
         public string CustomerBarcode { get; set; }
