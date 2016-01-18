@@ -6,14 +6,19 @@ namespace KIPS_WMS.Model
     [IgnoreFirst(1)]
     internal class ItemModel
     {
-        public string ItemBarcode { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string ItemBarcode;
 
-        public string ItemNo { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
+        public string ItemNo;
 
-        public string ItemVariant { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
+        public string ItemVariant;
 
-        public string ItemDescription { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
+        public string ItemDescription;
 
-        public string ItemUnitOfMeasure { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
+        public string ItemUnitOfMeasure;
     }
 }

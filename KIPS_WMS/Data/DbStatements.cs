@@ -12,5 +12,9 @@
         public const string FindCustomersStatementComplete = "SELECT * FROM Customers Where Customer_barcode = '{0}' OR Customer_code LIKE '%{0}%' OR Customer_name LIKE '%{0}%'";
         public const string FindItemsStatementBarcode = "SELECT * FROM Items Where Item_barcode = '{0}'";
         public const string FindItemsStatementComplete = "SELECT * FROM Items Where Item_barcode = '{0}' OR Item_code LIKE '%{0}%' OR Item_description LIKE '%{0}%'";
+
+        public const string UpdateCustomersStatement = "UPDATE Customers SET Customer_code='{1}', Customer_name='{2}' WHERE Customer_barcode='{0}'";
+
+        public const string GetSyncDateCustomers = "SELECT SyncData_customers FROM SyncData";
     }
 }

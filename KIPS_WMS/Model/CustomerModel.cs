@@ -6,10 +6,14 @@ namespace KIPS_WMS.Model
     [IgnoreFirst(1)]
     internal class CustomerModel
     {
-        public string CustomerBarcode { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string CustomerBarcode;
 
-        public string CustomerCode { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string CustomerCode;
 
-        public string CustomerName { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string CustomerName;
+
     }
 }
