@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using KIPS_WMS.Data;
 using KIPS_WMS.Model;
+using KIPS_WMS.NAV_WS;
+using KIPS_WMS.Web;
+using FileHelpers;
 
 namespace KIPS_WMS.UI.Ponude
 {
@@ -16,6 +19,7 @@ namespace KIPS_WMS.UI.Ponude
 
         List<Object[]> customers;
         Object[] selectedCustomer;
+        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
 
         public NovaPonuda()
         {
@@ -70,6 +74,53 @@ namespace KIPS_WMS.UI.Ponude
         private void bNoviKupci_Click(object sender, EventArgs e)
         {
 
+            var loadingForm = new Loading();
+            loadingForm.Show();
+            Cursor.Current = Cursors.WaitCursor;
+
+            List<Object> date = SQLiteHelper.oneRowQuery(DbStatements.GetSyncDateCustomers, new object[] { });
+            DateTime dt = Convert.ToDateTime(date[0]);
+
+            string csvCustomers = string.Empty;
+            _ws.GetCustomers(ref csvCustomers, String.Empty, new DateTime(2015,09,01));
+
+            CustomerModel[] customers;
+            var engine = new FileHelperEngine(typeof(CustomerModel));
+            customers = (CustomerModel[])engine.ReadString(csvCustomers);
+
+            loadingForm.Close();
+
+            lvKupci.Clear();
+            lvKupci.View = View.Details;
+            lvKupci.Columns.Add("Šifra artikla", 110, HorizontalAlignment.Center);
+            lvKupci.Columns.Add("Naziv", 185, HorizontalAlignment.Center);
+
+            foreach (CustomerModel customer in customers)
+            {
+                List<Object> foundCustomer = SQLiteHelper.oneRowQuery(DbStatements.FindCustomersStatementComplete, new object[] { customer.CustomerBarcode });
+
+                if (foundCustomer.Count > 0)
+                {
+                    SQLiteHelper.nonQuery(DbStatements.UpdateCustomersStatement,
+                        new object[] { customer.CustomerBarcode, customer.CustomerCode, customer.CustomerName });
+                }
+                else
+                {
+                    SQLiteHelper.insertQuery(DbStatements.InsertCustomersStatement,
+                        new object[] { customer.CustomerBarcode, customer.CustomerCode, customer.CustomerName });
+                }
+                ListViewItem lvi;
+
+                lvi =
+                    new ListViewItem(new[]
+                        {
+                            customer.CustomerCode.ToString(), customer.CustomerName.ToString()
+                        });
+
+                lvKupci.Items.Add(lvi);
+            }
+            Cursor.Current = Cursors.Default;
+
         }
 
         private void tbPronadji_KeyUp(object sender, KeyEventArgs e)
@@ -109,8 +160,13 @@ namespace KIPS_WMS.UI.Ponude
             {
                 int index = lvKupci.SelectedIndices[0];
                 selectedCustomer = customers[index];
-                MessageBox.Show(selectedCustomer[0]+"/"+selectedCustomer[1]);
+                MessageBox.Show(selectedCustomer[0] + "/" + selectedCustomer[1]);
             }
+        }
+
+        private void NovaPonuda_Activated(object sender, EventArgs e)
+        {
+
         }
     }
 }
