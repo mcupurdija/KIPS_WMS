@@ -71,6 +71,7 @@
             // bOdustani
             // 
             this.bOdustani.Text = "Odustani";
+            this.bOdustani.Click += new System.EventHandler(this.bOdustani_Click);
             // 
             // bLagerLista
             // 
@@ -79,6 +80,7 @@
             // bPrihvati
             // 
             this.bPrihvati.Text = "|   Prihvati";
+            this.bPrihvati.Click += new System.EventHandler(this.bPrihvati_Click);
             // 
             // lSifra
             // 

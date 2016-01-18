@@ -47,7 +47,7 @@
             // 
             this.bUcitaj.Location = new System.Drawing.Point(165, 3);
             this.bUcitaj.Name = "bUcitaj";
-            this.bUcitaj.Size = new System.Drawing.Size(72, 21);
+            this.bUcitaj.Size = new System.Drawing.Size(72, 20);
             this.bUcitaj.TabIndex = 1;
             this.bUcitaj.Text = "Učitaj";
             this.bUcitaj.Click += new System.EventHandler(this.bUcitaj_Click);
@@ -56,7 +56,7 @@
             // 
             this.bNova.Location = new System.Drawing.Point(3, 30);
             this.bNova.Name = "bNova";
-            this.bNova.Size = new System.Drawing.Size(110, 42);
+            this.bNova.Size = new System.Drawing.Size(110, 40);
             this.bNova.TabIndex = 2;
             this.bNova.Text = "Nova";
             this.bNova.Click += new System.EventHandler(this.bNova_Click);

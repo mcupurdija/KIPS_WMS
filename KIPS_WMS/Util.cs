@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using System.Net;
 using System.Reflection;
 
@@ -14,6 +15,7 @@ namespace KIPS_WMS
 
 
 
+
         public static string GetCurrentDirectory()
         {
             return Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
@@ -22,6 +24,11 @@ namespace KIPS_WMS
         public static string GetDbConnectionString()
         {
             return @"Data Source=" + GetCurrentDirectory() + "\\Data\\database.s3db;Version=3;FailIfMissing=True;";
+        }
+
+        public static CultureInfo GetLocalCulture()
+        {
+            return CultureInfo.CreateSpecificCulture("sr");
         }
     }
 }

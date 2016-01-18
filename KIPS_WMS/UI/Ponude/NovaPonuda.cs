@@ -35,7 +35,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             if (tbPronadji.Text.Length > 2)
             {
-                customers = SQLiteHelper.multiRowQuery(String.Format(DbStatements.FindCustomersStatementNoName, tbPronadji.Text), new object[] { });
+                customers = SQLiteHelper.multiRowQuery(String.Format(DbStatements.FindCustomersStatementComplete, tbPronadji.Text), new object[] { });
                 lvKupci.Clear();
                 lvKupci.View = View.Details;
                 lvKupci.Columns.Add("Šifra artikla", 120, HorizontalAlignment.Center);

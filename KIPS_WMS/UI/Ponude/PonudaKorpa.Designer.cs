@@ -31,8 +31,8 @@
         {
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.bOpcije = new System.Windows.Forms.MenuItem();
-            this.bIzmeni = new System.Windows.Forms.MenuItem();
-            this.bObrisi = new System.Windows.Forms.MenuItem();
+            this.bIzmeniLiniju = new System.Windows.Forms.MenuItem();
+            this.bObrisiLiniju = new System.Windows.Forms.MenuItem();
             this.bUcitajNoveArtikle = new System.Windows.Forms.MenuItem();
             this.bPosalji = new System.Windows.Forms.MenuItem();
             this.tbPronadji = new System.Windows.Forms.TextBox();
@@ -51,22 +51,25 @@
             // 
             // bOpcije
             // 
-            this.bOpcije.MenuItems.Add(this.bIzmeni);
-            this.bOpcije.MenuItems.Add(this.bObrisi);
+            this.bOpcije.MenuItems.Add(this.bIzmeniLiniju);
+            this.bOpcije.MenuItems.Add(this.bObrisiLiniju);
             this.bOpcije.MenuItems.Add(this.bUcitajNoveArtikle);
             this.bOpcije.Text = "Opcije";
             // 
-            // bIzmeni
+            // bIzmeniLiniju
             // 
-            this.bIzmeni.Text = "Izmeni liniju";
+            this.bIzmeniLiniju.Text = "Izmeni liniju";
+            this.bIzmeniLiniju.Click += new System.EventHandler(this.bIzmeniLiniju_Click);
             // 
-            // bObrisi
+            // bObrisiLiniju
             // 
-            this.bObrisi.Text = "Obriši liniju";
+            this.bObrisiLiniju.Text = "Obriši liniju";
+            this.bObrisiLiniju.Click += new System.EventHandler(this.bObrisiLiniju_Click);
             // 
             // bUcitajNoveArtikle
             // 
             this.bUcitajNoveArtikle.Text = "Učitaj nove artikle";
+            this.bUcitajNoveArtikle.Click += new System.EventHandler(this.bUcitajNoveArtikle_Click);
             // 
             // bPosalji
             // 
@@ -78,6 +81,7 @@
             this.tbPronadji.Name = "tbPronadji";
             this.tbPronadji.Size = new System.Drawing.Size(125, 21);
             this.tbPronadji.TabIndex = 0;
+            this.tbPronadji.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPronadji_KeyUp);
             // 
             // bPronadji
             // 
@@ -86,6 +90,7 @@
             this.bPronadji.Size = new System.Drawing.Size(72, 20);
             this.bPronadji.TabIndex = 1;
             this.bPronadji.Text = "Pronađi";
+            this.bPronadji.Click += new System.EventHandler(this.bPronadji_Click);
             // 
             // bResetuj
             // 
@@ -94,16 +99,19 @@
             this.bResetuj.Size = new System.Drawing.Size(25, 20);
             this.bResetuj.TabIndex = 2;
             this.bResetuj.Text = "X";
+            this.bResetuj.Click += new System.EventHandler(this.bResetuj_Click);
             // 
             // listView1
             // 
+            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.listView1.FullRowSelect = true;
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.Location = new System.Drawing.Point(0, 50);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(240, 112);
             this.listView1.TabIndex = 5;
-            this.listView1.View = System.Windows.Forms.View.List;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // lKupac
             // 
@@ -120,12 +128,14 @@
             this.bDodaj.Size = new System.Drawing.Size(103, 20);
             this.bDodaj.TabIndex = 7;
             this.bDodaj.Text = "Dodaj";
+            this.bDodaj.Click += new System.EventHandler(this.bDodaj_Click);
             // 
             // lUkupno
             // 
-            this.lUkupno.Location = new System.Drawing.Point(4, 165);
+            this.lUkupno.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.lUkupno.Location = new System.Drawing.Point(3, 168);
             this.lUkupno.Name = "lUkupno";
-            this.lUkupno.Size = new System.Drawing.Size(124, 20);
+            this.lUkupno.Size = new System.Drawing.Size(124, 17);
             this.lUkupno.Text = "Ukupno: 0,00";
             // 
             // PonudaKorpa
@@ -154,8 +164,8 @@
         private System.Windows.Forms.TextBox tbPronadji;
         private System.Windows.Forms.Button bPronadji;
         private System.Windows.Forms.Button bResetuj;
-        private System.Windows.Forms.MenuItem bIzmeni;
-        private System.Windows.Forms.MenuItem bObrisi;
+        private System.Windows.Forms.MenuItem bIzmeniLiniju;
+        private System.Windows.Forms.MenuItem bObrisiLiniju;
         private System.Windows.Forms.MenuItem bUcitajNoveArtikle;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label lKupac;

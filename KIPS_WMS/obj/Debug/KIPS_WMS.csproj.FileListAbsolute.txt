@@ -27,7 +27,6 @@ C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\KIPS_WMS.pdb
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\FileHelpersPPC.dll
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\System.Data.SQLite.dll
-C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\System.SR.dll
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\FileHelpersPPC.xml
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\System.Data.SQLite.pdb
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\bin\Debug\System.Data.SQLite.xml

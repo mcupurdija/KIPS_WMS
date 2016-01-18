@@ -16,6 +16,7 @@ namespace KIPS_WMS.UI.Ponude
         public PonudePocetna()
         {
             InitializeComponent();
+            tbUcitaj.Text = "PPO13-003215";
         }
 
         private void bNova_Click(object sender, EventArgs e)
