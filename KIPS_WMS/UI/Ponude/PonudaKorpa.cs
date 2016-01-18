@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using KIPS_WMS.Data;
@@ -11,9 +12,9 @@ namespace KIPS_WMS.UI.Ponude
     public partial class PonudaKorpa : Form
     {
         private readonly string _customerCode;
-        private readonly string _customerName;
+        private readonly int _isAuthenticated;
         private readonly string _quoteNo;
-        private ItemQuoteModel[] _quoteItems;
+        private List<ItemQuoteModel> _quoteItems;
 
         private List<Object[]> _searchedItems;
         private Object _selectedItem;
@@ -24,16 +25,16 @@ namespace KIPS_WMS.UI.Ponude
             InitializeComponent();
         }
 
-        public PonudaKorpa(string quoteNo, string customerCode, string customerName, ItemQuoteModel[] quoteItems)
+        public PonudaKorpa(string customerCode, string customerName, int isAuthenticated, string quoteNo, List<ItemQuoteModel> quoteItems)
         {
             InitializeComponent();
 
-            _quoteNo = quoteNo;
-            _customerName = customerName;
             _customerCode = customerCode;
+            _isAuthenticated = isAuthenticated;
+            _quoteNo = quoteNo;
             _quoteItems = quoteItems;
 
-            lKupac.Text = string.Format("{0} - {1}", _customerCode, _customerName);
+            lKupac.Text = string.Format("{0} - {1}", _customerCode, customerName);
             lUkupno.Text = string.Format("Ukupno: {0}", SumPrices());
             DisplayLines();
         }
@@ -47,6 +48,7 @@ namespace KIPS_WMS.UI.Ponude
         private void DisplayLines()
         {
             _tableBasket = true;
+            bDodaj.Visible = false;
             listView1.BackColor = Color.LightYellow;
 
             listView1.Clear();
@@ -64,6 +66,8 @@ namespace KIPS_WMS.UI.Ponude
                 });
                 listView1.Items.Add(lvi);
             }
+
+            tbPronadji.Focus();
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -74,15 +78,18 @@ namespace KIPS_WMS.UI.Ponude
             _selectedItem = _tableBasket ? (object) _quoteItems[index] : _searchedItems[index];
         }
 
-        private decimal SumPrices()
+        private string SumPrices()
         {
             try
             {
-                return _quoteItems.Sum(item => decimal.Parse(item.UnitPrice, Util.GetLocalCulture()));
+                CultureInfo culture = Util.GetLocalCulture();
+                return
+                    _quoteItems.Sum(item => decimal.Parse(item.UnitPrice, culture)*decimal.Parse(item.Quantity, culture))
+                        .ToString(culture);
             }
             catch (Exception)
             {
-                return 0;
+                return "0";
             }
         }
 
@@ -109,6 +116,7 @@ namespace KIPS_WMS.UI.Ponude
         private void DisplaySearchResults(IEnumerable<object[]> data)
         {
             _tableBasket = false;
+            bDodaj.Visible = true;
             listView1.BackColor = Color.White;
 
             listView1.Clear();
@@ -135,9 +143,9 @@ namespace KIPS_WMS.UI.Ponude
             tbPronadji.Focus();
         }
 
-        private void ShowLinesForm()
+        private void ShowLinesForm(PonudaLinija.ItemState itemState)
         {
-            var ponudaLinija = new PonudaLinija(_quoteNo, _quoteItems, _selectedItem);
+            var ponudaLinija = new PonudaLinija(_customerCode, _isAuthenticated, itemState, _quoteNo, _selectedItem, _quoteItems);
             DialogResult result = ponudaLinija.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -151,7 +159,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             if (!_tableBasket && _selectedItem != null)
             {
-                ShowLinesForm();
+                ShowLinesForm(PonudaLinija.ItemState.New);
             }
             else
             {
@@ -163,7 +171,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             if (_tableBasket && _selectedItem is ItemQuoteModel)
             {
-                ShowLinesForm();
+                ShowLinesForm(PonudaLinija.ItemState.Edit);
             }
             else
             {
@@ -175,7 +183,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             if (_tableBasket && _selectedItem is ItemQuoteModel)
             {
-                _quoteItems = _quoteItems.Where(val => val != _selectedItem).ToArray();
+                _quoteItems = (List<ItemQuoteModel>) _quoteItems.Where(val => val != _selectedItem);
             }
             else
             {

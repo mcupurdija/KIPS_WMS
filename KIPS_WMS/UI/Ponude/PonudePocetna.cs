@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Web.Services.Protocols;
 using System.Windows.Forms;
@@ -16,7 +17,7 @@ namespace KIPS_WMS.UI.Ponude
         public PonudePocetna()
         {
             InitializeComponent();
-            tbUcitaj.Text = "PPO13-003215";
+            tbUcitaj.Text = "PPO13-003215"; // TMP
         }
 
         private void bNova_Click(object sender, EventArgs e)
@@ -58,19 +59,11 @@ namespace KIPS_WMS.UI.Ponude
                     var engine = new FileHelperEngine(typeof (ItemQuoteModel));
                     var quoteItems = (ItemQuoteModel[]) engine.ReadString(quoteLinesCsv);
 
-                    new PonudaKorpa(quoteNo, customerCode, customerName, quoteItems).Show();
-                }
-                catch (SoapException se)
-                {
-                    MessageBox.Show(se.Message, "SoapException");
-                }
-                catch (WebException we)
-                {
-                    MessageBox.Show(we.Message, "WebException");
+                    new PonudaKorpa(customerCode, customerName, isAuthenticated, quoteNo, quoteItems.ToList()).Show();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Exception");
+                    Util.GeneralExceptionProcessing(ex);
                 }
                 finally
                 {

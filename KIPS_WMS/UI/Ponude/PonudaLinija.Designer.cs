@@ -34,32 +34,30 @@
             this.bLagerLista = new System.Windows.Forms.MenuItem();
             this.bPrihvati = new System.Windows.Forms.MenuItem();
             this.lSifra = new System.Windows.Forms.Label();
-            this.lVarijanta = new System.Windows.Forms.Label();
             this.tbSifra = new System.Windows.Forms.TextBox();
-            this.tbVarijanta = new System.Windows.Forms.TextBox();
             this.tbNaziv = new System.Windows.Forms.TextBox();
             this.lNaziv = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.tbKolicina = new System.Windows.Forms.TextBox();
+            this.tbKolicinaKonverzija = new System.Windows.Forms.TextBox();
+            this.tbCena = new System.Windows.Forms.TextBox();
+            this.tbCenaUkupno = new System.Windows.Forms.TextBox();
+            this.tbKolicinaVezanaLokacija = new System.Windows.Forms.TextBox();
+            this.tbRaspolozivoVezanaLokacija = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.tbRaspolozivoLokacija = new System.Windows.Forms.TextBox();
+            this.tbKolicinaLokacija = new System.Windows.Forms.TextBox();
             this.bUcitaj = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.tbJedinicaKonverzija = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.tbCenaPopust = new System.Windows.Forms.TextBox();
+            this.bJedinicaMere = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -90,32 +88,18 @@
             this.lSifra.Size = new System.Drawing.Size(30, 17);
             this.lSifra.Text = "Šifra:";
             // 
-            // lVarijanta
-            // 
-            this.lVarijanta.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.lVarijanta.Location = new System.Drawing.Point(114, 5);
-            this.lVarijanta.Name = "lVarijanta";
-            this.lVarijanta.Size = new System.Drawing.Size(52, 17);
-            this.lVarijanta.Text = "Varijanta:";
-            // 
             // tbSifra
             // 
+            this.tbSifra.Enabled = false;
             this.tbSifra.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.tbSifra.Location = new System.Drawing.Point(43, 3);
             this.tbSifra.Name = "tbSifra";
-            this.tbSifra.Size = new System.Drawing.Size(65, 19);
+            this.tbSifra.Size = new System.Drawing.Size(194, 19);
             this.tbSifra.TabIndex = 3;
-            // 
-            // tbVarijanta
-            // 
-            this.tbVarijanta.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.tbVarijanta.Location = new System.Drawing.Point(172, 3);
-            this.tbVarijanta.Name = "tbVarijanta";
-            this.tbVarijanta.Size = new System.Drawing.Size(65, 19);
-            this.tbVarijanta.TabIndex = 4;
             // 
             // tbNaziv
             // 
+            this.tbNaziv.Enabled = false;
             this.tbNaziv.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.tbNaziv.Location = new System.Drawing.Point(43, 25);
             this.tbNaziv.Name = "tbNaziv";
@@ -130,55 +114,58 @@
             this.lNaziv.Size = new System.Drawing.Size(35, 17);
             this.lNaziv.Text = "Naziv:";
             // 
-            // textBox1
+            // tbKolicina
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Info;
-            this.textBox1.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.textBox1.Location = new System.Drawing.Point(179, 51);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(58, 19);
-            this.textBox1.TabIndex = 8;
+            this.tbKolicina.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.tbKolicina.Location = new System.Drawing.Point(179, 51);
+            this.tbKolicina.Name = "tbKolicina";
+            this.tbKolicina.Size = new System.Drawing.Size(58, 19);
+            this.tbKolicina.TabIndex = 8;
+            this.tbKolicina.TextChanged += new System.EventHandler(this.tbKolicina_TextChanged);
             // 
-            // textBox2
+            // tbKolicinaKonverzija
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.Info;
-            this.textBox2.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.textBox2.Location = new System.Drawing.Point(179, 73);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(58, 19);
-            this.textBox2.TabIndex = 9;
+            this.tbKolicinaKonverzija.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.tbKolicinaKonverzija.Location = new System.Drawing.Point(179, 73);
+            this.tbKolicinaKonverzija.Name = "tbKolicinaKonverzija";
+            this.tbKolicinaKonverzija.Size = new System.Drawing.Size(58, 19);
+            this.tbKolicinaKonverzija.TabIndex = 9;
             // 
-            // textBox3
+            // tbCena
             // 
-            this.textBox3.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.textBox3.Location = new System.Drawing.Point(107, 96);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(35, 19);
-            this.textBox3.TabIndex = 13;
+            this.tbCena.Enabled = false;
+            this.tbCena.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.tbCena.Location = new System.Drawing.Point(87, 96);
+            this.tbCena.Name = "tbCena";
+            this.tbCena.Size = new System.Drawing.Size(45, 19);
+            this.tbCena.TabIndex = 13;
             // 
-            // textBox4
+            // tbCenaUkupno
             // 
-            this.textBox4.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.textBox4.Location = new System.Drawing.Point(119, 118);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(64, 19);
-            this.textBox4.TabIndex = 14;
+            this.tbCenaUkupno.Enabled = false;
+            this.tbCenaUkupno.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.tbCenaUkupno.Location = new System.Drawing.Point(119, 118);
+            this.tbCenaUkupno.Name = "tbCenaUkupno";
+            this.tbCenaUkupno.Size = new System.Drawing.Size(64, 19);
+            this.tbCenaUkupno.TabIndex = 14;
             // 
-            // textBox5
+            // tbKolicinaVezanaLokacija
             // 
-            this.textBox5.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.textBox5.Location = new System.Drawing.Point(179, 144);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(58, 19);
-            this.textBox5.TabIndex = 15;
+            this.tbKolicinaVezanaLokacija.Enabled = false;
+            this.tbKolicinaVezanaLokacija.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.tbKolicinaVezanaLokacija.Location = new System.Drawing.Point(179, 144);
+            this.tbKolicinaVezanaLokacija.Name = "tbKolicinaVezanaLokacija";
+            this.tbKolicinaVezanaLokacija.Size = new System.Drawing.Size(58, 19);
+            this.tbKolicinaVezanaLokacija.TabIndex = 15;
             // 
-            // textBox6
+            // tbRaspolozivoVezanaLokacija
             // 
-            this.textBox6.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.textBox6.Location = new System.Drawing.Point(179, 166);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(58, 19);
-            this.textBox6.TabIndex = 16;
+            this.tbRaspolozivoVezanaLokacija.Enabled = false;
+            this.tbRaspolozivoVezanaLokacija.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.tbRaspolozivoVezanaLokacija.Location = new System.Drawing.Point(179, 166);
+            this.tbRaspolozivoVezanaLokacija.Name = "tbRaspolozivoVezanaLokacija";
+            this.tbRaspolozivoVezanaLokacija.Size = new System.Drawing.Size(58, 19);
+            this.tbRaspolozivoVezanaLokacija.TabIndex = 16;
             // 
             // label1
             // 
@@ -212,21 +199,23 @@
             this.label4.Size = new System.Drawing.Size(45, 17);
             this.label4.Text = "Uk. lok.:";
             // 
-            // textBox7
+            // tbRaspolozivoLokacija
             // 
-            this.textBox7.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.textBox7.Location = new System.Drawing.Point(54, 166);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(58, 19);
-            this.textBox7.TabIndex = 24;
+            this.tbRaspolozivoLokacija.Enabled = false;
+            this.tbRaspolozivoLokacija.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.tbRaspolozivoLokacija.Location = new System.Drawing.Point(54, 166);
+            this.tbRaspolozivoLokacija.Name = "tbRaspolozivoLokacija";
+            this.tbRaspolozivoLokacija.Size = new System.Drawing.Size(58, 19);
+            this.tbRaspolozivoLokacija.TabIndex = 24;
             // 
-            // textBox8
+            // tbKolicinaLokacija
             // 
-            this.textBox8.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.textBox8.Location = new System.Drawing.Point(54, 144);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(58, 19);
-            this.textBox8.TabIndex = 23;
+            this.tbKolicinaLokacija.Enabled = false;
+            this.tbKolicinaLokacija.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.tbKolicinaLokacija.Location = new System.Drawing.Point(54, 144);
+            this.tbKolicinaLokacija.Name = "tbKolicinaLokacija";
+            this.tbKolicinaLokacija.Size = new System.Drawing.Size(58, 19);
+            this.tbKolicinaLokacija.TabIndex = 23;
             // 
             // bUcitaj
             // 
@@ -236,14 +225,15 @@
             this.bUcitaj.Size = new System.Drawing.Size(48, 41);
             this.bUcitaj.TabIndex = 27;
             this.bUcitaj.Text = "Učitaj\r\ncenu";
+            this.bUcitaj.Click += new System.EventHandler(this.bUcitaj_Click);
             // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.label5.Location = new System.Drawing.Point(3, 98);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(103, 17);
-            this.label5.Text = "MPC / Sa popustom:";
+            this.label5.Size = new System.Drawing.Size(81, 17);
+            this.label5.Text = "MPC/Sa popus.:";
             // 
             // label6
             // 
@@ -269,22 +259,14 @@
             this.label8.Size = new System.Drawing.Size(21, 17);
             this.label8.Text = "JM:";
             // 
-            // textBox9
+            // tbJedinicaKonverzija
             // 
-            this.textBox9.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.textBox9.Location = new System.Drawing.Point(54, 73);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(58, 19);
-            this.textBox9.TabIndex = 35;
-            // 
-            // textBox10
-            // 
-            this.textBox10.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox10.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.textBox10.Location = new System.Drawing.Point(54, 51);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(58, 19);
-            this.textBox10.TabIndex = 34;
+            this.tbJedinicaKonverzija.Enabled = false;
+            this.tbJedinicaKonverzija.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.tbJedinicaKonverzija.Location = new System.Drawing.Point(54, 73);
+            this.tbJedinicaKonverzija.Name = "tbJedinicaKonverzija";
+            this.tbJedinicaKonverzija.Size = new System.Drawing.Size(58, 19);
+            this.tbJedinicaKonverzija.TabIndex = 35;
             // 
             // label9
             // 
@@ -294,13 +276,22 @@
             this.label9.Size = new System.Drawing.Size(46, 17);
             this.label9.Text = "Količina:";
             // 
-            // textBox11
+            // tbCenaPopust
             // 
-            this.textBox11.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.textBox11.Location = new System.Drawing.Point(148, 96);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(35, 19);
-            this.textBox11.TabIndex = 52;
+            this.tbCenaPopust.Enabled = false;
+            this.tbCenaPopust.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.tbCenaPopust.Location = new System.Drawing.Point(138, 96);
+            this.tbCenaPopust.Name = "tbCenaPopust";
+            this.tbCenaPopust.Size = new System.Drawing.Size(45, 19);
+            this.tbCenaPopust.TabIndex = 52;
+            // 
+            // bJedinicaMere
+            // 
+            this.bJedinicaMere.Location = new System.Drawing.Point(54, 51);
+            this.bJedinicaMere.Name = "bJedinicaMere";
+            this.bJedinicaMere.Size = new System.Drawing.Size(58, 19);
+            this.bJedinicaMere.TabIndex = 64;
+            this.bJedinicaMere.Click += new System.EventHandler(this.bJedinicaMere_Click);
             // 
             // PonudaLinija
             // 
@@ -308,36 +299,34 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
-            this.Controls.Add(this.textBox11);
+            this.Controls.Add(this.bJedinicaMere);
+            this.Controls.Add(this.tbCenaPopust);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox10);
+            this.Controls.Add(this.tbJedinicaKonverzija);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.bUcitaj);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.tbRaspolozivoLokacija);
+            this.Controls.Add(this.tbKolicinaLokacija);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbRaspolozivoVezanaLokacija);
+            this.Controls.Add(this.tbKolicinaVezanaLokacija);
+            this.Controls.Add(this.tbCenaUkupno);
+            this.Controls.Add(this.tbCena);
+            this.Controls.Add(this.tbKolicinaKonverzija);
+            this.Controls.Add(this.tbKolicina);
             this.Controls.Add(this.lNaziv);
             this.Controls.Add(this.tbNaziv);
-            this.Controls.Add(this.tbVarijanta);
             this.Controls.Add(this.tbSifra);
-            this.Controls.Add(this.lVarijanta);
             this.Controls.Add(this.lSifra);
             this.Menu = this.mainMenu1;
             this.Name = "PonudaLinija";
-            this.Text = "Ponuda 123";
+            this.Text = "Nova ponuda";
             this.ResumeLayout(false);
 
         }
@@ -345,34 +334,32 @@
         #endregion
 
         private System.Windows.Forms.Label lSifra;
-        private System.Windows.Forms.Label lVarijanta;
         private System.Windows.Forms.TextBox tbSifra;
-        private System.Windows.Forms.TextBox tbVarijanta;
         private System.Windows.Forms.TextBox tbNaziv;
         private System.Windows.Forms.Label lNaziv;
         private System.Windows.Forms.MenuItem bOdustani;
         private System.Windows.Forms.MenuItem bLagerLista;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbKolicina;
+        private System.Windows.Forms.TextBox tbKolicinaKonverzija;
         private System.Windows.Forms.MenuItem bPrihvati;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox tbCena;
+        private System.Windows.Forms.TextBox tbCenaUkupno;
+        private System.Windows.Forms.TextBox tbKolicinaVezanaLokacija;
+        private System.Windows.Forms.TextBox tbRaspolozivoVezanaLokacija;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox tbRaspolozivoLokacija;
+        private System.Windows.Forms.TextBox tbKolicinaLokacija;
         private System.Windows.Forms.Button bUcitaj;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox tbJedinicaKonverzija;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox tbCenaPopust;
+        private System.Windows.Forms.Button bJedinicaMere;
     }
 }

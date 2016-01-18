@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\ItemPriceInventoryModel.cs" />
     <Compile Include="Model\DatabaseModel.cs" />
     <Compile Include="Model\ItemQuoteModel.cs" />
     <Compile Include="Model\ItemInformationModel.cs" />
@@ -117,6 +118,9 @@
     <EmbeddedResource Include="UI\Ponude\NovaPonuda.resx">
       <DependentUpon>NovaPonuda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ponude\OdabirJediniceDijalog.resx">
+      <DependentUpon>OdabirJediniceDijalog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Ponude\PonudaKorpa.resx">
       <DependentUpon>PonudaKorpa.cs</DependentUpon>
     </EmbeddedResource>
@@ -133,11 +137,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UI\NonFullscreenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Ponude\NovaPonuda.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Ponude\NovaPonuda.Designer.cs">
       <DependentUpon>NovaPonuda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ponude\OdabirJediniceDijalog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Ponude\OdabirJediniceDijalog.Designer.cs">
+      <DependentUpon>OdabirJediniceDijalog.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Ponude\PonudaKorpa.cs">
       <SubType>Form</SubType>
