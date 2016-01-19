@@ -39,14 +39,18 @@
             this.AutoScroll = true;
             this.CenterFormOnScreen = true;
             this.ClientSize = new System.Drawing.Size(180, 100);
+            this.ControlBox = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Menu = this.mainMenu1;
             this.Name = "NoviArtikliDijalog";
-            this.Text = "NoviArtikliDijalog";
+            this.Text = "Molimo sačekajte...";
+            this.Activated += new System.EventHandler(this.NoviArtikliDijalog_Activated);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+
     }
 }

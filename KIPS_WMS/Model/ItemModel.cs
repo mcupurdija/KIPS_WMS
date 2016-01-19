@@ -4,7 +4,7 @@ namespace KIPS_WMS.Model
 {
     [DelimitedRecord(";")]
     [IgnoreFirst(1)]
-    internal class ItemModel
+    public class ItemModel
     {
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
         public string ItemBarcode;
