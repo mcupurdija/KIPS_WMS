@@ -14,7 +14,7 @@ namespace KIPS_WMS.UI.Ponude
                 AutoScaleDimensions.Width/96F,
                 AutoScaleDimensions.Height/96F);
 
-            Height = (int) (myAutoScaleFactor.Height*80 - SystemInformation.MenuHeight);
+            Height = (int) (myAutoScaleFactor.Height*95);
         }
 
         private void linkLabel1_Click(object sender, EventArgs e)

@@ -3,16 +3,22 @@
 namespace KIPS_WMS.Model
 {
     [DelimitedRecord(";")]
+    [IgnoreFirst(1)]
     internal class ItemLagerListModel
     {
-        public string WarehouseCode { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
+        public string WarehouseCode;
 
-        public string WarehouseName { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
+        public string WarehouseName;
 
-        public string UnitOfMeasure { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
+        public string UnitOfMeasure;
 
-        public double TotalQuantity { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
+        public double TotalQuantity;
 
-        public double AvailableQuantity { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
+        public double AvailableQuantity;
     }
 }

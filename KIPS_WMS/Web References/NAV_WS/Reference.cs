@@ -32,6 +32,30 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetCustomers", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetCustomers_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetCustomers(ref string cSVStringP, string customerNoP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime lastDateModifiedP) {
+            object[] results = this.Invoke("GetCustomers", new object[] {
+                        cSVStringP,
+                        customerNoP,
+                        lastDateModifiedP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetCustomers(string cSVStringP, string customerNoP, System.DateTime lastDateModifiedP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetCustomers", new object[] {
+                        cSVStringP,
+                        customerNoP,
+                        lastDateModifiedP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetCustomers(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetQuote", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetQuote_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetQuote(string documentNoP, string userIdP, string locationCodeP, ref string customerCodeP, ref string customerNameP, ref int isAuthenticatedCustomerP, ref string cSVStringP) {
             object[] results = this.Invoke("GetQuote", new object[] {
@@ -275,30 +299,6 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         public void EndGetItems(System.IAsyncResult asyncResult, out string cSVStringP) {
-            object[] results = this.EndInvoke(asyncResult);
-            cSVStringP = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetCustomers", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetCustomers_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetCustomers(ref string cSVStringP, string customerNoP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime lastDateModifiedP) {
-            object[] results = this.Invoke("GetCustomers", new object[] {
-                        cSVStringP,
-                        customerNoP,
-                        lastDateModifiedP});
-            cSVStringP = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginGetCustomers(string cSVStringP, string customerNoP, System.DateTime lastDateModifiedP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("GetCustomers", new object[] {
-                        cSVStringP,
-                        customerNoP,
-                        lastDateModifiedP}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public void EndGetCustomers(System.IAsyncResult asyncResult, out string cSVStringP) {
             object[] results = this.EndInvoke(asyncResult);
             cSVStringP = ((string)(results[0]));
         }

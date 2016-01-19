@@ -2,6 +2,22 @@
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="GetCustomers">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastDateModifiedP" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetCustomers_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="GetQuote">
         <complexType>
           <sequence>
@@ -158,24 +174,14 @@
           </sequence>
         </complexType>
       </element>
-      <element name="GetCustomers">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="customerNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="lastDateModifiedP" type="date" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetCustomers_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
     </schema>
   </types>
+  <message name="GetCustomers">
+    <part name="parameters" element="tns:GetCustomers" />
+  </message>
+  <message name="GetCustomers_Result">
+    <part name="parameters" element="tns:GetCustomers_Result" />
+  </message>
   <message name="GetQuote">
     <part name="parameters" element="tns:GetQuote" />
   </message>
@@ -224,13 +230,11 @@
   <message name="GetItems_Result">
     <part name="parameters" element="tns:GetItems_Result" />
   </message>
-  <message name="GetCustomers">
-    <part name="parameters" element="tns:GetCustomers" />
-  </message>
-  <message name="GetCustomers_Result">
-    <part name="parameters" element="tns:GetCustomers_Result" />
-  </message>
   <portType name="KIPS_wms_Port">
+    <operation name="GetCustomers">
+      <input name="GetCustomers" message="tns:GetCustomers" />
+      <output name="GetCustomers_Result" message="tns:GetCustomers_Result" />
+    </operation>
     <operation name="GetQuote">
       <input name="GetQuote" message="tns:GetQuote" />
       <output name="GetQuote_Result" message="tns:GetQuote_Result" />
@@ -263,13 +267,18 @@
       <input name="GetItems" message="tns:GetItems" />
       <output name="GetItems_Result" message="tns:GetItems_Result" />
     </operation>
-    <operation name="GetCustomers">
-      <input name="GetCustomers" message="tns:GetCustomers" />
-      <output name="GetCustomers_Result" message="tns:GetCustomers_Result" />
-    </operation>
   </portType>
   <binding name="KIPS_wms_Binding" type="tns:KIPS_wms_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="GetCustomers">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetCustomers" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetCustomers">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetCustomers_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="GetQuote">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetQuote" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetQuote">
@@ -339,15 +348,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="GetItems_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="GetCustomers">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetCustomers" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetCustomers">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GetCustomers_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
