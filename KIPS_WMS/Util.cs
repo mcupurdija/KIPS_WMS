@@ -28,7 +28,10 @@ namespace KIPS_WMS
 
         public static CultureInfo GetLocalCulture()
         {
-            return CultureInfo.CreateSpecificCulture("sr");
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("sr");
+            culture.NumberFormat.NumberDecimalSeparator = ",";
+            culture.NumberFormat.NumberGroupSeparator = ".";
+            return culture;
         }
 
         public static void GeneralExceptionProcessing(Exception ex)

@@ -21,16 +21,20 @@ namespace KIPS_WMS.UI.Ponude
         private const int BsMultiline = 0x00002000;
         private const int GwlStyle = -16;
 
+        public List<ItemQuoteModel> QuoteItems;
+
+        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+
         private readonly string _customerCode;
         private readonly int _isAuthenticated;
         private readonly ItemState _itemState;
         private readonly string _quoteNo;
         private readonly Object _selectedItem;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
-        public List<ItemQuoteModel> QuoteItems;
         private string _conversionCoefficient;
         private string _itemCode;
         private string _variantCode;
+        private bool _quantityWatcherEnabled = true;
+        private bool _convertedQuantityWatcherEnabled = true;
 
         public PonudaLinija()
         {
@@ -208,12 +212,26 @@ namespace KIPS_WMS.UI.Ponude
 
         private void tbKolicina_TextChanged(object sender, EventArgs e)
         {
+            if (!_quantityWatcherEnabled) return;
+            CalculatePrice();
+            CalculateConvertedQuantity();
+        }
+
+        private void tbKolicinaKonverzija_TextChanged(object sender, EventArgs e)
+        {
+            if (!_convertedQuantityWatcherEnabled) return;
+            CalculateQuantity();
+            CalculatePrice();
+        }
+
+        private void CalculatePrice()
+        {
+            CultureInfo culture = Util.GetLocalCulture();
             try
             {
-                CultureInfo culture = Util.GetLocalCulture();
                 decimal priceWithDiscount = decimal.Parse(tbCenaPopust.Text, culture);
                 decimal quantity = decimal.Parse(tbKolicina.Text, culture);
-                tbCenaUkupno.Text = (priceWithDiscount*quantity).ToString(culture);
+                tbCenaUkupno.Text = (priceWithDiscount * quantity).ToString("N", culture.NumberFormat);
             }
             catch (Exception)
             {
@@ -221,9 +239,67 @@ namespace KIPS_WMS.UI.Ponude
             }
         }
 
+        private void CalculateQuantity()
+        {
+            CultureInfo culture = Util.GetLocalCulture();
+            try
+            {
+                _quantityWatcherEnabled = false;
+                decimal conversionCoefficient = decimal.Parse(_conversionCoefficient, culture);
+                decimal convertedQuantity = decimal.Parse(tbKolicinaKonverzija.Text, culture);
+                tbKolicina.Text = (convertedQuantity/conversionCoefficient).ToString("N", culture.NumberFormat);
+                
+            }
+            catch (Exception)
+            {
+                tbKolicina.Text = "0,00";
+            }
+            finally
+            {
+                _quantityWatcherEnabled = true;
+            }
+        }
+
+        private void CalculateConvertedQuantity()
+        {
+            CultureInfo culture = Util.GetLocalCulture();
+            try
+            {
+                _convertedQuantityWatcherEnabled = false;
+                decimal conversionCoefficient = decimal.Parse(_conversionCoefficient, culture);
+                decimal quantity = decimal.Parse(tbKolicina.Text, culture);
+                tbKolicinaKonverzija.Text = (conversionCoefficient*quantity).ToString("N", culture.NumberFormat);
+            }
+            catch (Exception)
+            {
+                tbKolicinaKonverzija.Text = "0,00";
+            }
+            finally
+            {
+                _convertedQuantityWatcherEnabled = true;
+            }
+        }
+
         private void bJedinicaMere_Click(object sender, EventArgs e)
         {
-            new OdabirJediniceDijalog().ShowDialog();
+            var odabirJediniceDijalog = new OdabirJediniceDijalog(_itemCode);
+            DialogResult result = odabirJediniceDijalog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                var selectedUnitOfMeasure = odabirJediniceDijalog.SelectedUnitOfMeasure;
+
+                bJedinicaMere.Text = selectedUnitOfMeasure.UnitOfMeasureCode;
+                tbJedinicaKonverzija.Text = selectedUnitOfMeasure.UnitOfMeasureForConversion;
+
+                tbKolicinaLokacija.Text = selectedUnitOfMeasure.TotalQuantity;
+                tbKolicinaVezanaLokacija.Text = selectedUnitOfMeasure.TotalQuantityConnected;
+                tbRaspolozivoLokacija.Text = selectedUnitOfMeasure.AvailableQuantity;
+                tbRaspolozivoVezanaLokacija.Text = selectedUnitOfMeasure.AvailableQuantityConnected;
+
+                _conversionCoefficient = selectedUnitOfMeasure.ConversionCoeficient;
+                CalculateConvertedQuantity();
+            }
         }
 
         private void bUcitaj_Click(object sender, EventArgs e)
@@ -260,5 +336,6 @@ namespace KIPS_WMS.UI.Ponude
                 Cursor.Current = Cursors.Default;
             }
         }
+
     }
 }

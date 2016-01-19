@@ -30,57 +30,52 @@
         private void InitializeComponent()
         {
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.bPotvrdi = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
-            // label1
+            // bPotvrdi
             // 
-            this.label1.Location = new System.Drawing.Point(4, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 20);
-            this.label1.Text = "label1";
+            this.bPotvrdi.Location = new System.Drawing.Point(85, 97);
+            this.bPotvrdi.Name = "bPotvrdi";
+            this.bPotvrdi.Size = new System.Drawing.Size(72, 20);
+            this.bPotvrdi.TabIndex = 0;
+            this.bPotvrdi.Text = "Potvrdi";
+            this.bPotvrdi.Click += new System.EventHandler(this.bPotvrdi_Click);
             // 
-            // label2
+            // listView1
             // 
-            this.label2.Location = new System.Drawing.Point(4, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 20);
-            this.label2.Text = "label2";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.Location = new System.Drawing.Point(157, 4);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(20, 20);
-            this.linkLabel1.TabIndex = 3;
-            this.linkLabel1.Text = "X";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.linkLabel1.Click += new System.EventHandler(this.linkLabel1_Click);
+            this.listView1.FullRowSelect = true;
+            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listView1.Location = new System.Drawing.Point(4, 4);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(153, 87);
+            this.listView1.TabIndex = 1;
+            this.listView1.View = System.Windows.Forms.View.List;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // OdabirJediniceDijalog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CenterFormOnScreen = true;
-            this.ClientSize = new System.Drawing.Size(180, 100);
+            this.ClientSize = new System.Drawing.Size(160, 120);
             this.ControlBox = false;
-            this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.bPotvrdi);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Menu = this.mainMenu1;
+            this.MinimizeBox = false;
             this.Name = "OdabirJediniceDijalog";
-            this.Text = "OdabirJediniceDijalog";
+            this.Text = "Izaberite jedinicu mere";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button bPotvrdi;
+        private System.Windows.Forms.ListView listView1;
+
     }
 }

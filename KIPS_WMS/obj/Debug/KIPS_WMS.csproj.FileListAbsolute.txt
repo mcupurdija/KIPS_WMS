@@ -45,3 +45,5 @@ C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.csproj.GenerateResource.Cache
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.exe
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.pdb
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.NoviArtikliDijalog.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.StampaDijalog.resources

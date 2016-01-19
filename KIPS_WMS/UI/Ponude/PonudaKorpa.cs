@@ -4,8 +4,11 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using FileHelpers;
 using KIPS_WMS.Data;
 using KIPS_WMS.Model;
+using KIPS_WMS.NAV_WS;
+using KIPS_WMS.Web;
 
 namespace KIPS_WMS.UI.Ponude
 {
@@ -14,6 +17,7 @@ namespace KIPS_WMS.UI.Ponude
         private readonly string _customerCode;
         private readonly int _isAuthenticated;
         private readonly string _quoteNo;
+        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
         private List<ItemQuoteModel> _quoteItems;
 
         private List<Object[]> _searchedItems;
@@ -25,7 +29,8 @@ namespace KIPS_WMS.UI.Ponude
             InitializeComponent();
         }
 
-        public PonudaKorpa(string customerCode, string customerName, int isAuthenticated, string quoteNo, List<ItemQuoteModel> quoteItems)
+        public PonudaKorpa(string customerCode, string customerName, int isAuthenticated, string quoteNo,
+            List<ItemQuoteModel> quoteItems)
         {
             InitializeComponent();
 
@@ -35,7 +40,6 @@ namespace KIPS_WMS.UI.Ponude
             _quoteItems = quoteItems;
 
             lKupac.Text = string.Format("{0} - {1}", _customerCode, customerName);
-            lUkupno.Text = string.Format("Ukupno: {0}", SumPrices());
             DisplayLines();
         }
 
@@ -67,6 +71,8 @@ namespace KIPS_WMS.UI.Ponude
                 listView1.Items.Add(lvi);
             }
 
+            lUkupno.Text = string.Format("Ukupno: {0}", SumPrices());
+
             tbPronadji.Focus();
         }
 
@@ -85,7 +91,7 @@ namespace KIPS_WMS.UI.Ponude
                 CultureInfo culture = Util.GetLocalCulture();
                 return
                     _quoteItems.Sum(item => decimal.Parse(item.UnitPrice, culture)*decimal.Parse(item.Quantity, culture))
-                        .ToString(culture);
+                        .ToString("N", culture.NumberFormat);
             }
             catch (Exception)
             {
@@ -145,7 +151,8 @@ namespace KIPS_WMS.UI.Ponude
 
         private void ShowLinesForm(PonudaLinija.ItemState itemState)
         {
-            var ponudaLinija = new PonudaLinija(_customerCode, _isAuthenticated, itemState, _quoteNo, _selectedItem, _quoteItems);
+            var ponudaLinija = new PonudaLinija(_customerCode, _isAuthenticated, itemState, _quoteNo, _selectedItem,
+                _quoteItems);
             DialogResult result = ponudaLinija.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -193,6 +200,50 @@ namespace KIPS_WMS.UI.Ponude
 
         private void bUcitajNoveArtikle_Click(object sender, EventArgs e)
         {
+        }
+
+        private void bPosalji_Click(object sender, EventArgs e)
+        {
+            DialogResult result = new StampaDijalog().ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                
+            }
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                string documentNo = _quoteNo;
+                int status = 0;
+                int creditLimit = 0;
+                List<SendQuoteModel> quotes = _quoteItems.Select(item => new SendQuoteModel
+                {
+                    ItemCode = item.ItemCode,
+                    ItemQuantity = item.Quantity,
+                    UnitOfMeasureCode = item.UnitOfMeasureCode,
+                    VariantCode = "",
+                    WarehouseCode = "001"
+                }).ToList();
+
+                var engine = new FileHelperEngine(typeof (SendQuoteModel));
+                string lines = engine.WriteString(quotes);
+
+                _ws.SendQuote("1", "001", ref documentNo, _customerCode, _isAuthenticated, lines, ref status,
+                    ref creditLimit);
+            }
+            catch (Exception ex)
+            {
+                Util.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+
+
+
         }
     }
 }

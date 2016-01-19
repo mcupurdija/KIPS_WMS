@@ -90,19 +90,19 @@
             // 
             // tbSifra
             // 
-            this.tbSifra.Enabled = false;
             this.tbSifra.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.tbSifra.Location = new System.Drawing.Point(43, 3);
             this.tbSifra.Name = "tbSifra";
+            this.tbSifra.ReadOnly = true;
             this.tbSifra.Size = new System.Drawing.Size(194, 19);
             this.tbSifra.TabIndex = 3;
             // 
             // tbNaziv
             // 
-            this.tbNaziv.Enabled = false;
             this.tbNaziv.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.tbNaziv.Location = new System.Drawing.Point(43, 25);
             this.tbNaziv.Name = "tbNaziv";
+            this.tbNaziv.ReadOnly = true;
             this.tbNaziv.Size = new System.Drawing.Size(194, 19);
             this.tbNaziv.TabIndex = 5;
             // 
@@ -130,40 +130,41 @@
             this.tbKolicinaKonverzija.Name = "tbKolicinaKonverzija";
             this.tbKolicinaKonverzija.Size = new System.Drawing.Size(58, 19);
             this.tbKolicinaKonverzija.TabIndex = 9;
+            this.tbKolicinaKonverzija.TextChanged += new System.EventHandler(this.tbKolicinaKonverzija_TextChanged);
             // 
             // tbCena
             // 
-            this.tbCena.Enabled = false;
             this.tbCena.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.tbCena.Location = new System.Drawing.Point(87, 96);
             this.tbCena.Name = "tbCena";
+            this.tbCena.ReadOnly = true;
             this.tbCena.Size = new System.Drawing.Size(45, 19);
             this.tbCena.TabIndex = 13;
             // 
             // tbCenaUkupno
             // 
-            this.tbCenaUkupno.Enabled = false;
             this.tbCenaUkupno.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.tbCenaUkupno.Location = new System.Drawing.Point(119, 118);
             this.tbCenaUkupno.Name = "tbCenaUkupno";
+            this.tbCenaUkupno.ReadOnly = true;
             this.tbCenaUkupno.Size = new System.Drawing.Size(64, 19);
             this.tbCenaUkupno.TabIndex = 14;
             // 
             // tbKolicinaVezanaLokacija
             // 
-            this.tbKolicinaVezanaLokacija.Enabled = false;
             this.tbKolicinaVezanaLokacija.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.tbKolicinaVezanaLokacija.Location = new System.Drawing.Point(179, 144);
             this.tbKolicinaVezanaLokacija.Name = "tbKolicinaVezanaLokacija";
+            this.tbKolicinaVezanaLokacija.ReadOnly = true;
             this.tbKolicinaVezanaLokacija.Size = new System.Drawing.Size(58, 19);
             this.tbKolicinaVezanaLokacija.TabIndex = 15;
             // 
             // tbRaspolozivoVezanaLokacija
             // 
-            this.tbRaspolozivoVezanaLokacija.Enabled = false;
             this.tbRaspolozivoVezanaLokacija.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.tbRaspolozivoVezanaLokacija.Location = new System.Drawing.Point(179, 166);
             this.tbRaspolozivoVezanaLokacija.Name = "tbRaspolozivoVezanaLokacija";
+            this.tbRaspolozivoVezanaLokacija.ReadOnly = true;
             this.tbRaspolozivoVezanaLokacija.Size = new System.Drawing.Size(58, 19);
             this.tbRaspolozivoVezanaLokacija.TabIndex = 16;
             // 
@@ -201,19 +202,19 @@
             // 
             // tbRaspolozivoLokacija
             // 
-            this.tbRaspolozivoLokacija.Enabled = false;
             this.tbRaspolozivoLokacija.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.tbRaspolozivoLokacija.Location = new System.Drawing.Point(54, 166);
             this.tbRaspolozivoLokacija.Name = "tbRaspolozivoLokacija";
+            this.tbRaspolozivoLokacija.ReadOnly = true;
             this.tbRaspolozivoLokacija.Size = new System.Drawing.Size(58, 19);
             this.tbRaspolozivoLokacija.TabIndex = 24;
             // 
             // tbKolicinaLokacija
             // 
-            this.tbKolicinaLokacija.Enabled = false;
             this.tbKolicinaLokacija.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.tbKolicinaLokacija.Location = new System.Drawing.Point(54, 144);
             this.tbKolicinaLokacija.Name = "tbKolicinaLokacija";
+            this.tbKolicinaLokacija.ReadOnly = true;
             this.tbKolicinaLokacija.Size = new System.Drawing.Size(58, 19);
             this.tbKolicinaLokacija.TabIndex = 23;
             // 
@@ -261,10 +262,10 @@
             // 
             // tbJedinicaKonverzija
             // 
-            this.tbJedinicaKonverzija.Enabled = false;
             this.tbJedinicaKonverzija.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.tbJedinicaKonverzija.Location = new System.Drawing.Point(54, 73);
             this.tbJedinicaKonverzija.Name = "tbJedinicaKonverzija";
+            this.tbJedinicaKonverzija.ReadOnly = true;
             this.tbJedinicaKonverzija.Size = new System.Drawing.Size(58, 19);
             this.tbJedinicaKonverzija.TabIndex = 35;
             // 
@@ -278,10 +279,10 @@
             // 
             // tbCenaPopust
             // 
-            this.tbCenaPopust.Enabled = false;
             this.tbCenaPopust.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.tbCenaPopust.Location = new System.Drawing.Point(138, 96);
             this.tbCenaPopust.Name = "tbCenaPopust";
+            this.tbCenaPopust.ReadOnly = true;
             this.tbCenaPopust.Size = new System.Drawing.Size(45, 19);
             this.tbCenaPopust.TabIndex = 52;
             // 

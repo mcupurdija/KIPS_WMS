@@ -3,20 +3,28 @@
 namespace KIPS_WMS.Model
 {
     [DelimitedRecord(";")]
-    internal class ItemUnitOfMeasureModel
+    [IgnoreFirst(1)]
+    public class ItemUnitOfMeasureModel
     {
-        public string UnitOfMeasureCode { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
+        public string UnitOfMeasureCode;
 
-        public string UnitOfMeasureForConversion { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
+        public string UnitOfMeasureForConversion;
 
-        public double ConversionCoeficient { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string ConversionCoeficient;
 
-        public double TotalQuantity { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string TotalQuantity;
 
-        public double AvailableQuantity { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string AvailableQuantity;
 
-        public double TotalQuantityConnected { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string TotalQuantityConnected;
 
-        public double AvailableQuantityConnected { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string AvailableQuantityConnected;
     }
 }

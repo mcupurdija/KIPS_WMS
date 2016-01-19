@@ -74,6 +74,7 @@
             // bPosalji
             // 
             this.bPosalji.Text = "Pošalji";
+            this.bPosalji.Click += new System.EventHandler(this.bPosalji_Click);
             // 
             // tbPronadji
             // 
