@@ -75,7 +75,7 @@ namespace KIPS_WMS.UI.Ponude
             if (listView1.SelectedIndices.Count != 1) return;
 
             int index = listView1.SelectedIndices[0];
-            _selectedItem = _tableBasket ? (object) _quoteItems[index] : _searchedItems[index];
+            _selectedItem = _tableBasket ? (object)_quoteItems[index] : _searchedItems[index];
         }
 
         private string SumPrices()
@@ -84,7 +84,7 @@ namespace KIPS_WMS.UI.Ponude
             {
                 CultureInfo culture = Util.GetLocalCulture();
                 return
-                    _quoteItems.Sum(item => decimal.Parse(item.UnitPrice, culture)*decimal.Parse(item.Quantity, culture))
+                    _quoteItems.Sum(item => decimal.Parse(item.UnitPrice, culture) * decimal.Parse(item.Quantity, culture))
                         .ToString(culture);
             }
             catch (Exception)
@@ -98,7 +98,7 @@ namespace KIPS_WMS.UI.Ponude
             if (e.KeyCode != Keys.Enter || tbPronadji.Text.Length < 3) return;
 
             _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
-                new object[] {tbPronadji.Text});
+                new object[] { tbPronadji.Text });
 
             DisplaySearchResults(_searchedItems);
         }
@@ -108,7 +108,7 @@ namespace KIPS_WMS.UI.Ponude
             if (tbPronadji.Text.Length < 3) return;
 
             _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementComplete,
-                new object[] {tbPronadji.Text});
+                new object[] { tbPronadji.Text });
 
             DisplaySearchResults(_searchedItems);
         }
@@ -183,7 +183,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             if (_tableBasket && _selectedItem is ItemQuoteModel)
             {
-                _quoteItems = (List<ItemQuoteModel>) _quoteItems.Where(val => val != _selectedItem);
+                _quoteItems = (List<ItemQuoteModel>)_quoteItems.Where(val => val != _selectedItem);
             }
             else
             {

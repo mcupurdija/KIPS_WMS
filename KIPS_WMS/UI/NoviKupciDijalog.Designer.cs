@@ -1,6 +1,6 @@
 ﻿namespace KIPS_WMS.UI
 {
-    partial class Loading
+    partial class NoviKupciDijalog
     {
         /// <summary>
         /// Required designer variable.
@@ -30,62 +30,37 @@
         private void InitializeComponent()
         {
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
-            this.pNewCustomer = new System.Windows.Forms.Panel();
-            this.lText = new System.Windows.Forms.Label();
-            this.lTitle = new System.Windows.Forms.Label();
-            this.pNewCustomer.SuspendLayout();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // pNewCustomer
+            // label1
             // 
-            this.pNewCustomer.Controls.Add(this.lText);
-            this.pNewCustomer.Location = new System.Drawing.Point(0, 24);
-            this.pNewCustomer.Name = "pNewCustomer";
-            this.pNewCustomer.Size = new System.Drawing.Size(180, 76);
-            this.pNewCustomer.Paint += new System.Windows.Forms.PaintEventHandler(this.pNewCustomer_Paint);
+            this.label1.Font = new System.Drawing.Font("Tahoma", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.label1.Location = new System.Drawing.Point(3, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(173, 69);
+            this.label1.Text = "Učitavanje kupaca. Molimo sačekajte...";
             // 
-            // lText
-            // 
-            this.lText.Location = new System.Drawing.Point(3, 20);
-            this.lText.Name = "lText";
-            this.lText.Size = new System.Drawing.Size(174, 35);
-            this.lText.Text = "Učitavanje kupaca u toku. Molimo sačekajte...";
-            this.lText.ParentChanged += new System.EventHandler(this.label1_ParentChanged);
-            // 
-            // lTitle
-            // 
-            this.lTitle.BackColor = System.Drawing.Color.Silver;
-            this.lTitle.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular);
-            this.lTitle.Location = new System.Drawing.Point(0, 0);
-            this.lTitle.Name = "lTitle";
-            this.lTitle.Size = new System.Drawing.Size(180, 21);
-            this.lTitle.Text = "Učitavanje";
-            this.lTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // Loading
+            // NoviKupciDijalog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(180, 100);
+            this.CenterFormOnScreen = true;
+            this.ClientSize = new System.Drawing.Size(180, 80);
             this.ControlBox = false;
-            this.Controls.Add(this.lTitle);
-            this.Controls.Add(this.pNewCustomer);
+            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Location = new System.Drawing.Point(40, 40);
-            this.MinimizeBox = false;
-            this.Name = "Loading";
+            this.Menu = this.mainMenu1;
+            this.Name = "NoviKupciDijalog";
             this.Text = "Molimo sačekajte";
-            this.TopMost = true;
-            this.Activated += new System.EventHandler(this.Loading_Activated);
-            this.pNewCustomer.ResumeLayout(false);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.NoviKupciDijalog_Paint);
+            this.Activated += new System.EventHandler(this.NoviKupciDijalog_Activated);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pNewCustomer;
-        private System.Windows.Forms.Label lTitle;
-        private System.Windows.Forms.Label lText;
+        private System.Windows.Forms.Label label1;
     }
 }

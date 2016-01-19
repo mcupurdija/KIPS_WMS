@@ -19,5 +19,10 @@ namespace KIPS_WMS.UI
         {
             new Settings().Show();
         }
+
+        private void bLagerLista_Click(object sender, System.EventArgs e)
+        {
+            new LagerLista().Show();
+        }
     }
 }

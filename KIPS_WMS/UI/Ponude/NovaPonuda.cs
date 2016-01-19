@@ -74,50 +74,28 @@ namespace KIPS_WMS.UI.Ponude
         private void bNoviKupci_Click(object sender, EventArgs e)
         {
 
-            var loadingForm = new Loading();
-            loadingForm.Show();
+            var loadingForm = new NoviKupciDijalog();
+            DialogResult result = loadingForm.ShowDialog();
             Cursor.Current = Cursors.WaitCursor;
 
-            List<Object> date = SQLiteHelper.oneRowQuery(DbStatements.GetSyncDateCustomers, new object[] { });
-            DateTime dt = Convert.ToDateTime(date[0]);
-
-            string csvCustomers = string.Empty;
-            _ws.GetCustomers(ref csvCustomers, String.Empty, new DateTime(2015,09,01));
-
-            CustomerModel[] customers;
-            var engine = new FileHelperEngine(typeof(CustomerModel));
-            customers = (CustomerModel[])engine.ReadString(csvCustomers);
-
-            loadingForm.Close();
-
-            lvKupci.Clear();
-            lvKupci.View = View.Details;
-            lvKupci.Columns.Add("Šifra artikla", 110, HorizontalAlignment.Center);
-            lvKupci.Columns.Add("Naziv", 185, HorizontalAlignment.Center);
-
-            foreach (CustomerModel customer in customers)
+            if (result == DialogResult.OK)
             {
-                List<Object> foundCustomer = SQLiteHelper.oneRowQuery(DbStatements.FindCustomersStatementComplete, new object[] { customer.CustomerBarcode });
-
-                if (foundCustomer.Count > 0)
+                lvKupci.Clear();
+                lvKupci.View = View.Details;
+                lvKupci.Columns.Add("Šifra artikla", 120, HorizontalAlignment.Center);
+                lvKupci.Columns.Add("Naziv", 195, HorizontalAlignment.Center);
+                foreach (CustomerModel customer in loadingForm.Customers)
                 {
-                    SQLiteHelper.nonQuery(DbStatements.UpdateCustomersStatement,
-                        new object[] { customer.CustomerBarcode, customer.CustomerCode, customer.CustomerName });
-                }
-                else
-                {
-                    SQLiteHelper.insertQuery(DbStatements.InsertCustomersStatement,
-                        new object[] { customer.CustomerBarcode, customer.CustomerCode, customer.CustomerName });
-                }
-                ListViewItem lvi;
+                    ListViewItem lvi;
 
-                lvi =
-                    new ListViewItem(new[]
+                    lvi =
+                        new ListViewItem(new[]
                         {
                             customer.CustomerCode.ToString(), customer.CustomerName.ToString()
                         });
 
-                lvKupci.Items.Add(lvi);
+                    lvKupci.Items.Add(lvi);
+                }
             }
             Cursor.Current = Cursors.Default;
 
