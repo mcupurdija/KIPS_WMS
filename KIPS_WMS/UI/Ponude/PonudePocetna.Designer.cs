@@ -71,6 +71,7 @@
             this.Controls.Add(this.bUcitaj);
             this.Controls.Add(this.tbUcitaj);
             this.Menu = this.mainMenu1;
+            this.MinimizeBox = false;
             this.Name = "PonudePocetna";
             this.Text = "Ponude";
             this.ResumeLayout(false);

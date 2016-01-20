@@ -30,7 +30,15 @@
         private void InitializeComponent()
         {
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(174, 54);
+            this.label1.Text = "Preuzimanje artikala je u toku. Molimo sačekajte...";
             // 
             // NoviArtikliDijalog
             // 
@@ -38,18 +46,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.CenterFormOnScreen = true;
-            this.ClientSize = new System.Drawing.Size(180, 100);
+            this.ClientSize = new System.Drawing.Size(180, 60);
             this.ControlBox = false;
+            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Menu = this.mainMenu1;
             this.Name = "NoviArtikliDijalog";
-            this.Text = "Molimo sačekajte...";
-            this.Activated += new System.EventHandler(this.NoviArtikliDijalog_Activated);
+            this.Text = "Novi artikli";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label1;
 
 
     }

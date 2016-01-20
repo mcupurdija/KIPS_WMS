@@ -65,7 +65,6 @@
             this.Controls.Add(this.bPotvrdi);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Menu = this.mainMenu1;
-            this.MinimizeBox = false;
             this.Name = "OdabirJediniceDijalog";
             this.Text = "Izaberite jedinicu mere";
             this.ResumeLayout(false);

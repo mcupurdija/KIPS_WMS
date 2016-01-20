@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace KIPS_WMS.UI.Ponude
     public partial class PonudaKorpa : Form
     {
         private readonly string _customerCode;
+        private readonly string _customerName;
         private readonly int _isAuthenticated;
         private readonly string _quoteNo;
         private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
@@ -23,6 +25,7 @@ namespace KIPS_WMS.UI.Ponude
         private List<Object[]> _searchedItems;
         private Object _selectedItem;
         private bool _tableBasket = true;
+        private bool _sent;
 
         public PonudaKorpa()
         {
@@ -35,11 +38,12 @@ namespace KIPS_WMS.UI.Ponude
             InitializeComponent();
 
             _customerCode = customerCode;
+            _customerName = customerName;
             _isAuthenticated = isAuthenticated;
             _quoteNo = quoteNo;
             _quoteItems = quoteItems;
 
-            lKupac.Text = string.Format("{0} - {1}", _customerCode, customerName);
+            lKupac.Text = string.Format("{0} - {1}", _customerCode, _customerName);
             DisplayLines();
         }
 
@@ -47,6 +51,21 @@ namespace KIPS_WMS.UI.Ponude
         {
             base.OnActivated(e);
             Text = _quoteNo;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+
+            if (_sent)
+            {
+                RegistryUtils.DeleteSavedQuoteData();
+            }
+            else
+            {
+                RegistryUtils.SaveQuoteHeader(new QuoteHeaderHelper(_quoteNo, _customerCode, _customerName, _isAuthenticated));
+                RegistryUtils.SaveQuoteLines(_quoteItems);
+            }
         }
 
         private void DisplayLines()
@@ -88,14 +107,14 @@ namespace KIPS_WMS.UI.Ponude
         {
             try
             {
-                CultureInfo culture = Util.GetLocalCulture();
+                CultureInfo culture = Utils.GetLocalCulture();
                 return
-                    _quoteItems.Sum(item => decimal.Parse(item.UnitPrice, culture)*decimal.Parse(item.Quantity, culture))
+                    _quoteItems.Sum(item => decimal.Parse(item.UnitPriceWithDiscount, culture)*decimal.Parse(item.Quantity, culture))
                         .ToString("N", culture.NumberFormat);
             }
             catch (Exception)
             {
-                return "0";
+                return "0,00";
             }
         }
 
@@ -200,50 +219,90 @@ namespace KIPS_WMS.UI.Ponude
 
         private void bUcitajNoveArtikle_Click(object sender, EventArgs e)
         {
+            var loadingForm = new NoviArtikliDijalog();
+            DialogResult result = loadingForm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                if (tbPronadji.Text.Length < 3) return;
+
+                _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementComplete, new object[] { tbPronadji.Text });
+                DisplaySearchResults(_searchedItems);
+            }
         }
 
         private void bPosalji_Click(object sender, EventArgs e)
         {
-            DialogResult result = new StampaDijalog().ShowDialog();
+            var stampaDijalog = new StampaDijalog();
+            DialogResult result = stampaDijalog.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                
-            }
+                int selectedPrintType = stampaDijalog.PrintTypeSelected;
 
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
-
-                string documentNo = _quoteNo;
-                int status = 0;
-                int creditLimit = 0;
-                List<SendQuoteModel> quotes = _quoteItems.Select(item => new SendQuoteModel
+                try
                 {
-                    ItemCode = item.ItemCode,
-                    ItemQuantity = item.Quantity,
-                    UnitOfMeasureCode = item.UnitOfMeasureCode,
-                    VariantCode = "",
-                    WarehouseCode = "001"
-                }).ToList();
+                    Cursor.Current = Cursors.WaitCursor;
 
-                var engine = new FileHelperEngine(typeof (SendQuoteModel));
-                string lines = engine.WriteString(quotes);
+                    string documentNo = _quoteNo;
+                    int status = 0;
+                    int creditLimit = 0;
+                    List<SendQuoteModel> quotes = _quoteItems.Select(item => new SendQuoteModel
+                    {
+                        ItemCode = item.ItemCode,
+                        ItemQuantity = item.Quantity,
+                        UnitOfMeasureCode = item.UnitOfMeasureCode,
+                        VariantCode = "",
+                        WarehouseCode = "001"
+                    }).ToList();
 
-                _ws.SendQuote("1", "001", ref documentNo, _customerCode, _isAuthenticated, lines, ref status,
-                    ref creditLimit);
+                    var engine = new FileHelperEngine(typeof (SendQuoteModel));
+                    string lines = engine.WriteString(quotes);
+
+                    _ws.SendQuote("1", "001", ref documentNo, _customerCode, _isAuthenticated, lines, ref status,
+                        ref creditLimit);
+
+                    Cursor.Current = Cursors.Default;
+                    if (status == 1)
+                    {
+                        var printHeader = new PrintHeaderModel
+                        {
+                            PrinterName = RegistryUtils.GetPrinterName(),
+                            PrintType = selectedPrintType,
+                            DocumentNo = documentNo,
+                            DocumentDate = new DateTime().ToString("dd.MM.yyyy. HH:mm:ss"),
+                            CustomerCode = _customerCode,
+                            CustomerName = _customerName,
+                            Total = SumPrices(),
+                            Lines = _quoteItems.Select(item => new PrintLineModel
+                            {
+                                ItemCode = item.ItemCode,
+                                ItemDescription = item.ItemDescription,
+                                ItemQuantity = item.Quantity,
+                                ItemPrice = item.UnitPriceWithDiscount
+                            }).ToList()
+                        };
+
+                        if (selectedPrintType != Utils.PrintTypeIgnore)
+                        {
+                            PrintHelper.Print(printHeader);
+                        }
+
+                        var slanjeDijalog = new SlanjeDijalog(printHeader, creditLimit);
+                        DialogResult result2 = slanjeDijalog.ShowDialog();
+
+                        if (result2 == DialogResult.OK)
+                        {
+                            _sent = true;
+                            Close();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Cursor.Current = Cursors.Default;
+                    Utils.GeneralExceptionProcessing(ex);
+                }
             }
-            catch (Exception ex)
-            {
-                Util.GeneralExceptionProcessing(ex);
-            }
-            finally
-            {
-                Cursor.Current = Cursors.Default;
-            }
-
-
-
         }
     }
 }

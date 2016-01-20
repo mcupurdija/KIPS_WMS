@@ -1,7 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Web.Services.Protocols;
 using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Model;
@@ -18,6 +17,16 @@ namespace KIPS_WMS.UI.Ponude
         {
             InitializeComponent();
             tbUcitaj.Text = "PPO13-003215"; // TMP
+
+            QuoteHeaderHelper savedQuoteHeader = RegistryUtils.GetQuoteHeader();
+            if (savedQuoteHeader == null) return;
+
+            Cursor.Current = Cursors.WaitCursor;
+            List<ItemQuoteModel> savedQuoteLines = RegistryUtils.GetQuoteLines();
+            new PonudaKorpa(savedQuoteHeader.CustomerCode, savedQuoteHeader.CustomerName,
+                savedQuoteHeader.IsAuthenticated, savedQuoteHeader.DocumentNo, savedQuoteLines).Show();
+            Cursor.Current = Cursors.Default;
+            Close();
         }
 
         private void bNova_Click(object sender, EventArgs e)
@@ -60,10 +69,11 @@ namespace KIPS_WMS.UI.Ponude
                     var quoteItems = (ItemQuoteModel[]) engine.ReadString(quoteLinesCsv);
 
                     new PonudaKorpa(customerCode, customerName, isAuthenticated, quoteNo, quoteItems.ToList()).Show();
+                    Close();
                 }
                 catch (Exception ex)
                 {
-                    Util.GeneralExceptionProcessing(ex);
+                    Utils.GeneralExceptionProcessing(ex);
                 }
                 finally
                 {

@@ -169,6 +169,7 @@
             this.Controls.Add(this.bPreklasifikacija);
             this.Controls.Add(this.bPonude);
             this.Menu = this.mainMenu1;
+            this.MinimizeBox = false;
             this.Name = "Meni";
             this.Text = "Meni";
             this.ResumeLayout(false);

@@ -1,30 +1,19 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using KIPS_WMS.Data;
-using KIPS_WMS.Model;
-using KIPS_WMS.NAV_WS;
-using KIPS_WMS.Web;
-using FileHelpers;
 
 namespace KIPS_WMS.UI.Ponude
 {
     public partial class NovaPonuda : Form
     {
-
-        List<Object[]> customers;
-        Object[] selectedCustomer;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private List<Object[]> _customers;
+        private Object[] _selectedCustomer;
 
         public NovaPonuda()
         {
             InitializeComponent();
-            customers = new List<object[]>();
+            _customers = new List<object[]>();
         }
 
         private void NovaPonuda_KeyUp(object sender, KeyEventArgs e)
@@ -37,68 +26,49 @@ namespace KIPS_WMS.UI.Ponude
 
         private void bPronadji_Click(object sender, EventArgs e)
         {
+            FindCustomers();
+        }
+
+        private void FindCustomers()
+        {
             if (tbPronadji.Text.Length > 2)
             {
-                customers = SQLiteHelper.multiRowQuery(String.Format(DbStatements.FindCustomersStatementComplete, tbPronadji.Text), new object[] { });
+                _customers =
+                    SQLiteHelper.multiRowQuery(
+                        String.Format(DbStatements.FindCustomersStatementComplete, tbPronadji.Text), new object[] { });
+
                 lvKupci.Clear();
                 lvKupci.View = View.Details;
-                lvKupci.Columns.Add("Šifra artikla", 120, HorizontalAlignment.Center);
-                lvKupci.Columns.Add("Naziv", 195, HorizontalAlignment.Center);
+                lvKupci.Columns.Add("Šifra", 120, HorizontalAlignment.Left);
+                lvKupci.Columns.Add("Ime kupca", 195, HorizontalAlignment.Left);
 
-                foreach (Object[] customer in customers)
+                foreach (var customer in _customers)
                 {
-                    ListViewItem lvi;
-
-                    lvi =
-                        new ListViewItem(new[]
-                        {
-                            customer[2].ToString(), customer[3].ToString()
-                        });
-
+                    var lvi = new ListViewItem(new[]
+                    {
+                        customer[2].ToString(), customer[3].ToString()
+                    });
                     lvKupci.Items.Add(lvi);
                 }
-
             }
         }
 
         private void bNepoznatKupac_Click(object sender, EventArgs e)
         {
-
         }
 
         private void bKreiraj_Click(object sender, EventArgs e)
         {
-
         }
 
         private void bNoviKupci_Click(object sender, EventArgs e)
         {
-
             var loadingForm = new NoviKupciDijalog();
             DialogResult result = loadingForm.ShowDialog();
-            Cursor.Current = Cursors.WaitCursor;
-
             if (result == DialogResult.OK)
             {
-                lvKupci.Clear();
-                lvKupci.View = View.Details;
-                lvKupci.Columns.Add("Šifra artikla", 120, HorizontalAlignment.Center);
-                lvKupci.Columns.Add("Naziv", 195, HorizontalAlignment.Center);
-                foreach (CustomerModel customer in loadingForm.Customers)
-                {
-                    ListViewItem lvi;
-
-                    lvi =
-                        new ListViewItem(new[]
-                        {
-                            customer.CustomerCode.ToString(), customer.CustomerName.ToString()
-                        });
-
-                    lvKupci.Items.Add(lvi);
-                }
+                FindCustomers();
             }
-            Cursor.Current = Cursors.Default;
-
         }
 
         private void tbPronadji_KeyUp(object sender, KeyEventArgs e)
@@ -107,29 +77,23 @@ namespace KIPS_WMS.UI.Ponude
             {
                 if (tbPronadji.Text.Length > 2)
                 {
-                    customers = SQLiteHelper.multiRowQuery(DbStatements.FindCustomersStatementBarcode, new object[] { tbPronadji.Text });
+                    _customers = SQLiteHelper.multiRowQuery(DbStatements.FindCustomersStatementBarcode,
+                        new object[] {tbPronadji.Text});
                     lvKupci.Clear();
                     lvKupci.View = View.Details;
-                    lvKupci.Columns.Add("Šifra artikla", 120, HorizontalAlignment.Center);
-                    lvKupci.Columns.Add("Naziv", 195, HorizontalAlignment.Center);
+                    lvKupci.Columns.Add("Šifra", 120, HorizontalAlignment.Left);
+                    lvKupci.Columns.Add("Ime kupca", 195, HorizontalAlignment.Left);
 
-                    foreach (Object[] customer in customers)
+                    foreach (var customer in _customers)
                     {
-                        ListViewItem lvi;
-
-                        lvi =
-                            new ListViewItem(new[]
+                        var lvi = new ListViewItem(new[]
                         {
                             customer[2].ToString(), customer[3].ToString()
                         });
-
                         lvKupci.Items.Add(lvi);
                     }
-
                 }
             }
-
-
         }
 
         private void lvKupci_SelectedIndexChanged(object sender, EventArgs e)
@@ -137,14 +101,13 @@ namespace KIPS_WMS.UI.Ponude
             if (lvKupci.SelectedIndices.Count == 1)
             {
                 int index = lvKupci.SelectedIndices[0];
-                selectedCustomer = customers[index];
-                MessageBox.Show(selectedCustomer[0] + "/" + selectedCustomer[1]);
+                _selectedCustomer = _customers[index];
+//                MessageBox.Show(selectedCustomer[0] + "/" + selectedCustomer[1]);
             }
         }
 
         private void NovaPonuda_Activated(object sender, EventArgs e)
         {
-
         }
     }
 }

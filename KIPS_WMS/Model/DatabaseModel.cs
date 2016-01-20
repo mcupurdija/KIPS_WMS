@@ -19,5 +19,12 @@
             public const int ItemVariant = 4;
             public const int ItemUnitOfMeasure = 5;
         }
+
+        public static class SyncDataDbModel
+        {
+            public const int SyncDataId = 0;
+            public const int CustomersSyncDate = 1;
+            public const int ItemsSyncDate = 2;
+        }
     }
 }

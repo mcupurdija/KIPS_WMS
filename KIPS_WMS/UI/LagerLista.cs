@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using KIPS_WMS.Data;
+using FileHelpers;
+using KIPS_WMS.Model;
 using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Web;
-using KIPS_WMS.Model;
-using FileHelpers;
 
 namespace KIPS_WMS.UI
 {
     public partial class LagerLista : Form
     {
         private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
-        private string _itemNo;
+        private ItemLagerListModel[] _items;
 
         public LagerLista()
         {
@@ -28,49 +21,62 @@ namespace KIPS_WMS.UI
         {
             InitializeComponent();
 
-            _itemNo = itemNo;
-            if (_itemNo != null)
+            if (itemNo != null)
             {
-                tbSifra.Text = _itemNo;
-                GetData();
+                tbSifra.Text = itemNo;
+                GetData(itemNo);
             }
         }
 
-        private void GetData()
+        private void GetData(string itemNo)
         {
-            var code = SQLiteHelper.oneRowQuery(DbStatements.FindItemsStatementCode, new object[] { _itemNo });
-            
-            string csvLagerList = string.Empty;
-            _ws.GetItemLagerList(code[1].ToString(), string.Empty, string.Empty, string.Empty,ref csvLagerList);
-            ItemLagerListModel[] lagerList;
-            var engine = new FileHelperEngine(typeof(ItemLagerListModel));
-            lagerList = (ItemLagerListModel[])engine.ReadString(csvLagerList);
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
 
+                string csvLagerList = string.Empty;
+
+                _ws.GetItemLagerList(itemNo, string.Empty, string.Empty, "001", ref csvLagerList);
+
+                var engine = new FileHelperEngine(typeof(ItemLagerListModel));
+                _items = (ItemLagerListModel[])engine.ReadString(csvLagerList);
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+
+            DisplayLines();
+        }
+
+        private void DisplayLines()
+        {
             lvLagerLista.Clear();
             lvLagerLista.View = View.Details;
-            lvLagerLista.Columns.Add("Šifra", 60, HorizontalAlignment.Center);
-            lvLagerLista.Columns.Add("Naziv", 195, HorizontalAlignment.Center);
-            lvLagerLista.Columns.Add("JM", 60, HorizontalAlignment.Center);
-            lvLagerLista.Columns.Add("Ukupno", 80, HorizontalAlignment.Center);
-            lvLagerLista.Columns.Add("Raspoloživo", 80, HorizontalAlignment.Center);
+            lvLagerLista.Columns.Add("Šifra", 80, HorizontalAlignment.Left);
+            lvLagerLista.Columns.Add("Naziv", 160, HorizontalAlignment.Left);
+            lvLagerLista.Columns.Add("Jedinica", 80, HorizontalAlignment.Center);
+            lvLagerLista.Columns.Add("Ukupno", 100, HorizontalAlignment.Right);
+            lvLagerLista.Columns.Add("Raspoloživo", 100, HorizontalAlignment.Right);
 
-            foreach (ItemLagerListModel item in lagerList)
+            foreach (ItemLagerListModel item in _items)
             {
-                ListViewItem lvi;
-
-                lvi =
-                    new ListViewItem(new[]
-                        {
-                            item.WarehouseCode, item.WarehouseName, item.UnitOfMeasure, item.TotalQuantity.ToString(), item.AvailableQuantity.ToString()
-                        });
-
+                var lvi = new ListViewItem(new[]
+                {
+                    item.WarehouseCode, item.WarehouseName, item.UnitOfMeasure, item.TotalQuantity,
+                    item.AvailableQuantity
+                });
                 lvLagerLista.Items.Add(lvi);
             }
         }
 
         private void bPronadji_Click(object sender, EventArgs e)
         {
-           
+            GetData(tbSifra.Text);
         }
 
         private void tbSifra_KeyUp(object sender, KeyEventArgs e)
@@ -79,7 +85,7 @@ namespace KIPS_WMS.UI
             //if (e.KeyCode == Keys.Enter)
             //{
             //    var code = SQLiteHelper.oneRowQuery(DbStatements.FindItemsStatementBarcode, new object[] { tbSifra.Text });
-                
+
             //    string csvLagerList = string.Empty;
             //    _ws.GetItemLagerList(code[1].ToString(), string.Empty, string.Empty, string.Empty, ref csvLagerList);
             //    ItemLagerListModel[] lagerList;

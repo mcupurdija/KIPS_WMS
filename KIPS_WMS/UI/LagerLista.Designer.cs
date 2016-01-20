@@ -40,15 +40,15 @@
             this.tbSifra.Enabled = false;
             this.tbSifra.Location = new System.Drawing.Point(3, 3);
             this.tbSifra.Name = "tbSifra";
-            this.tbSifra.Size = new System.Drawing.Size(163, 21);
+            this.tbSifra.Size = new System.Drawing.Size(156, 21);
             this.tbSifra.TabIndex = 0;
             this.tbSifra.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbSifra_KeyUp);
             // 
             // bPronadji
             // 
-            this.bPronadji.Location = new System.Drawing.Point(172, 4);
+            this.bPronadji.Location = new System.Drawing.Point(165, 3);
             this.bPronadji.Name = "bPronadji";
-            this.bPronadji.Size = new System.Drawing.Size(82, 20);
+            this.bPronadji.Size = new System.Drawing.Size(72, 20);
             this.bPronadji.TabIndex = 1;
             this.bPronadji.Text = "Pronadji";
             this.bPronadji.Click += new System.EventHandler(this.bPronadji_Click);
@@ -57,20 +57,21 @@
             // 
             this.lvLagerLista.Location = new System.Drawing.Point(0, 30);
             this.lvLagerLista.Name = "lvLagerLista";
-            this.lvLagerLista.Size = new System.Drawing.Size(257, 140);
+            this.lvLagerLista.Size = new System.Drawing.Size(240, 155);
             this.lvLagerLista.TabIndex = 2;
             // 
             // LagerLista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(257, 188);
+            this.ClientSize = new System.Drawing.Size(240, 188);
             this.Controls.Add(this.lvLagerLista);
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbSifra);
             this.Menu = this.mainMenu1;
+            this.MinimizeBox = false;
             this.Name = "LagerLista";
-            this.Text = "LagerLista";
+            this.Text = "Lager lista";
             this.ResumeLayout(false);
 
         }

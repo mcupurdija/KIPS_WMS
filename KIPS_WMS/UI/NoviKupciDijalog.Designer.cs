@@ -35,26 +35,23 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Tahoma", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label1.Location = new System.Drawing.Point(3, 4);
+            this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 69);
-            this.label1.Text = "Učitavanje kupaca. Molimo sačekajte...";
+            this.label1.Size = new System.Drawing.Size(174, 54);
+            this.label1.Text = "Preuzimanje kupaca je u toku. Molimo sačekajte...";
             // 
             // NoviKupciDijalog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CenterFormOnScreen = true;
-            this.ClientSize = new System.Drawing.Size(180, 80);
+            this.ClientSize = new System.Drawing.Size(180, 60);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Menu = this.mainMenu1;
             this.Name = "NoviKupciDijalog";
-            this.Text = "Molimo sačekajte";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.NoviKupciDijalog_Paint);
-            this.Activated += new System.EventHandler(this.NoviKupciDijalog_Activated);
+            this.Text = "Novi kupci";
             this.ResumeLayout(false);
 
         }
@@ -62,5 +59,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
+
     }
 }

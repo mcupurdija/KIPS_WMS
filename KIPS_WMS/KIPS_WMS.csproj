@@ -50,6 +50,10 @@
       <HintPath>..\..\..\..\..\Downloads\FileHelpersPPC\FileHelpersPPC.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json.Compact, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Downloads\json.net.cf\Newtonsoft.Json.Compact.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.99.0, Culture=neutral, PublicKeyToken=1fdb50b1b62b4c84, processorArchitecture=MSIL">
@@ -69,11 +73,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JsonHelper.cs" />
     <Compile Include="Model\ItemPriceInventoryModel.cs" />
     <Compile Include="Model\DatabaseModel.cs" />
     <Compile Include="Model\ItemQuoteModel.cs" />
     <Compile Include="Model\ItemInformationModel.cs" />
+    <Compile Include="Model\PrintHeaderModel.cs" />
+    <Compile Include="Model\PrintLineModel.cs" />
     <Compile Include="Model\SendQuoteModel.cs" />
+    <Compile Include="RegistryUtils.cs" />
     <Compile Include="UI\CsvImport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +123,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\LagerLista.resx">
+      <DependentUpon>LagerLista.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Meni.resx">
       <DependentUpon>Meni.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -148,6 +159,9 @@
     <EmbeddedResource Include="UI\Ponude\PonudePocetna.resx">
       <DependentUpon>PonudePocetna.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ponude\SlanjeDijalog.resx">
+      <DependentUpon>SlanjeDijalog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ponude\StampaDijalog.resx">
       <DependentUpon>StampaDijalog.cs</DependentUpon>
@@ -205,6 +219,13 @@
     <Compile Include="UI\Ponude\PonudePocetna.Designer.cs">
       <DependentUpon>PonudePocetna.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Ponude\PrintHelper.cs" />
+    <Compile Include="UI\Ponude\SlanjeDijalog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Ponude\SlanjeDijalog.Designer.cs">
+      <DependentUpon>SlanjeDijalog.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Ponude\StampaDijalog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,7 +238,7 @@
     <Compile Include="UI\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Util.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="Web References\NAV_WS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

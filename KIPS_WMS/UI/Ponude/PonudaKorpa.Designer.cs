@@ -153,6 +153,7 @@
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbPronadji);
             this.Menu = this.mainMenu1;
+            this.MinimizeBox = false;
             this.Name = "PonudaKorpa";
             this.Text = "Nova ponuda";
             this.ResumeLayout(false);

@@ -35,6 +35,7 @@
             this.rbDugaStampa = new System.Windows.Forms.RadioButton();
             this.rbKratkaStampa = new System.Windows.Forms.RadioButton();
             this.bPotvrdi = new System.Windows.Forms.Button();
+            this.bOdustani = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,17 +84,27 @@
             this.bPotvrdi.Text = "Potvrdi";
             this.bPotvrdi.Click += new System.EventHandler(this.bPotvrdi_Click);
             // 
+            // bOdustani
+            // 
+            this.bOdustani.Location = new System.Drawing.Point(3, 97);
+            this.bOdustani.Name = "bOdustani";
+            this.bOdustani.Size = new System.Drawing.Size(72, 20);
+            this.bOdustani.TabIndex = 3;
+            this.bOdustani.Text = "Otkaži";
+            this.bOdustani.Click += new System.EventHandler(this.bOdustani_Click);
+            // 
             // StampaDijalog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CenterFormOnScreen = true;
             this.ClientSize = new System.Drawing.Size(180, 120);
+            this.ControlBox = false;
+            this.Controls.Add(this.bOdustani);
             this.Controls.Add(this.bPotvrdi);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Menu = this.mainMenu1;
-            this.MinimizeBox = false;
             this.Name = "StampaDijalog";
             this.Text = "Izbor štampe";
             this.panel1.ResumeLayout(false);
@@ -108,5 +119,6 @@
         private System.Windows.Forms.RadioButton rbBezStampe;
         private System.Windows.Forms.RadioButton rbDugaStampa;
         private System.Windows.Forms.RadioButton rbKratkaStampa;
+        private System.Windows.Forms.Button bOdustani;
     }
 }

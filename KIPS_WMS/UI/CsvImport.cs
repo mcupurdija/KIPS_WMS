@@ -62,12 +62,12 @@ namespace KIPS_WMS.UI
                 {
                     switch (import.TableNo)
                     {
-                        case Util.CsvImportCustomers:
+                        case Utils.CsvImportCustomers:
                             SQLiteHelper.insertQuery(DbStatements.InsertCustomersStatement,
                                 new object[] {import.Field1, import.Field2, import.Field4});
                             customerCount++;
                             break;
-                        case Util.CsvImportItems:
+                        case Utils.CsvImportItems:
                             SQLiteHelper.insertQuery(DbStatements.InsertItemsStatement,
                                 new object[] {import.Field1, import.Field2, import.Field3, import.Field4, import.Field5});
                             itemCount++;

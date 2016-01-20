@@ -57,7 +57,7 @@ namespace KIPS_WMS.UI.Ponude
             }
             catch (Exception ex)
             {
-                Util.GeneralExceptionProcessing(ex);
+                Utils.GeneralExceptionProcessing(ex);
             }
             finally
             {

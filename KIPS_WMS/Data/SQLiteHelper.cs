@@ -9,7 +9,7 @@ namespace KIPS_WMS.Data
     {
         public static DataSet query(String select, Object[] args, String tableName)
         {
-            var sqliteCon = new SQLiteConnection(Util.GetDbConnectionString());
+            var sqliteCon = new SQLiteConnection(Utils.GetDbConnectionString());
             try
             {
                 sqliteCon.Open();
@@ -45,7 +45,7 @@ namespace KIPS_WMS.Data
 
         public static Object simpleQuery(String select, Object[] args)
         {
-            var sqliteCon = new SQLiteConnection(Util.GetDbConnectionString());
+            var sqliteCon = new SQLiteConnection(Utils.GetDbConnectionString());
             try
             {
                 Object result = null;
@@ -93,7 +93,7 @@ namespace KIPS_WMS.Data
 
         public static List<Object[]> multiRowQuery(String select, Object[] args)
         {
-            var sqliteCon = new SQLiteConnection(Util.GetDbConnectionString());
+            var sqliteCon = new SQLiteConnection(Utils.GetDbConnectionString());
             try
             {
                 sqliteCon.Open();
@@ -157,7 +157,7 @@ namespace KIPS_WMS.Data
         /// <returns></returns>
         public static List<Object> oneRowQuery(String select, Object[] args)
         {
-            var sqliteCon = new SQLiteConnection(Util.GetDbConnectionString());
+            var sqliteCon = new SQLiteConnection(Utils.GetDbConnectionString());
             try
             {
                 sqliteCon.Open();
@@ -210,7 +210,7 @@ namespace KIPS_WMS.Data
         public static int nonQuery(String statement, Object[] args)
         {
             int result = -1;
-            var sqliteCon = new SQLiteConnection(Util.GetDbConnectionString());
+            var sqliteCon = new SQLiteConnection(Utils.GetDbConnectionString());
             try
             {
                 sqliteCon.Open();
@@ -243,7 +243,7 @@ namespace KIPS_WMS.Data
         public static int insertQuery(String statement, Object[] args)
         {
             int result = -1;
-            var sqliteCon = new SQLiteConnection(Util.GetDbConnectionString());
+            var sqliteCon = new SQLiteConnection(Utils.GetDbConnectionString());
             try
             {
                 sqliteCon.Open();

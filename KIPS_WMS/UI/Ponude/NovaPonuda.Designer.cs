@@ -66,10 +66,12 @@
             // 
             // lvKupci
             // 
+            this.lvKupci.FullRowSelect = true;
             this.lvKupci.Location = new System.Drawing.Point(0, 31);
             this.lvKupci.Name = "lvKupci";
             this.lvKupci.Size = new System.Drawing.Size(240, 127);
             this.lvKupci.TabIndex = 4;
+            this.lvKupci.View = System.Windows.Forms.View.Details;
             this.lvKupci.SelectedIndexChanged += new System.EventHandler(this.lvKupci_SelectedIndexChanged);
             // 
             // bNepoznatKupac
@@ -102,6 +104,7 @@
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbPronadji);
             this.Menu = this.mainMenu1;
+            this.MinimizeBox = false;
             this.Name = "NovaPonuda";
             this.Text = "Nova ponuda";
             this.Activated += new System.EventHandler(this.NovaPonuda_Activated);

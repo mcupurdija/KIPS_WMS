@@ -113,11 +113,12 @@ namespace KIPS_WMS.UI.Ponude
                     break;
             }
 
-            if (tbKolicina.Text.Length > 0)
-            {
-                tbKolicina.SelectionStart = 0;
-                tbKolicina.SelectionLength = tbKolicina.Text.Length;
-            }
+            tbKolicina.Focus();
+//            if (tbKolicina.Text.Length > 0)
+//            {
+//                tbKolicina.SelectionStart = 0;
+//                tbKolicina.SelectionLength = tbKolicina.Text.Length;
+//            }
         }
 
         private void GetItemInformation(string itemNo, string itemVariant)
@@ -155,7 +156,7 @@ namespace KIPS_WMS.UI.Ponude
             }
             catch (Exception ex)
             {
-                Util.GeneralExceptionProcessing(ex);
+                Utils.GeneralExceptionProcessing(ex);
             }
             finally
             {
@@ -226,7 +227,7 @@ namespace KIPS_WMS.UI.Ponude
 
         private void CalculatePrice()
         {
-            CultureInfo culture = Util.GetLocalCulture();
+            CultureInfo culture = Utils.GetLocalCulture();
             try
             {
                 decimal priceWithDiscount = decimal.Parse(tbCenaPopust.Text, culture);
@@ -241,7 +242,7 @@ namespace KIPS_WMS.UI.Ponude
 
         private void CalculateQuantity()
         {
-            CultureInfo culture = Util.GetLocalCulture();
+            CultureInfo culture = Utils.GetLocalCulture();
             try
             {
                 _quantityWatcherEnabled = false;
@@ -262,7 +263,7 @@ namespace KIPS_WMS.UI.Ponude
 
         private void CalculateConvertedQuantity()
         {
-            CultureInfo culture = Util.GetLocalCulture();
+            CultureInfo culture = Utils.GetLocalCulture();
             try
             {
                 _convertedQuantityWatcherEnabled = false;
@@ -329,12 +330,17 @@ namespace KIPS_WMS.UI.Ponude
             }
             catch (Exception ex)
             {
-                Util.GeneralExceptionProcessing(ex);
+                Utils.GeneralExceptionProcessing(ex);
             }
             finally
             {
                 Cursor.Current = Cursors.Default;
             }
+        }
+
+        private void bLagerLista_Click(object sender, EventArgs e)
+        {
+            new LagerLista(_itemCode).ShowDialog();
         }
 
     }

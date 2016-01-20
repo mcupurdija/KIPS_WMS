@@ -8,7 +8,7 @@ namespace KIPS_WMS.Web
 
         static WebServiceFactory()
         {
-            WebService = new KIPS_wms { Credentials = Util.GoProCredentials, PreAuthenticate = true };
+            WebService = new KIPS_wms { Credentials = Utils.GoProCredentials, PreAuthenticate = true };
         }
 
         public static KIPS_wms GetWebService()

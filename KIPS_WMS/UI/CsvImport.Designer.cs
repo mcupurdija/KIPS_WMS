@@ -74,7 +74,7 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // CsvSync
+            // CsvImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -85,8 +85,9 @@
             this.Controls.Add(this.bSelect);
             this.Controls.Add(this.tbFile);
             this.Menu = this.mainMenu1;
-            this.Name = "CsvSync";
-            this.Text = "CsvSync";
+            this.MinimizeBox = false;
+            this.Name = "CsvImport";
+            this.Text = "Import";
             this.ResumeLayout(false);
 
         }

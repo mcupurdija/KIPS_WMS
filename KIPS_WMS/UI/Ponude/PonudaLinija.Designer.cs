@@ -74,6 +74,7 @@
             // bLagerLista
             // 
             this.bLagerLista.Text = "|   Lager lista";
+            this.bLagerLista.Click += new System.EventHandler(this.bLagerLista_Click);
             // 
             // bPrihvati
             // 
@@ -326,6 +327,7 @@
             this.Controls.Add(this.tbSifra);
             this.Controls.Add(this.lSifra);
             this.Menu = this.mainMenu1;
+            this.MinimizeBox = false;
             this.Name = "PonudaLinija";
             this.Text = "Nova ponuda";
             this.ResumeLayout(false);

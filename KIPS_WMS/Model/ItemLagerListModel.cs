@@ -15,10 +15,10 @@ namespace KIPS_WMS.Model
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
         public string UnitOfMeasure;
 
-        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
-        public double TotalQuantity;
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string TotalQuantity;
 
-        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
-        public double AvailableQuantity;
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string AvailableQuantity;
     }
 }
