@@ -13,8 +13,6 @@ namespace KIPS_WMS.UI
 {
     public partial class NoviArtikliDijalog : NonFullscreenForm
     {
-        public delegate void CloseDelagate();
-
         private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
 
         public NoviArtikliDijalog()
@@ -27,46 +25,54 @@ namespace KIPS_WMS.UI
 
             Height = (int) (myAutoScaleFactor.Height*50);
 
-            var thread = new Thread(GetData);
-            thread.Start();
+            new Thread(GetData).Start();
         }
 
         public void GetData()
         {
-            List<Object> date = SQLiteHelper.oneRowQuery(DbStatements.GetSyncDateItems, new object[] {});
-            DateTime dt = Convert.ToDateTime(date[0]);
-
-            string csvItems = string.Empty;
-
-            _ws.GetItems(ref csvItems, String.Empty, dt);
-
-            var engine = new FileHelperEngine(typeof (ItemModel));
-            var items = (ItemModel[]) engine.ReadString(csvItems);
-
-            foreach (ItemModel item in items)
+            try
             {
-                List<Object> foundItem = SQLiteHelper.oneRowQuery(DbStatements.FindItemsStatementComplete,
-                    new object[] {item.ItemBarcode});
+                List<Object> date = SQLiteHelper.oneRowQuery(DbStatements.GetSyncDateItems, new object[] { });
+                DateTime dt = Convert.ToDateTime(date[0]);
 
-                if (foundItem.Count > 0)
+                string csvItems = string.Empty;
+
+                _ws.GetItems(ref csvItems, String.Empty, dt);
+
+                var engine = new FileHelperEngine(typeof(ItemModel));
+                var items = (ItemModel[])engine.ReadString(csvItems);
+
+                foreach (ItemModel item in items)
                 {
-                    SQLiteHelper.nonQuery(DbStatements.UpdateItemsStatement,
-                        new object[]
-                        {item.ItemBarcode, item.ItemNo, item.ItemDescription, item.ItemVariant, item.ItemUnitOfMeasure});
-                }
-                else
-                {
-                    SQLiteHelper.insertQuery(DbStatements.InsertItemsStatement,
-                        new object[]
-                        {item.ItemBarcode, item.ItemNo, item.ItemDescription, item.ItemVariant, item.ItemUnitOfMeasure});
+                    List<Object> foundItem = SQLiteHelper.oneRowQuery(DbStatements.FindItemsStatementComplete,
+                        new object[] { item.ItemBarcode });
+
+                    if (foundItem.Count > 0)
+                    {
+                        SQLiteHelper.nonQuery(DbStatements.UpdateItemsStatement,
+                            new object[] { item.ItemBarcode, item.ItemNo, item.ItemDescription, item.ItemVariant, item.ItemUnitOfMeasure });
+                    }
+                    else
+                    {
+                        SQLiteHelper.insertQuery(DbStatements.InsertItemsStatement,
+                            new object[] { item.ItemBarcode, item.ItemNo, item.ItemDescription, item.ItemVariant, item.ItemUnitOfMeasure });
+                    }
                 }
             }
-
-            Invoke((CloseDelagate)delegate
+            catch (Exception ex)
             {
-                DialogResult = DialogResult.OK;
-                Close();
-            });
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Invoke(new EventHandler(CloseDialog));
+            }
+        }
+
+        private void CloseDialog(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

@@ -114,11 +114,11 @@ namespace KIPS_WMS.UI.Ponude
             }
 
             tbKolicina.Focus();
-//            if (tbKolicina.Text.Length > 0)
-//            {
-//                tbKolicina.SelectionStart = 0;
-//                tbKolicina.SelectionLength = tbKolicina.Text.Length;
-//            }
+            if (tbKolicina.Text.Length > 0)
+            {
+                tbKolicina.SelectionStart = 0;
+                tbKolicina.SelectionLength = tbKolicina.Text.Length;
+            }
         }
 
         private void GetItemInformation(string itemNo, string itemVariant)

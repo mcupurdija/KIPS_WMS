@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Data;
@@ -92,8 +93,6 @@ namespace KIPS_WMS.UI.Ponude
             }
 
             lUkupno.Text = string.Format("Ukupno: {0}", SumPrices());
-
-            tbPronadji.Focus();
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -102,6 +101,14 @@ namespace KIPS_WMS.UI.Ponude
 
             int index = listView1.SelectedIndices[0];
             _selectedItem = _tableBasket ? (object) _quoteItems[index] : _searchedItems[index];
+        }
+
+        private void listView1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (listView1.SelectedIndices.Count == 1 && !_tableBasket && _selectedItem != null && e.KeyCode == Keys.Return)
+            {
+                ShowLinesForm(PonudaLinija.ItemState.New);
+            }
         }
 
         private string SumPrices()
@@ -159,6 +166,12 @@ namespace KIPS_WMS.UI.Ponude
                 });
                 listView1.Items.Add(lvi);
             }
+
+            if (listView1.Items.Count > 0)
+            {
+                listView1.Focus();
+                listView1.Items[0].Selected = true;
+            }
         }
 
         private void bResetuj_Click(object sender, EventArgs e)
@@ -210,7 +223,8 @@ namespace KIPS_WMS.UI.Ponude
         {
             if (_tableBasket && _selectedItem is ItemQuoteModel)
             {
-                _quoteItems = (List<ItemQuoteModel>) _quoteItems.Where(val => val != _selectedItem);
+                _quoteItems.Remove((ItemQuoteModel)_selectedItem);
+                DisplayLines();
             }
             else
             {
@@ -238,71 +252,81 @@ namespace KIPS_WMS.UI.Ponude
 
             if (result == DialogResult.OK)
             {
-                int selectedPrintType = stampaDijalog.PrintTypeSelected;
+                new Thread(() => SendQuote(stampaDijalog.PrintTypeSelected)).Start();
+            }
+        }
 
-                try
+        private void SendQuote(int selectedPrintType)
+        {
+            try
+            {
+                Cursor.Current = Cursors.Default;
+
+                string documentNo = _quoteNo;
+                int status = 0;
+                int creditLimit = 0;
+                List<SendQuoteModel> quotes = _quoteItems.Select(item => new SendQuoteModel
                 {
-                    Cursor.Current = Cursors.WaitCursor;
+                    ItemCode = item.ItemCode,
+                    ItemQuantity = item.Quantity,
+                    UnitOfMeasureCode = item.UnitOfMeasureCode,
+                    VariantCode = "",
+                    WarehouseCode = "001"
+                }).ToList();
 
-                    string documentNo = _quoteNo;
-                    int status = 0;
-                    int creditLimit = 0;
-                    List<SendQuoteModel> quotes = _quoteItems.Select(item => new SendQuoteModel
+                var engine = new FileHelperEngine(typeof (SendQuoteModel));
+                string lines = engine.WriteString(quotes);
+
+                _ws.SendQuote("1", "001", ref documentNo, _customerCode, _isAuthenticated, lines, ref status,
+                    ref creditLimit);
+
+                if (status == 1)
+                {
+                    var printHeader = new PrintHeaderModel
                     {
-                        ItemCode = item.ItemCode,
-                        ItemQuantity = item.Quantity,
-                        UnitOfMeasureCode = item.UnitOfMeasureCode,
-                        VariantCode = "",
-                        WarehouseCode = "001"
-                    }).ToList();
+                        PrinterName = RegistryUtils.GetPrinterName(),
+                        PrintType = selectedPrintType,
+                        DocumentNo = documentNo,
+                        DocumentDate = new DateTime().ToString("dd.MM.yyyy. HH:mm:ss"),
+                        CustomerCode = _customerCode,
+                        CustomerName = _customerName,
+                        Total = SumPrices(),
+                        Lines = _quoteItems.Select(item => new PrintLineModel
+                        {
+                            ItemCode = item.ItemCode,
+                            ItemDescription = item.ItemDescription,
+                            ItemQuantity = item.Quantity,
+                            ItemPrice = item.UnitPriceWithDiscount
+                        }).ToList()
+                    };
 
-                    var engine = new FileHelperEngine(typeof (SendQuoteModel));
-                    string lines = engine.WriteString(quotes);
-
-                    _ws.SendQuote("1", "001", ref documentNo, _customerCode, _isAuthenticated, lines, ref status,
-                        ref creditLimit);
-
-                    Cursor.Current = Cursors.Default;
-                    if (status == 1)
+                    if (selectedPrintType != Utils.PrintTypeIgnore)
                     {
-                        var printHeader = new PrintHeaderModel
-                        {
-                            PrinterName = RegistryUtils.GetPrinterName(),
-                            PrintType = selectedPrintType,
-                            DocumentNo = documentNo,
-                            DocumentDate = new DateTime().ToString("dd.MM.yyyy. HH:mm:ss"),
-                            CustomerCode = _customerCode,
-                            CustomerName = _customerName,
-                            Total = SumPrices(),
-                            Lines = _quoteItems.Select(item => new PrintLineModel
-                            {
-                                ItemCode = item.ItemCode,
-                                ItemDescription = item.ItemDescription,
-                                ItemQuantity = item.Quantity,
-                                ItemPrice = item.UnitPriceWithDiscount
-                            }).ToList()
-                        };
-
-                        if (selectedPrintType != Utils.PrintTypeIgnore)
-                        {
-                            PrintHelper.Print(printHeader);
-                        }
-
-                        var slanjeDijalog = new SlanjeDijalog(printHeader, creditLimit);
-                        DialogResult result2 = slanjeDijalog.ShowDialog();
-
-                        if (result2 == DialogResult.OK)
-                        {
-                            _sent = true;
-                            Close();
-                        }
+                        PrintHelper.Print(printHeader);
                     }
+
+                    Invoke(new EventHandler((sender, e) => DisplayResults(printHeader, creditLimit)));
                 }
-                catch (Exception ex)
-                {
-                    Cursor.Current = Cursors.Default;
-                    Utils.GeneralExceptionProcessing(ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void DisplayResults(PrintHeaderModel printHeader, int creditLimit)
+        {
+            var slanjeDijalog = new SlanjeDijalog(printHeader, creditLimit);
+            DialogResult result2 = slanjeDijalog.ShowDialog();
+
+            if (result2 == DialogResult.OK)
+            {
+                _sent = true;
+                Close();
             }
         }
     }

@@ -107,8 +107,6 @@
             this.MinimizeBox = false;
             this.Name = "NovaPonuda";
             this.Text = "Nova ponuda";
-            this.Activated += new System.EventHandler(this.NovaPonuda_Activated);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NovaPonuda_KeyUp);
             this.ResumeLayout(false);
 
         }
