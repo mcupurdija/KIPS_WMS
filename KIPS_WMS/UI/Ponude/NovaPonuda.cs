@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using KIPS_WMS.Data;
+using KIPS_WMS.Model;
 
 namespace KIPS_WMS.UI.Ponude
 {
@@ -16,37 +17,38 @@ namespace KIPS_WMS.UI.Ponude
             _customers = new List<object[]>();
         }
 
-        private void NovaPonuda_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                Close();
-            }
-        }
-
         private void bPronadji_Click(object sender, EventArgs e)
         {
-            FindCustomers();
+            FindCustomers(SearchType.Button);
         }
 
-        private void FindCustomers()
+        private void FindCustomers(SearchType searchType)
         {
             if (tbPronadji.Text.Length > 2)
             {
-                _customers =
-                    SQLiteHelper.multiRowQuery(
-                        String.Format(DbStatements.FindCustomersStatementComplete, tbPronadji.Text), new object[] { });
+                switch (searchType)
+                {
+                    case SearchType.Scanner:
+                        _customers = SQLiteHelper.multiRowQuery(DbStatements.FindCustomersStatementBarcode,
+                            new object[] {tbPronadji.Text});
+                        break;
+                    case SearchType.Button:
+                        _customers = SQLiteHelper.multiRowQuery(DbStatements.FindCustomersStatementComplete,
+                            new object[] {tbPronadji.Text});
+                        break;
+                }
 
                 lvKupci.Clear();
                 lvKupci.View = View.Details;
                 lvKupci.Columns.Add("Šifra", 120, HorizontalAlignment.Left);
-                lvKupci.Columns.Add("Ime kupca", 195, HorizontalAlignment.Left);
+                lvKupci.Columns.Add("Ime kupca", 200, HorizontalAlignment.Left);
 
                 foreach (var customer in _customers)
                 {
                     var lvi = new ListViewItem(new[]
                     {
-                        customer[2].ToString(), customer[3].ToString()
+                        customer[DatabaseModel.CustomerDbModel.CustomerCode].ToString(),
+                        customer[DatabaseModel.CustomerDbModel.CustomerDescription].ToString()
                     });
                     lvKupci.Items.Add(lvi);
                 }
@@ -55,10 +57,14 @@ namespace KIPS_WMS.UI.Ponude
 
         private void bNepoznatKupac_Click(object sender, EventArgs e)
         {
+//            new PonudaKorpa(customerCode, customerName, isAuthenticatedCustomer, quoteNo, quoteItems.ToList()).Show();
+            Close();
         }
 
         private void bKreiraj_Click(object sender, EventArgs e)
         {
+//            new PonudaKorpa(customerCode, customerName, isAuthenticatedCustomer, quoteNo, quoteItems.ToList()).Show();
+            Close();
         }
 
         private void bNoviKupci_Click(object sender, EventArgs e)
@@ -67,7 +73,7 @@ namespace KIPS_WMS.UI.Ponude
             DialogResult result = loadingForm.ShowDialog();
             if (result == DialogResult.OK)
             {
-                FindCustomers();
+                FindCustomers(SearchType.Button);
             }
         }
 
@@ -75,24 +81,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (tbPronadji.Text.Length > 2)
-                {
-                    _customers = SQLiteHelper.multiRowQuery(DbStatements.FindCustomersStatementBarcode,
-                        new object[] {tbPronadji.Text});
-                    lvKupci.Clear();
-                    lvKupci.View = View.Details;
-                    lvKupci.Columns.Add("Šifra", 120, HorizontalAlignment.Left);
-                    lvKupci.Columns.Add("Ime kupca", 195, HorizontalAlignment.Left);
-
-                    foreach (var customer in _customers)
-                    {
-                        var lvi = new ListViewItem(new[]
-                        {
-                            customer[2].ToString(), customer[3].ToString()
-                        });
-                        lvKupci.Items.Add(lvi);
-                    }
-                }
+                FindCustomers(SearchType.Scanner);
             }
         }
 
@@ -102,12 +91,13 @@ namespace KIPS_WMS.UI.Ponude
             {
                 int index = lvKupci.SelectedIndices[0];
                 _selectedCustomer = _customers[index];
-//                MessageBox.Show(selectedCustomer[0] + "/" + selectedCustomer[1]);
             }
         }
 
-        private void NovaPonuda_Activated(object sender, EventArgs e)
+        private enum SearchType
         {
+            Scanner,
+            Button
         }
     }
 }

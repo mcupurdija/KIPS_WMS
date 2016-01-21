@@ -13,8 +13,6 @@ namespace KIPS_WMS.UI
 {
     public partial class NoviKupciDijalog : NonFullscreenForm
     {
-        public delegate void CloseDelagate();
-
         private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
 
         public NoviKupciDijalog()
@@ -27,44 +25,54 @@ namespace KIPS_WMS.UI
 
             Height = (int) (myAutoScaleFactor.Height*50);
 
-            var thread = new Thread(GetData);
-            thread.Start();
+            new Thread(GetData).Start();
         }
 
         public void GetData()
         {
-            List<Object> date = SQLiteHelper.oneRowQuery(DbStatements.GetSyncDateCustomers, new object[] {});
-            DateTime dt = Convert.ToDateTime(date[0]);
-
-            string csvCustomers = string.Empty;
-
-            _ws.GetCustomers(ref csvCustomers, String.Empty, dt);
-
-            var engine = new FileHelperEngine(typeof (CustomerModel));
-            var customers = (CustomerModel[]) engine.ReadString(csvCustomers);
-
-            foreach (CustomerModel customer in customers)
+            try
             {
-                List<Object> foundCustomer = SQLiteHelper.oneRowQuery(DbStatements.FindCustomersStatementComplete,
-                    new object[] {customer.CustomerBarcode});
+                List<Object> date = SQLiteHelper.oneRowQuery(DbStatements.GetSyncDateCustomers, new object[] { });
+                DateTime dt = Convert.ToDateTime(date[0]);
 
-                if (foundCustomer.Count > 0)
+                string csvCustomers = string.Empty;
+
+                _ws.GetCustomers(ref csvCustomers, String.Empty, dt);
+
+                var engine = new FileHelperEngine(typeof(CustomerModel));
+                var customers = (CustomerModel[])engine.ReadString(csvCustomers);
+
+                foreach (CustomerModel customer in customers)
                 {
-                    SQLiteHelper.nonQuery(DbStatements.UpdateCustomersStatement,
-                        new object[] {customer.CustomerBarcode, customer.CustomerCode, customer.CustomerName});
-                }
-                else
-                {
-                    SQLiteHelper.insertQuery(DbStatements.InsertCustomersStatement,
-                        new object[] {customer.CustomerBarcode, customer.CustomerCode, customer.CustomerName});
+                    List<Object> foundCustomer = SQLiteHelper.oneRowQuery(DbStatements.FindCustomersStatementComplete,
+                        new object[] { customer.CustomerBarcode });
+
+                    if (foundCustomer.Count > 0)
+                    {
+                        SQLiteHelper.nonQuery(DbStatements.UpdateCustomersStatement,
+                            new object[] { customer.CustomerBarcode, customer.CustomerCode, customer.CustomerName });
+                    }
+                    else
+                    {
+                        SQLiteHelper.insertQuery(DbStatements.InsertCustomersStatement,
+                            new object[] { customer.CustomerBarcode, customer.CustomerCode, customer.CustomerName });
+                    }
                 }
             }
-
-            Invoke((CloseDelagate) delegate
+            catch (Exception ex)
             {
-                DialogResult = DialogResult.OK;
-                Close();
-            });
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Invoke(new EventHandler(CloseDialog));
+            }
+        }
+
+        private void CloseDialog(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

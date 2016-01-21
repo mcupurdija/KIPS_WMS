@@ -28,7 +28,7 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         public KIPS_wms() {
-            this.Url = "http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/KIPS_wms";
+            this.Url = Utils.NavWsUrl;
         }
         
         /// <remarks/>

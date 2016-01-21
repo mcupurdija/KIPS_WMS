@@ -63,7 +63,7 @@
             // 
             // bCrossDocking
             // 
-            this.bCrossDocking.Text = "Cross Docking";
+            this.bCrossDocking.Text = "Cross docking";
             // 
             // bPodesavanja
             // 
@@ -93,7 +93,7 @@
             this.bMagPrijemnice.Name = "bMagPrijemnice";
             this.bMagPrijemnice.Size = new System.Drawing.Size(114, 30);
             this.bMagPrijemnice.TabIndex = 2;
-            this.bMagPrijemnice.Text = "Mag. Prijemnice";
+            this.bMagPrijemnice.Text = "Mag. prijemnice";
             // 
             // bMagIsporuke
             // 
@@ -101,7 +101,7 @@
             this.bMagIsporuke.Name = "bMagIsporuke";
             this.bMagIsporuke.Size = new System.Drawing.Size(114, 30);
             this.bMagIsporuke.TabIndex = 3;
-            this.bMagIsporuke.Text = "Mag. Isporuke";
+            this.bMagIsporuke.Text = "Mag. isporuke";
             // 
             // bSkladistenja
             // 

@@ -68,7 +68,7 @@ namespace KIPS_WMS.UI.Ponude
                     var engine = new FileHelperEngine(typeof (ItemQuoteModel));
                     var quoteItems = (ItemQuoteModel[]) engine.ReadString(quoteLinesCsv);
 
-                    new PonudaKorpa(customerCode, customerName, isAuthenticated, quoteNo, quoteItems.ToList()).Show();
+                    new PonudaKorpa(customerCode, customerName, isAuthenticatedCustomer, quoteNo, quoteItems.ToList()).Show();
                     Close();
                 }
                 catch (Exception ex)
