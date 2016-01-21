@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Data;
 using KIPS_WMS.Model;
+using KIPS_WMS.Properties;
 
 namespace KIPS_WMS.UI
 {
@@ -44,7 +45,7 @@ namespace KIPS_WMS.UI
         {
             if (tbFile.Text.Length == 0)
             {
-                MessageBox.Show("Potrebno je da odaberete dokument");
+                MessageBox.Show(Resources.OdaberiteDokument);
                 return;
             }
 
@@ -77,7 +78,7 @@ namespace KIPS_WMS.UI
 
                 tbFile.Text = String.Empty;
                 lStatus.Text =
-                    String.Format("Sinhronizacija je uspešno završena.\nUkupno kupaca: {0}\nUkupno artikala: {1}",
+                    String.Format(Resources.UspesnaSinhronizacija,
                         customerCount, itemCount);
             }
             catch (Exception ex)

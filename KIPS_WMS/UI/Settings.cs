@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using KIPS_WMS.Properties;
 
 namespace KIPS_WMS.UI
 {
@@ -56,7 +57,7 @@ namespace KIPS_WMS.UI
         {
             if (tbSavedPrinter.Text.Length == 0)
             {
-                MessageBox.Show("Potrebno je da odaberete štampač.", "Greška");
+                MessageBox.Show(Resources.OdaberiteStampac, "Greška");
                 return;
             }
 

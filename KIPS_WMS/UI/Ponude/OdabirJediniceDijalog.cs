@@ -5,6 +5,7 @@ using FileHelpers;
 using KIPS_WMS.Model;
 using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Web;
+using KIPS_WMS.Properties;
 
 namespace KIPS_WMS.UI.Ponude
 {
@@ -82,7 +83,7 @@ namespace KIPS_WMS.UI.Ponude
             }
             else
             {
-                MessageBox.Show("Potrebno je da odaberete jedinicu mere!", "Greška");
+                MessageBox.Show(Resources.OdaberiteJM, "Greška");
             }
         }
     }

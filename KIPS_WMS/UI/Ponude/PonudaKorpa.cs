@@ -10,6 +10,7 @@ using KIPS_WMS.Data;
 using KIPS_WMS.Model;
 using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Web;
+using KIPS_WMS.Properties;
 
 namespace KIPS_WMS.UI.Ponude
 {
@@ -189,7 +190,7 @@ namespace KIPS_WMS.UI.Ponude
             }
             else
             {
-                MessageBox.Show("Potrebno je da odaberete artikal!", "Greška");
+                MessageBox.Show(Resources.OdaberiteArtikal, "Greška");
             }
         }
 
@@ -201,7 +202,7 @@ namespace KIPS_WMS.UI.Ponude
             }
             else
             {
-                MessageBox.Show("Potrebno je da odaberete liniju iz korpe!", "Greška");
+                MessageBox.Show(Resources.OdaberiteLiniju, "Greška");
             }
         }
 
@@ -213,7 +214,7 @@ namespace KIPS_WMS.UI.Ponude
             }
             else
             {
-                MessageBox.Show("Potrebno je da odaberete liniju iz korpe!", "Greška");
+                MessageBox.Show(Resources.OdaberiteLiniju, "Greška");
             }
         }
 

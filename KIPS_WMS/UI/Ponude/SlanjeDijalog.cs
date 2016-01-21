@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using KIPS_WMS.Model;
+using KIPS_WMS.Properties;
 
 namespace KIPS_WMS.UI.Ponude
 {
@@ -21,7 +22,7 @@ namespace KIPS_WMS.UI.Ponude
 
             Height = (int) (myAutoScaleFactor.Height*110);
 
-            lStatus.Text = String.Format("Ponuda je uspešno kreirana/ažurirana. Broj ponude u NAV-u: {0}", _printHeaderModel.DocumentNo);
+            lStatus.Text = String.Format(Resources.UspesnoKreiranjeAzuriranje, _printHeaderModel.DocumentNo);
             if (creditLimit == 1)
             {
                 lKreditniLimit.Text = "Kreditni limit je prekoračen!";
