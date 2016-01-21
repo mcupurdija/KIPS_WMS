@@ -58,6 +58,96 @@ namespace KIPS_WMS.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Greška.
+        /// </summary>
+        internal static string Greska {
+            get {
+                return ResourceManager.GetString("Greska", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Greška prilikom povezivanja..
+        /// </summary>
+        internal static string GreskaPovezivanje {
+            get {
+                return ResourceManager.GetString("GreskaPovezivanje", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Greška prilikom poziva web servisa..
+        /// </summary>
+        internal static string GreskaWebServis {
+            get {
+                return ResourceManager.GetString("GreskaWebServis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ime kupca.
+        /// </summary>
+        internal static string ImeKupca {
+            get {
+                return ResourceManager.GetString("ImeKupca", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jedinica.
+        /// </summary>
+        internal static string Jedinica {
+            get {
+                return ResourceManager.GetString("Jedinica", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jedinica mere.
+        /// </summary>
+        internal static string JedinicaMere {
+            get {
+                return ResourceManager.GetString("JedinicaMere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Količina.
+        /// </summary>
+        internal static string Kolicina {
+            get {
+                return ResourceManager.GetString("Kolicina", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Naziv.
+        /// </summary>
+        internal static string Naziv {
+            get {
+                return ResourceManager.GetString("Naziv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Naziv artikla.
+        /// </summary>
+        internal static string NazivArtika {
+            get {
+                return ResourceManager.GetString("NazivArtika", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potrebno je da u okviru podešavanja odaberete štampač..
+        /// </summary>
+        internal static string NijeOdabranStampac {
+            get {
+                return ResourceManager.GetString("NijeOdabranStampac", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Potrebno je da odaberete artikal!.
         /// </summary>
         internal static string OdaberiteArtikal {
@@ -99,6 +189,51 @@ namespace KIPS_WMS.Properties {
         internal static string OdaberiteStampac {
             get {
                 return ResourceManager.GetString("OdaberiteStampac", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Podešavanja nisu sačuvana..
+        /// </summary>
+        internal static string PodesavanjaNisuSacuvana {
+            get {
+                return ResourceManager.GetString("PodesavanjaNisuSacuvana", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kreditni limit je prekoračen!.
+        /// </summary>
+        internal static string PrekoracenKreditniLimit {
+            get {
+                return ResourceManager.GetString("PrekoracenKreditniLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raspoloživo.
+        /// </summary>
+        internal static string Raspolozivo {
+            get {
+                return ResourceManager.GetString("Raspolozivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Šifra.
+        /// </summary>
+        internal static string Sifra {
+            get {
+                return ResourceManager.GetString("Sifra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ukupno.
+        /// </summary>
+        internal static string Ukupno {
+            get {
+                return ResourceManager.GetString("Ukupno", resourceCulture);
             }
         }
         

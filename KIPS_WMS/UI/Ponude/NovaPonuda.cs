@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using KIPS_WMS.Data;
 using KIPS_WMS.Model;
+using KIPS_WMS.Properties;
 
 namespace KIPS_WMS.UI.Ponude
 {
@@ -40,8 +41,8 @@ namespace KIPS_WMS.UI.Ponude
 
                 lvKupci.Clear();
                 lvKupci.View = View.Details;
-                lvKupci.Columns.Add("Šifra", 120, HorizontalAlignment.Left);
-                lvKupci.Columns.Add("Ime kupca", 200, HorizontalAlignment.Left);
+                lvKupci.Columns.Add(Resources.Sifra, 120, HorizontalAlignment.Left);
+                lvKupci.Columns.Add(Resources.ImeKupca, 200, HorizontalAlignment.Left);
 
                 foreach (var customer in _customers)
                 {

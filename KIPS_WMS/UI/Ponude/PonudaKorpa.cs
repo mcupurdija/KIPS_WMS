@@ -78,10 +78,10 @@ namespace KIPS_WMS.UI.Ponude
 
             listView1.Clear();
             listView1.View = View.Details;
-            listView1.Columns.Add("Šifra", 120, HorizontalAlignment.Left);
-            listView1.Columns.Add("Naziv artikla", 250, HorizontalAlignment.Left);
-            listView1.Columns.Add("Količina", 80, HorizontalAlignment.Center);
-            listView1.Columns.Add("Jedinica", 80, HorizontalAlignment.Center);
+            listView1.Columns.Add(Resources.Sifra, 120, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.NazivArtika, 250, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.Kolicina, 80, HorizontalAlignment.Center);
+            listView1.Columns.Add(Resources.Jedinica, 80, HorizontalAlignment.Center);
 
             foreach (ItemQuoteModel item in _quoteItems)
             {
@@ -92,7 +92,7 @@ namespace KIPS_WMS.UI.Ponude
                 listView1.Items.Add(lvi);
             }
 
-            lUkupno.Text = string.Format("Ukupno: {0}", SumPrices());
+            lUkupno.Text = string.Format(Resources.Ukupno + ": {0}", SumPrices());
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -154,8 +154,8 @@ namespace KIPS_WMS.UI.Ponude
 
             listView1.Clear();
             listView1.View = View.Details;
-            listView1.Columns.Add("Šifra", 120, HorizontalAlignment.Left);
-            listView1.Columns.Add("Naziv artikla", 250, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.Sifra, 120, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.NazivArtika, 250, HorizontalAlignment.Left);
 
             foreach (var item in data)
             {
@@ -203,7 +203,7 @@ namespace KIPS_WMS.UI.Ponude
             }
             else
             {
-                MessageBox.Show(Resources.OdaberiteArtikal, "Greška");
+                MessageBox.Show(Resources.OdaberiteArtikal, Resources.Greska);
             }
         }
 
@@ -215,7 +215,7 @@ namespace KIPS_WMS.UI.Ponude
             }
             else
             {
-                MessageBox.Show(Resources.OdaberiteLiniju, "Greška");
+                MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
             }
         }
 
@@ -228,7 +228,7 @@ namespace KIPS_WMS.UI.Ponude
             }
             else
             {
-                MessageBox.Show(Resources.OdaberiteLiniju, "Greška");
+                MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
             }
         }
 

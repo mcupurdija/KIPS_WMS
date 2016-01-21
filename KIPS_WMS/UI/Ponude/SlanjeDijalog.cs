@@ -25,7 +25,7 @@ namespace KIPS_WMS.UI.Ponude
             lStatus.Text = String.Format(Resources.UspesnoKreiranjeAzuriranje, _printHeaderModel.DocumentNo);
             if (creditLimit == 1)
             {
-                lKreditniLimit.Text = "Kreditni limit je prekoračen!";
+                lKreditniLimit.Text = Resources.PrekoracenKreditniLimit;
             }
             else
             {

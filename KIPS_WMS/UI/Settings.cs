@@ -38,7 +38,7 @@ namespace KIPS_WMS.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Greška");
+                MessageBox.Show(ex.Message, Resources.Greska);
             }
             finally
             {
@@ -57,7 +57,7 @@ namespace KIPS_WMS.UI
         {
             if (tbSavedPrinter.Text.Length == 0)
             {
-                MessageBox.Show(Resources.OdaberiteStampac, "Greška");
+                MessageBox.Show(Resources.OdaberiteStampac, Resources.Greska);
                 return;
             }
 
@@ -83,7 +83,7 @@ namespace KIPS_WMS.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Greška");
+                MessageBox.Show(ex.Message, Resources.Greska);
             }
             finally
             {

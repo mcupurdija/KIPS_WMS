@@ -5,6 +5,7 @@ using System.Net;
 using System.Reflection;
 using System.Web.Services.Protocols;
 using System.Windows.Forms;
+using KIPS_WMS.Properties;
 
 namespace KIPS_WMS
 {
@@ -49,15 +50,15 @@ namespace KIPS_WMS
         {
             if (ex is SoapException)
             {
-                MessageBox.Show(ex.Message, "Greška");
+                MessageBox.Show(Resources.GreskaWebServis + " " + ex.Message, Resources.Greska);
             }
             else if (ex is WebException)
             {
-                MessageBox.Show(ex.Message, "Greška");
+                MessageBox.Show(Resources.GreskaPovezivanje + " " + ex.Message, Resources.Greska);
             }
             else
             {
-                MessageBox.Show(ex.Message, "Greška");
+                MessageBox.Show(ex.Message, Resources.Greska);
             }
         }
     }

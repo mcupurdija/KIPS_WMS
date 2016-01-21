@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using KIPS_WMS.Model;
 using Microsoft.Win32;
+using KIPS_WMS.Properties;
 
 namespace KIPS_WMS
 {
@@ -38,7 +39,7 @@ namespace KIPS_WMS
             }
             catch (Exception)
             {
-                MessageBox.Show("Podešavanja nisu sačuvana.", "Greška");
+                MessageBox.Show(Resources.PodesavanjaNisuSacuvana, Resources.Greska);
             }
         }
 

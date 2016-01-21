@@ -46,7 +46,7 @@ namespace KIPS_WMS.UI.Ponude
 
                 listView1.Clear();
                 listView1.View = View.Details;
-                listView1.Columns.Add("Jedinica mere", listView1.Width - 2, HorizontalAlignment.Left);
+                listView1.Columns.Add(Resources.JedinicaMere, listView1.Width - 2, HorizontalAlignment.Left);
                 foreach (ItemUnitOfMeasureModel item in _itemUnitsOfMeasure)
                 {
                     var lvi = new ListViewItem(new[]
@@ -83,7 +83,7 @@ namespace KIPS_WMS.UI.Ponude
             }
             else
             {
-                MessageBox.Show(Resources.OdaberiteJM, "Greška");
+                MessageBox.Show(Resources.OdaberiteJM, Resources.Greska);
             }
         }
     }

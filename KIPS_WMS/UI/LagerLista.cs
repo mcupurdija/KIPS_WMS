@@ -4,6 +4,7 @@ using FileHelpers;
 using KIPS_WMS.Model;
 using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Web;
+using KIPS_WMS.Properties;
 
 namespace KIPS_WMS.UI
 {
@@ -57,11 +58,11 @@ namespace KIPS_WMS.UI
         {
             lvLagerLista.Clear();
             lvLagerLista.View = View.Details;
-            lvLagerLista.Columns.Add("Šifra", 80, HorizontalAlignment.Left);
-            lvLagerLista.Columns.Add("Naziv", 160, HorizontalAlignment.Left);
-            lvLagerLista.Columns.Add("Jedinica", 80, HorizontalAlignment.Center);
-            lvLagerLista.Columns.Add("Ukupno", 100, HorizontalAlignment.Right);
-            lvLagerLista.Columns.Add("Raspoloživo", 100, HorizontalAlignment.Right);
+            lvLagerLista.Columns.Add(Resources.Sifra, 80, HorizontalAlignment.Left);
+            lvLagerLista.Columns.Add(Resources.Naziv, 160, HorizontalAlignment.Left);
+            lvLagerLista.Columns.Add(Resources.Jedinica, 80, HorizontalAlignment.Center);
+            lvLagerLista.Columns.Add(Resources.Ukupno, 100, HorizontalAlignment.Right);
+            lvLagerLista.Columns.Add(Resources.Raspolozivo, 100, HorizontalAlignment.Right);
 
             foreach (ItemLagerListModel item in _items)
             {
