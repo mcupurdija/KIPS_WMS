@@ -11,6 +11,8 @@ namespace KIPS_WMS
 {
     public static class Utils
     {
+        public const string UnknownCustomerCode = "FL00001";
+
         public const int CsvImportCustomers = 1;
         public const int CsvImportItems = 2;
 

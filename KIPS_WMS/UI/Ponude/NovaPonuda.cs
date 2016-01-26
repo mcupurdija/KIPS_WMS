@@ -32,6 +32,13 @@ namespace KIPS_WMS.UI.Ponude
                     case SearchType.Scanner:
                         _customers = SQLiteHelper.multiRowQuery(DbStatements.FindCustomersStatementBarcode,
                             new object[] {tbPronadji.Text});
+                        if (_customers.Count == 1)
+                        {
+                            new PonudaKorpa(_customers[0][DatabaseModel.CustomerDbModel.CustomerCode].ToString(),
+                                _customers[0][DatabaseModel.CustomerDbModel.CustomerName].ToString(), 1, String.Empty,
+                                new List<ItemQuoteModel>()).Show();
+                            Close();
+                        }
                         break;
                     case SearchType.Button:
                         _customers = SQLiteHelper.multiRowQuery(DbStatements.FindCustomersStatementComplete,
@@ -49,23 +56,28 @@ namespace KIPS_WMS.UI.Ponude
                     var lvi = new ListViewItem(new[]
                     {
                         customer[DatabaseModel.CustomerDbModel.CustomerCode].ToString(),
-                        customer[DatabaseModel.CustomerDbModel.CustomerDescription].ToString()
+                        customer[DatabaseModel.CustomerDbModel.CustomerName].ToString()
                     });
                     lvKupci.Items.Add(lvi);
+                }
+
+                if (lvKupci.Items.Count > 0)
+                {
+                    lvKupci.Focus();
+                    lvKupci.Items[0].Selected = true;
                 }
             }
         }
 
         private void bNepoznatKupac_Click(object sender, EventArgs e)
         {
-//            new PonudaKorpa(customerCode, customerName, isAuthenticatedCustomer, quoteNo, quoteItems.ToList()).Show();
+            new PonudaKorpa(Utils.UnknownCustomerCode, String.Empty, 0, String.Empty, new List<ItemQuoteModel>()).Show();
             Close();
         }
 
         private void bKreiraj_Click(object sender, EventArgs e)
         {
-//            new PonudaKorpa(customerCode, customerName, isAuthenticatedCustomer, quoteNo, quoteItems.ToList()).Show();
-            Close();
+            CreateNewOffer();
         }
 
         private void bNoviKupci_Click(object sender, EventArgs e)
@@ -93,6 +105,22 @@ namespace KIPS_WMS.UI.Ponude
                 int index = lvKupci.SelectedIndices[0];
                 _selectedCustomer = _customers[index];
             }
+        }
+
+        private void lvKupci_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (lvKupci.SelectedIndices.Count == 1 && _selectedCustomer != null && e.KeyCode == Keys.Return)
+            {
+                CreateNewOffer();
+            }
+        }
+
+        private void CreateNewOffer()
+        {
+            new PonudaKorpa(_selectedCustomer[DatabaseModel.CustomerDbModel.CustomerCode].ToString(),
+                _selectedCustomer[DatabaseModel.CustomerDbModel.CustomerName].ToString(), 0, String.Empty,
+                new List<ItemQuoteModel>()).Show();
+            Close();
         }
 
         private enum SearchType

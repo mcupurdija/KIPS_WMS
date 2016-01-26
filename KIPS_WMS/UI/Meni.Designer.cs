@@ -33,6 +33,7 @@
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.bUnosBarkoda = new System.Windows.Forms.MenuItem();
             this.bCrossDocking = new System.Windows.Forms.MenuItem();
+            this.bUvozPodataka = new System.Windows.Forms.MenuItem();
             this.bPodesavanja = new System.Windows.Forms.MenuItem();
             this.bPonude = new System.Windows.Forms.Button();
             this.bPreklasifikacija = new System.Windows.Forms.Button();
@@ -54,6 +55,7 @@
             // 
             this.menuItem1.MenuItems.Add(this.bUnosBarkoda);
             this.menuItem1.MenuItems.Add(this.bCrossDocking);
+            this.menuItem1.MenuItems.Add(this.bUvozPodataka);
             this.menuItem1.MenuItems.Add(this.bPodesavanja);
             this.menuItem1.Text = "Ostalo";
             // 
@@ -64,6 +66,11 @@
             // bCrossDocking
             // 
             this.bCrossDocking.Text = "Cross docking";
+            // 
+            // bUvozPodataka
+            // 
+            this.bUvozPodataka.Text = "Uvoz podataka";
+            this.bUvozPodataka.Click += new System.EventHandler(this.bUvozPodataka_Click);
             // 
             // bPodesavanja
             // 
@@ -86,6 +93,7 @@
             this.bPreklasifikacija.Size = new System.Drawing.Size(114, 30);
             this.bPreklasifikacija.TabIndex = 1;
             this.bPreklasifikacija.Text = "Preklasifikacija";
+            this.bPreklasifikacija.Click += new System.EventHandler(this.bPreklasifikacija_Click);
             // 
             // bMagPrijemnice
             // 
@@ -94,6 +102,7 @@
             this.bMagPrijemnice.Size = new System.Drawing.Size(114, 30);
             this.bMagPrijemnice.TabIndex = 2;
             this.bMagPrijemnice.Text = "Mag. prijemnice";
+            this.bMagPrijemnice.Click += new System.EventHandler(this.bMagPrijemnice_Click);
             // 
             // bMagIsporuke
             // 
@@ -192,5 +201,6 @@
         private System.Windows.Forms.MenuItem bUnosBarkoda;
         private System.Windows.Forms.MenuItem bCrossDocking;
         private System.Windows.Forms.MenuItem bPodesavanja;
+        private System.Windows.Forms.MenuItem bUvozPodataka;
     }
 }

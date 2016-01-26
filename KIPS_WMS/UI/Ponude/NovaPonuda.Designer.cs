@@ -59,7 +59,7 @@
             // 
             this.bPronadji.Location = new System.Drawing.Point(165, 3);
             this.bPronadji.Name = "bPronadji";
-            this.bPronadji.Size = new System.Drawing.Size(72, 21);
+            this.bPronadji.Size = new System.Drawing.Size(72, 20);
             this.bPronadji.TabIndex = 1;
             this.bPronadji.Text = "Pronadji";
             this.bPronadji.Click += new System.EventHandler(this.bPronadji_Click);
@@ -67,27 +67,28 @@
             // lvKupci
             // 
             this.lvKupci.FullRowSelect = true;
-            this.lvKupci.Location = new System.Drawing.Point(0, 31);
+            this.lvKupci.Location = new System.Drawing.Point(0, 30);
             this.lvKupci.Name = "lvKupci";
-            this.lvKupci.Size = new System.Drawing.Size(240, 127);
+            this.lvKupci.Size = new System.Drawing.Size(240, 129);
             this.lvKupci.TabIndex = 4;
             this.lvKupci.View = System.Windows.Forms.View.Details;
             this.lvKupci.SelectedIndexChanged += new System.EventHandler(this.lvKupci_SelectedIndexChanged);
+            this.lvKupci.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lvKupci_KeyUp);
             // 
             // bNepoznatKupac
             // 
-            this.bNepoznatKupac.Location = new System.Drawing.Point(3, 164);
+            this.bNepoznatKupac.Location = new System.Drawing.Point(3, 165);
             this.bNepoznatKupac.Name = "bNepoznatKupac";
-            this.bNepoznatKupac.Size = new System.Drawing.Size(114, 21);
+            this.bNepoznatKupac.Size = new System.Drawing.Size(114, 20);
             this.bNepoznatKupac.TabIndex = 5;
             this.bNepoznatKupac.Text = "Nepoznat kupac";
             this.bNepoznatKupac.Click += new System.EventHandler(this.bNepoznatKupac_Click);
             // 
             // bKreiraj
             // 
-            this.bKreiraj.Location = new System.Drawing.Point(123, 164);
+            this.bKreiraj.Location = new System.Drawing.Point(123, 165);
             this.bKreiraj.Name = "bKreiraj";
-            this.bKreiraj.Size = new System.Drawing.Size(114, 21);
+            this.bKreiraj.Size = new System.Drawing.Size(114, 20);
             this.bKreiraj.TabIndex = 6;
             this.bKreiraj.Text = "Kreiraj";
             this.bKreiraj.Click += new System.EventHandler(this.bKreiraj_Click);

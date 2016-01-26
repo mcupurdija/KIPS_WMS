@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Downloads\json.net.cf\Newtonsoft.Json.Compact.dll</HintPath>
     </Reference>
+    <Reference Include="OpenNETCF.Windows.Forms, Version=2.3.12317.0, Culture=neutral, PublicKeyToken=e60dbea84bb431b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Downloads\SDF_Binaries\OpenNETCF.Windows.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.99.0, Culture=neutral, PublicKeyToken=1fdb50b1b62b4c84, processorArchitecture=MSIL">
@@ -74,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JsonHelper.cs" />
+    <Compile Include="Model\WarehouseReceiptLineModel.cs" />
     <Compile Include="Model\ItemPriceInventoryModel.cs" />
     <Compile Include="Model\DatabaseModel.cs" />
     <Compile Include="Model\ItemQuoteModel.cs" />
@@ -81,11 +86,12 @@
     <Compile Include="Model\PrintHeaderModel.cs" />
     <Compile Include="Model\PrintLineModel.cs" />
     <Compile Include="Model\SendQuoteModel.cs" />
+    <Compile Include="Model\WarehouseReceiptModel.cs" />
     <Compile Include="RegistryUtils.cs" />
-    <Compile Include="UI\CsvImport.cs">
+    <Compile Include="UI\Ostalo\CsvImport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\CsvImport.Designer.cs">
+    <Compile Include="UI\Ostalo\CsvImport.Designer.cs">
       <DependentUpon>CsvImport.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\DbStatements.cs" />
@@ -115,7 +121,7 @@
     <Compile Include="Model\CustomerModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="UI\CsvImport.resx">
+    <EmbeddedResource Include="UI\Ostalo\CsvImport.resx">
       <DependentUpon>CsvImport.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -142,6 +148,9 @@
       <DependentUpon>NoviKupciDijalog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ostalo\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Ponude\NovaPonuda.resx">
       <DependentUpon>NovaPonuda.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,13 +175,20 @@
     <EmbeddedResource Include="UI\Ponude\StampaDijalog.resx">
       <DependentUpon>StampaDijalog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Settings.resx">
+    <EmbeddedResource Include="UI\Ostalo\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Prijem\PrijemPocetna.resx">
+      <DependentUpon>PrijemPocetna.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Prijem\PrijemPretragaPoDokumentu.resx">
+      <DependentUpon>PrijemPretragaPoDokumentu.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="UI\NonFullscreenForm.cs">
       <SubType>Form</SubType>
@@ -188,6 +204,12 @@
     </Compile>
     <Compile Include="UI\NoviKupciDijalog.Designer.cs">
       <DependentUpon>NoviKupciDijalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ostalo\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Ostalo\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Ponude\NovaPonuda.cs">
       <SubType>Form</SubType>
@@ -232,11 +254,23 @@
     <Compile Include="UI\Ponude\StampaDijalog.Designer.cs">
       <DependentUpon>StampaDijalog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Settings.cs">
+    <Compile Include="UI\Ostalo\Settings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Settings.Designer.cs">
+    <Compile Include="UI\Ostalo\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Prijem\PrijemPocetna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Prijem\PrijemPocetna.Designer.cs">
+      <DependentUpon>PrijemPocetna.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Prijem\PrijemPretragaPoDokumentu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Prijem\PrijemPretragaPoDokumentu.Designer.cs">
+      <DependentUpon>PrijemPretragaPoDokumentu.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
     <Compile Include="Web References\NAV_WS\Reference.cs">
@@ -278,6 +312,12 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\Isporuka\" />
+    <Folder Include="UI\Izdvajanje\" />
+    <Folder Include="UI\Preklasifikacija\" />
+    <Folder Include="UI\Skladistenje\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

@@ -1,4 +1,4 @@
-﻿namespace KIPS_WMS.UI
+﻿namespace KIPS_WMS.UI.Ostalo
 {
     partial class CsvImport
     {

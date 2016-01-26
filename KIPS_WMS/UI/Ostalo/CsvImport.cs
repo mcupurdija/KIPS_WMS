@@ -5,7 +5,7 @@ using KIPS_WMS.Data;
 using KIPS_WMS.Model;
 using KIPS_WMS.Properties;
 
-namespace KIPS_WMS.UI
+namespace KIPS_WMS.UI.Ostalo
 {
     public partial class CsvImport : Form
     {

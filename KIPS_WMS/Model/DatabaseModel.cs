@@ -7,7 +7,7 @@
             public const int CustomerId = 0;
             public const int CustomerBarcode = 1;
             public const int CustomerCode = 2;
-            public const int CustomerDescription = 3;
+            public const int CustomerName = 3;
         }
 
         public static class ItemDbModel

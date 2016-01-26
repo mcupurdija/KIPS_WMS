@@ -25,8 +25,8 @@ namespace KIPS_WMS.UI.Ponude
                 WebRequest request = WebRequest.Create(Utils.PrintServerApiPath);
                 request.Method = "POST";
 
-                string testData = JsonHelper.Serialize(model);
-                byte[] byteArray = Encoding.UTF8.GetBytes(testData);
+                string body = JsonHelper.Serialize(model);
+                byte[] byteArray = Encoding.UTF8.GetBytes(body);
 
                 request.ContentType = "application/json";
                 request.ContentLength = byteArray.Length;

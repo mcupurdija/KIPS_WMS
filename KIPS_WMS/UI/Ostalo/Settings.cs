@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using KIPS_WMS.Properties;
 
-namespace KIPS_WMS.UI
+namespace KIPS_WMS.UI.Ostalo
 {
     public partial class Settings : Form
     {

@@ -45,14 +45,19 @@ namespace KIPS_WMS.UI.Ponude
             _quoteNo = quoteNo;
             _quoteItems = quoteItems;
 
-            lKupac.Text = string.Format("{0} - {1}", _customerCode, _customerName);
+            lKupac.Text = _customerCode != Utils.UnknownCustomerCode ? string.Format("{0} - {1}", _customerCode, _customerName) : Resources.NepoznatKupac;
+            
             DisplayLines();
         }
 
         protected override void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
-            Text = _quoteNo;
+
+            if (_quoteNo != String.Empty)
+            {
+                Text = _quoteNo;
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -132,6 +137,10 @@ namespace KIPS_WMS.UI.Ponude
 
             _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
                 new object[] {tbPronadji.Text});
+            if (_searchedItems.Count == 1)
+            {
+                ShowLinesForm(PonudaLinija.ItemState.New);
+            }
 
             DisplaySearchResults(_searchedItems);
         }
@@ -287,7 +296,7 @@ namespace KIPS_WMS.UI.Ponude
                         PrinterName = RegistryUtils.GetPrinterName(),
                         PrintType = selectedPrintType,
                         DocumentNo = documentNo,
-                        DocumentDate = new DateTime().ToString("dd.MM.yyyy. HH:mm:ss"),
+                        DocumentDate = DateTime.Now.ToString("dd.MM.yyyy. HH:mm:ss"),
                         CustomerCode = _customerCode,
                         CustomerName = _customerName,
                         Total = SumPrices(),

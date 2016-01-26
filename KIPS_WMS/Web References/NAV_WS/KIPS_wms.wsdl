@@ -174,6 +174,62 @@
           </sequence>
         </complexType>
       </element>
+      <element name="GetWarehouseReceipts">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehouseReceipts_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehouseReceiptLines">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsReceiptNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehouseReceiptLines_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateWarehouseLineQty">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsReceiptNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsReceiptLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="qtyP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isUpdateP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="trackingCSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="normCSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="scannedUoMCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="qtyInScannedUoMP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateWarehouseLineQty_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
     </schema>
   </types>
   <message name="GetQuote">
@@ -230,6 +286,24 @@
   <message name="GetCustomers_Result">
     <part name="parameters" element="tns:GetCustomers_Result" />
   </message>
+  <message name="GetWarehouseReceipts">
+    <part name="parameters" element="tns:GetWarehouseReceipts" />
+  </message>
+  <message name="GetWarehouseReceipts_Result">
+    <part name="parameters" element="tns:GetWarehouseReceipts_Result" />
+  </message>
+  <message name="GetWarehouseReceiptLines">
+    <part name="parameters" element="tns:GetWarehouseReceiptLines" />
+  </message>
+  <message name="GetWarehouseReceiptLines_Result">
+    <part name="parameters" element="tns:GetWarehouseReceiptLines_Result" />
+  </message>
+  <message name="UpdateWarehouseLineQty">
+    <part name="parameters" element="tns:UpdateWarehouseLineQty" />
+  </message>
+  <message name="UpdateWarehouseLineQty_Result">
+    <part name="parameters" element="tns:UpdateWarehouseLineQty_Result" />
+  </message>
   <portType name="KIPS_wms_Port">
     <operation name="GetQuote">
       <input name="GetQuote" message="tns:GetQuote" />
@@ -266,6 +340,18 @@
     <operation name="GetCustomers">
       <input name="GetCustomers" message="tns:GetCustomers" />
       <output name="GetCustomers_Result" message="tns:GetCustomers_Result" />
+    </operation>
+    <operation name="GetWarehouseReceipts">
+      <input name="GetWarehouseReceipts" message="tns:GetWarehouseReceipts" />
+      <output name="GetWarehouseReceipts_Result" message="tns:GetWarehouseReceipts_Result" />
+    </operation>
+    <operation name="GetWarehouseReceiptLines">
+      <input name="GetWarehouseReceiptLines" message="tns:GetWarehouseReceiptLines" />
+      <output name="GetWarehouseReceiptLines_Result" message="tns:GetWarehouseReceiptLines_Result" />
+    </operation>
+    <operation name="UpdateWarehouseLineQty">
+      <input name="UpdateWarehouseLineQty" message="tns:UpdateWarehouseLineQty" />
+      <output name="UpdateWarehouseLineQty_Result" message="tns:UpdateWarehouseLineQty_Result" />
     </operation>
   </portType>
   <binding name="KIPS_wms_Binding" type="tns:KIPS_wms_Port">
@@ -348,6 +434,33 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="GetCustomers_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetWarehouseReceipts">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetWarehouseReceipts" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetWarehouseReceipts">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetWarehouseReceipts_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetWarehouseReceiptLines">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetWarehouseReceiptLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetWarehouseReceiptLines">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetWarehouseReceiptLines_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateWarehouseLineQty">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:UpdateWarehouseLineQty" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateWarehouseLineQty">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateWarehouseLineQty_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

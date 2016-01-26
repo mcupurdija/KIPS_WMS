@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Model;
@@ -87,7 +88,7 @@ namespace KIPS_WMS.UI.Ponude
                     _itemCode = modelNew[DatabaseModel.ItemDbModel.ItemCode].ToString();
                     _variantCode = (modelNew[DatabaseModel.ItemDbModel.ItemVariant] ?? String.Empty).ToString();
 
-                    GetItemInformation(_itemCode, _variantCode);
+                    new Thread(() => GetItemInformation(_itemCode, _variantCode)).Start();
 
                     break;
                 case ItemState.Edit:
@@ -110,14 +111,9 @@ namespace KIPS_WMS.UI.Ponude
                     tbRaspolozivoLokacija.Text = modelEdit.AvailableWarehouseQuantity;
                     tbRaspolozivoVezanaLokacija.Text = modelEdit.AvailableLinkedWarehouseQuantity;
 
-                    break;
-            }
+                    FocusQuantity();
 
-            tbKolicina.Focus();
-            if (tbKolicina.Text.Length > 0)
-            {
-                tbKolicina.SelectionStart = 0;
-                tbKolicina.SelectionLength = tbKolicina.Text.Length;
+                    break;
             }
         }
 
@@ -135,23 +131,7 @@ namespace KIPS_WMS.UI.Ponude
                 var itemInformation = (ItemInformationModel[]) engine.ReadString(itemInformationCsv);
                 if (itemInformation.Length > 0)
                 {
-                    ItemInformationModel model = itemInformation[0];
-
-                    _conversionCoefficient = model.ConversionCoeficient;
-
-                    tbSifra.Text = model.ItemCode;
-                    tbNaziv.Text = model.ItemDescription;
-                    bJedinicaMere.Text = model.UnitOfMeasureCode;
-                    tbJedinicaKonverzija.Text = model.UnitOfMeasureForConversion;
-                    tbKolicina.Text = model.BaseQuantityForSale;
-
-                    tbCena.Text = model.UnitPrice;
-                    tbCenaPopust.Text = model.UnitPriceWithDiscount;
-
-                    tbKolicinaLokacija.Text = model.TotalWarehouseQuantity;
-                    tbKolicinaVezanaLokacija.Text = model.TotalLinkedWarehouseQuantity;
-                    tbRaspolozivoLokacija.Text = model.AvailableWarehouseQuantity;
-                    tbRaspolozivoVezanaLokacija.Text = model.AvailableLinkedWarehouseQuantity;
+                    Invoke(new EventHandler((sender, e) => UpdateData(itemInformation[0])));
                 }
             }
             catch (Exception ex)
@@ -161,6 +141,37 @@ namespace KIPS_WMS.UI.Ponude
             finally
             {
                 Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void UpdateData(ItemInformationModel model)
+        {
+            _conversionCoefficient = model.ConversionCoeficient;
+
+            tbSifra.Text = model.ItemCode;
+            tbNaziv.Text = model.ItemDescription;
+            bJedinicaMere.Text = model.UnitOfMeasureCode;
+            tbJedinicaKonverzija.Text = model.UnitOfMeasureForConversion;
+            tbKolicina.Text = model.BaseQuantityForSale;
+
+            tbCena.Text = model.UnitPrice;
+            tbCenaPopust.Text = model.UnitPriceWithDiscount;
+
+            tbKolicinaLokacija.Text = model.TotalWarehouseQuantity;
+            tbKolicinaVezanaLokacija.Text = model.TotalLinkedWarehouseQuantity;
+            tbRaspolozivoLokacija.Text = model.AvailableWarehouseQuantity;
+            tbRaspolozivoVezanaLokacija.Text = model.AvailableLinkedWarehouseQuantity;
+
+            FocusQuantity();
+        }
+
+        private void FocusQuantity()
+        {
+            tbKolicina.Focus();
+            if (tbKolicina.Text.Length > 0)
+            {
+                tbKolicina.SelectionStart = 0;
+                tbKolicina.SelectionLength = tbKolicina.Text.Length;
             }
         }
 

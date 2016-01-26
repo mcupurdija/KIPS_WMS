@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Model;
@@ -25,7 +26,8 @@ namespace KIPS_WMS.UI
             if (itemNo != null)
             {
                 tbSifra.Text = itemNo;
-                GetData(itemNo);
+
+                new Thread(() => GetData(itemNo)).Start();
             }
         }
 
@@ -41,6 +43,8 @@ namespace KIPS_WMS.UI
 
                 var engine = new FileHelperEngine(typeof(ItemLagerListModel));
                 _items = (ItemLagerListModel[])engine.ReadString(csvLagerList);
+
+                Invoke(new EventHandler((sender, e) => DisplayLines()));
             }
             catch (Exception ex)
             {
@@ -50,8 +54,6 @@ namespace KIPS_WMS.UI
             {
                 Cursor.Current = Cursors.Default;
             }
-
-            DisplayLines();
         }
 
         private void DisplayLines()

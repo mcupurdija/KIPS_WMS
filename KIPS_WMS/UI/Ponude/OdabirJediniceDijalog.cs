@@ -45,8 +45,7 @@ namespace KIPS_WMS.UI.Ponude
                 _itemUnitsOfMeasure = (ItemUnitOfMeasureModel[])engine.ReadString(itemUnitOfMeasureCsv);
 
                 listView1.Clear();
-                listView1.View = View.Details;
-                listView1.Columns.Add(Resources.JedinicaMere, listView1.Width - 2, HorizontalAlignment.Left);
+                listView1.View = View.List;
                 foreach (ItemUnitOfMeasureModel item in _itemUnitsOfMeasure)
                 {
                     var lvi = new ListViewItem(new[]
