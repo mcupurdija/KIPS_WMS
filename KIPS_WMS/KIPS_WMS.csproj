@@ -185,6 +185,9 @@
     <EmbeddedResource Include="UI\Prijem\PrijemPocetna.resx">
       <DependentUpon>PrijemPocetna.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Prijem\PrijemPretragaPoArtiklu.resx">
+      <DependentUpon>PrijemPretragaPoArtiklu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Prijem\PrijemPretragaPoDokumentu.resx">
       <DependentUpon>PrijemPretragaPoDokumentu.cs</DependentUpon>
     </EmbeddedResource>
@@ -274,6 +277,12 @@
     </Compile>
     <Compile Include="UI\Prijem\PrijemPocetna.Designer.cs">
       <DependentUpon>PrijemPocetna.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Prijem\PrijemPretragaPoArtiklu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Prijem\PrijemPretragaPoArtiklu.Designer.cs">
+      <DependentUpon>PrijemPretragaPoArtiklu.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Prijem\PrijemPretragaPoDokumentu.cs">
       <SubType>Form</SubType>

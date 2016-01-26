@@ -119,6 +119,7 @@
             this.bSkladistenja.Size = new System.Drawing.Size(114, 30);
             this.bSkladistenja.TabIndex = 4;
             this.bSkladistenja.Text = "Skladištenja";
+            this.bSkladistenja.Click += new System.EventHandler(this.bSkladistenja_Click);
             // 
             // bIzdvajanja
             // 

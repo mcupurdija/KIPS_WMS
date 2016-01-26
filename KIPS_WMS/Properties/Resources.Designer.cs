@@ -166,7 +166,7 @@ namespace KIPS_WMS.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Potrebno je da odaberete dokument.
+        ///   Looks up a localized string similar to Potrebno je da odaberete dokument!.
         /// </summary>
         internal static string OdaberiteDokument {
             get {

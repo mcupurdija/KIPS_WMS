@@ -10,16 +10,16 @@ using KIPS_WMS.Properties;
 using KIPS_WMS.Web;
 using OpenNETCF.Windows.Forms;
 
-namespace KIPS_WMS.UI.Prijem
+namespace KIPS_WMS.UI.Skladistenje
 {
-    public partial class PrijemPretragaPoDokumentu : Form
+    public partial class SkladistenjePretragaPoDokumentu : Form
     {
         private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
         private List<WarehouseReceiptModel> _filteredList;
         private WarehouseReceiptModel _selectedReceipt;
         private List<WarehouseReceiptModel> _warehouseReceipts;
 
-        public PrijemPretragaPoDokumentu()
+        public SkladistenjePretragaPoDokumentu()
         {
             InitializeComponent();
 
@@ -101,7 +101,7 @@ namespace KIPS_WMS.UI.Prijem
         {
             if (_selectedReceipt != null)
             {
-                new PrijemLinije(_selectedReceipt.ReceiptCode).ShowDialog();
+//                new PrijemLinije(_selectedReceipt.ReceiptCode).ShowDialog();
             }
             else
             {

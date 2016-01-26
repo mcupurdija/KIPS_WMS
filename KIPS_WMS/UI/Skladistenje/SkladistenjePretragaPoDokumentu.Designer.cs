@@ -1,6 +1,6 @@
-﻿namespace KIPS_WMS.UI.Prijem
+﻿namespace KIPS_WMS.UI.Skladistenje
 {
-    partial class PrijemPretragaPoDokumentu
+    partial class SkladistenjePretragaPoDokumentu
     {
         /// <summary>
         /// Required designer variable.

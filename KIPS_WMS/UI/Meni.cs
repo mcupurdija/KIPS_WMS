@@ -2,6 +2,7 @@
 using KIPS_WMS.UI.Ostalo;
 using KIPS_WMS.UI.Ponude;
 using KIPS_WMS.UI.Prijem;
+using KIPS_WMS.UI.Skladistenje;
 
 namespace KIPS_WMS.UI
 {
@@ -40,6 +41,11 @@ namespace KIPS_WMS.UI
         private void bMagPrijemnice_Click(object sender, System.EventArgs e)
         {
             new PrijemPocetna().Show();
+        }
+
+        private void bSkladistenja_Click(object sender, System.EventArgs e)
+        {
+            new SkladistenjePocetna().Show();
         }
     }
 }
