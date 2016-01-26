@@ -179,6 +179,9 @@
       <DependentUpon>Settings.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Prijem\PrijemLinije.resx">
+      <DependentUpon>PrijemLinije.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Prijem\PrijemPocetna.resx">
       <DependentUpon>PrijemPocetna.cs</DependentUpon>
     </EmbeddedResource>
@@ -259,6 +262,12 @@
     </Compile>
     <Compile Include="UI\Ostalo\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Prijem\PrijemLinije.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Prijem\PrijemLinije.Designer.cs">
+      <DependentUpon>PrijemLinije.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Prijem\PrijemPocetna.cs">
       <SubType>Form</SubType>
