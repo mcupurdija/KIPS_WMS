@@ -1,4 +1,6 @@
-﻿namespace KIPS_WMS
+﻿using OpenNETCF.Windows.Forms;
+
+namespace KIPS_WMS
 {
     partial class Form1
     {
@@ -31,20 +33,12 @@
         {
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.bTest = new System.Windows.Forms.Button();
-            this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.menuItem2 = new System.Windows.Forms.MenuItem();
-            this.menuItem3 = new System.Windows.Forms.MenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.listBox1 = new OpenNETCF.Windows.Forms.ListBox2();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // mainMenu1
-            // 
-            this.mainMenu1.MenuItems.Add(this.menuItem1);
-            this.mainMenu1.MenuItems.Add(this.menuItem2);
-            this.mainMenu1.MenuItems.Add(this.menuItem3);
             // 
             // bTest
             // 
@@ -55,64 +49,60 @@
             this.bTest.Text = "Test";
             this.bTest.Click += new System.EventHandler(this.bTest_Click);
             // 
-            // menuItem1
+            // listBox1
             // 
-            this.menuItem1.Text = "D1";
+            this.listBox1.BackgroundImage = null;
+            this.listBox1.Location = new System.Drawing.Point(0, 31);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(240, 154);
+            this.listBox1.TabIndex = 1;
             // 
-            // menuItem2
+            // button1
             // 
-            this.menuItem2.Text = "D2";
+            this.button1.Location = new System.Drawing.Point(3, 191);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(65, 20);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
             // 
-            // menuItem3
+            // button2
             // 
-            this.menuItem3.Text = "D3";
+            this.button2.Location = new System.Drawing.Point(74, 191);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(65, 20);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "button2";
             // 
-            // label1
+            // button3
             // 
-            this.label1.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Regular);
-            this.label1.Location = new System.Drawing.Point(23, 110);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 14);
-            this.label1.Text = "Sedmica";
+            this.button3.Location = new System.Drawing.Point(145, 191);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(65, 20);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "button3";
             // 
-            // textBox1
+            // button4
             // 
-            this.textBox1.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Regular);
-            this.textBox1.Location = new System.Drawing.Point(76, 106);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 18);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "Sedmica";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.textBox2.Location = new System.Drawing.Point(76, 130);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 19);
-            this.textBox2.TabIndex = 4;
-            this.textBox2.Text = "Osmica";
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
-            this.label2.Location = new System.Drawing.Point(23, 135);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 14);
-            this.label2.Text = "Osmica";
+            this.button4.Location = new System.Drawing.Point(216, 191);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(21, 20);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "K";
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(240, 188);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(240, 214);
+            this.ControlBox = false;
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.bTest);
-            this.Menu = this.mainMenu1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -122,13 +112,11 @@
         #endregion
 
         private System.Windows.Forms.Button bTest;
-        private System.Windows.Forms.MenuItem menuItem1;
-        private System.Windows.Forms.MenuItem menuItem2;
-        private System.Windows.Forms.MenuItem menuItem3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
+        private ListBox2 listBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
 
 
 

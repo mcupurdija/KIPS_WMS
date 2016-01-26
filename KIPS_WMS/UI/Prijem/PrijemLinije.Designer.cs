@@ -1,4 +1,6 @@
-﻿namespace KIPS_WMS.UI.Prijem
+﻿using OpenNETCF.Windows.Forms;
+
+namespace KIPS_WMS.UI.Prijem
 {
     partial class PrijemLinije
     {
@@ -87,10 +89,10 @@
             // listBox1
             // 
             this.listBox1.BackgroundImage = null;
-            this.listBox1.ItemHeight = 40;
             this.listBox1.Location = new System.Drawing.Point(0, 29);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(240, 156);
+            this.listBox1.ShowLines = true;
+            this.listBox1.Size = new System.Drawing.Size(240, 158);
             this.listBox1.TabIndex = 3;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -117,9 +119,9 @@
         private System.Windows.Forms.TextBox tbPronadji;
         private System.Windows.Forms.Button bPronadji;
         private System.Windows.Forms.Button bPonisti;
-        private OpenNETCF.Windows.Forms.ListBox2 listBox1;
         private System.Windows.Forms.MenuItem bNazad;
         private System.Windows.Forms.MenuItem menuItem2;
         private System.Windows.Forms.MenuItem bDalje;
+        private ListBox2 listBox1;
     }
 }

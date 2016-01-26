@@ -34,6 +34,13 @@ namespace KIPS_WMS.UI.Prijem
             new Thread(GetData).Start();
         }
 
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+
+            Text = _receiptNo;
+        }
+
         private void GetData()
         {
             try
@@ -48,7 +55,7 @@ namespace KIPS_WMS.UI.Prijem
                 _warehouseReceiptLines =
                     ((WarehouseReceiptLineModel[]) engine.ReadString(warehouseReceiptsCsv)).ToList();
 
-                Invoke(new EventHandler((sender, e) => DisplayData(null)));
+                listBox1.Invoke(new EventHandler((sender, e) => DisplayData(null)));
             }
             catch (Exception ex)
             {
@@ -60,13 +67,6 @@ namespace KIPS_WMS.UI.Prijem
             }
         }
 
-        protected override void OnActivated(EventArgs e)
-        {
-            base.OnActivated(e);
-
-            Text = _receiptNo;
-        }
-
         private void bNazad_Click(object sender, EventArgs e)
         {
             Close();
@@ -75,6 +75,7 @@ namespace KIPS_WMS.UI.Prijem
         private void DisplayData(string filterText)
         {
             listBox1.Items.Clear();
+            listBox1.ItemHeight = 40;
 
             _selectedLine = null;
             _filteredReceiptLines = filterText != null
@@ -83,10 +84,12 @@ namespace KIPS_WMS.UI.Prijem
 
             foreach (WarehouseReceiptLineModel item in _filteredReceiptLines)
             {
-                var listItem =
-                    new ListItem(string.Format("{0} - {1}{2}{3} / {4}", item.ItemNo, item.ItemDescription,
-                        Environment.NewLine, item.QuantityOutstanding, item.QuantityToReceive));
+                var listItem = new ListItem(item.ItemNo + Environment.NewLine + item.ItemDescription);
                 listBox1.Items.Add(listItem);
+            }
+            if (_filteredReceiptLines.Count > 5)
+            {
+                listBox1.Items.Add(new ListItem());
             }
 
             tbPronadji.Focus();
@@ -99,6 +102,7 @@ namespace KIPS_WMS.UI.Prijem
 
         private void bPonisti_Click(object sender, EventArgs e)
         {
+            tbPronadji.Text = String.Empty;
             DisplayData(null);
         }
 
@@ -117,7 +121,7 @@ namespace KIPS_WMS.UI.Prijem
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = listBox1.SelectedIndex;
-            if (index == -1) return;
+            if (index == -1 || index >= _filteredReceiptLines.Count) return;
 
             _selectedLine = _filteredReceiptLines[index];
         }

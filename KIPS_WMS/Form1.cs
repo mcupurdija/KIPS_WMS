@@ -1,8 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using FileHelpers;
+using KIPS_WMS.Model;
 using KIPS_WMS.NAV_WS;
 using KIPS_WMS.UI.Ponude;
 using KIPS_WMS.Web;
+using OpenNETCF.Windows.Forms;
 
 namespace KIPS_WMS
 {
@@ -10,6 +16,8 @@ namespace KIPS_WMS
     {
 
         private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private List<WarehouseReceiptLineModel> _warehouseReceiptLines;
+
 
         public Form1()
         {
@@ -43,9 +51,50 @@ namespace KIPS_WMS
             
         }
 
+        private void GetData()
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                string warehouseReceiptsCsv = String.Empty;
+
+                _ws.GetWarehouseReceipts("1", "001", "002", "", ref warehouseReceiptsCsv);
+
+                _ws.GetWarehouseReceiptLines("1", "1", "1", "MPR15-0469", ref warehouseReceiptsCsv);
+
+                var engine = new FileHelperEngine(typeof(WarehouseReceiptLineModel));
+                _warehouseReceiptLines =
+                    ((WarehouseReceiptLineModel[])engine.ReadString(warehouseReceiptsCsv)).ToList();
+
+                listBox1.Items.Clear();
+                listBox1.ItemHeight = 40;
+
+                foreach (WarehouseReceiptLineModel item in _warehouseReceiptLines)
+                {
+                    var listItem =
+                        new ListItem(item.ItemNo + Environment.NewLine + item.ItemDescription);
+                    listBox1.Items.Add(listItem);
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
         private void bTest_Click(object sender, EventArgs e)
         {
-            Test();
+            GetData();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

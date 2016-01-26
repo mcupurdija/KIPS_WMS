@@ -161,6 +161,7 @@
             this.bPopis.Size = new System.Drawing.Size(114, 30);
             this.bPopis.TabIndex = 9;
             this.bPopis.Text = "Popis";
+            this.bPopis.Click += new System.EventHandler(this.bPopis_Click);
             // 
             // Meni
             // 

@@ -90,11 +90,13 @@
             this.listBox1.ItemHeight = 40;
             this.listBox1.Location = new System.Drawing.Point(0, 29);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(240, 156);
+            this.listBox1.SelectedIndex = -1;
+            this.listBox1.ShowLines = true;
+            this.listBox1.Size = new System.Drawing.Size(240, 158);
             this.listBox1.TabIndex = 3;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // PrijemLinije
+            // SkladistenjeLinije
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -106,7 +108,7 @@
             this.Controls.Add(this.tbPronadji);
             this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
-            this.Name = "PrijemLinije";
+            this.Name = "SkladistenjeLinije";
             this.Text = "PrijemLinije";
             this.ResumeLayout(false);
 

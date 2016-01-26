@@ -48,7 +48,7 @@ namespace KIPS_WMS.UI.Skladistenje
                 _warehouseReceiptLines =
                     ((WarehouseReceiptLineModel[]) engine.ReadString(warehouseReceiptsCsv)).ToList();
 
-                Invoke(new EventHandler((sender, e) => DisplayData(null)));
+                listBox1.Invoke(new EventHandler((sender, e) => DisplayData(null)));
             }
             catch (Exception ex)
             {
@@ -84,9 +84,12 @@ namespace KIPS_WMS.UI.Skladistenje
             foreach (WarehouseReceiptLineModel item in _filteredReceiptLines)
             {
                 var listItem =
-                    new ListItem(string.Format("{0} - {1}{2}{3} / {4}", item.ItemNo, item.ItemDescription,
-                        Environment.NewLine, item.QuantityOutstanding, item.QuantityToReceive));
+                    new ListItem(item.ItemNo + Environment.NewLine + item.ItemDescription);
                 listBox1.Items.Add(listItem);
+            }
+            if (_filteredReceiptLines.Count > 5)
+            {
+                listBox1.Items.Add(new ListItem());
             }
 
             tbPronadji.Focus();
@@ -99,6 +102,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
         private void bPonisti_Click(object sender, EventArgs e)
         {
+            tbPronadji.Text = String.Empty;
             DisplayData(null);
         }
 
@@ -117,7 +121,7 @@ namespace KIPS_WMS.UI.Skladistenje
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = listBox1.SelectedIndex;
-            if (index == -1) return;
+            if (index == -1 || index >= _filteredReceiptLines.Count) return;
 
             _selectedLine = _filteredReceiptLines[index];
         }
