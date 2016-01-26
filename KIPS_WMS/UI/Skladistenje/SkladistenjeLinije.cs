@@ -10,9 +10,9 @@ using KIPS_WMS.Properties;
 using KIPS_WMS.Web;
 using OpenNETCF.Windows.Forms;
 
-namespace KIPS_WMS.UI.Prijem
+namespace KIPS_WMS.UI.Skladistenje
 {
-    public partial class PrijemLinije : Form
+    public partial class SkladistenjeLinije : Form
     {
         private readonly string _receiptNo;
         private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
@@ -20,12 +20,12 @@ namespace KIPS_WMS.UI.Prijem
         private WarehouseReceiptLineModel _selectedLine;
         private List<WarehouseReceiptLineModel> _warehouseReceiptLines;
 
-        public PrijemLinije()
+        public SkladistenjeLinije()
         {
             InitializeComponent();
         }
 
-        public PrijemLinije(string receiptNo)
+        public SkladistenjeLinije(string receiptNo)
         {
             InitializeComponent();
 

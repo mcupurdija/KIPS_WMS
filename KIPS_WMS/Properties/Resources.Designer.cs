@@ -184,7 +184,7 @@ namespace KIPS_WMS.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Potrebno je da odaberete liniju iz korpe!.
+        ///   Looks up a localized string similar to Potrebno je da odaberete liniju!.
         /// </summary>
         internal static string OdaberiteLiniju {
             get {

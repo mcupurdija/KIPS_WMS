@@ -101,7 +101,7 @@ namespace KIPS_WMS.UI.Skladistenje
         {
             if (_selectedReceipt != null)
             {
-//                new PrijemLinije(_selectedReceipt.ReceiptCode).ShowDialog();
+                new SkladistenjeLinije(_selectedReceipt.ReceiptCode).ShowDialog();
             }
             else
             {
