@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{7EF17339-3A65-401F-89DE-63C7D80897B0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -88,6 +88,42 @@
     <Compile Include="Model\SendQuoteModel.cs" />
     <Compile Include="Model\WarehouseReceiptModel.cs" />
     <Compile Include="RegistryUtils.cs" />
+    <Compile Include="UI\Isporuka\IsporukaLinije.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Isporuka\IsporukaLinije.Designer.cs">
+      <DependentUpon>IsporukaLinije.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Isporuka\IsporukaPocetna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Isporuka\IsporukaPocetna.Designer.cs">
+      <DependentUpon>IsporukaPocetna.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Isporuka\IzdvajanjePretragaPoDokumentu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Isporuka\IzdvajanjePretragaPoDokumentu.Designer.cs">
+      <DependentUpon>IzdvajanjePretragaPoDokumentu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Izdvajanje\IzdvajanjeLinije.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Izdvajanje\IzdvajanjeLinije.Designer.cs">
+      <DependentUpon>IzdvajanjeLinije.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Izdvajanje\IzdvajanjePocetna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Izdvajanje\IzdvajanjePocetna.Designer.cs">
+      <DependentUpon>IzdvajanjePocetna.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Izdvajanje\IzdvajanjePretragaPoDokumentu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Izdvajanje\IzdvajanjePretragaPoDokumentu.Designer.cs">
+      <DependentUpon>IzdvajanjePretragaPoDokumentu.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Ostalo\CsvImport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +157,30 @@
     <Compile Include="Model\CustomerModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="UI\Isporuka\IsporukaLinije.resx">
+      <DependentUpon>IsporukaLinije.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Isporuka\IsporukaPocetna.resx">
+      <DependentUpon>IsporukaPocetna.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Isporuka\IzdvajanjePretragaPoDokumentu.resx">
+      <DependentUpon>IzdvajanjePretragaPoDokumentu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Izdvajanje\IzdvajanjeLinije.resx">
+      <DependentUpon>IzdvajanjeLinije.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Izdvajanje\IzdvajanjePocetna.resx">
+      <DependentUpon>IzdvajanjePocetna.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Izdvajanje\IzdvajanjePretragaPoDokumentu.resx">
+      <DependentUpon>IzdvajanjePretragaPoDokumentu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Ostalo\CsvImport.resx">
       <DependentUpon>CsvImport.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -131,6 +191,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\LagerLista.resx">
       <DependentUpon>LagerLista.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Meni.resx">
       <DependentUpon>Meni.cs</DependentUpon>
@@ -143,6 +204,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NoviArtikliDijalog.resx">
       <DependentUpon>NoviArtikliDijalog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NoviKupciDijalog.resx">
       <DependentUpon>NoviKupciDijalog.cs</DependentUpon>
@@ -150,12 +212,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ostalo\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ponude\NovaPonuda.resx">
       <DependentUpon>NovaPonuda.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ponude\OdabirJediniceDijalog.resx">
       <DependentUpon>OdabirJediniceDijalog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ponude\PonudaKorpa.resx">
       <DependentUpon>PonudaKorpa.cs</DependentUpon>
@@ -171,34 +236,51 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ponude\SlanjeDijalog.resx">
       <DependentUpon>SlanjeDijalog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ponude\StampaDijalog.resx">
       <DependentUpon>StampaDijalog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ostalo\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Preklasifikacija\OdabirArtiklaDijalog.resx">
+      <DependentUpon>OdabirArtiklaDijalog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Preklasifikacija\PreklasifikacijaDetalji.resx">
+      <DependentUpon>PreklasifikacijaDetalji.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Prijem\PrijemLinije.resx">
       <DependentUpon>PrijemLinije.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Prijem\PrijemPocetna.resx">
       <DependentUpon>PrijemPocetna.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Prijem\PrijemPretragaPoArtiklu.resx">
       <DependentUpon>PrijemPretragaPoArtiklu.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Prijem\PrijemPretragaPoDokumentu.resx">
       <DependentUpon>PrijemPretragaPoDokumentu.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Skladistenje\SkladistenjeLinije.resx">
       <DependentUpon>SkladistenjeLinije.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Skladistenje\SkladistenjePretragaPoDokumentu.resx">
       <DependentUpon>SkladistenjePretragaPoDokumentu.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Skladistenje\SkladistenjePocetna.resx">
       <DependentUpon>SkladistenjePocetna.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -274,6 +356,18 @@
     </Compile>
     <Compile Include="UI\Ostalo\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Preklasifikacija\OdabirArtiklaDijalog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Preklasifikacija\OdabirArtiklaDijalog.Designer.cs">
+      <DependentUpon>OdabirArtiklaDijalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Preklasifikacija\PreklasifikacijaDetalji.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Preklasifikacija\PreklasifikacijaDetalji.Designer.cs">
+      <DependentUpon>PreklasifikacijaDetalji.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Prijem\PrijemDetalji.cs">
       <SubType>Form</SubType>
@@ -369,11 +463,6 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\Isporuka\" />
-    <Folder Include="UI\Izdvajanje\" />
-    <Folder Include="UI\Preklasifikacija\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

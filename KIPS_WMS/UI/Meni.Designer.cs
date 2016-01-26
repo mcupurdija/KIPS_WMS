@@ -128,6 +128,7 @@
             this.bIzdvajanja.Size = new System.Drawing.Size(114, 30);
             this.bIzdvajanja.TabIndex = 5;
             this.bIzdvajanja.Text = "Izdvajanja";
+            this.bIzdvajanja.Click += new System.EventHandler(this.bIzdvajanja_Click);
             // 
             // bBarkodTest
             // 

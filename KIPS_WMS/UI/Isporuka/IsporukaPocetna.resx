@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,88 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Artikal" xml:space="preserve">
-    <value>Artikal</value>
-  </data>
-  <data name="Greska" xml:space="preserve">
-    <value>Greška</value>
-  </data>
-  <data name="GreskaPovezivanje" xml:space="preserve">
-    <value>Greška prilikom povezivanja.</value>
-  </data>
-  <data name="GreskaWebServis" xml:space="preserve">
-    <value>Greška prilikom poziva web servisa.</value>
-  </data>
-  <data name="ImeKupca" xml:space="preserve">
-    <value>Ime kupca</value>
-  </data>
-  <data name="Jedinica" xml:space="preserve">
-    <value>Jedinica</value>
-  </data>
-  <data name="JedinicaMere" xml:space="preserve">
-    <value>Jedinica mere</value>
-  </data>
-  <data name="JM" xml:space="preserve">
-    <value>JM</value>
-  </data>
-  <data name="Kolicina" xml:space="preserve">
-    <value>Količina</value>
-  </data>
-  <data name="NaRegal" xml:space="preserve">
-    <value>Na regal</value>
-  </data>
-  <data name="Naziv" xml:space="preserve">
-    <value>Naziv</value>
-  </data>
-  <data name="NazivArtika" xml:space="preserve">
-    <value>Naziv artikla</value>
-  </data>
-  <data name="NepoznatKupac" xml:space="preserve">
-    <value>Nepoznat kupac</value>
-  </data>
-  <data name="NijeOdabranStampac" xml:space="preserve">
-    <value>Potrebno je da u okviru podešavanja odaberete štampač.</value>
-  </data>
-  <data name="NijePronadjenArtikal" xml:space="preserve">
-    <value>Nije pronađen nijedan artikal.</value>
-  </data>
-  <data name="OdaberiteArtikal" xml:space="preserve">
-    <value>Potrebno je da odaberete artikal!</value>
-  </data>
-  <data name="OdaberiteDokument" xml:space="preserve">
-    <value>Potrebno je da odaberete dokument!</value>
-  </data>
-  <data name="OdaberiteJM" xml:space="preserve">
-    <value>Potrebno je da odaberete jedinicu mere!</value>
-  </data>
-  <data name="OdaberiteLiniju" xml:space="preserve">
-    <value>Potrebno je da odaberete liniju!</value>
-  </data>
-  <data name="OdaberiteStampac" xml:space="preserve">
-    <value>Potrebno je da odaberete štampač.</value>
-  </data>
-  <data name="PodesavanjaNisuSacuvana" xml:space="preserve">
-    <value>Podešavanja nisu sačuvana.</value>
-  </data>
-  <data name="PrekoracenKreditniLimit" xml:space="preserve">
-    <value>Kreditni limit je prekoračen!</value>
-  </data>
-  <data name="Raspolozivo" xml:space="preserve">
-    <value>Raspoloživo</value>
-  </data>
-  <data name="SaRegala" xml:space="preserve">
-    <value>Sa regala</value>
-  </data>
-  <data name="Sifra" xml:space="preserve">
-    <value>Šifra</value>
-  </data>
-  <data name="Ukupno" xml:space="preserve">
-    <value>Ukupno</value>
-  </data>
-  <data name="UspesnaSinhronizacija" xml:space="preserve">
-    <value>Sinhronizacija je uspešno završena.\nUkupno kupaca: {0}\nUkupno artikala: {1}</value>
-  </data>
-  <data name="UspesnoKreiranjeAzuriranje" xml:space="preserve">
-    <value>Ponuda je uspešno kreirana/ažurirana. Broj ponude u NAV-u: {0}</value>
-  </data>
+  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.FormFactorShadowProperty" xml:space="preserve">
+    <value>Pocket_PC_Phone_Square_Screen</value>
+  </metadata>
+  <metadata name="$this.Skin" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

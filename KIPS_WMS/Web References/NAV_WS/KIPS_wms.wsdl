@@ -230,6 +230,121 @@
           <sequence />
         </complexType>
       </element>
+      <element name="BinToBinMovement">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="qtyAsTxtP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="fromBinCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="toBinCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="trackingCSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="nAVLineNoP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="BinToBinMovement_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="nAVLineNoP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemFromAnotherBin">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="linesCSV" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="docNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lineNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="userID" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemFromAnotherBin_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="linesCSV" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="DeleteReclassificationLines">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="lineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="userID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="deleteAllLinesP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="DeleteReclassificationLines_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="PostReclassification">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PostReclassification_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="TestItemHasTracking">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="trackingTypeP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="TestItemHasTracking_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="trackingTypeP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ConvertDecToCommaSepTxtDec">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="decimalNumberP" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ConvertDecToCommaSepTxtDec_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ConvertTxtDecToCurrNAVFormat">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="decimalNumberAsTxtP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ConvertTxtDecToCurrNAVFormat_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
     </schema>
   </types>
   <message name="GetQuote">
@@ -304,6 +419,48 @@
   <message name="UpdateWarehouseLineQty_Result">
     <part name="parameters" element="tns:UpdateWarehouseLineQty_Result" />
   </message>
+  <message name="BinToBinMovement">
+    <part name="parameters" element="tns:BinToBinMovement" />
+  </message>
+  <message name="BinToBinMovement_Result">
+    <part name="parameters" element="tns:BinToBinMovement_Result" />
+  </message>
+  <message name="GetItemFromAnotherBin">
+    <part name="parameters" element="tns:GetItemFromAnotherBin" />
+  </message>
+  <message name="GetItemFromAnotherBin_Result">
+    <part name="parameters" element="tns:GetItemFromAnotherBin_Result" />
+  </message>
+  <message name="DeleteReclassificationLines">
+    <part name="parameters" element="tns:DeleteReclassificationLines" />
+  </message>
+  <message name="DeleteReclassificationLines_Result">
+    <part name="parameters" element="tns:DeleteReclassificationLines_Result" />
+  </message>
+  <message name="PostReclassification">
+    <part name="parameters" element="tns:PostReclassification" />
+  </message>
+  <message name="PostReclassification_Result">
+    <part name="parameters" element="tns:PostReclassification_Result" />
+  </message>
+  <message name="TestItemHasTracking">
+    <part name="parameters" element="tns:TestItemHasTracking" />
+  </message>
+  <message name="TestItemHasTracking_Result">
+    <part name="parameters" element="tns:TestItemHasTracking_Result" />
+  </message>
+  <message name="ConvertDecToCommaSepTxtDec">
+    <part name="parameters" element="tns:ConvertDecToCommaSepTxtDec" />
+  </message>
+  <message name="ConvertDecToCommaSepTxtDec_Result">
+    <part name="parameters" element="tns:ConvertDecToCommaSepTxtDec_Result" />
+  </message>
+  <message name="ConvertTxtDecToCurrNAVFormat">
+    <part name="parameters" element="tns:ConvertTxtDecToCurrNAVFormat" />
+  </message>
+  <message name="ConvertTxtDecToCurrNAVFormat_Result">
+    <part name="parameters" element="tns:ConvertTxtDecToCurrNAVFormat_Result" />
+  </message>
   <portType name="KIPS_wms_Port">
     <operation name="GetQuote">
       <input name="GetQuote" message="tns:GetQuote" />
@@ -352,6 +509,34 @@
     <operation name="UpdateWarehouseLineQty">
       <input name="UpdateWarehouseLineQty" message="tns:UpdateWarehouseLineQty" />
       <output name="UpdateWarehouseLineQty_Result" message="tns:UpdateWarehouseLineQty_Result" />
+    </operation>
+    <operation name="BinToBinMovement">
+      <input name="BinToBinMovement" message="tns:BinToBinMovement" />
+      <output name="BinToBinMovement_Result" message="tns:BinToBinMovement_Result" />
+    </operation>
+    <operation name="GetItemFromAnotherBin">
+      <input name="GetItemFromAnotherBin" message="tns:GetItemFromAnotherBin" />
+      <output name="GetItemFromAnotherBin_Result" message="tns:GetItemFromAnotherBin_Result" />
+    </operation>
+    <operation name="DeleteReclassificationLines">
+      <input name="DeleteReclassificationLines" message="tns:DeleteReclassificationLines" />
+      <output name="DeleteReclassificationLines_Result" message="tns:DeleteReclassificationLines_Result" />
+    </operation>
+    <operation name="PostReclassification">
+      <input name="PostReclassification" message="tns:PostReclassification" />
+      <output name="PostReclassification_Result" message="tns:PostReclassification_Result" />
+    </operation>
+    <operation name="TestItemHasTracking">
+      <input name="TestItemHasTracking" message="tns:TestItemHasTracking" />
+      <output name="TestItemHasTracking_Result" message="tns:TestItemHasTracking_Result" />
+    </operation>
+    <operation name="ConvertDecToCommaSepTxtDec">
+      <input name="ConvertDecToCommaSepTxtDec" message="tns:ConvertDecToCommaSepTxtDec" />
+      <output name="ConvertDecToCommaSepTxtDec_Result" message="tns:ConvertDecToCommaSepTxtDec_Result" />
+    </operation>
+    <operation name="ConvertTxtDecToCurrNAVFormat">
+      <input name="ConvertTxtDecToCurrNAVFormat" message="tns:ConvertTxtDecToCurrNAVFormat" />
+      <output name="ConvertTxtDecToCurrNAVFormat_Result" message="tns:ConvertTxtDecToCurrNAVFormat_Result" />
     </operation>
   </portType>
   <binding name="KIPS_wms_Binding" type="tns:KIPS_wms_Port">
@@ -461,6 +646,69 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="UpdateWarehouseLineQty_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="BinToBinMovement">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:BinToBinMovement" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="BinToBinMovement">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="BinToBinMovement_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetItemFromAnotherBin">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemFromAnotherBin" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItemFromAnotherBin">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItemFromAnotherBin_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="DeleteReclassificationLines">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:DeleteReclassificationLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="DeleteReclassificationLines">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="DeleteReclassificationLines_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="PostReclassification">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:PostReclassification" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="PostReclassification">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="PostReclassification_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="TestItemHasTracking">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:TestItemHasTracking" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="TestItemHasTracking">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="TestItemHasTracking_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ConvertDecToCommaSepTxtDec">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertDecToCommaSepTxtDec" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ConvertDecToCommaSepTxtDec">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ConvertDecToCommaSepTxtDec_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ConvertTxtDecToCurrNAVFormat">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertTxtDecToCurrNAVFormat" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ConvertTxtDecToCurrNAVFormat">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ConvertTxtDecToCurrNAVFormat_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
