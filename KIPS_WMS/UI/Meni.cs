@@ -3,6 +3,8 @@ using KIPS_WMS.UI.Ostalo;
 using KIPS_WMS.UI.Ponude;
 using KIPS_WMS.UI.Prijem;
 using KIPS_WMS.UI.Skladistenje;
+using KIPS_WMS.UI.Izdvajanje;
+using KIPS_WMS.UI.Preklasifikacija;
 
 namespace KIPS_WMS.UI
 {
@@ -30,7 +32,7 @@ namespace KIPS_WMS.UI
 
         private void bPreklasifikacija_Click(object sender, System.EventArgs e)
         {
-            new Login().Show();
+            new PreklasifikacijaDetalji().Show();
         }
 
         private void bUvozPodataka_Click(object sender, System.EventArgs e)
@@ -48,9 +50,9 @@ namespace KIPS_WMS.UI
             new SkladistenjePocetna().Show();
         }
 
-        private void bPopis_Click(object sender, System.EventArgs e)
+        private void bIzdvajanja_Click(object sender, System.EventArgs e)
         {
-            new Form1().Show();
+            new IzdvajanjePocetna().Show();
         }
     }
 }
