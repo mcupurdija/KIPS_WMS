@@ -54,5 +54,10 @@ namespace KIPS_WMS.UI
         {
             new IzdvajanjePocetna().Show();
         }
+
+        private void bPopis_Click(object sender, System.EventArgs e)
+        {
+            new Form1().Show();
+        }
     }
 }

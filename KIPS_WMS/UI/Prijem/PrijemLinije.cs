@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -30,6 +31,7 @@ namespace KIPS_WMS.UI.Prijem
             InitializeComponent();
 
             _receiptNo = receiptNo;
+            listBox1.DrawMode = DrawMode.OwnerDrawFixed;
 
             new Thread(GetData).Start();
         }
@@ -82,14 +84,14 @@ namespace KIPS_WMS.UI.Prijem
                 ? _warehouseReceiptLines.FindAll(x => x.ItemNo.Contains(filterText))
                 : _warehouseReceiptLines;
 
-            foreach (WarehouseReceiptLineModel item in _filteredReceiptLines)
+            var listItem = new ListItem();
+            for (int i = 0; i < _filteredReceiptLines.Count; i++)
             {
-                var listItem = new ListItem(item.ItemNo + Environment.NewLine + item.ItemDescription);
                 listBox1.Items.Add(listItem);
             }
-            if (_filteredReceiptLines.Count > 5)
+            if (listBox1.Items.Count > 5)
             {
-                listBox1.Items.Add(new ListItem());
+                listBox1.Items.Add(new ListItem {Tag = 0});
             }
 
             tbPronadji.Focus();
@@ -111,6 +113,7 @@ namespace KIPS_WMS.UI.Prijem
             if (_selectedLine != null)
             {
                 // TODO
+                new PrijemDetalji(_selectedLine).Show();
             }
             else
             {
@@ -121,9 +124,64 @@ namespace KIPS_WMS.UI.Prijem
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = listBox1.SelectedIndex;
-            if (index == -1 || index >= _filteredReceiptLines.Count) return;
+            if (index == -1 || index >= listBox1.Items.Count || listBox1.Items[index].Tag != null)
+            {
+                _selectedLine = null;
+                return;
+            }
 
             _selectedLine = _filteredReceiptLines[index];
+        }
+
+        private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            int index = e.Index;
+            if (index >= listBox1.Items.Count || listBox1.Items[index].Tag != null) return;
+
+            SolidBrush brush;
+            if (e.State == DrawItemState.Selected)
+            {
+                e.DrawBackground(Color.Blue);
+                brush = new SolidBrush(Color.White);
+            }
+            else
+            {
+                e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
+                brush = new SolidBrush(Color.Black);
+            }
+
+            WarehouseReceiptLineModel line = _filteredReceiptLines[index];
+            decimal receivedQuantity = decimal.Parse(line.QuantityToReceive, Utils.GetLocalCulture());
+            decimal outstandingQuantity = decimal.Parse(line.QuantityOutstanding, Utils.GetLocalCulture());
+
+            var rectangle = new Rectangle(e.Bounds.Left, e.Bounds.Top, 7, e.Bounds.Height);
+            if (receivedQuantity == 0)
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.Red), rectangle);
+            }
+            else if (outstandingQuantity > receivedQuantity)
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.Yellow), rectangle);
+            }
+            else if (outstandingQuantity == receivedQuantity)
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.Green), rectangle);
+            }
+            else
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.CornflowerBlue), rectangle);
+            }
+            e.Graphics.DrawRectangle(new Pen(Color.White), rectangle);
+
+            string firstLine = string.Format("{0} {1}", line.ItemNo, line.ItemDescription);
+            string secondLine = string.Format("{0} / {1}", line.QuantityToReceive, line.QuantityOutstanding);
+
+            e.Graphics.DrawString(firstLine,
+                new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 10, e.Bounds.Top,
+                new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+            e.Graphics.DrawString(secondLine,
+                new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 10,
+                e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
         }
     }
 }

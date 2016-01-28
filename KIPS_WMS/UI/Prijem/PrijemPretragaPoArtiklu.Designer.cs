@@ -30,17 +30,27 @@
         private void InitializeComponent()
         {
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
+            this.bNazad = new System.Windows.Forms.MenuItem();
+            this.bDalje = new System.Windows.Forms.MenuItem();
             this.bPronadji = new System.Windows.Forms.Button();
             this.tbPronadji = new System.Windows.Forms.TextBox();
             this.listBox1 = new OpenNETCF.Windows.Forms.ListBox2();
-            this.bNazad = new System.Windows.Forms.MenuItem();
-            this.bDalje = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu1
             // 
             this.mainMenu1.MenuItems.Add(this.bNazad);
             this.mainMenu1.MenuItems.Add(this.bDalje);
+            // 
+            // bNazad
+            // 
+            this.bNazad.Text = "Nazad";
+            this.bNazad.Click += new System.EventHandler(this.bNazad_Click);
+            // 
+            // bDalje
+            // 
+            this.bDalje.Text = "Dalje";
+            this.bDalje.Click += new System.EventHandler(this.bDalje_Click);
             // 
             // bPronadji
             // 
@@ -65,20 +75,11 @@
             this.listBox1.Location = new System.Drawing.Point(0, 29);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectedIndex = -1;
-            this.listBox1.Size = new System.Drawing.Size(240, 156);
+            this.listBox1.Size = new System.Drawing.Size(240, 158);
             this.listBox1.TabIndex = 2;
             this.listBox1.WrapText = true;
+            this.listBox1.DrawItem += new OpenNETCF.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // bNazad
-            // 
-            this.bNazad.Text = "Nazad";
-            this.bNazad.Click += new System.EventHandler(this.bNazad_Click);
-            // 
-            // bDalje
-            // 
-            this.bDalje.Text = "Dalje";
-            this.bDalje.Click += new System.EventHandler(this.bDalje_Click);
             // 
             // PrijemPretragaPoArtiklu
             // 

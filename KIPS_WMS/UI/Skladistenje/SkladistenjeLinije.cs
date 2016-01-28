@@ -87,7 +87,7 @@ namespace KIPS_WMS.UI.Skladistenje
                     new ListItem(item.ItemNo + Environment.NewLine + item.ItemDescription);
                 listBox1.Items.Add(listItem);
             }
-            if (_filteredReceiptLines.Count > 5)
+            if (listBox1.Items.Count > 5)
             {
                 listBox1.Items.Add(new ListItem());
             }
@@ -121,7 +121,7 @@ namespace KIPS_WMS.UI.Skladistenje
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = listBox1.SelectedIndex;
-            if (index == -1 || index >= _filteredReceiptLines.Count) return;
+            if (index == -1 || index >= listBox1.Items.Count - 1) return;
 
             _selectedLine = _filteredReceiptLines[index];
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -27,6 +28,8 @@ namespace KIPS_WMS.UI.Prijem
         {
             InitializeComponent();
 
+            listBox1.DrawMode = DrawMode.OwnerDrawFixed;
+
             tbPronadji.Focus();
         }
 
@@ -53,11 +56,14 @@ namespace KIPS_WMS.UI.Prijem
 
             listBox1.Items.Clear();
 
+            var listItem = new ListItem();
             foreach (var item in data)
             {
-                listBox1.Items.Add(string.Format("{0}{1}{2}", item[DatabaseModel.ItemDbModel.ItemCode],
-                    Environment.NewLine,
-                    item[DatabaseModel.ItemDbModel.ItemDescription]));
+                listBox1.Items.Add(listItem);
+            }
+            if (listBox1.Items.Count > 5)
+            {
+                listBox1.Items.Add(new ListItem {Tag = 0});
             }
 
             tbPronadji.Focus();
@@ -66,7 +72,18 @@ namespace KIPS_WMS.UI.Prijem
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = listBox1.SelectedIndex;
-            if (index == -1) return;
+            if (index == -1 || index >= listBox1.Items.Count || listBox1.Items[index].Tag != null)
+            {
+                if (_tableItems)
+                {
+                    _selectedItem = null;
+                }
+                else
+                {
+                    _selectedReceipt = null;
+                }
+                return;
+            }
 
             if (_tableItems)
             {
@@ -121,6 +138,8 @@ namespace KIPS_WMS.UI.Prijem
 
                 var engine = new FileHelperEngine(typeof (WarehouseReceiptModel));
                 _warehouseReceipts = ((WarehouseReceiptModel[]) engine.ReadString(warehouseReceiptsCsv)).ToList();
+                _warehouseReceipts.Sort(
+                    (x, y) => String.Compare(x.SourceDescription, y.SourceDescription, StringComparison.Ordinal));
 
                 Invoke(new EventHandler((sender, e) => DisplayData()));
             }
@@ -142,15 +161,64 @@ namespace KIPS_WMS.UI.Prijem
             listBox1.Items.Clear();
             listBox1.SelectedIndex = -1;
 
-            foreach (WarehouseReceiptModel item in _warehouseReceipts)
+            var listItem = new ListItem();
+            for (int i = 0; i < _warehouseReceipts.Count; i++)
             {
-                var listItem =
-                    new ListItem(string.Format("{0} - {1}{2}{3} - {4}", item.ReceiptCode, item.ReceiptDate,
-                        Environment.NewLine, item.SourceCode, item.SourceDescription));
                 listBox1.Items.Add(listItem);
+            }
+            if (listBox1.Items.Count > 5)
+            {
+                listBox1.Items.Add(new ListItem {Tag = 0});
             }
 
             tbPronadji.Focus();
+        }
+
+        private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            int index = e.Index;
+            if (index >= listBox1.Items.Count || listBox1.Items[index].Tag != null) return;
+
+            SolidBrush brush;
+            if (e.State == DrawItemState.Selected)
+            {
+                e.DrawBackground(Color.Blue);
+                brush = new SolidBrush(Color.White);
+            }
+            else
+            {
+                e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
+                brush = new SolidBrush(Color.Black);
+            }
+
+            if (_tableItems)
+            {
+                object[] line = _searchedItems[index];
+
+                string firstLine = line[DatabaseModel.ItemDbModel.ItemCode].ToString();
+                string secondLine = line[DatabaseModel.ItemDbModel.ItemDescription].ToString();
+
+                e.Graphics.DrawString(firstLine,
+                    new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 3, e.Bounds.Top,
+                    new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                e.Graphics.DrawString(secondLine,
+                    new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 3,
+                    e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+            }
+            else
+            {
+                WarehouseReceiptModel line = _warehouseReceipts[index];
+
+                string firstLine = line.SourceDescription;
+                string secondLine = string.Format("{0} - {1}", line.ReceiptCode, line.ReceiptDate);
+
+                e.Graphics.DrawString(firstLine,
+                    new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 3, e.Bounds.Top,
+                    new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                e.Graphics.DrawString(secondLine,
+                    new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 3,
+                    e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+            }
         }
     }
 }

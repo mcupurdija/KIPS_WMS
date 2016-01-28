@@ -4,7 +4,7 @@ namespace KIPS_WMS.Model
 {
     [DelimitedRecord(";")]
     [IgnoreFirst(1)]
-    class WarehouseReceiptLineModel
+    public class WarehouseReceiptLineModel
     {
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
         public string DocumentNo;
@@ -28,10 +28,10 @@ namespace KIPS_WMS.Model
         public string UnitOfMeasureCode;
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string QuantityOutstanding;
+        public string QuantityOutstanding; // ZA PRIJEM 
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string QuantityToReceive;
+        public string QuantityToReceive; // ZAPREMLJENA
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
         public string TrackingType;

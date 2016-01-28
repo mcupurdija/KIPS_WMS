@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -6,6 +7,7 @@ using System.Reflection;
 using System.Web.Services.Protocols;
 using System.Windows.Forms;
 using KIPS_WMS.Properties;
+using OpenNETCF.Windows.Forms;
 
 namespace KIPS_WMS
 {
@@ -62,6 +64,27 @@ namespace KIPS_WMS
             {
                 MessageBox.Show(ex.Message, Resources.Greska);
             }
+        }
+
+        public static void DrawTwoLinesListBox(DrawItemEventArgs e, string firstLine, string secondLine)
+        {
+            int index = e.Index;
+            SolidBrush brush;
+            if (e.State == DrawItemState.Selected)
+            {
+                e.DrawBackground(Color.Blue);
+                brush = new SolidBrush(Color.White);
+            }
+            else
+            {
+                e.DrawBackground(index % 2 == 0 ? SystemColors.Control : Color.White);
+                brush = new SolidBrush(Color.Black);
+            }
+
+            e.Graphics.DrawString(firstLine,
+                new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 3, e.Bounds.Top, new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
+            e.Graphics.DrawString(secondLine,
+                new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 3, e.Bounds.Top + 20, new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
         }
     }
 }

@@ -68,6 +68,10 @@ namespace KIPS_WMS.UI.Skladistenje
                         Environment.NewLine, item.SourceCode, item.SourceDescription));
                 listBox1.Items.Add(listItem);
             }
+            if (listBox1.Items.Count > 5)
+            {
+                listBox1.Items.Add(new ListItem());
+            }
 
             tbPronadji.Focus();
         }
@@ -87,7 +91,7 @@ namespace KIPS_WMS.UI.Skladistenje
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = listBox1.SelectedIndex;
-            if (index == -1) return;
+            if (index == -1 || index >= listBox1.Items.Count - 1) return;
 
             _selectedReceipt = _filteredList[index];
         }

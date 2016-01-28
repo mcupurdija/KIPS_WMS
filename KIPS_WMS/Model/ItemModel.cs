@@ -20,5 +20,11 @@ namespace KIPS_WMS.Model
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)] 
         public string ItemUnitOfMeasure;
+
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string UnitOfMeasureCoefficient;
+
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string ItemTrackingType;
     }
 }

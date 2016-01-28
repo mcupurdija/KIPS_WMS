@@ -88,12 +88,16 @@ namespace KIPS_WMS.UI.Prijem
             // 
             // listBox1
             // 
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox1.BackgroundImage = null;
             this.listBox1.Location = new System.Drawing.Point(0, 29);
             this.listBox1.Name = "listBox1";
-            this.listBox1.ShowLines = true;
+            this.listBox1.ShowScrollbar = true;
             this.listBox1.Size = new System.Drawing.Size(240, 158);
             this.listBox1.TabIndex = 3;
+            this.listBox1.WrapText = false;
+            this.listBox1.DrawItem += new OpenNETCF.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // PrijemLinije

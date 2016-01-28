@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -23,6 +24,8 @@ namespace KIPS_WMS.UI.Prijem
         {
             InitializeComponent();
 
+            listBox1.DrawMode = DrawMode.OwnerDrawFixed;
+
             new Thread(GetData).Start();
         }
 
@@ -38,6 +41,7 @@ namespace KIPS_WMS.UI.Prijem
 
                 var engine = new FileHelperEngine(typeof (WarehouseReceiptModel));
                 _warehouseReceipts = ((WarehouseReceiptModel[]) engine.ReadString(warehouseReceiptsCsv)).ToList();
+                _warehouseReceipts.Sort((x, y) => String.Compare(x.SourceDescription, y.SourceDescription, StringComparison.Ordinal));
                 _filteredList = _warehouseReceipts;
 
                 Invoke(new EventHandler((sender, e) => DisplayData(null)));
@@ -61,12 +65,14 @@ namespace KIPS_WMS.UI.Prijem
                 ? _warehouseReceipts.FindAll(x => x.ReceiptCode.Contains(documentNo))
                 : _warehouseReceipts;
 
-            foreach (WarehouseReceiptModel item in _filteredList)
+            var listItem = new ListItem();
+            for (int i = 0; i < _filteredList.Count; i++)
             {
-                var listItem =
-                    new ListItem(string.Format("{0} - {1}{2}{3} - {4}", item.ReceiptCode, item.ReceiptDate,
-                        Environment.NewLine, item.SourceCode, item.SourceDescription));
                 listBox1.Items.Add(listItem);
+            }
+            if (listBox1.Items.Count > 5)
+            {
+                listBox1.Items.Add(new ListItem {Tag = 0});
             }
 
             tbPronadji.Focus();
@@ -87,7 +93,11 @@ namespace KIPS_WMS.UI.Prijem
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = listBox1.SelectedIndex;
-            if (index == -1) return;
+            if (index == -1 || index >= listBox1.Items.Count || listBox1.Items[index].Tag != null)
+            {
+                _selectedReceipt = null;
+                return;
+            }
 
             _selectedReceipt = _filteredList[index];
         }
@@ -107,6 +117,36 @@ namespace KIPS_WMS.UI.Prijem
             {
                 MessageBox.Show(Resources.OdaberiteDokument, Resources.Greska);
             }
+        }
+
+        private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            int index = e.Index;
+            if (index >= listBox1.Items.Count || listBox1.Items[index].Tag != null) return;
+
+            SolidBrush brush;
+            if (e.State == DrawItemState.Selected)
+            {
+                e.DrawBackground(Color.Blue);
+                brush = new SolidBrush(Color.White);
+            }
+            else
+            {
+                e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
+                brush = new SolidBrush(Color.Black);
+            }
+
+            WarehouseReceiptModel line = _filteredList[index];
+
+            string firstLine = line.SourceDescription;
+            string secondLine = string.Format("{0} - {1}", line.ReceiptCode, line.ReceiptDate);
+
+            e.Graphics.DrawString(firstLine,
+                new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 3, e.Bounds.Top,
+                new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+            e.Graphics.DrawString(secondLine,
+                new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 3,
+                e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
         }
     }
 }
