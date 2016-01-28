@@ -210,7 +210,24 @@
           </sequence>
         </complexType>
       </element>
-      <element name="UpdateWarehouseLineQty">
+      <element name="GetReceiptLineQtyToReceive">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsReceiptNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsReceiptLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="qtyToReceiveP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetReceiptLineQtyToReceive_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="qtyToReceiveP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateWarehouseReceiptLineQty">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
@@ -225,7 +242,23 @@
           </sequence>
         </complexType>
       </element>
-      <element name="UpdateWarehouseLineQty_Result">
+      <element name="UpdateWarehouseReceiptLineQty_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="UpdateDamagedIncomplete">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="damagedQtyP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="incompleteQtyP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateDamagedIncomplete_Result">
         <complexType>
           <sequence />
         </complexType>
@@ -235,6 +268,7 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="qtyAsTxtP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="unitOfMeasureCodeP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="fromBinCodeP" type="string" />
@@ -302,6 +336,60 @@
           </sequence>
         </complexType>
       </element>
+      <element name="GetItemBinContent">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="binCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="variantCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemBinContent_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ChangeBinOnDocumentLine">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentTypeP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="documentNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="newBinCodeP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ChangeBinOnDocumentLine_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="SplitDocumentLine">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentTypeP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="documentNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="newDocumentLineNoP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SplitDocumentLine_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="newDocumentLineNoP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="TestItemHasTracking">
         <complexType>
           <sequence>
@@ -342,6 +430,34 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ConvertTxtDateToCurrNAVFormat">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="dateAsTxtP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ConvertTxtDateToCurrNAVFormat_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ConvertDateToSRBFormatTxtDate">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="dateP" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ConvertDateToSRBFormatTxtDate_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -413,11 +529,23 @@
   <message name="GetWarehouseReceiptLines_Result">
     <part name="parameters" element="tns:GetWarehouseReceiptLines_Result" />
   </message>
-  <message name="UpdateWarehouseLineQty">
-    <part name="parameters" element="tns:UpdateWarehouseLineQty" />
+  <message name="GetReceiptLineQtyToReceive">
+    <part name="parameters" element="tns:GetReceiptLineQtyToReceive" />
   </message>
-  <message name="UpdateWarehouseLineQty_Result">
-    <part name="parameters" element="tns:UpdateWarehouseLineQty_Result" />
+  <message name="GetReceiptLineQtyToReceive_Result">
+    <part name="parameters" element="tns:GetReceiptLineQtyToReceive_Result" />
+  </message>
+  <message name="UpdateWarehouseReceiptLineQty">
+    <part name="parameters" element="tns:UpdateWarehouseReceiptLineQty" />
+  </message>
+  <message name="UpdateWarehouseReceiptLineQty_Result">
+    <part name="parameters" element="tns:UpdateWarehouseReceiptLineQty_Result" />
+  </message>
+  <message name="UpdateDamagedIncomplete">
+    <part name="parameters" element="tns:UpdateDamagedIncomplete" />
+  </message>
+  <message name="UpdateDamagedIncomplete_Result">
+    <part name="parameters" element="tns:UpdateDamagedIncomplete_Result" />
   </message>
   <message name="BinToBinMovement">
     <part name="parameters" element="tns:BinToBinMovement" />
@@ -443,6 +571,24 @@
   <message name="PostReclassification_Result">
     <part name="parameters" element="tns:PostReclassification_Result" />
   </message>
+  <message name="GetItemBinContent">
+    <part name="parameters" element="tns:GetItemBinContent" />
+  </message>
+  <message name="GetItemBinContent_Result">
+    <part name="parameters" element="tns:GetItemBinContent_Result" />
+  </message>
+  <message name="ChangeBinOnDocumentLine">
+    <part name="parameters" element="tns:ChangeBinOnDocumentLine" />
+  </message>
+  <message name="ChangeBinOnDocumentLine_Result">
+    <part name="parameters" element="tns:ChangeBinOnDocumentLine_Result" />
+  </message>
+  <message name="SplitDocumentLine">
+    <part name="parameters" element="tns:SplitDocumentLine" />
+  </message>
+  <message name="SplitDocumentLine_Result">
+    <part name="parameters" element="tns:SplitDocumentLine_Result" />
+  </message>
   <message name="TestItemHasTracking">
     <part name="parameters" element="tns:TestItemHasTracking" />
   </message>
@@ -460,6 +606,18 @@
   </message>
   <message name="ConvertTxtDecToCurrNAVFormat_Result">
     <part name="parameters" element="tns:ConvertTxtDecToCurrNAVFormat_Result" />
+  </message>
+  <message name="ConvertTxtDateToCurrNAVFormat">
+    <part name="parameters" element="tns:ConvertTxtDateToCurrNAVFormat" />
+  </message>
+  <message name="ConvertTxtDateToCurrNAVFormat_Result">
+    <part name="parameters" element="tns:ConvertTxtDateToCurrNAVFormat_Result" />
+  </message>
+  <message name="ConvertDateToSRBFormatTxtDate">
+    <part name="parameters" element="tns:ConvertDateToSRBFormatTxtDate" />
+  </message>
+  <message name="ConvertDateToSRBFormatTxtDate_Result">
+    <part name="parameters" element="tns:ConvertDateToSRBFormatTxtDate_Result" />
   </message>
   <portType name="KIPS_wms_Port">
     <operation name="GetQuote">
@@ -506,9 +664,17 @@
       <input name="GetWarehouseReceiptLines" message="tns:GetWarehouseReceiptLines" />
       <output name="GetWarehouseReceiptLines_Result" message="tns:GetWarehouseReceiptLines_Result" />
     </operation>
-    <operation name="UpdateWarehouseLineQty">
-      <input name="UpdateWarehouseLineQty" message="tns:UpdateWarehouseLineQty" />
-      <output name="UpdateWarehouseLineQty_Result" message="tns:UpdateWarehouseLineQty_Result" />
+    <operation name="GetReceiptLineQtyToReceive">
+      <input name="GetReceiptLineQtyToReceive" message="tns:GetReceiptLineQtyToReceive" />
+      <output name="GetReceiptLineQtyToReceive_Result" message="tns:GetReceiptLineQtyToReceive_Result" />
+    </operation>
+    <operation name="UpdateWarehouseReceiptLineQty">
+      <input name="UpdateWarehouseReceiptLineQty" message="tns:UpdateWarehouseReceiptLineQty" />
+      <output name="UpdateWarehouseReceiptLineQty_Result" message="tns:UpdateWarehouseReceiptLineQty_Result" />
+    </operation>
+    <operation name="UpdateDamagedIncomplete">
+      <input name="UpdateDamagedIncomplete" message="tns:UpdateDamagedIncomplete" />
+      <output name="UpdateDamagedIncomplete_Result" message="tns:UpdateDamagedIncomplete_Result" />
     </operation>
     <operation name="BinToBinMovement">
       <input name="BinToBinMovement" message="tns:BinToBinMovement" />
@@ -526,6 +692,18 @@
       <input name="PostReclassification" message="tns:PostReclassification" />
       <output name="PostReclassification_Result" message="tns:PostReclassification_Result" />
     </operation>
+    <operation name="GetItemBinContent">
+      <input name="GetItemBinContent" message="tns:GetItemBinContent" />
+      <output name="GetItemBinContent_Result" message="tns:GetItemBinContent_Result" />
+    </operation>
+    <operation name="ChangeBinOnDocumentLine">
+      <input name="ChangeBinOnDocumentLine" message="tns:ChangeBinOnDocumentLine" />
+      <output name="ChangeBinOnDocumentLine_Result" message="tns:ChangeBinOnDocumentLine_Result" />
+    </operation>
+    <operation name="SplitDocumentLine">
+      <input name="SplitDocumentLine" message="tns:SplitDocumentLine" />
+      <output name="SplitDocumentLine_Result" message="tns:SplitDocumentLine_Result" />
+    </operation>
     <operation name="TestItemHasTracking">
       <input name="TestItemHasTracking" message="tns:TestItemHasTracking" />
       <output name="TestItemHasTracking_Result" message="tns:TestItemHasTracking_Result" />
@@ -537,6 +715,14 @@
     <operation name="ConvertTxtDecToCurrNAVFormat">
       <input name="ConvertTxtDecToCurrNAVFormat" message="tns:ConvertTxtDecToCurrNAVFormat" />
       <output name="ConvertTxtDecToCurrNAVFormat_Result" message="tns:ConvertTxtDecToCurrNAVFormat_Result" />
+    </operation>
+    <operation name="ConvertTxtDateToCurrNAVFormat">
+      <input name="ConvertTxtDateToCurrNAVFormat" message="tns:ConvertTxtDateToCurrNAVFormat" />
+      <output name="ConvertTxtDateToCurrNAVFormat_Result" message="tns:ConvertTxtDateToCurrNAVFormat_Result" />
+    </operation>
+    <operation name="ConvertDateToSRBFormatTxtDate">
+      <input name="ConvertDateToSRBFormatTxtDate" message="tns:ConvertDateToSRBFormatTxtDate" />
+      <output name="ConvertDateToSRBFormatTxtDate_Result" message="tns:ConvertDateToSRBFormatTxtDate_Result" />
     </operation>
   </portType>
   <binding name="KIPS_wms_Binding" type="tns:KIPS_wms_Port">
@@ -640,12 +826,30 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="UpdateWarehouseLineQty">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:UpdateWarehouseLineQty" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="UpdateWarehouseLineQty">
+    <operation name="GetReceiptLineQtyToReceive">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetReceiptLineQtyToReceive" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetReceiptLineQtyToReceive">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
-      <output name="UpdateWarehouseLineQty_Result">
+      <output name="GetReceiptLineQtyToReceive_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateWarehouseReceiptLineQty">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:UpdateWarehouseReceiptLineQty" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateWarehouseReceiptLineQty">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateWarehouseReceiptLineQty_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateDamagedIncomplete">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:UpdateDamagedIncomplete" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateDamagedIncomplete">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateDamagedIncomplete_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -685,6 +889,33 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="GetItemBinContent">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemBinContent" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItemBinContent">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItemBinContent_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ChangeBinOnDocumentLine">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ChangeBinOnDocumentLine" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ChangeBinOnDocumentLine">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ChangeBinOnDocumentLine_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SplitDocumentLine">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:SplitDocumentLine" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SplitDocumentLine">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SplitDocumentLine_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="TestItemHasTracking">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:TestItemHasTracking" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="TestItemHasTracking">
@@ -709,6 +940,24 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="ConvertTxtDecToCurrNAVFormat_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ConvertTxtDateToCurrNAVFormat">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertTxtDateToCurrNAVFormat" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ConvertTxtDateToCurrNAVFormat">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ConvertTxtDateToCurrNAVFormat_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ConvertDateToSRBFormatTxtDate">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertDateToSRBFormatTxtDate" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ConvertDateToSRBFormatTxtDate">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ConvertDateToSRBFormatTxtDate_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

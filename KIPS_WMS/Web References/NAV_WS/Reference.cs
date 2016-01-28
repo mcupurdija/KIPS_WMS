@@ -360,9 +360,35 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:UpdateWarehouseLineQty", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="UpdateWarehouseLineQty_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdateWarehouseLineQty(string userIdP, string whsReceiptNoP, int whsReceiptLineNoP, string qtyP, int isUpdateP, string trackingCSVStringP, string normCSVStringP, string scannedUoMCodeP, string qtyInScannedUoMP) {
-            this.Invoke("UpdateWarehouseLineQty", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetReceiptLineQtyToReceive", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetReceiptLineQtyToReceive_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetReceiptLineQtyToReceive(string userIdP, string whsReceiptNoP, int whsReceiptLineNoP, ref string qtyToReceiveP) {
+            object[] results = this.Invoke("GetReceiptLineQtyToReceive", new object[] {
+                        userIdP,
+                        whsReceiptNoP,
+                        whsReceiptLineNoP,
+                        qtyToReceiveP});
+            qtyToReceiveP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetReceiptLineQtyToReceive(string userIdP, string whsReceiptNoP, int whsReceiptLineNoP, string qtyToReceiveP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetReceiptLineQtyToReceive", new object[] {
+                        userIdP,
+                        whsReceiptNoP,
+                        whsReceiptLineNoP,
+                        qtyToReceiveP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetReceiptLineQtyToReceive(System.IAsyncResult asyncResult, out string qtyToReceiveP) {
+            object[] results = this.EndInvoke(asyncResult);
+            qtyToReceiveP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:UpdateWarehouseReceiptLineQty", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="UpdateWarehouseReceiptLineQty_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateWarehouseReceiptLineQty(string userIdP, string whsReceiptNoP, int whsReceiptLineNoP, string qtyP, int isUpdateP, string trackingCSVStringP, string normCSVStringP, string scannedUoMCodeP, string qtyInScannedUoMP) {
+            this.Invoke("UpdateWarehouseReceiptLineQty", new object[] {
                         userIdP,
                         whsReceiptNoP,
                         whsReceiptLineNoP,
@@ -375,8 +401,8 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginUpdateWarehouseLineQty(string userIdP, string whsReceiptNoP, int whsReceiptLineNoP, string qtyP, int isUpdateP, string trackingCSVStringP, string normCSVStringP, string scannedUoMCodeP, string qtyInScannedUoMP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("UpdateWarehouseLineQty", new object[] {
+        public System.IAsyncResult BeginUpdateWarehouseReceiptLineQty(string userIdP, string whsReceiptNoP, int whsReceiptLineNoP, string qtyP, int isUpdateP, string trackingCSVStringP, string normCSVStringP, string scannedUoMCodeP, string qtyInScannedUoMP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("UpdateWarehouseReceiptLineQty", new object[] {
                         userIdP,
                         whsReceiptNoP,
                         whsReceiptLineNoP,
@@ -389,16 +415,43 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        public void EndUpdateWarehouseLineQty(System.IAsyncResult asyncResult) {
+        public void EndUpdateWarehouseReceiptLineQty(System.IAsyncResult asyncResult) {
+            this.EndInvoke(asyncResult);
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:UpdateDamagedIncomplete", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="UpdateDamagedIncomplete_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateDamagedIncomplete(string userIdP, string documentNoP, int documentLineNoP, string damagedQtyP, string incompleteQtyP) {
+            this.Invoke("UpdateDamagedIncomplete", new object[] {
+                        userIdP,
+                        documentNoP,
+                        documentLineNoP,
+                        damagedQtyP,
+                        incompleteQtyP});
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginUpdateDamagedIncomplete(string userIdP, string documentNoP, int documentLineNoP, string damagedQtyP, string incompleteQtyP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("UpdateDamagedIncomplete", new object[] {
+                        userIdP,
+                        documentNoP,
+                        documentLineNoP,
+                        damagedQtyP,
+                        incompleteQtyP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndUpdateDamagedIncomplete(System.IAsyncResult asyncResult) {
             this.EndInvoke(asyncResult);
         }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:BinToBinMovement", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="BinToBinMovement_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void BinToBinMovement(string itemNoP, string qtyAsTxtP, string locationCodeP, string sublocationCodeP, string fromBinCodeP, string toBinCodeP, string userIdP, string trackingCSVStringP, ref int nAVLineNoP) {
+        public void BinToBinMovement(string itemNoP, string qtyAsTxtP, string unitOfMeasureCodeP, string locationCodeP, string sublocationCodeP, string fromBinCodeP, string toBinCodeP, string userIdP, string trackingCSVStringP, ref int nAVLineNoP) {
             object[] results = this.Invoke("BinToBinMovement", new object[] {
                         itemNoP,
                         qtyAsTxtP,
+                        unitOfMeasureCodeP,
                         locationCodeP,
                         sublocationCodeP,
                         fromBinCodeP,
@@ -410,10 +463,11 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginBinToBinMovement(string itemNoP, string qtyAsTxtP, string locationCodeP, string sublocationCodeP, string fromBinCodeP, string toBinCodeP, string userIdP, string trackingCSVStringP, int nAVLineNoP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginBinToBinMovement(string itemNoP, string qtyAsTxtP, string unitOfMeasureCodeP, string locationCodeP, string sublocationCodeP, string fromBinCodeP, string toBinCodeP, string userIdP, string trackingCSVStringP, int nAVLineNoP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("BinToBinMovement", new object[] {
                         itemNoP,
                         qtyAsTxtP,
+                        unitOfMeasureCodeP,
                         locationCodeP,
                         sublocationCodeP,
                         fromBinCodeP,
@@ -508,6 +562,92 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemBinContent", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItemBinContent_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetItemBinContent(string userIdP, string locationCodeP, string sublocationCodeP, string binCodeP, string itemNoP, string variantCodeP, ref string cSVStringP) {
+            object[] results = this.Invoke("GetItemBinContent", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        binCodeP,
+                        itemNoP,
+                        variantCodeP,
+                        cSVStringP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetItemBinContent(string userIdP, string locationCodeP, string sublocationCodeP, string binCodeP, string itemNoP, string variantCodeP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetItemBinContent", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        binCodeP,
+                        itemNoP,
+                        variantCodeP,
+                        cSVStringP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetItemBinContent(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ChangeBinOnDocumentLine", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="ChangeBinOnDocumentLine_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ChangeBinOnDocumentLine(string userIdP, int documentTypeP, string documentNoP, int documentLineNoP, string newBinCodeP) {
+            this.Invoke("ChangeBinOnDocumentLine", new object[] {
+                        userIdP,
+                        documentTypeP,
+                        documentNoP,
+                        documentLineNoP,
+                        newBinCodeP});
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginChangeBinOnDocumentLine(string userIdP, int documentTypeP, string documentNoP, int documentLineNoP, string newBinCodeP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("ChangeBinOnDocumentLine", new object[] {
+                        userIdP,
+                        documentTypeP,
+                        documentNoP,
+                        documentLineNoP,
+                        newBinCodeP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndChangeBinOnDocumentLine(System.IAsyncResult asyncResult) {
+            this.EndInvoke(asyncResult);
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:SplitDocumentLine", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="SplitDocumentLine_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SplitDocumentLine(string userIdP, int documentTypeP, string documentNoP, int documentLineNoP, ref int newDocumentLineNoP) {
+            object[] results = this.Invoke("SplitDocumentLine", new object[] {
+                        userIdP,
+                        documentTypeP,
+                        documentNoP,
+                        documentLineNoP,
+                        newDocumentLineNoP});
+            newDocumentLineNoP = ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginSplitDocumentLine(string userIdP, int documentTypeP, string documentNoP, int documentLineNoP, int newDocumentLineNoP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("SplitDocumentLine", new object[] {
+                        userIdP,
+                        documentTypeP,
+                        documentNoP,
+                        documentLineNoP,
+                        newDocumentLineNoP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndSplitDocumentLine(System.IAsyncResult asyncResult, out int newDocumentLineNoP) {
+            object[] results = this.EndInvoke(asyncResult);
+            newDocumentLineNoP = ((int)(results[0]));
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:TestItemHasTracking", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="TestItemHasTracking_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void TestItemHasTracking(string itemNoP, ref int trackingTypeP) {
             object[] results = this.Invoke("TestItemHasTracking", new object[] {
@@ -569,6 +709,48 @@ namespace KIPS_WMS.NAV_WS {
         public decimal EndConvertTxtDecToCurrNAVFormat(System.IAsyncResult asyncResult) {
             object[] results = this.EndInvoke(asyncResult);
             return ((decimal)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertTxtDateToCurrNAVFormat", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="ConvertTxtDateToCurrNAVFormat_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value", DataType="date")]
+        public System.DateTime ConvertTxtDateToCurrNAVFormat(string dateAsTxtP) {
+            object[] results = this.Invoke("ConvertTxtDateToCurrNAVFormat", new object[] {
+                        dateAsTxtP});
+            return ((System.DateTime)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginConvertTxtDateToCurrNAVFormat(string dateAsTxtP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("ConvertTxtDateToCurrNAVFormat", new object[] {
+                        dateAsTxtP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public System.DateTime EndConvertTxtDateToCurrNAVFormat(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((System.DateTime)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertDateToSRBFormatTxtDate", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="ConvertDateToSRBFormatTxtDate_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string ConvertDateToSRBFormatTxtDate([System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime dateP) {
+            object[] results = this.Invoke("ConvertDateToSRBFormatTxtDate", new object[] {
+                        dateP});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginConvertDateToSRBFormatTxtDate(System.DateTime dateP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("ConvertDateToSRBFormatTxtDate", new object[] {
+                        dateP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndConvertDateToSRBFormatTxtDate(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
         }
     }
 }

@@ -49,7 +49,7 @@
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.Location = new System.Drawing.Point(4, 4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(153, 87);
+            this.listView1.Size = new System.Drawing.Size(150, 90);
             this.listView1.TabIndex = 1;
             this.listView1.View = System.Windows.Forms.View.List;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
