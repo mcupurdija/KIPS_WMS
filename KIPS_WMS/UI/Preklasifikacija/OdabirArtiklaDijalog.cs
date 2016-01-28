@@ -44,11 +44,14 @@ namespace KIPS_WMS.UI.Preklasifikacija
                             new object[] { _itemNo });
 
                 listView1.Clear();
-                listView1.View = View.List;
+                listView1.View = View.Details;
+                listView1.Columns.Add(Resources.Sifra, 100, HorizontalAlignment.Left);
+                listView1.Columns.Add(Resources.NazivArtika, 250, HorizontalAlignment.Left);
                 foreach (Object[] item in _items)
                 {
                     var lvi = new ListViewItem(new[]
                     {
+                        item[DatabaseModel.ItemDbModel.ItemCode].ToString(),
                         item[DatabaseModel.ItemDbModel.ItemDescription].ToString()
                     });
                     listView1.Items.Add(lvi);

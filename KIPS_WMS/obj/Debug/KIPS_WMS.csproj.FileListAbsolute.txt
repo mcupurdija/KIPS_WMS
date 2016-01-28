@@ -64,3 +64,43 @@ C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.csproj.GenerateResource.Cache
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.exe
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.pdb
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Isporuka.IsporukaLinije.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Isporuka.IsporukaPocetna.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Isporuka.IsporukaPretragaPoDokumentu.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Izdvajanje.IzdvajanjeLinije.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Izdvajanje.IzdvajanjePocetna.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Izdvajanje.IzdvajanjePretragaPoDokumentu.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ostalo.CsvImport.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.Form1.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.LagerLista.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Meni.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.Properties.Resources.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.NoviArtikliDijalog.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.NoviKupciDijalog.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ostalo.Login.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.NovaPonuda.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.OdabirJediniceDijalog.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.PonudaKorpa.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.PonudaLinija.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.PonudePocetna.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.SlanjeDijalog.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.StampaDijalog.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ostalo.Settings.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Preklasifikacija.OdabirArtiklaDijalog.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Preklasifikacija.PreklasifikacijaDetalji.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.PrijemLinije.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.PrijemPocetna.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.PrijemPretragaPoArtiklu.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.PrijemPretragaPoDokumentu.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Skladistenje.SkladistenjeLinije.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Skladistenje.SkladistenjePretragaPoDokumentu.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Skladistenje.SkladistenjePocetna.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.csproj.GenerateResource.Cache
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.exe
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\bin\Debug\SQLite.Interop.099.dll
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\bin\Debug\Data\database.s3db
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\bin\Debug\KIPS_WMS.exe
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\bin\Debug\KIPS_WMS.pdb
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.pdb
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Preklasifikacija.Pracenje.resources

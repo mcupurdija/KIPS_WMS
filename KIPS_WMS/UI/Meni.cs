@@ -54,5 +54,14 @@ namespace KIPS_WMS.UI
         {
             new IzdvajanjePocetna().Show();
         }
+
+        private void bPopis_Click(object sender, System.EventArgs e)
+        {
+            var pracenje = new Pracenje("BROJ",5,2);
+            DialogResult result = pracenje.ShowDialog();
+            if (result == DialogResult.OK) {
+                MessageBox.Show(pracenje._lines.ToString());
+            }
+        }
     }
 }

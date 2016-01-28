@@ -33,6 +33,7 @@
             this.bNazad = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.bObrisi = new System.Windows.Forms.MenuItem();
+            this.bObrisiSve = new System.Windows.Forms.MenuItem();
             this.bKnjizi = new System.Windows.Forms.MenuItem();
             this.bPonisti = new System.Windows.Forms.Button();
             this.bPronadji = new System.Windows.Forms.Button();
@@ -47,6 +48,7 @@
             this.lbJM = new System.Windows.Forms.Label();
             this.bDodaj = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.bStanje = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -57,20 +59,29 @@
             // bNazad
             // 
             this.bNazad.Text = "Nazad";
+            this.bNazad.Click += new System.EventHandler(this.bNazad_Click);
             // 
             // menuItem2
             // 
             this.menuItem2.MenuItems.Add(this.bObrisi);
+            this.menuItem2.MenuItems.Add(this.bObrisiSve);
             this.menuItem2.MenuItems.Add(this.bKnjizi);
             this.menuItem2.Text = "Opcije";
             // 
             // bObrisi
             // 
             this.bObrisi.Text = "Obriši";
+            this.bObrisi.Click += new System.EventHandler(this.bObrisi_Click);
+            // 
+            // bObrisiSve
+            // 
+            this.bObrisiSve.Text = "Obriši sve";
+            this.bObrisiSve.Click += new System.EventHandler(this.bObrisiSve_Click);
             // 
             // bKnjizi
             // 
             this.bKnjizi.Text = "Knjiži";
+            this.bKnjizi.Click += new System.EventHandler(this.bKnjizi_Click);
             // 
             // bPonisti
             // 
@@ -96,6 +107,7 @@
             this.tbPronadji.Name = "tbPronadji";
             this.tbPronadji.Size = new System.Drawing.Size(125, 21);
             this.tbPronadji.TabIndex = 3;
+            this.tbPronadji.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPronadji_KeyUp);
             // 
             // lbNaziv
             // 
@@ -164,16 +176,26 @@
             // 
             // listView1
             // 
+            this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(0, 116);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(237, 72);
             this.listView1.TabIndex = 17;
+            // 
+            // bStanje
+            // 
+            this.bStanje.Location = new System.Drawing.Point(184, 55);
+            this.bStanje.Name = "bStanje";
+            this.bStanje.Size = new System.Drawing.Size(53, 20);
+            this.bStanje.TabIndex = 23;
+            this.bStanje.Text = "Stanje";
             // 
             // PreklasifikacijaDetalji
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(240, 188);
+            this.Controls.Add(this.bStanje);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bDodaj);
             this.Controls.Add(this.lbJM);
@@ -214,6 +236,8 @@
         private System.Windows.Forms.Label lbJM;
         private System.Windows.Forms.Button bDodaj;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.MenuItem bObrisiSve;
+        private System.Windows.Forms.Button bStanje;
 
 
     }

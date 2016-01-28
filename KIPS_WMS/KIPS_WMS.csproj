@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JsonHelper.cs" />
+    <Compile Include="Model\SendTrackingModel.cs" />
     <Compile Include="Model\WarehouseReceiptLineModel.cs" />
     <Compile Include="Model\ItemPriceInventoryModel.cs" />
     <Compile Include="Model\DatabaseModel.cs" />
@@ -251,6 +252,10 @@
       <DependentUpon>OdabirArtiklaDijalog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Preklasifikacija\Pracenje.resx">
+      <DependentUpon>Pracenje.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Preklasifikacija\PreklasifikacijaDetalji.resx">
       <DependentUpon>PreklasifikacijaDetalji.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -363,6 +368,12 @@
     </Compile>
     <Compile Include="UI\Preklasifikacija\OdabirArtiklaDijalog.Designer.cs">
       <DependentUpon>OdabirArtiklaDijalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Preklasifikacija\Pracenje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Preklasifikacija\Pracenje.Designer.cs">
+      <DependentUpon>Pracenje.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Preklasifikacija\PreklasifikacijaDetalji.cs">
       <SubType>Form</SubType>

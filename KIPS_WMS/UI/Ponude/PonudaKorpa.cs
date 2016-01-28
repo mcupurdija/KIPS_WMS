@@ -269,7 +269,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             try
             {
-                Cursor.Current = Cursors.Default;
+                Cursor.Current = Cursors.WaitCursor;
 
                 string documentNo = _quoteNo;
                 int status = 0;
