@@ -18,6 +18,8 @@
             public const int ItemDescription = 3;
             public const int ItemVariant = 4;
             public const int ItemUnitOfMeasure = 5;
+            public const int ItemQuantity = 6;
+            public const int ItemTracking = 7;
         }
 
         public static class SyncDataDbModel

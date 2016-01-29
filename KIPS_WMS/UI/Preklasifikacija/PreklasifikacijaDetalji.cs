@@ -11,6 +11,7 @@ using KIPS_WMS.Properties;
 using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Web;
 using FileHelpers;
+using KIPS_WMS.Data;
 
 namespace KIPS_WMS.UI.Preklasifikacija
 {
@@ -51,10 +52,8 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 _itemName = odabirArtikla._selectedItem[DatabaseModel.ItemDbModel.ItemDescription].ToString();
                 _itemUnitOfMeasure = odabirArtikla._selectedItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
                 _itemNo = odabirArtikla._selectedItem[DatabaseModel.ItemDbModel.ItemBarcode].ToString();
-                //TODO _itemQuantity = odabirArtikla._selectedItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString();
-                //TODO _itemTrackingType = odabirArtikla._selectedItem[DatabaseModel.ItemDbModel.ItemTrackingType].ToString();
-                _itemQuantity = "5";
-                _itemTrackingType = "2";
+                _itemQuantity = odabirArtikla._selectedItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString();
+                _itemTrackingType = odabirArtikla._selectedItem[DatabaseModel.ItemDbModel.ItemTracking].ToString();
                 lbNaziv.Text = Resources.NazivArtika + ": " + _itemName;
                 lbJM.Text = Resources.JM + ": " + _itemUnitOfMeasure;
                 tbPronadji.Text = _itemNo;
@@ -66,6 +65,10 @@ namespace KIPS_WMS.UI.Preklasifikacija
         {
             try
             {
+                //List<object> baseUnit = SQLiteHelper.oneRowQuery(DbStatements.FindItemBaseUnitOfMeasure,
+                //            new object[] { _itemNo });
+                int kolicina = Int32.Parse(tbKolicina.Text) * Int32.Parse(_itemQuantity);
+
                 Pracenje pracenje = new Pracenje(_itemNo + "", Int32.Parse(tbKolicina.Text), Int32.Parse(_itemTrackingType));
                 DialogResult result = pracenje.ShowDialog();
 

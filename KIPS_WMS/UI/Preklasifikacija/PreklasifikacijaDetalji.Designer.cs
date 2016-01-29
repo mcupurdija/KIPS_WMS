@@ -184,7 +184,7 @@
             // 
             // bStanje
             // 
-            this.bStanje.Location = new System.Drawing.Point(184, 55);
+            this.bStanje.Location = new System.Drawing.Point(184, 45);
             this.bStanje.Name = "bStanje";
             this.bStanje.Size = new System.Drawing.Size(53, 20);
             this.bStanje.TabIndex = 23;

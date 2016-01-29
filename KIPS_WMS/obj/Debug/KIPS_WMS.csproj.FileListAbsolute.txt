@@ -104,3 +104,4 @@ C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\bin\Debug\KIPS_WMS.exe
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\bin\Debug\KIPS_WMS.pdb
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.pdb
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Preklasifikacija.Pracenje.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.PrijemDetalji.resources

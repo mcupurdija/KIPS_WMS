@@ -95,7 +95,7 @@
             // 
             // bDodaj
             // 
-            this.bDodaj.Location = new System.Drawing.Point(150, 47);
+            this.bDodaj.Location = new System.Drawing.Point(150, 48);
             this.bDodaj.Name = "bDodaj";
             this.bDodaj.Size = new System.Drawing.Size(84, 21);
             this.bDodaj.TabIndex = 9;
@@ -119,7 +119,7 @@
             // 
             // dtDatum
             // 
-            this.dtDatum.CustomFormat = "dd.MM.yyyy";
+            this.dtDatum.CustomFormat = "dd.MM.yyyy.";
             this.dtDatum.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtDatum.Location = new System.Drawing.Point(143, 26);
             this.dtDatum.Name = "dtDatum";
