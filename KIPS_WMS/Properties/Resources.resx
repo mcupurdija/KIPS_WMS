@@ -160,7 +160,7 @@
     <value>Potrebno je da u okviru podešavanja odaberete štampač.</value>
   </data>
   <data name="NijePronadjenArtikal" xml:space="preserve">
-    <value>Nije pronađen nijedan artikal.</value>
+    <value>Artikal nije pronađen.</value>
   </data>
   <data name="OdaberiteArtikal" xml:space="preserve">
     <value>Potrebno je da odaberete artikal!</value>

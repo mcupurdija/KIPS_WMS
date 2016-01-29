@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using FileHelpers;
+using KIPS_WMS.Data;
 using KIPS_WMS.Model;
 using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Properties;
@@ -20,11 +21,6 @@ namespace KIPS_WMS.UI.Prijem
         private List<WarehouseReceiptLineModel> _filteredReceiptLines;
         private WarehouseReceiptLineModel _selectedLine;
         private List<WarehouseReceiptLineModel> _warehouseReceiptLines;
-
-        public PrijemLinije()
-        {
-            InitializeComponent();
-        }
 
         public PrijemLinije(string receiptNo)
         {
@@ -57,7 +53,7 @@ namespace KIPS_WMS.UI.Prijem
                 _warehouseReceiptLines =
                     ((WarehouseReceiptLineModel[]) engine.ReadString(warehouseReceiptsCsv)).ToList();
 
-                listBox1.Invoke(new EventHandler((sender, e) => DisplayData(null)));
+                listBox1.Invoke(new EventHandler((sender, e) => DisplayData(null, false)));
             }
             catch (Exception ex)
             {
@@ -74,14 +70,14 @@ namespace KIPS_WMS.UI.Prijem
             Close();
         }
 
-        private void DisplayData(string filterText)
+        private void DisplayData(string filterText, bool barcode)
         {
             listBox1.Items.Clear();
             listBox1.ItemHeight = 40;
 
             _selectedLine = null;
             _filteredReceiptLines = filterText != null
-                ? _warehouseReceiptLines.FindAll(x => x.ItemNo.Contains(filterText))
+                ? _warehouseReceiptLines.FindAll(x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
                 : _warehouseReceiptLines;
 
             var listItem = new ListItem();
@@ -93,32 +89,53 @@ namespace KIPS_WMS.UI.Prijem
             {
                 listBox1.Items.Add(new ListItem {Tag = 0});
             }
-
             tbPronadji.Focus();
+
+            if (barcode && _filteredReceiptLines.Count == 1)
+            {
+                _selectedLine = _filteredReceiptLines[0];
+                ShowLineDetailsForm();
+            }
+        }
+
+        private void tbPronadji_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+
+            List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
+                new object[] { tbPronadji.Text });
+            if (query.Count == 1)
+            {
+                DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
+            }
         }
 
         private void bPronadji_Click(object sender, EventArgs e)
         {
-            DisplayData(tbPronadji.Text);
+            DisplayData(tbPronadji.Text, false);
         }
 
         private void bPonisti_Click(object sender, EventArgs e)
         {
             tbPronadji.Text = String.Empty;
-            DisplayData(null);
+            DisplayData(null, false);
         }
 
         private void bDalje_Click(object sender, EventArgs e)
         {
             if (_selectedLine != null)
             {
-                // TODO
-                new PrijemDetalji(_selectedLine).Show();
+                ShowLineDetailsForm();
             }
             else
             {
                 MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
             }
+        }
+
+        private void ShowLineDetailsForm()
+        {
+            new PrijemDetalji(_receiptNo, _selectedLine).Show();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -151,26 +168,9 @@ namespace KIPS_WMS.UI.Prijem
             }
 
             WarehouseReceiptLineModel line = _filteredReceiptLines[index];
-            decimal receivedQuantity = decimal.Parse(line.QuantityToReceive, Utils.GetLocalCulture());
-            decimal outstandingQuantity = decimal.Parse(line.QuantityOutstanding, Utils.GetLocalCulture());
 
             var rectangle = new Rectangle(e.Bounds.Left, e.Bounds.Top, 7, e.Bounds.Height);
-            if (receivedQuantity == 0)
-            {
-                e.Graphics.FillRectangle(new SolidBrush(Color.Red), rectangle);
-            }
-            else if (outstandingQuantity > receivedQuantity)
-            {
-                e.Graphics.FillRectangle(new SolidBrush(Color.Yellow), rectangle);
-            }
-            else if (outstandingQuantity == receivedQuantity)
-            {
-                e.Graphics.FillRectangle(new SolidBrush(Color.Green), rectangle);
-            }
-            else
-            {
-                e.Graphics.FillRectangle(new SolidBrush(Color.CornflowerBlue), rectangle);
-            }
+            e.Graphics.FillRectangle(new SolidBrush(GetLineStatusColor(line.QuantityOutstanding, line.QuantityToReceive)), rectangle);
             e.Graphics.DrawRectangle(new Pen(Color.White), rectangle);
 
             string firstLine = string.Format("{0} {1}", line.ItemNo, line.ItemDescription);
@@ -183,5 +183,34 @@ namespace KIPS_WMS.UI.Prijem
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 10,
                 e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
         }
+
+        public static Color GetLineStatusColor(string outstanding, string toReceive)
+        {
+            try
+            {
+                var culture = Utils.GetLocalCulture();
+                decimal receivedQuantity = decimal.Parse(toReceive, culture);
+                decimal outstandingQuantity = decimal.Parse(outstanding, culture);
+
+                if (receivedQuantity == 0)
+                {
+                    return Color.Red;
+                }
+                if (outstandingQuantity > receivedQuantity)
+                {
+                    return Color.Yellow;
+                }
+                if (outstandingQuantity == receivedQuantity)
+                {
+                    return Color.Green;
+                }
+                return Color.Aqua;
+            }
+            catch (Exception)
+            {
+                return Color.White;
+            }
+        }
+        
     }
 }

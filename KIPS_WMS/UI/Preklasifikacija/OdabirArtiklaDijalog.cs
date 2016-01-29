@@ -1,23 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using FileHelpers;
-using KIPS_WMS.Model;
-using KIPS_WMS.NAV_WS;
-using KIPS_WMS.Web;
-using KIPS_WMS.Properties;
 using KIPS_WMS.Data;
-using System.Collections.Generic;
+using KIPS_WMS.Model;
+using KIPS_WMS.Properties;
 
 namespace KIPS_WMS.UI.Preklasifikacija
 {
     public partial class OdabirArtiklaDijalog : NonFullscreenForm
     {
         private readonly string _itemNo;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
 
+        public Object[] SelectedItem;
         private List<Object[]> _items;
-        public Object[] _selectedItem;
 
         public OdabirArtiklaDijalog(string itemNo)
         {
@@ -26,10 +22,10 @@ namespace KIPS_WMS.UI.Preklasifikacija
             _itemNo = itemNo;
 
             var myAutoScaleFactor = new SizeF(
-                AutoScaleDimensions.Width / 96F,
-                AutoScaleDimensions.Height / 96F);
+                AutoScaleDimensions.Width/96F,
+                AutoScaleDimensions.Height/96F);
 
-            Height = (int)(myAutoScaleFactor.Height * 110);
+            Height = (int) (myAutoScaleFactor.Height*130);
 
             GetData();
         }
@@ -41,13 +37,13 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 Cursor.Current = Cursors.WaitCursor;
 
                 _items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementComplete,
-                            new object[] { _itemNo });
+                    new object[] {_itemNo});
 
                 listView1.Clear();
                 listView1.View = View.Details;
                 listView1.Columns.Add(Resources.Sifra, 100, HorizontalAlignment.Left);
                 listView1.Columns.Add(Resources.NazivArtika, 250, HorizontalAlignment.Left);
-                foreach (Object[] item in _items)
+                foreach (var item in _items)
                 {
                     var lvi = new ListViewItem(new[]
                     {
@@ -56,7 +52,6 @@ namespace KIPS_WMS.UI.Preklasifikacija
                     });
                     listView1.Items.Add(lvi);
                 }
-
             }
             catch (Exception ex)
             {
@@ -73,12 +68,12 @@ namespace KIPS_WMS.UI.Preklasifikacija
             if (listView1.SelectedIndices.Count != 1) return;
 
             int index = listView1.SelectedIndices[0];
-            _selectedItem = _items[index];
+            SelectedItem = _items[index];
         }
 
         private void bPotvrdi_Click(object sender, EventArgs e)
         {
-            if (_selectedItem != null)
+            if (SelectedItem != null)
             {
                 DialogResult = DialogResult.OK;
                 Close();
@@ -87,7 +82,6 @@ namespace KIPS_WMS.UI.Preklasifikacija
             {
                 MessageBox.Show(Resources.OdaberiteArtikal, Resources.Greska);
             }
-
         }
 
         private void OdabirArtiklaDijalog_Paint(object sender, PaintEventArgs e)

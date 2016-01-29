@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using KIPS_WMS.Properties;
 using KIPS_WMS.Model;
+using KIPS_WMS.Properties;
 
 namespace KIPS_WMS.UI.Preklasifikacija
 {
@@ -24,6 +19,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
         {
             InitializeComponent();
         }
+
         public Pracenje(string itemNo, int quantity, int trackingType)
         {
             InitializeComponent();
@@ -77,9 +73,9 @@ namespace KIPS_WMS.UI.Preklasifikacija
             if (_trackingType == 1 && _currQuantity < _quantity)
             {
                 var lvi = new ListViewItem(new[]
-                    {
-                        "1",tbSN.Text
-                    });
+                {
+                    "1", tbSN.Text
+                });
                 _lines.Add(new SendTrackingModel(_trackingType + "", "", "", "1"));
                 listView1.Items.Add(lvi);
                 _currQuantity++;
@@ -95,14 +91,14 @@ namespace KIPS_WMS.UI.Preklasifikacija
                     {
                         var lvi = new ListViewItem(new[]
                         {
-                            "",""
+                            "", ""
                         });
 
                         if (_trackingType == 2)
                         {
                             lvi = new ListViewItem(new[]
                             {
-                                tbKolicina.Text,tbSN.Text, dtDatum.Text
+                                tbKolicina.Text, tbSN.Text, dtDatum.Text
                             });
                             _lines.Add(new SendTrackingModel(_trackingType + "", "", dtDatum.Text, tbKolicina.Text));
                         }
@@ -110,7 +106,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
                         {
                             lvi = new ListViewItem(new[]
                             {
-                                tbKolicina.Text,tbSN.Text
+                                tbKolicina.Text, tbSN.Text
                             });
                             _lines.Add(new SendTrackingModel(_trackingType + "", "", "", tbKolicina.Text));
                         }
@@ -161,6 +157,5 @@ namespace KIPS_WMS.UI.Preklasifikacija
             _currQuantity -= Int32.Parse(_lines[index].Quantity);
             lKolicina.Text = _currQuantity + "/" + _quantity;
         }
-
     }
 }

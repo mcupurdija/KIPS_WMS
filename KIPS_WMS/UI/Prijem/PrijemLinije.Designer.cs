@@ -54,11 +54,11 @@ namespace KIPS_WMS.UI.Prijem
             // 
             // menuItem2
             // 
-            this.menuItem2.Text = "Završen prijem";
+            this.menuItem2.Text = "|   Završen prijem";
             // 
             // bDalje
             // 
-            this.bDalje.Text = "Dalje";
+            this.bDalje.Text = "|   Dalje";
             this.bDalje.Click += new System.EventHandler(this.bDalje_Click);
             // 
             // tbPronadji
@@ -67,6 +67,7 @@ namespace KIPS_WMS.UI.Prijem
             this.tbPronadji.Name = "tbPronadji";
             this.tbPronadji.Size = new System.Drawing.Size(125, 21);
             this.tbPronadji.TabIndex = 0;
+            this.tbPronadji.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPronadji_KeyUp);
             // 
             // bPronadji
             // 
@@ -91,9 +92,15 @@ namespace KIPS_WMS.UI.Prijem
             this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox1.BackgroundImage = null;
+            this.listBox1.DataSource = null;
+            this.listBox1.DisplayMember = null;
+            this.listBox1.EvenItemColor = System.Drawing.SystemColors.Control;
+            this.listBox1.ImageList = null;
+            this.listBox1.LineColor = System.Drawing.SystemColors.ControlText;
             this.listBox1.Location = new System.Drawing.Point(0, 29);
             this.listBox1.Name = "listBox1";
-            this.listBox1.ShowScrollbar = true;
+            this.listBox1.SelectedIndex = -1;
+            this.listBox1.ShowLines = true;
             this.listBox1.Size = new System.Drawing.Size(240, 158);
             this.listBox1.TabIndex = 3;
             this.listBox1.WrapText = false;

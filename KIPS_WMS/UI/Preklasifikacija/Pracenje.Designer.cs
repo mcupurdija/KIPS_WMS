@@ -60,51 +60,51 @@
             // 
             // lSifra
             // 
-            this.lSifra.Location = new System.Drawing.Point(4, 4);
+            this.lSifra.Location = new System.Drawing.Point(3, 3);
             this.lSifra.Name = "lSifra";
-            this.lSifra.Size = new System.Drawing.Size(233, 20);
+            this.lSifra.Size = new System.Drawing.Size(234, 20);
             this.lSifra.Text = "Šifra artikla: ";
             // 
             // lTekst
             // 
-            this.lTekst.Location = new System.Drawing.Point(4, 28);
+            this.lTekst.Location = new System.Drawing.Point(3, 25);
             this.lTekst.Name = "lTekst";
             this.lTekst.Size = new System.Drawing.Size(57, 20);
             this.lTekst.Text = "SN:";
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(4, 48);
+            this.label2.Location = new System.Drawing.Point(3, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 20);
             this.label2.Text = "Količina:";
             // 
             // tbSN
             // 
-            this.tbSN.Location = new System.Drawing.Point(67, 27);
+            this.tbSN.Location = new System.Drawing.Point(66, 23);
             this.tbSN.Name = "tbSN";
             this.tbSN.Size = new System.Drawing.Size(70, 21);
             this.tbSN.TabIndex = 4;
             // 
             // tbKolicina
             // 
-            this.tbKolicina.Location = new System.Drawing.Point(67, 47);
+            this.tbKolicina.Location = new System.Drawing.Point(66, 50);
             this.tbKolicina.Name = "tbKolicina";
             this.tbKolicina.Size = new System.Drawing.Size(70, 21);
             this.tbKolicina.TabIndex = 8;
             // 
             // bDodaj
             // 
-            this.bDodaj.Location = new System.Drawing.Point(150, 47);
+            this.bDodaj.Location = new System.Drawing.Point(142, 50);
             this.bDodaj.Name = "bDodaj";
-            this.bDodaj.Size = new System.Drawing.Size(84, 21);
+            this.bDodaj.Size = new System.Drawing.Size(95, 20);
             this.bDodaj.TabIndex = 9;
             this.bDodaj.Text = "Dodaj";
             this.bDodaj.Click += new System.EventHandler(this.bDodaj_Click);
             // 
             // lKolicina
             // 
-            this.lKolicina.Location = new System.Drawing.Point(67, 75);
+            this.lKolicina.Location = new System.Drawing.Point(66, 74);
             this.lKolicina.Name = "lKolicina";
             this.lKolicina.Size = new System.Drawing.Size(70, 20);
             this.lKolicina.Text = "kolicina";
@@ -112,18 +112,18 @@
             // listView1
             // 
             this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(4, 102);
+            this.listView1.Location = new System.Drawing.Point(0, 97);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(230, 86);
+            this.listView1.Size = new System.Drawing.Size(240, 91);
             this.listView1.TabIndex = 11;
             // 
             // dtDatum
             // 
             this.dtDatum.CustomFormat = "dd.MM.yyyy";
             this.dtDatum.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDatum.Location = new System.Drawing.Point(143, 26);
+            this.dtDatum.Location = new System.Drawing.Point(142, 23);
             this.dtDatum.Name = "dtDatum";
-            this.dtDatum.Size = new System.Drawing.Size(91, 22);
+            this.dtDatum.Size = new System.Drawing.Size(95, 22);
             this.dtDatum.TabIndex = 16;
             // 
             // Pracenje

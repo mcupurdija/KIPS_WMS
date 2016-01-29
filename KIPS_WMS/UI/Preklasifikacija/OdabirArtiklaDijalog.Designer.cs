@@ -36,7 +36,7 @@
             // 
             // bPotvrdi
             // 
-            this.bPotvrdi.Location = new System.Drawing.Point(85, 97);
+            this.bPotvrdi.Location = new System.Drawing.Point(145, 117);
             this.bPotvrdi.Name = "bPotvrdi";
             this.bPotvrdi.Size = new System.Drawing.Size(72, 20);
             this.bPotvrdi.TabIndex = 0;
@@ -47,9 +47,9 @@
             // 
             this.listView1.FullRowSelect = true;
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView1.Location = new System.Drawing.Point(4, 4);
+            this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(150, 90);
+            this.listView1.Size = new System.Drawing.Size(214, 108);
             this.listView1.TabIndex = 1;
             this.listView1.View = System.Windows.Forms.View.List;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
@@ -59,7 +59,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CenterFormOnScreen = true;
-            this.ClientSize = new System.Drawing.Size(160, 120);
+            this.ClientSize = new System.Drawing.Size(220, 140);
             this.ControlBox = false;
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bPotvrdi);

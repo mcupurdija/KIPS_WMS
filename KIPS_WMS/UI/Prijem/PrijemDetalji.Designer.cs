@@ -41,9 +41,9 @@ namespace KIPS_WMS.UI.Prijem
             this.bDodaj = new System.Windows.Forms.Button();
             this.bZameni = new System.Windows.Forms.Button();
             this.tbKolicina = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbBarkod = new System.Windows.Forms.TextBox();
+            this.lJedinica = new System.Windows.Forms.Label();
+            this.tbJedinicaKolicina = new System.Windows.Forms.TextBox();
             this.listBox1 = new OpenNETCF.Windows.Forms.ListBox2();
             this.SuspendLayout();
             // 
@@ -82,57 +82,70 @@ namespace KIPS_WMS.UI.Prijem
             // 
             // bDodaj
             // 
-            this.bDodaj.Location = new System.Drawing.Point(87, 164);
+            this.bDodaj.Location = new System.Drawing.Point(87, 144);
             this.bDodaj.Name = "bDodaj";
             this.bDodaj.Size = new System.Drawing.Size(72, 20);
             this.bDodaj.TabIndex = 0;
             this.bDodaj.Text = "Dodaj";
+            this.bDodaj.Click += new System.EventHandler(this.bDodaj_Click);
             // 
             // bZameni
             // 
-            this.bZameni.Location = new System.Drawing.Point(165, 164);
+            this.bZameni.Location = new System.Drawing.Point(165, 144);
             this.bZameni.Name = "bZameni";
             this.bZameni.Size = new System.Drawing.Size(72, 20);
             this.bZameni.TabIndex = 1;
             this.bZameni.Text = "Zameni";
+            this.bZameni.Click += new System.EventHandler(this.bZameni_Click);
             // 
             // tbKolicina
             // 
-            this.tbKolicina.Location = new System.Drawing.Point(3, 164);
+            this.tbKolicina.Location = new System.Drawing.Point(3, 144);
             this.tbKolicina.Name = "tbKolicina";
             this.tbKolicina.Size = new System.Drawing.Size(78, 21);
             this.tbKolicina.TabIndex = 2;
+            this.tbKolicina.Text = "1";
             // 
-            // textBox1
+            // tbBarkod
             // 
-            this.textBox1.Location = new System.Drawing.Point(3, 137);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(110, 21);
-            this.textBox1.TabIndex = 3;
+            this.tbBarkod.Location = new System.Drawing.Point(3, 117);
+            this.tbBarkod.Name = "tbBarkod";
+            this.tbBarkod.Size = new System.Drawing.Size(110, 21);
+            this.tbBarkod.TabIndex = 3;
+            this.tbBarkod.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbBarkod_KeyUp);
             // 
-            // label1
+            // lJedinica
             // 
-            this.label1.Location = new System.Drawing.Point(119, 138);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 20);
-            this.label1.Text = "PAK";
+            this.lJedinica.Location = new System.Drawing.Point(119, 118);
+            this.lJedinica.Name = "lJedinica";
+            this.lJedinica.Size = new System.Drawing.Size(26, 20);
+            this.lJedinica.Text = "PAK";
             // 
-            // textBox2
+            // tbJedinicaKolicina
             // 
-            this.textBox2.Location = new System.Drawing.Point(151, 137);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(50, 21);
-            this.textBox2.TabIndex = 5;
+            this.tbJedinicaKolicina.Location = new System.Drawing.Point(151, 117);
+            this.tbJedinicaKolicina.Name = "tbJedinicaKolicina";
+            this.tbJedinicaKolicina.Size = new System.Drawing.Size(86, 21);
+            this.tbJedinicaKolicina.TabIndex = 5;
+            this.tbJedinicaKolicina.TextChanged += new System.EventHandler(this.tbJedinicaKolicina_TextChanged);
             // 
             // listBox1
             // 
             this.listBox1.BackgroundImage = null;
+            this.listBox1.DataSource = null;
+            this.listBox1.DisplayMember = null;
+            this.listBox1.EvenItemColor = System.Drawing.SystemColors.Control;
+            this.listBox1.ImageList = null;
             this.listBox1.ItemHeight = 21;
+            this.listBox1.LineColor = System.Drawing.SystemColors.ControlText;
             this.listBox1.Location = new System.Drawing.Point(0, 0);
             this.listBox1.Name = "listBox1";
+            this.listBox1.SelectedIndex = -1;
             this.listBox1.ShowLines = true;
             this.listBox1.Size = new System.Drawing.Size(240, 111);
             this.listBox1.TabIndex = 6;
+            this.listBox1.WrapText = false;
+            this.listBox1.DrawItem += new OpenNETCF.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
             // 
             // PrijemDetalji
             // 
@@ -141,9 +154,9 @@ namespace KIPS_WMS.UI.Prijem
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbJedinicaKolicina);
+            this.Controls.Add(this.lJedinica);
+            this.Controls.Add(this.tbBarkod);
             this.Controls.Add(this.tbKolicina);
             this.Controls.Add(this.bZameni);
             this.Controls.Add(this.bDodaj);
@@ -166,9 +179,9 @@ namespace KIPS_WMS.UI.Prijem
         private System.Windows.Forms.Button bDodaj;
         private System.Windows.Forms.Button bZameni;
         private System.Windows.Forms.TextBox tbKolicina;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbBarkod;
+        private System.Windows.Forms.Label lJedinica;
+        private System.Windows.Forms.TextBox tbJedinicaKolicina;
         private ListBox2 listBox1;
     }
 }
