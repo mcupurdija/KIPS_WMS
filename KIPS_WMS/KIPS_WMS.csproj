@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{7EF17339-3A65-401F-89DE-63C7D80897B0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -262,6 +262,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Prijem\PrijemDetalji.resx">
       <DependentUpon>PrijemDetalji.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Prijem\PrijemLinije.resx">
       <DependentUpon>PrijemLinije.cs</DependentUpon>

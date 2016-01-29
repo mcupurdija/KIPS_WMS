@@ -103,31 +103,31 @@
             // 
             // tbPronadji
             // 
-            this.tbPronadji.Location = new System.Drawing.Point(3, 3);
+            this.tbPronadji.Location = new System.Drawing.Point(6, 3);
             this.tbPronadji.Name = "tbPronadji";
-            this.tbPronadji.Size = new System.Drawing.Size(128, 21);
+            this.tbPronadji.Size = new System.Drawing.Size(125, 21);
             this.tbPronadji.TabIndex = 3;
             this.tbPronadji.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPronadji_KeyUp);
             // 
             // lbNaziv
             // 
-            this.lbNaziv.Location = new System.Drawing.Point(3, 27);
+            this.lbNaziv.Location = new System.Drawing.Point(6, 26);
             this.lbNaziv.Name = "lbNaziv";
-            this.lbNaziv.Size = new System.Drawing.Size(234, 18);
+            this.lbNaziv.Size = new System.Drawing.Size(231, 15);
             this.lbNaziv.Text = "Naziv artikla:";
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(3, 45);
+            this.label1.Location = new System.Drawing.Point(6, 45);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 20);
+            this.label1.Size = new System.Drawing.Size(66, 20);
             this.label1.Text = "Sa regala:";
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(3, 65);
+            this.label2.Location = new System.Drawing.Point(6, 65);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 20);
+            this.label2.Size = new System.Drawing.Size(66, 20);
             this.label2.Text = "Na regal:";
             // 
             // tbSaRegala
@@ -139,14 +139,14 @@
             // 
             // tbNaRegal
             // 
-            this.tbNaRegal.Location = new System.Drawing.Point(78, 64);
+            this.tbNaRegal.Location = new System.Drawing.Point(78, 65);
             this.tbNaRegal.Name = "tbNaRegal";
             this.tbNaRegal.Size = new System.Drawing.Size(100, 21);
             this.tbNaRegal.TabIndex = 11;
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(3, 93);
+            this.label3.Location = new System.Drawing.Point(6, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 20);
             this.label3.Text = "Količina:";
@@ -177,14 +177,14 @@
             // listView1
             // 
             this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(0, 119);
+            this.listView1.Location = new System.Drawing.Point(0, 116);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(240, 69);
+            this.listView1.Size = new System.Drawing.Size(237, 72);
             this.listView1.TabIndex = 17;
             // 
             // bStanje
             // 
-            this.bStanje.Location = new System.Drawing.Point(184, 54);
+            this.bStanje.Location = new System.Drawing.Point(184, 45);
             this.bStanje.Name = "bStanje";
             this.bStanje.Size = new System.Drawing.Size(53, 20);
             this.bStanje.TabIndex = 23;
