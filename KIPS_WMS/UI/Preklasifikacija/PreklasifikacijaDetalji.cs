@@ -1,31 +1,24 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using KIPS_WMS.Model;
-using KIPS_WMS.Properties;
-using KIPS_WMS.NAV_WS;
-using KIPS_WMS.Web;
 using FileHelpers;
-using KIPS_WMS.Data;
+using KIPS_WMS.Model;
+using KIPS_WMS.NAV_WS;
+using KIPS_WMS.Properties;
+using KIPS_WMS.Web;
 
 namespace KIPS_WMS.UI.Preklasifikacija
 {
     public partial class PreklasifikacijaDetalji : Form
     {
         private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly List<int> lineNumbers = new List<int>();
 
         private string _itemName;
-        private string _itemUnitOfMeasure;
         private string _itemNo;
         private string _itemQuantity;
         private string _itemTrackingType;
-
-        private List<int> lineNumbers = new List<int>();
+        private string _itemUnitOfMeasure;
 
         public PreklasifikacijaDetalji()
         {
@@ -49,11 +42,11 @@ namespace KIPS_WMS.UI.Preklasifikacija
 
             if (result == DialogResult.OK)
             {
-                _itemName = odabirArtikla._selectedItem[DatabaseModel.ItemDbModel.ItemDescription].ToString();
-                _itemUnitOfMeasure = odabirArtikla._selectedItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
-                _itemNo = odabirArtikla._selectedItem[DatabaseModel.ItemDbModel.ItemBarcode].ToString();
-                _itemQuantity = odabirArtikla._selectedItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString();
-                _itemTrackingType = odabirArtikla._selectedItem[DatabaseModel.ItemDbModel.ItemTracking].ToString();
+                _itemName = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemDescription].ToString();
+                _itemUnitOfMeasure = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
+                _itemNo = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemBarcode].ToString();
+                _itemQuantity = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString();
+                _itemTrackingType = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemTracking].ToString();
                 lbNaziv.Text = Resources.NazivArtika + ": " + _itemName;
                 lbJM.Text = Resources.JM + ": " + _itemUnitOfMeasure;
                 tbPronadji.Text = _itemNo;
@@ -67,9 +60,9 @@ namespace KIPS_WMS.UI.Preklasifikacija
             {
                 //List<object> baseUnit = SQLiteHelper.oneRowQuery(DbStatements.FindItemBaseUnitOfMeasure,
                 //            new object[] { _itemNo });
-                int kolicina = Int32.Parse(tbKolicina.Text) * Int32.Parse(_itemQuantity);
+                int kolicina = Int32.Parse(tbKolicina.Text)*Int32.Parse(_itemQuantity);
 
-                Pracenje pracenje = new Pracenje(_itemNo + "", Int32.Parse(tbKolicina.Text), Int32.Parse(_itemTrackingType));
+                var pracenje = new Pracenje(_itemNo + "", Int32.Parse(tbKolicina.Text), Int32.Parse(_itemTrackingType));
                 DialogResult result = pracenje.ShowDialog();
 
                 if (result == DialogResult.OK)
@@ -77,15 +70,16 @@ namespace KIPS_WMS.UI.Preklasifikacija
                     Cursor.Current = Cursors.WaitCursor;
 
                     int numOfLine = 0;
-                    var engine = new FileHelperEngine(typeof(SendTrackingModel));
+                    var engine = new FileHelperEngine(typeof (SendTrackingModel));
                     string lines = engine.WriteString(pracenje._lines);
 
-                    _ws.BinToBinMovement(_itemNo, _itemQuantity, _itemUnitOfMeasure, "001", "1", tbSaRegala.Text, tbNaRegal.Text, "1", lines, ref numOfLine);
+                    _ws.BinToBinMovement(_itemNo, _itemQuantity, _itemUnitOfMeasure, "001", "1", tbSaRegala.Text,
+                        tbNaRegal.Text, "1", lines, ref numOfLine);
                     lineNumbers.Add(numOfLine);
 
                     var lvi = new ListViewItem(new[]
                     {
-                        _itemNo,_itemName, tbKolicina.Text,_itemUnitOfMeasure, tbSaRegala.Text,tbNaRegal.Text
+                        _itemNo, _itemName, tbKolicina.Text, _itemUnitOfMeasure, tbSaRegala.Text, tbNaRegal.Text
                     });
                     listView1.Items.Add(lvi);
 
@@ -124,7 +118,6 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 _ws.DeleteReclassificationLines(lineNumbers[index], "1", "001", "1", 0);
                 lineNumbers.RemoveAt(index);
                 listView1.Items.RemoveAt(index);
-
             }
             catch (Exception ex)
             {
@@ -140,7 +133,6 @@ namespace KIPS_WMS.UI.Preklasifikacija
         {
             try
             {
-
                 Cursor.Current = Cursors.WaitCursor;
 
                 _ws.DeleteReclassificationLines(0, "1", "001", "1", 1);
@@ -187,6 +179,5 @@ namespace KIPS_WMS.UI.Preklasifikacija
         {
             Close();
         }
-
     }
 }

@@ -18,6 +18,7 @@ namespace KIPS_WMS.UI.Prijem
     {
         private readonly string _receiptNo;
         private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private string _barcode;
         private List<WarehouseReceiptLineModel> _filteredReceiptLines;
         private WarehouseReceiptLineModel _selectedLine;
         private List<WarehouseReceiptLineModel> _warehouseReceiptLines;
@@ -36,6 +37,7 @@ namespace KIPS_WMS.UI.Prijem
         {
             base.OnActivated(e);
 
+            _barcode = null;
             Text = _receiptNo;
         }
 
@@ -70,7 +72,7 @@ namespace KIPS_WMS.UI.Prijem
             Close();
         }
 
-        private void DisplayData(string filterText, bool barcode)
+        private void DisplayData(string filterText, bool fromScanner)
         {
             listBox1.Items.Clear();
             listBox1.ItemHeight = 40;
@@ -91,10 +93,10 @@ namespace KIPS_WMS.UI.Prijem
             }
             tbPronadji.Focus();
 
-            if (barcode && _filteredReceiptLines.Count == 1)
+            if (fromScanner && _filteredReceiptLines.Count == 1)
             {
                 _selectedLine = _filteredReceiptLines[0];
-                ShowLineDetailsForm();
+                ShowLineDetailsForm(_barcode);
             }
         }
 
@@ -103,9 +105,10 @@ namespace KIPS_WMS.UI.Prijem
             if (e.KeyCode != Keys.Enter) return;
 
             List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
-                new object[] { tbPronadji.Text });
+                new object[] { tbPronadji.Text.Trim() });
             if (query.Count == 1)
             {
+                _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
                 DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
             }
         }
@@ -125,7 +128,7 @@ namespace KIPS_WMS.UI.Prijem
         {
             if (_selectedLine != null)
             {
-                ShowLineDetailsForm();
+                ShowLineDetailsForm(null);
             }
             else
             {
@@ -133,9 +136,16 @@ namespace KIPS_WMS.UI.Prijem
             }
         }
 
-        private void ShowLineDetailsForm()
+        private void ShowLineDetailsForm(string barcode)
         {
-            new PrijemDetalji(_receiptNo, _selectedLine).Show();
+            var prijemDetalji = new PrijemDetalji(_receiptNo, barcode, _selectedLine, _warehouseReceiptLines);
+            DialogResult result = prijemDetalji.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                _warehouseReceiptLines = prijemDetalji.WarehouseReceiptLines;
+                DisplayData(null, false);
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -194,7 +204,7 @@ namespace KIPS_WMS.UI.Prijem
 
                 if (receivedQuantity == 0)
                 {
-                    return Color.Red;
+                    return Color.Salmon;
                 }
                 if (outstandingQuantity > receivedQuantity)
                 {
@@ -202,7 +212,7 @@ namespace KIPS_WMS.UI.Prijem
                 }
                 if (outstandingQuantity == receivedQuantity)
                 {
-                    return Color.Green;
+                    return Color.SpringGreen;
                 }
                 return Color.Aqua;
             }

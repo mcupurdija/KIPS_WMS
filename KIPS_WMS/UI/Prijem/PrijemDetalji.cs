@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
+using FileHelpers;
 using KIPS_WMS.Data;
 using KIPS_WMS.Model;
 using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Properties;
+using KIPS_WMS.UI.Ostalo;
 using KIPS_WMS.Web;
 using OpenNETCF.Windows.Forms;
 
@@ -15,12 +20,14 @@ namespace KIPS_WMS.UI.Prijem
     public partial class PrijemDetalji : Form
     {
         private readonly string _receiptNo;
-        private readonly WarehouseReceiptLineModel _selectedLine;
+        private WarehouseReceiptLineModel _selectedLine;
         private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
-
         private Object[] _dbItem;
+        private bool _lineSplit;
 
-        public PrijemDetalji(string receiptNo, WarehouseReceiptLineModel selectedLine)
+        public List<WarehouseReceiptLineModel> WarehouseReceiptLines;
+
+        public PrijemDetalji(string receiptNo, string barcode, WarehouseReceiptLineModel selectedLine, List<WarehouseReceiptLineModel> warehouseReceiptLines)
         {
             InitializeComponent();
 
@@ -28,13 +35,11 @@ namespace KIPS_WMS.UI.Prijem
 
             _receiptNo = receiptNo;
             _selectedLine = selectedLine;
+            WarehouseReceiptLines = warehouseReceiptLines;
 
-            listBox1.Items.Clear();
-            var listItem = new ListItem();
-            for (int i = 0; i < 7; i++)
-            {
-                listBox1.Items.Add(listItem);
-            }
+//            _selectedLine.UnitOfMeasureCode = "PAK";
+
+            DisplayData(barcode);
         }
 
         protected override void OnActivated(EventArgs e)
@@ -42,6 +47,47 @@ namespace KIPS_WMS.UI.Prijem
             base.OnActivated(e);
 
             Text = _receiptNo;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+
+            int index = WarehouseReceiptLines.IndexOf(_selectedLine);
+
+            _selectedLine.QuantityToReceive = tbKolicina.Text;
+            WarehouseReceiptLines[index] = _selectedLine;
+        }
+
+        private void DisplayData(string barcode)
+        {
+            listBox1.Items.Clear();
+            var listItem = new ListItem();
+            for (int i = 0; i < 7; i++)
+            {
+                listBox1.Items.Add(listItem);
+            }
+
+            tbRegal.Text = String.Empty;
+            tbJedinicaKolicina.Text = String.Empty;
+            tbKolicina.Text = "1";
+
+            if (barcode != null)
+            {
+                tbBarkod.Text = barcode;
+                ProcessBarcode(barcode);
+            }
+            else
+            {
+                tbBarkod.Text = String.Empty;
+            }
+
+            tbKolicina.Focus();
+            if (tbKolicina.Text.Length > 0)
+            {
+                tbKolicina.SelectionStart = 0;
+                tbKolicina.SelectionLength = tbKolicina.Text.Length;
+            }
         }
 
         private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
@@ -54,27 +100,26 @@ namespace KIPS_WMS.UI.Prijem
             switch (index)
             {
                 case 0:
-                    text = string.Format("{0} {1}", "Šifra:", _selectedLine.ItemNo);
+                    text = string.Format("{0}: {1}", "Šifra", _selectedLine.ItemNo);
                     break;
                 case 1:
-                    text = string.Format("{0} {1}", "Naziv:", _selectedLine.ItemDescription);
+                    text = string.Format("{0}: {1}", "Naziv", _selectedLine.ItemDescription);
                     break;
                 case 2:
-                    text = string.Format("{0} {1} {2}", "Regal:", _selectedLine.BinCode, String.Empty);
+                    text = string.Format("{0}: {1}", "Regal", _selectedLine.BinCode);
                     break;
                 case 3:
-                    text = string.Format("{0} {1}", "Jedinica mere za prijem:", _selectedLine.UnitOfMeasureCode);
+                    text = string.Format("{0}: {1}", "Jedinica mere za prijem", _selectedLine.UnitOfMeasureCode);
                     break;
                 case 4:
-                    text = string.Format("{0} {1}", "Količina za prijem:", _selectedLine.QuantityOutstanding);
+                    text = string.Format("{0}: {1}", "Količina za prijem", _selectedLine.QuantityOutstanding);
                     break;
                 case 5:
-                    text = string.Format("{0} {1}", "Zaprimljena količina:", _selectedLine.QuantityToReceive);
+                    text = string.Format("{0}: {1}", "Zaprimljena količina", _selectedLine.QuantityToReceive);
                     break;
                 case 6:
-                    e.DrawBackground(PrijemLinije.GetLineStatusColor(_selectedLine.QuantityOutstanding,
-                        _selectedLine.QuantityToReceive));
-                    text = string.Format("{0} {1}", "Preostalo za prijem:", GetRemainingQuantity());
+                    e.DrawBackground(PrijemLinije.GetLineStatusColor(_selectedLine.QuantityOutstanding, _selectedLine.QuantityToReceive));
+                    text = string.Format("{0}: {1}", "Preostalo za prijem", GetRemainingQuantity());
                     break;
             }
 
@@ -102,14 +147,20 @@ namespace KIPS_WMS.UI.Prijem
 
         private void tbBarkod_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter || tbBarkod.Text.Length < 3)
+            string barcode = tbBarkod.Text.Trim();
+            if (e.KeyCode != Keys.Enter || barcode.Length < 3)
             {
                 _dbItem = null;
                 return;
             }
 
-            List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
-                new object[] {tbBarkod.Text});
+            ProcessBarcode(barcode);
+        }
+
+        private void ProcessBarcode(string barcode)
+        {
+            tbJedinicaKolicina.Text = String.Empty;
+            List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode, new object[] {barcode});
             if (query.Count == 1)
             {
                 _dbItem = query[0];
@@ -126,13 +177,16 @@ namespace KIPS_WMS.UI.Prijem
         {
             try
             {
-                if (_dbItem != null)
-                {
-                    int itemQuantity = int.Parse(_dbItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString());
-                    int unitQuantity = int.Parse(tbJedinicaKolicina.Text);
+                if (_dbItem == null) return;
 
-                    tbKolicina.Text = (itemQuantity * unitQuantity).ToString(CultureInfo.InvariantCulture);
-                }
+                int coefficient = IsLineInPrimaryUnitOfMeasure(_selectedLine.ItemNo, _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString());
+
+                int scannedItemQuantity = int.Parse(_dbItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString());
+                int unitQuantity = int.Parse(tbJedinicaKolicina.Text);
+
+                tbKolicina.Text = coefficient > 1
+                    ? ((scannedItemQuantity*unitQuantity)/coefficient).ToString(CultureInfo.InvariantCulture)
+                    : (scannedItemQuantity*unitQuantity).ToString(CultureInfo.InvariantCulture);
             }
             catch (Exception)
             {
@@ -140,12 +194,22 @@ namespace KIPS_WMS.UI.Prijem
             }
         }
 
-        private bool IsLineInPrimaryUnitOfMeasure()
+        private int IsLineInPrimaryUnitOfMeasure(string itemNo, string scannedItemUnitOfMeasure)
         {
-
-
-
-            return false;
+            try
+            {
+                object query = SQLiteHelper.simpleQuery(DbStatements.FindItemBaseUnitOfMeasure, new object[] {itemNo});
+                if (query != null && !string.Equals(scannedItemUnitOfMeasure, query.ToString(), StringComparison.OrdinalIgnoreCase))
+                {
+                    object query2 = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity, new object[] {itemNo, _selectedLine.UnitOfMeasureCode});
+                    return int.Parse(query2.ToString());
+                }
+            }
+            catch (Exception)
+            {
+                return 1;
+            }
+            return 1;
         }
 
         private void bDodaj_Click(object sender, EventArgs e)
@@ -167,8 +231,17 @@ namespace KIPS_WMS.UI.Prijem
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.UpdateWarehouseReceiptLineQty("1", _receiptNo, Convert.ToInt16(_selectedLine.LineNo), quantity, isUpdate, "", "", "", "");
+                Convert.ToInt16(quantity);
 
+                _ws.UpdateWarehouseReceiptLineQty("1", _receiptNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
+                    isUpdate, "", "", "", "");
+
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Proverite format unetih podataka", Resources.Greska);
             }
             catch (Exception ex)
             {
@@ -178,6 +251,96 @@ namespace KIPS_WMS.UI.Prijem
             {
                 Cursor.Current = Cursors.Default;
             }
+        }
+
+        private void bArtikalPoRegalima_Click(object sender, EventArgs e)
+        {
+            new ArtikliPoRegalimaDijalog(_selectedLine.BinCode, _selectedLine.ItemNo, _selectedLine.ItemVariant)
+                .ShowDialog();
+        }
+
+        private void bPodeliRed_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                int newLineNo = 0;
+                _ws.SplitDocumentLine("1", Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+
+                _lineSplit = true;
+
+                new Thread(() => GetData(newLineNo)).Start();
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void GetData(int lineNo)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                string warehouseReceiptsCsv = String.Empty;
+
+                _ws.GetWarehouseReceiptLines("1", "1", "1", _receiptNo, ref warehouseReceiptsCsv);
+
+                var engine = new FileHelperEngine(typeof(WarehouseReceiptLineModel));
+                WarehouseReceiptLines = ((WarehouseReceiptLineModel[])engine.ReadString(warehouseReceiptsCsv)).ToList();
+
+                _selectedLine = WarehouseReceiptLines.Find(x => x.LineNo == Convert.ToString(lineNo));
+
+                Invoke(new EventHandler((e, args) => DisplayData(null)));
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void bZameniRegal_Click(object sender, EventArgs e)
+        {
+            string newBinCode = tbRegal.Text.Trim();
+            if (newBinCode.Length == 0 || newBinCode == _selectedLine.BinCode) return;
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                _ws.ChangeBinOnDocumentLine("1", Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+
+                tbRegal.Text = newBinCode;
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void bOsteceno_Click(object sender, EventArgs e)
+        {
+            new OstecenoNekompletnoDijalog(_selectedLine).ShowDialog();
+        }
+
+        private void bNazad_Click(object sender, EventArgs e)
+        {
+            DialogResult = _lineSplit ? DialogResult.OK : DialogResult.Abort;
+            Close();
         }
     }
 }

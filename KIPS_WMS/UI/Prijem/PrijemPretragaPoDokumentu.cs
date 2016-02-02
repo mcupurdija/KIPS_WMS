@@ -80,7 +80,10 @@ namespace KIPS_WMS.UI.Prijem
 
         private void bPronadji_Click(object sender, EventArgs e)
         {
-            DisplayData(tbPronadji.Text);
+            string searchQuery = tbPronadji.Text.Trim();
+            if (searchQuery.Length == 0) return;
+
+            DisplayData(searchQuery);
         }
 
         private void bReset_Click(object sender, EventArgs e)

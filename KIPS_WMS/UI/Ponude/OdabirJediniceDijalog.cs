@@ -85,5 +85,6 @@ namespace KIPS_WMS.UI.Ponude
                 MessageBox.Show(Resources.OdaberiteJM, Resources.Greska);
             }
         }
+
     }
 }

@@ -2,6 +2,22 @@
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="LogIn">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="usernameP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="passwordP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="LogIn_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="GetQuote">
         <complexType>
           <sequence>
@@ -405,64 +421,14 @@
           </sequence>
         </complexType>
       </element>
-      <element name="ConvertDecToCommaSepTxtDec">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="decimalNumberP" type="decimal" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="ConvertDecToCommaSepTxtDec_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="ConvertTxtDecToCurrNAVFormat">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="decimalNumberAsTxtP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="ConvertTxtDecToCurrNAVFormat_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="ConvertTxtDateToCurrNAVFormat">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="dateAsTxtP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="ConvertTxtDateToCurrNAVFormat_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="date" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="ConvertDateToSRBFormatTxtDate">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="dateP" type="date" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="ConvertDateToSRBFormatTxtDate_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
     </schema>
   </types>
+  <message name="LogIn">
+    <part name="parameters" element="tns:LogIn" />
+  </message>
+  <message name="LogIn_Result">
+    <part name="parameters" element="tns:LogIn_Result" />
+  </message>
   <message name="GetQuote">
     <part name="parameters" element="tns:GetQuote" />
   </message>
@@ -595,31 +561,11 @@
   <message name="TestItemHasTracking_Result">
     <part name="parameters" element="tns:TestItemHasTracking_Result" />
   </message>
-  <message name="ConvertDecToCommaSepTxtDec">
-    <part name="parameters" element="tns:ConvertDecToCommaSepTxtDec" />
-  </message>
-  <message name="ConvertDecToCommaSepTxtDec_Result">
-    <part name="parameters" element="tns:ConvertDecToCommaSepTxtDec_Result" />
-  </message>
-  <message name="ConvertTxtDecToCurrNAVFormat">
-    <part name="parameters" element="tns:ConvertTxtDecToCurrNAVFormat" />
-  </message>
-  <message name="ConvertTxtDecToCurrNAVFormat_Result">
-    <part name="parameters" element="tns:ConvertTxtDecToCurrNAVFormat_Result" />
-  </message>
-  <message name="ConvertTxtDateToCurrNAVFormat">
-    <part name="parameters" element="tns:ConvertTxtDateToCurrNAVFormat" />
-  </message>
-  <message name="ConvertTxtDateToCurrNAVFormat_Result">
-    <part name="parameters" element="tns:ConvertTxtDateToCurrNAVFormat_Result" />
-  </message>
-  <message name="ConvertDateToSRBFormatTxtDate">
-    <part name="parameters" element="tns:ConvertDateToSRBFormatTxtDate" />
-  </message>
-  <message name="ConvertDateToSRBFormatTxtDate_Result">
-    <part name="parameters" element="tns:ConvertDateToSRBFormatTxtDate_Result" />
-  </message>
   <portType name="KIPS_wms_Port">
+    <operation name="LogIn">
+      <input name="LogIn" message="tns:LogIn" />
+      <output name="LogIn_Result" message="tns:LogIn_Result" />
+    </operation>
     <operation name="GetQuote">
       <input name="GetQuote" message="tns:GetQuote" />
       <output name="GetQuote_Result" message="tns:GetQuote_Result" />
@@ -708,25 +654,18 @@
       <input name="TestItemHasTracking" message="tns:TestItemHasTracking" />
       <output name="TestItemHasTracking_Result" message="tns:TestItemHasTracking_Result" />
     </operation>
-    <operation name="ConvertDecToCommaSepTxtDec">
-      <input name="ConvertDecToCommaSepTxtDec" message="tns:ConvertDecToCommaSepTxtDec" />
-      <output name="ConvertDecToCommaSepTxtDec_Result" message="tns:ConvertDecToCommaSepTxtDec_Result" />
-    </operation>
-    <operation name="ConvertTxtDecToCurrNAVFormat">
-      <input name="ConvertTxtDecToCurrNAVFormat" message="tns:ConvertTxtDecToCurrNAVFormat" />
-      <output name="ConvertTxtDecToCurrNAVFormat_Result" message="tns:ConvertTxtDecToCurrNAVFormat_Result" />
-    </operation>
-    <operation name="ConvertTxtDateToCurrNAVFormat">
-      <input name="ConvertTxtDateToCurrNAVFormat" message="tns:ConvertTxtDateToCurrNAVFormat" />
-      <output name="ConvertTxtDateToCurrNAVFormat_Result" message="tns:ConvertTxtDateToCurrNAVFormat_Result" />
-    </operation>
-    <operation name="ConvertDateToSRBFormatTxtDate">
-      <input name="ConvertDateToSRBFormatTxtDate" message="tns:ConvertDateToSRBFormatTxtDate" />
-      <output name="ConvertDateToSRBFormatTxtDate_Result" message="tns:ConvertDateToSRBFormatTxtDate_Result" />
-    </operation>
   </portType>
   <binding name="KIPS_wms_Binding" type="tns:KIPS_wms_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="LogIn">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:LogIn" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="LogIn">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="LogIn_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="GetQuote">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetQuote" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetQuote">
@@ -922,42 +861,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="TestItemHasTracking_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="ConvertDecToCommaSepTxtDec">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertDecToCommaSepTxtDec" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="ConvertDecToCommaSepTxtDec">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="ConvertDecToCommaSepTxtDec_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="ConvertTxtDecToCurrNAVFormat">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertTxtDecToCurrNAVFormat" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="ConvertTxtDecToCurrNAVFormat">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="ConvertTxtDecToCurrNAVFormat_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="ConvertTxtDateToCurrNAVFormat">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertTxtDateToCurrNAVFormat" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="ConvertTxtDateToCurrNAVFormat">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="ConvertTxtDateToCurrNAVFormat_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="ConvertDateToSRBFormatTxtDate">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertDateToSRBFormatTxtDate" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="ConvertDateToSRBFormatTxtDate">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="ConvertDateToSRBFormatTxtDate_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

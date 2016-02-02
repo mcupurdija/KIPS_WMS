@@ -47,5 +47,8 @@ namespace KIPS_WMS.Model
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
         public string NormRoundingPrecision;
+
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string NormDeviation;
     }
 }

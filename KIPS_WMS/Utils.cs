@@ -6,6 +6,7 @@ using System.Net;
 using System.Reflection;
 using System.Web.Services.Protocols;
 using System.Windows.Forms;
+using KIPS_WMS.Model;
 using KIPS_WMS.Properties;
 using OpenNETCF.Windows.Forms;
 
@@ -29,6 +30,15 @@ namespace KIPS_WMS
         private const string PrintServerAddress = "http://192.168.1.106/";
         public const string PrintServerApiPath = PrintServerAddress + "WMSPrintServer/api/Print";
         public const string PrintServerApiTestPath = PrintServerAddress + "WMSPrintServer/api/Test";
+
+        public const string DateTimeApiPath = "http://api.timezonedb.com/?zone=Europe/Belgrade&format=json&key=5LSDOP8B3LXP";
+
+        public const int DocumentTypePrijem = 1;
+        public const int DocumentTypeIsporuka = 2;
+        public const int DocumentTypeSkladistenje = 3;
+        public const int DocumentTypeIzdvajanje = 4;
+
+
 
 
 
@@ -85,6 +95,30 @@ namespace KIPS_WMS
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 3, e.Bounds.Top, new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
             e.Graphics.DrawString(secondLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 3, e.Bounds.Top + 20, new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
+        }
+
+        public static DateTime GetCurrentDateTime()
+        {
+            var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            try
+            {
+                WebRequest request = WebRequest.Create(DateTimeApiPath);
+
+                using (WebResponse response = request.GetResponse())
+                {
+                    var model = JsonHelper.Deserialize<DateTimeModel>(response.GetResponseStream());
+                    
+                    if (model.status == "OK")
+                    {
+                        dateTime = dateTime.AddSeconds(model.timestamp);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return dateTime;
+            }
+            return dateTime;
         }
     }
 }

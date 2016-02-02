@@ -32,6 +32,30 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:LogIn", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="LogIn_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void LogIn(string usernameP, string passwordP, ref string cSVStringP) {
+            object[] results = this.Invoke("LogIn", new object[] {
+                        usernameP,
+                        passwordP,
+                        cSVStringP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginLogIn(string usernameP, string passwordP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("LogIn", new object[] {
+                        usernameP,
+                        passwordP,
+                        cSVStringP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndLogIn(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetQuote", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetQuote_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetQuote(string documentNoP, string userIdP, string locationCodeP, ref string customerCodeP, ref string customerNameP, ref int isAuthenticatedCustomerP, ref string cSVStringP) {
             object[] results = this.Invoke("GetQuote", new object[] {
@@ -667,90 +691,6 @@ namespace KIPS_WMS.NAV_WS {
         public void EndTestItemHasTracking(System.IAsyncResult asyncResult, out int trackingTypeP) {
             object[] results = this.EndInvoke(asyncResult);
             trackingTypeP = ((int)(results[0]));
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertDecToCommaSepTxtDec", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="ConvertDecToCommaSepTxtDec_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string ConvertDecToCommaSepTxtDec(decimal decimalNumberP) {
-            object[] results = this.Invoke("ConvertDecToCommaSepTxtDec", new object[] {
-                        decimalNumberP});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginConvertDecToCommaSepTxtDec(decimal decimalNumberP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("ConvertDecToCommaSepTxtDec", new object[] {
-                        decimalNumberP}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public string EndConvertDecToCommaSepTxtDec(System.IAsyncResult asyncResult) {
-            object[] results = this.EndInvoke(asyncResult);
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertTxtDecToCurrNAVFormat", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="ConvertTxtDecToCurrNAVFormat_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public decimal ConvertTxtDecToCurrNAVFormat(string decimalNumberAsTxtP) {
-            object[] results = this.Invoke("ConvertTxtDecToCurrNAVFormat", new object[] {
-                        decimalNumberAsTxtP});
-            return ((decimal)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginConvertTxtDecToCurrNAVFormat(string decimalNumberAsTxtP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("ConvertTxtDecToCurrNAVFormat", new object[] {
-                        decimalNumberAsTxtP}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public decimal EndConvertTxtDecToCurrNAVFormat(System.IAsyncResult asyncResult) {
-            object[] results = this.EndInvoke(asyncResult);
-            return ((decimal)(results[0]));
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertTxtDateToCurrNAVFormat", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="ConvertTxtDateToCurrNAVFormat_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value", DataType="date")]
-        public System.DateTime ConvertTxtDateToCurrNAVFormat(string dateAsTxtP) {
-            object[] results = this.Invoke("ConvertTxtDateToCurrNAVFormat", new object[] {
-                        dateAsTxtP});
-            return ((System.DateTime)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginConvertTxtDateToCurrNAVFormat(string dateAsTxtP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("ConvertTxtDateToCurrNAVFormat", new object[] {
-                        dateAsTxtP}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public System.DateTime EndConvertTxtDateToCurrNAVFormat(System.IAsyncResult asyncResult) {
-            object[] results = this.EndInvoke(asyncResult);
-            return ((System.DateTime)(results[0]));
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ConvertDateToSRBFormatTxtDate", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="ConvertDateToSRBFormatTxtDate_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string ConvertDateToSRBFormatTxtDate([System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime dateP) {
-            object[] results = this.Invoke("ConvertDateToSRBFormatTxtDate", new object[] {
-                        dateP});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginConvertDateToSRBFormatTxtDate(System.DateTime dateP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("ConvertDateToSRBFormatTxtDate", new object[] {
-                        dateP}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public string EndConvertDateToSRBFormatTxtDate(System.IAsyncResult asyncResult) {
-            object[] results = this.EndInvoke(asyncResult);
-            return ((string)(results[0]));
         }
     }
 }
