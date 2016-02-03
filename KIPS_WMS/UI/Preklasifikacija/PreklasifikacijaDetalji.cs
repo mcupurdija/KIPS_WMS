@@ -7,6 +7,7 @@ using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Properties;
 using KIPS_WMS.UI.Ostalo;
 using KIPS_WMS.Web;
+using KIPS_WMS.Data;
 
 namespace KIPS_WMS.UI.Preklasifikacija
 {
@@ -51,7 +52,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 _itemTrackingType = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemTracking].ToString();
                 _itemVariant = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemVariant].ToString();
                 lbNaziv.Text = Resources.NazivArtika + ": " + _itemName;
-                lbJM.Text = Resources.JM + ": " + _itemUnitOfMeasure;
+                lbJM.Text = _itemUnitOfMeasure;
                 tbPronadji.Text = _itemNo;
                 tbSaRegala.Focus();
             }
@@ -64,36 +65,40 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 //List<object> baseUnit = SQLiteHelper.oneRowQuery(DbStatements.FindItemBaseUnitOfMeasure,
                 //            new object[] { _itemNo });
                 int kolicina = Int32.Parse(tbKolicina.Text)*Int32.Parse(_itemQuantity);
+                string lines = "";
+                int numOfLine = 0;
+                Cursor.Current = Cursors.WaitCursor;
 
-                var pracenje = new Pracenje(_itemNo + "", Int32.Parse(tbKolicina.Text), Int32.Parse(_itemTrackingType));
-                DialogResult result = pracenje.ShowDialog();
-
-                if (result == DialogResult.OK)
+                if (Int32.Parse(_itemTrackingType) != 0)
                 {
-                    Cursor.Current = Cursors.WaitCursor;
+                    var pracenje = new Pracenje(_itemNo + "", kolicina, Int32.Parse(_itemTrackingType));
+                    DialogResult result = pracenje.ShowDialog();
 
-                    int numOfLine = 0;
-                    var engine = new FileHelperEngine(typeof (SendTrackingModel));
-                    string lines = engine.WriteString(pracenje._lines);
+                    if (result == DialogResult.OK)
+                    {                      
+                        var engine = new FileHelperEngine(typeof(SendTrackingModel));
+                        lines = engine.WriteString(pracenje._lines);                        
+                    }
+                }
 
-                    var loginData = RegistryUtils.GetLoginData();
-                    _ws.BinToBinMovement(_itemNo, _itemQuantity, _itemUnitOfMeasure, loginData.Magacin, loginData.Podmagacin, tbSaRegala.Text,
-                        tbNaRegal.Text, RegistryUtils.GetLastUsername(), lines, ref numOfLine);
-                    lineNumbers.Add(numOfLine);
+                var loginData = RegistryUtils.GetLoginData();
+                _ws.BinToBinMovement(_itemNo, tbKolicina.Text.Trim(), _itemUnitOfMeasure, loginData.Magacin, loginData.Podmagacin, tbSaRegala.Text,
+                    tbNaRegal.Text, RegistryUtils.GetLastUsername(), lines, ref numOfLine);
+                lineNumbers.Add(numOfLine);
 
-                    var lvi = new ListViewItem(new[]
+                var lvi = new ListViewItem(new[]
                     {
                         _itemNo, _itemName, tbKolicina.Text, _itemUnitOfMeasure, tbSaRegala.Text, tbNaRegal.Text
                     });
-                    listView1.Items.Add(lvi);
+                listView1.Items.Add(lvi);
 
-                    tbKolicina.Text = "";
-                    tbPronadji.Text = "";
-                    lbNaziv.Text = Resources.NazivArtika + ": ";
-                    lbJM.Text = Resources.JM + ": ";
-                    tbNaRegal.Text = "";
-                    tbSaRegala.Text = "";
-                }
+                tbKolicina.Text = "";
+                tbPronadji.Text = "";
+                lbNaziv.Text = Resources.NazivArtika + ": ";
+                lbJM.Text = Resources.JM + ": ";
+                tbNaRegal.Text = "";
+                tbSaRegala.Text = "";
+
             }
             catch (Exception ex)
             {
@@ -179,7 +184,41 @@ namespace KIPS_WMS.UI.Preklasifikacija
         {
             if (e.KeyCode == Keys.Enter)
             {
-                bPronadji_Click(sender, e);
+                //bPronadji_Click(sender, e);
+                try
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+
+                    var _items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
+                        new object[] { tbPronadji.Text });
+                    if (_items.Count > 1 || _items.Count == 0) {
+                        MessageBox.Show("Neispravan barkod.", Resources.Greska);
+                    }
+                    else
+                    {
+
+                        _itemName = _items[0][DatabaseModel.ItemDbModel.ItemDescription].ToString();
+                        _itemUnitOfMeasure = _items[0][DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
+                        _itemNo = _items[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
+                        _itemQuantity = _items[0][DatabaseModel.ItemDbModel.ItemQuantity].ToString();
+                        _itemTrackingType = _items[0][DatabaseModel.ItemDbModel.ItemTracking].ToString();
+                        _itemVariant = _items[0][DatabaseModel.ItemDbModel.ItemVariant].ToString();
+
+                        lbNaziv.Text = Resources.NazivArtika + ": " + _itemName;
+                        lbJM.Text = _itemUnitOfMeasure;
+                        tbPronadji.Text = _itemNo;
+                        tbSaRegala.Focus();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Utils.GeneralExceptionProcessing(ex);
+                }
+                finally
+                {
+                    Cursor.Current = Cursors.Default;
+                }
             }
         }
 
