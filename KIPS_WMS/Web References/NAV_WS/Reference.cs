@@ -28,67 +28,7 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         public MobileWMSSync() {
-            this.Url = "http://192.168.10.72:6047/TEST/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync";
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItems", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItems_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetItems(ref string cSVStringP, string itemNoP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime lastDateModifiedP) {
-            object[] results = this.Invoke("GetItems", new object[] {
-                        cSVStringP,
-                        itemNoP,
-                        lastDateModifiedP});
-            cSVStringP = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginGetItems(string cSVStringP, string itemNoP, System.DateTime lastDateModifiedP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("GetItems", new object[] {
-                        cSVStringP,
-                        itemNoP,
-                        lastDateModifiedP}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public void EndGetItems(System.IAsyncResult asyncResult, out string cSVStringP) {
-            object[] results = this.EndInvoke(asyncResult);
-            cSVStringP = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemPriceAndInventory", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItemPriceAndInventory_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetItemPriceAndInventory(string itemNoP, string variantCodeP, string unitOfMeasureP, string salesQtyP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, ref string cSVStringP) {
-            object[] results = this.Invoke("GetItemPriceAndInventory", new object[] {
-                        itemNoP,
-                        variantCodeP,
-                        unitOfMeasureP,
-                        salesQtyP,
-                        customerNoP,
-                        isAuthenticatedCustomerP,
-                        locationCodeP,
-                        userIdP,
-                        cSVStringP});
-            cSVStringP = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginGetItemPriceAndInventory(string itemNoP, string variantCodeP, string unitOfMeasureP, string salesQtyP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("GetItemPriceAndInventory", new object[] {
-                        itemNoP,
-                        variantCodeP,
-                        unitOfMeasureP,
-                        salesQtyP,
-                        customerNoP,
-                        isAuthenticatedCustomerP,
-                        locationCodeP,
-                        userIdP,
-                        cSVStringP}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public void EndGetItemPriceAndInventory(System.IAsyncResult asyncResult, out string cSVStringP) {
-            object[] results = this.EndInvoke(asyncResult);
-            cSVStringP = ((string)(results[0]));
+            this.Url = "http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/MobileWMSSync";
         }
         
         /// <remarks/>
@@ -252,6 +192,42 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemPriceAndInventory", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItemPriceAndInventory_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetItemPriceAndInventory(string itemNoP, string variantCodeP, string unitOfMeasureP, string salesQtyP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, ref string cSVStringP) {
+            object[] results = this.Invoke("GetItemPriceAndInventory", new object[] {
+                        itemNoP,
+                        variantCodeP,
+                        unitOfMeasureP,
+                        salesQtyP,
+                        customerNoP,
+                        isAuthenticatedCustomerP,
+                        locationCodeP,
+                        userIdP,
+                        cSVStringP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetItemPriceAndInventory(string itemNoP, string variantCodeP, string unitOfMeasureP, string salesQtyP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetItemPriceAndInventory", new object[] {
+                        itemNoP,
+                        variantCodeP,
+                        unitOfMeasureP,
+                        salesQtyP,
+                        customerNoP,
+                        isAuthenticatedCustomerP,
+                        locationCodeP,
+                        userIdP,
+                        cSVStringP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetItemPriceAndInventory(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemUnitsOfMeasure", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItemUnitsOfMeasure_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetItemUnitsOfMeasure(string itemNoP, string userIdP, ref string cSVStringP) {
             object[] results = this.Invoke("GetItemUnitsOfMeasure", new object[] {
@@ -299,6 +275,30 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         public void EndGetItemLagerList(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItems", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItems_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetItems(ref string cSVStringP, string itemNoP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime lastDateModifiedP) {
+            object[] results = this.Invoke("GetItems", new object[] {
+                        cSVStringP,
+                        itemNoP,
+                        lastDateModifiedP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetItems(string cSVStringP, string itemNoP, System.DateTime lastDateModifiedP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetItems", new object[] {
+                        cSVStringP,
+                        itemNoP,
+                        lastDateModifiedP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetItems(System.IAsyncResult asyncResult, out string cSVStringP) {
             object[] results = this.EndInvoke(asyncResult);
             cSVStringP = ((string)(results[0]));
         }
@@ -506,6 +506,32 @@ namespace KIPS_WMS.NAV_WS {
         public void EndBinToBinMovement(System.IAsyncResult asyncResult, out int nAVLineNoP) {
             object[] results = this.EndInvoke(asyncResult);
             nAVLineNoP = ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemFromAnotherBin", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItemFromAnotherBin_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetItemFromAnotherBin(ref string linesCSV, string docNo, string lineNo, string userID) {
+            object[] results = this.Invoke("GetItemFromAnotherBin", new object[] {
+                        linesCSV,
+                        docNo,
+                        lineNo,
+                        userID});
+            linesCSV = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetItemFromAnotherBin(string linesCSV, string docNo, string lineNo, string userID, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetItemFromAnotherBin", new object[] {
+                        linesCSV,
+                        docNo,
+                        lineNo,
+                        userID}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetItemFromAnotherBin(System.IAsyncResult asyncResult, out string linesCSV) {
+            object[] results = this.EndInvoke(asyncResult);
+            linesCSV = ((string)(results[0]));
         }
         
         /// <remarks/>

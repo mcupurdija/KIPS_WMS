@@ -2,44 +2,6 @@
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync" xmlns="http://www.w3.org/2001/XMLSchema">
-      <element name="GetItems">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="lastDateModifiedP" type="date" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetItems_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetItemPriceAndInventory">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="variantCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="unitOfMeasureP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="salesQtyP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="customerNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="isAuthenticatedCustomerP" type="int" />
-            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetItemPriceAndInventory_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
       <element name="LogIn">
         <complexType>
           <sequence>
@@ -140,6 +102,28 @@
           </sequence>
         </complexType>
       </element>
+      <element name="GetItemPriceAndInventory">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="variantCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="unitOfMeasureP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="salesQtyP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isAuthenticatedCustomerP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemPriceAndInventory_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="GetItemUnitsOfMeasure">
         <complexType>
           <sequence>
@@ -168,6 +152,22 @@
         </complexType>
       </element>
       <element name="GetItemLagerList_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItems">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastDateModifiedP" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItems_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
@@ -302,6 +302,23 @@
           </sequence>
         </complexType>
       </element>
+      <element name="GetItemFromAnotherBin">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="linesCSV" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="docNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lineNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="userID" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemFromAnotherBin_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="linesCSV" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="DeleteReclassificationLines">
         <complexType>
           <sequence>
@@ -406,18 +423,6 @@
       </element>
     </schema>
   </types>
-  <message name="GetItems">
-    <part name="parameters" element="tns:GetItems" />
-  </message>
-  <message name="GetItems_Result">
-    <part name="parameters" element="tns:GetItems_Result" />
-  </message>
-  <message name="GetItemPriceAndInventory">
-    <part name="parameters" element="tns:GetItemPriceAndInventory" />
-  </message>
-  <message name="GetItemPriceAndInventory_Result">
-    <part name="parameters" element="tns:GetItemPriceAndInventory_Result" />
-  </message>
   <message name="LogIn">
     <part name="parameters" element="tns:LogIn" />
   </message>
@@ -448,6 +453,12 @@
   <message name="GetItemInformation_Result">
     <part name="parameters" element="tns:GetItemInformation_Result" />
   </message>
+  <message name="GetItemPriceAndInventory">
+    <part name="parameters" element="tns:GetItemPriceAndInventory" />
+  </message>
+  <message name="GetItemPriceAndInventory_Result">
+    <part name="parameters" element="tns:GetItemPriceAndInventory_Result" />
+  </message>
   <message name="GetItemUnitsOfMeasure">
     <part name="parameters" element="tns:GetItemUnitsOfMeasure" />
   </message>
@@ -459,6 +470,12 @@
   </message>
   <message name="GetItemLagerList_Result">
     <part name="parameters" element="tns:GetItemLagerList_Result" />
+  </message>
+  <message name="GetItems">
+    <part name="parameters" element="tns:GetItems" />
+  </message>
+  <message name="GetItems_Result">
+    <part name="parameters" element="tns:GetItems_Result" />
   </message>
   <message name="GetCustomers">
     <part name="parameters" element="tns:GetCustomers" />
@@ -502,6 +519,12 @@
   <message name="BinToBinMovement_Result">
     <part name="parameters" element="tns:BinToBinMovement_Result" />
   </message>
+  <message name="GetItemFromAnotherBin">
+    <part name="parameters" element="tns:GetItemFromAnotherBin" />
+  </message>
+  <message name="GetItemFromAnotherBin_Result">
+    <part name="parameters" element="tns:GetItemFromAnotherBin_Result" />
+  </message>
   <message name="DeleteReclassificationLines">
     <part name="parameters" element="tns:DeleteReclassificationLines" />
   </message>
@@ -539,14 +562,6 @@
     <part name="parameters" element="tns:TestItemHasTracking_Result" />
   </message>
   <portType name="MobileWMSSync_Port">
-    <operation name="GetItems">
-      <input name="GetItems" message="tns:GetItems" />
-      <output name="GetItems_Result" message="tns:GetItems_Result" />
-    </operation>
-    <operation name="GetItemPriceAndInventory">
-      <input name="GetItemPriceAndInventory" message="tns:GetItemPriceAndInventory" />
-      <output name="GetItemPriceAndInventory_Result" message="tns:GetItemPriceAndInventory_Result" />
-    </operation>
     <operation name="LogIn">
       <input name="LogIn" message="tns:LogIn" />
       <output name="LogIn_Result" message="tns:LogIn_Result" />
@@ -567,6 +582,10 @@
       <input name="GetItemInformation" message="tns:GetItemInformation" />
       <output name="GetItemInformation_Result" message="tns:GetItemInformation_Result" />
     </operation>
+    <operation name="GetItemPriceAndInventory">
+      <input name="GetItemPriceAndInventory" message="tns:GetItemPriceAndInventory" />
+      <output name="GetItemPriceAndInventory_Result" message="tns:GetItemPriceAndInventory_Result" />
+    </operation>
     <operation name="GetItemUnitsOfMeasure">
       <input name="GetItemUnitsOfMeasure" message="tns:GetItemUnitsOfMeasure" />
       <output name="GetItemUnitsOfMeasure_Result" message="tns:GetItemUnitsOfMeasure_Result" />
@@ -574,6 +593,10 @@
     <operation name="GetItemLagerList">
       <input name="GetItemLagerList" message="tns:GetItemLagerList" />
       <output name="GetItemLagerList_Result" message="tns:GetItemLagerList_Result" />
+    </operation>
+    <operation name="GetItems">
+      <input name="GetItems" message="tns:GetItems" />
+      <output name="GetItems_Result" message="tns:GetItems_Result" />
     </operation>
     <operation name="GetCustomers">
       <input name="GetCustomers" message="tns:GetCustomers" />
@@ -603,6 +626,10 @@
       <input name="BinToBinMovement" message="tns:BinToBinMovement" />
       <output name="BinToBinMovement_Result" message="tns:BinToBinMovement_Result" />
     </operation>
+    <operation name="GetItemFromAnotherBin">
+      <input name="GetItemFromAnotherBin" message="tns:GetItemFromAnotherBin" />
+      <output name="GetItemFromAnotherBin_Result" message="tns:GetItemFromAnotherBin_Result" />
+    </operation>
     <operation name="DeleteReclassificationLines">
       <input name="DeleteReclassificationLines" message="tns:DeleteReclassificationLines" />
       <output name="DeleteReclassificationLines_Result" message="tns:DeleteReclassificationLines_Result" />
@@ -630,24 +657,6 @@
   </portType>
   <binding name="MobileWMSSync_Binding" type="tns:MobileWMSSync_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-    <operation name="GetItems">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItems" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetItems">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GetItems_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="GetItemPriceAndInventory">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemPriceAndInventory" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetItemPriceAndInventory">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GetItemPriceAndInventory_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="LogIn">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:LogIn" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="LogIn">
@@ -693,6 +702,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="GetItemPriceAndInventory">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemPriceAndInventory" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItemPriceAndInventory">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItemPriceAndInventory_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="GetItemUnitsOfMeasure">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemUnitsOfMeasure" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetItemUnitsOfMeasure">
@@ -708,6 +726,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="GetItemLagerList_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetItems">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItems" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItems">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItems_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -774,6 +801,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="GetItemFromAnotherBin">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemFromAnotherBin" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItemFromAnotherBin">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItemFromAnotherBin_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="DeleteReclassificationLines">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:DeleteReclassificationLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="DeleteReclassificationLines">
@@ -831,7 +867,7 @@
   </binding>
   <service name="MobileWMSSync">
     <port name="MobileWMSSync_Port" binding="tns:MobileWMSSync_Binding">
-      <address location="http://192.168.10.72:6047/TEST/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>
