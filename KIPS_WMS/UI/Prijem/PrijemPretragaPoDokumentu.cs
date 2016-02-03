@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Model;
@@ -110,6 +109,7 @@ namespace KIPS_WMS.UI.Prijem
 
         private void bNazad_Click(object sender, EventArgs e)
         {
+            listBox1.Dispose();
             Close();
         }
 

@@ -1023,7 +1023,7 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:KIPS WMS"
-        "Manufacturer" = "8:GoPro d.o.o"
+        "Manufacturer" = "8:GoPro d.o.o."
         "OSVersionMin" = "8:4.0"
         "OSVersionMax" = "8:6.99"
         "NoUninstall" = "11:FALSE"

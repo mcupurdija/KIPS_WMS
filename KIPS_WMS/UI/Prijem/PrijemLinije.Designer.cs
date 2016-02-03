@@ -55,6 +55,7 @@ namespace KIPS_WMS.UI.Prijem
             // menuItem2
             // 
             this.menuItem2.Text = "|   Završen prijem";
+            this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
             // 
             // bDalje
             // 
@@ -94,8 +95,10 @@ namespace KIPS_WMS.UI.Prijem
             this.listBox1.BackgroundImage = null;
             this.listBox1.DataSource = null;
             this.listBox1.DisplayMember = null;
+            this.listBox1.DrawMode = OpenNETCF.Windows.Forms.DrawMode.Normal;
             this.listBox1.EvenItemColor = System.Drawing.SystemColors.Control;
             this.listBox1.ImageList = null;
+            this.listBox1.ItemHeight = 15;
             this.listBox1.LineColor = System.Drawing.SystemColors.ControlText;
             this.listBox1.Location = new System.Drawing.Point(0, 29);
             this.listBox1.Name = "listBox1";

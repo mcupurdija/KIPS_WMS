@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -48,16 +47,6 @@ namespace KIPS_WMS.UI.Prijem
             base.OnActivated(e);
 
             Text = _receiptNo;
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
-
-            int index = WarehouseReceiptLines.IndexOf(_selectedLine);
-
-            _selectedLine.QuantityToReceive = tbKolicina.Text;
-            WarehouseReceiptLines[index] = _selectedLine;
         }
 
         private void DisplayData(string barcode)
@@ -227,6 +216,7 @@ namespace KIPS_WMS.UI.Prijem
         {
             string quantity = tbKolicina.Text;
             if (quantity.Trim().Length == 0) return;
+
             string lines = "";
             string normativeLines = "";
             try
@@ -259,6 +249,8 @@ namespace KIPS_WMS.UI.Prijem
                 _ws.UpdateWarehouseReceiptLineQty(RegistryUtils.GetLastUsername(), _receiptNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
                     isUpdate, lines, normativeLines, lJedinica.Text, quantity);
 
+                UpdateLines();
+
                 DialogResult = DialogResult.Yes;
                 listBox1.Dispose();
                 Close();
@@ -275,6 +267,14 @@ namespace KIPS_WMS.UI.Prijem
             {
                 Cursor.Current = Cursors.Default;
             }
+        }
+
+        private void UpdateLines()
+        {
+            int index = WarehouseReceiptLines.IndexOf(_selectedLine);
+
+            _selectedLine.QuantityToReceive = tbKolicina.Text;
+            WarehouseReceiptLines[index] = _selectedLine;
         }
 
         private void bArtikalPoRegalima_Click(object sender, EventArgs e)
@@ -364,7 +364,17 @@ namespace KIPS_WMS.UI.Prijem
 
         private void bNazad_Click(object sender, EventArgs e)
         {
-            DialogResult = _lineSplit ? DialogResult.Yes : DialogResult.No;
+            if (_lineSplit)
+            {
+                UpdateLines();
+
+                DialogResult = DialogResult.Yes;
+            }
+            else
+            {
+                DialogResult = DialogResult.No;
+            }
+            
             listBox1.Dispose();
             Close();
         }

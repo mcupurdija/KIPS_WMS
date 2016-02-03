@@ -39,7 +39,7 @@ namespace KIPS_WMS.UI.Ponude
                 Cursor.Current = Cursors.WaitCursor;
 
                 string itemUnitOfMeasureCsv = String.Empty;
-                _ws.GetItemUnitsOfMeasure(_itemNo, RegistryUtils.GetLastUsername(), ref itemUnitOfMeasureCsv);
+                _ws.GetItemUnitsOfMeasure(_itemNo, RegistryUtils.GetLastUsername(), RegistryUtils.GetLoginData().Magacin, ref itemUnitOfMeasureCsv);
 
                 var engine = new FileHelperEngine(typeof (ItemUnitOfMeasureModel));
                 _itemUnitsOfMeasure = (ItemUnitOfMeasureModel[])engine.ReadString(itemUnitOfMeasureCsv);

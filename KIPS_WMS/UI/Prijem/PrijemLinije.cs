@@ -150,7 +150,7 @@ namespace KIPS_WMS.UI.Prijem
             var prijemDetalji = new PrijemDetalji(_receiptNo, barcode, _selectedLine, _warehouseReceiptLines);
             DialogResult result = prijemDetalji.ShowDialog();
 
-            if (result == DialogResult.OK)
+            if (result == DialogResult.Yes)
             {
                 _warehouseReceiptLines = prijemDetalji.WarehouseReceiptLines;
                 DisplayData(null, false);
@@ -228,6 +228,27 @@ namespace KIPS_WMS.UI.Prijem
             catch (Exception)
             {
                 return Color.White;
+            }
+        }
+
+        private void menuItem2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                _ws.SetDocumentStatus(Utils.DocumentTypePrijem, _receiptNo, 1);
+
+                listBox1.Dispose();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
             }
         }
         

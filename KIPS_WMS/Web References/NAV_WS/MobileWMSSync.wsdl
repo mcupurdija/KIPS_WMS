@@ -18,6 +18,20 @@
           </sequence>
         </complexType>
       </element>
+      <element name="SetDocumentStatus">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="documentTypeP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="documentNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SetDocumentStatus_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="GetQuote">
         <complexType>
           <sequence>
@@ -129,6 +143,7 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
           </sequence>
         </complexType>
@@ -429,6 +444,12 @@
   <message name="LogIn_Result">
     <part name="parameters" element="tns:LogIn_Result" />
   </message>
+  <message name="SetDocumentStatus">
+    <part name="parameters" element="tns:SetDocumentStatus" />
+  </message>
+  <message name="SetDocumentStatus_Result">
+    <part name="parameters" element="tns:SetDocumentStatus_Result" />
+  </message>
   <message name="GetQuote">
     <part name="parameters" element="tns:GetQuote" />
   </message>
@@ -566,6 +587,10 @@
       <input name="LogIn" message="tns:LogIn" />
       <output name="LogIn_Result" message="tns:LogIn_Result" />
     </operation>
+    <operation name="SetDocumentStatus">
+      <input name="SetDocumentStatus" message="tns:SetDocumentStatus" />
+      <output name="SetDocumentStatus_Result" message="tns:SetDocumentStatus_Result" />
+    </operation>
     <operation name="GetQuote">
       <input name="GetQuote" message="tns:GetQuote" />
       <output name="GetQuote_Result" message="tns:GetQuote_Result" />
@@ -663,6 +688,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="LogIn_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SetDocumentStatus">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SetDocumentStatus" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SetDocumentStatus">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SetDocumentStatus_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

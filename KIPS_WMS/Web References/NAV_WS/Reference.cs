@@ -56,6 +56,28 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SetDocumentStatus", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="SetDocumentStatus_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SetDocumentStatus(int documentTypeP, string documentNoP, int statusP) {
+            this.Invoke("SetDocumentStatus", new object[] {
+                        documentTypeP,
+                        documentNoP,
+                        statusP});
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginSetDocumentStatus(int documentTypeP, string documentNoP, int statusP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("SetDocumentStatus", new object[] {
+                        documentTypeP,
+                        documentNoP,
+                        statusP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndSetDocumentStatus(System.IAsyncResult asyncResult) {
+            this.EndInvoke(asyncResult);
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetQuote", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetQuote_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetQuote(string documentNoP, string userIdP, string locationCodeP, ref string customerCodeP, ref string customerNameP, ref int isAuthenticatedCustomerP, ref string cSVStringP) {
             object[] results = this.Invoke("GetQuote", new object[] {
@@ -229,19 +251,21 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemUnitsOfMeasure", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItemUnitsOfMeasure_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetItemUnitsOfMeasure(string itemNoP, string userIdP, ref string cSVStringP) {
+        public void GetItemUnitsOfMeasure(string itemNoP, string userIdP, string locationCodeP, ref string cSVStringP) {
             object[] results = this.Invoke("GetItemUnitsOfMeasure", new object[] {
                         itemNoP,
                         userIdP,
+                        locationCodeP,
                         cSVStringP});
             cSVStringP = ((string)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetItemUnitsOfMeasure(string itemNoP, string userIdP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginGetItemUnitsOfMeasure(string itemNoP, string userIdP, string locationCodeP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("GetItemUnitsOfMeasure", new object[] {
                         itemNoP,
                         userIdP,
+                        locationCodeP,
                         cSVStringP}, callback, asyncState);
         }
         
