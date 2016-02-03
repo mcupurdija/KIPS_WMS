@@ -5,6 +5,8 @@ using KIPS_WMS.UI.Prijem;
 using KIPS_WMS.UI.Skladistenje;
 using KIPS_WMS.UI.Izdvajanje;
 using KIPS_WMS.UI.Preklasifikacija;
+using KIPS_WMS.Model;
+using System;
 
 namespace KIPS_WMS.UI
 {
@@ -57,7 +59,13 @@ namespace KIPS_WMS.UI
 
         private void bPopis_Click(object sender, System.EventArgs e)
         {
-            new Form1().Show();
+            WarehouseReceiptLineModel wrlm = new WarehouseReceiptLineModel();
+            wrlm.UnitOfMeasureCode = "PAK";
+            wrlm.NormUom ="KOM";
+            wrlm.NormRoundingPrecision = "0,002";
+            wrlm.NormDeviation = "10";
+            wrlm.NormCoefficient = "0,5";
+            new VarijabilniNormativDijalog(wrlm, Convert.ToDecimal("250,00")).Show();
         }
     }
 }

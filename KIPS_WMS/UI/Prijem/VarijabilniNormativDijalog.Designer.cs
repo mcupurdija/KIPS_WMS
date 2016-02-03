@@ -54,6 +54,7 @@
             // 
             // tbJedinicaMere
             // 
+            this.tbJedinicaMere.Enabled = false;
             this.tbJedinicaMere.Location = new System.Drawing.Point(117, 3);
             this.tbJedinicaMere.Name = "tbJedinicaMere";
             this.tbJedinicaMere.Size = new System.Drawing.Size(80, 21);
@@ -61,6 +62,7 @@
             // 
             // tbZaprimljenaKolicina
             // 
+            this.tbZaprimljenaKolicina.Enabled = false;
             this.tbZaprimljenaKolicina.Location = new System.Drawing.Point(117, 30);
             this.tbZaprimljenaKolicina.Name = "tbZaprimljenaKolicina";
             this.tbZaprimljenaKolicina.Size = new System.Drawing.Size(80, 21);
@@ -68,6 +70,7 @@
             // 
             // tbOsnovnaJedinicaMere
             // 
+            this.tbOsnovnaJedinicaMere.Enabled = false;
             this.tbOsnovnaJedinicaMere.Location = new System.Drawing.Point(117, 57);
             this.tbOsnovnaJedinicaMere.Name = "tbOsnovnaJedinicaMere";
             this.tbOsnovnaJedinicaMere.Size = new System.Drawing.Size(80, 21);
@@ -79,9 +82,13 @@
             this.tbKolicinaOsnovnaJedinicaMere.Name = "tbKolicinaOsnovnaJedinicaMere";
             this.tbKolicinaOsnovnaJedinicaMere.Size = new System.Drawing.Size(80, 21);
             this.tbKolicinaOsnovnaJedinicaMere.TabIndex = 12;
+            this.tbKolicinaOsnovnaJedinicaMere.TextChanged += new System.EventHandler(this.tbKolicinaOsnovnaJedinicaMere_TextChanged);
+            this.tbKolicinaOsnovnaJedinicaMere.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbKolicinaOsnovnaJedinicaMere_KeyUp);
+            this.tbKolicinaOsnovnaJedinicaMere.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKolicinaOsnovnaJedinicaMere_KeyPress);
             // 
             // tbFaktorKonverzije
             // 
+            this.tbFaktorKonverzije.Enabled = false;
             this.tbFaktorKonverzije.Location = new System.Drawing.Point(117, 111);
             this.tbFaktorKonverzije.Name = "tbFaktorKonverzije";
             this.tbFaktorKonverzije.Size = new System.Drawing.Size(80, 21);

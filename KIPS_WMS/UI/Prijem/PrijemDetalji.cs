@@ -14,6 +14,7 @@ using KIPS_WMS.Properties;
 using KIPS_WMS.UI.Ostalo;
 using KIPS_WMS.Web;
 using OpenNETCF.Windows.Forms;
+using KIPS_WMS.UI.Preklasifikacija;
 
 namespace KIPS_WMS.UI.Prijem
 {
@@ -226,15 +227,41 @@ namespace KIPS_WMS.UI.Prijem
         {
             string quantity = tbKolicina.Text;
             if (quantity.Trim().Length == 0) return;
-
+            string lines = "";
+            string normativeLines = "";
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
 
                 Convert.ToInt16(quantity);
+                if (Convert.ToInt16(_selectedLine.TrackingType) != 0)
+                {
+                    var pracenje = new Pracenje(_selectedLine.ItemNo, Convert.ToInt16(quantity), Convert.ToInt16(_selectedLine.TrackingType));
+                    DialogResult result = pracenje.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        var engine = new FileHelperEngine(typeof(SendTrackingModel));
+                        lines = engine.WriteString(pracenje._lines);
+                    }
+                }
+                _selectedLine.NormUom = "KOM";
+                _selectedLine.NormRoundingPrecision = "0,002";
+                _selectedLine.NormDeviation = "10";
+                _selectedLine.NormCoefficient = "0,5";
+                if (Convert.ToInt16(_selectedLine.NormUomType) != 0)
+                {
+                    var varijabilniNormativ = new VarijabilniNormativDijalog(_selectedLine, Convert.ToDecimal(quantity));
+                    DialogResult result = varijabilniNormativ.ShowDialog();
 
+                    if (result == DialogResult.OK)
+                    {
+                        var engine = new FileHelperEngine(typeof(SendNormativeModel));
+                        normativeLines = engine.WriteString(varijabilniNormativ._normativeLines);
+                    }
+                    
+                }
                 _ws.UpdateWarehouseReceiptLineQty("1", _receiptNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
-                    isUpdate, "", "", "", "");
+                    isUpdate, lines, normativeLines, lJedinica.Text, quantity);
 
                 DialogResult = DialogResult.OK;
                 Close();
