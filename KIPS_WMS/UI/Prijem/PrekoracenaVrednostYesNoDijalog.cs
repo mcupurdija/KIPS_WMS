@@ -23,23 +23,25 @@ namespace KIPS_WMS.UI.Prijem
             _normDeviation = normDeviation;
             _factor = factor;
 
-            label1.Text += "\nFaktor: " + normCoeff + "\nOdstupanje: " + normDeviation + "\nIzracunat faktor: " + Convert.ToDecimal(factor);
+            label1.Text += "\nFaktor: " + normCoeff + "\nOdstupanje: " + normDeviation + "\nIzračunat faktor: " + factor;
 
             var myAutoScaleFactor = new SizeF(
                 AutoScaleDimensions.Width / 96F,
                 AutoScaleDimensions.Height / 96F);
 
-            Height = (int)(myAutoScaleFactor.Height * 100);
+            Height = (int)(myAutoScaleFactor.Height * 110);
         }
 
         private void bDa_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Yes;
+            Close();
         }
 
         private void bNe_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.No;
+            Close();
         }
     }
 }

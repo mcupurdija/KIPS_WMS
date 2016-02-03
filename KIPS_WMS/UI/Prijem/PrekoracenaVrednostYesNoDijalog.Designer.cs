@@ -39,12 +39,12 @@
             // 
             this.label1.Location = new System.Drawing.Point(18, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(165, 69);
+            this.label1.Size = new System.Drawing.Size(165, 85);
             this.label1.Text = "Odstupanje je prekoračeno. Da li želite da nastavite?";
             // 
             // bDa
             // 
-            this.bDa.Location = new System.Drawing.Point(18, 81);
+            this.bDa.Location = new System.Drawing.Point(18, 97);
             this.bDa.Name = "bDa";
             this.bDa.Size = new System.Drawing.Size(72, 20);
             this.bDa.TabIndex = 1;
@@ -53,7 +53,7 @@
             // 
             // bNe
             // 
-            this.bNe.Location = new System.Drawing.Point(111, 81);
+            this.bNe.Location = new System.Drawing.Point(111, 97);
             this.bNe.Name = "bNe";
             this.bNe.Size = new System.Drawing.Size(72, 20);
             this.bNe.TabIndex = 2;
