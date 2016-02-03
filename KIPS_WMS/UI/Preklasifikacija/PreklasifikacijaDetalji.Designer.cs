@@ -189,6 +189,7 @@
             this.bStanje.Size = new System.Drawing.Size(53, 20);
             this.bStanje.TabIndex = 23;
             this.bStanje.Text = "Stanje";
+            this.bStanje.Click += new System.EventHandler(this.bStanje_Click);
             // 
             // PreklasifikacijaDetalji
             // 
