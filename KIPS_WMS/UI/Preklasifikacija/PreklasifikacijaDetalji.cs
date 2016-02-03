@@ -5,6 +5,7 @@ using FileHelpers;
 using KIPS_WMS.Model;
 using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Properties;
+using KIPS_WMS.UI.Ostalo;
 using KIPS_WMS.Web;
 
 namespace KIPS_WMS.UI.Preklasifikacija
@@ -15,6 +16,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
         private readonly List<int> lineNumbers = new List<int>();
 
         private string _itemName;
+        private string _itemVariant;
         private string _itemNo;
         private string _itemQuantity;
         private string _itemTrackingType;
@@ -24,8 +26,8 @@ namespace KIPS_WMS.UI.Preklasifikacija
         {
             InitializeComponent();
             //TODO
-            tbSaRegala.Text = "99-99-9";
-            tbNaRegal.Text = "01-01-1";
+//            tbSaRegala.Text = "99-99-9";
+//            tbNaRegal.Text = "01-01-1";
             listView1.View = View.Details;
             listView1.Columns.Add(Resources.Sifra, 100, HorizontalAlignment.Left);
             listView1.Columns.Add(Resources.Artikal, 200, HorizontalAlignment.Left);
@@ -47,6 +49,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 _itemNo = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemBarcode].ToString();
                 _itemQuantity = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString();
                 _itemTrackingType = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemTracking].ToString();
+                _itemVariant = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemVariant].ToString();
                 lbNaziv.Text = Resources.NazivArtika + ": " + _itemName;
                 lbJM.Text = Resources.JM + ": " + _itemUnitOfMeasure;
                 tbPronadji.Text = _itemNo;
@@ -183,6 +186,11 @@ namespace KIPS_WMS.UI.Preklasifikacija
         private void bNazad_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void bStanje_Click(object sender, EventArgs e)
+        {
+            new ArtikliPoRegalimaDijalog(tbSaRegala.Text, _itemNo, _itemVariant).ShowDialog();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace KIPS_WMS.UI.Prijem
     {
         private readonly WarehouseReceiptLineModel _selectedLine;
         private readonly decimal _quantity;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
 
         public List<SendNormativeModel> _normativeLines = new List<SendNormativeModel>();
 
@@ -78,7 +78,7 @@ namespace KIPS_WMS.UI.Prijem
             }
             catch (Exception ex)
             {
-                tbFaktorKonverzije.Text = "/";
+                tbFaktorKonverzije.Text = "0";
             }
         }
 

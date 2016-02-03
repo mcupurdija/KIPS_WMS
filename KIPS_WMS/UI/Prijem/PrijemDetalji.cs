@@ -22,7 +22,7 @@ namespace KIPS_WMS.UI.Prijem
     {
         private readonly string _receiptNo;
         private WarehouseReceiptLineModel _selectedLine;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private Object[] _dbItem;
         private bool _lineSplit;
 
@@ -244,10 +244,6 @@ namespace KIPS_WMS.UI.Prijem
                         lines = engine.WriteString(pracenje._lines);
                     }
                 }
-                _selectedLine.NormUom = "KOM";
-                _selectedLine.NormRoundingPrecision = "0,002";
-                _selectedLine.NormDeviation = "10";
-                _selectedLine.NormCoefficient = "0,5";
                 if (Convert.ToInt16(_selectedLine.NormUomType) != 0)
                 {
                     var varijabilniNormativ = new VarijabilniNormativDijalog(_selectedLine, Convert.ToDecimal(quantity));
@@ -260,10 +256,11 @@ namespace KIPS_WMS.UI.Prijem
                     }
                     
                 }
-                _ws.UpdateWarehouseReceiptLineQty("1", _receiptNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
+                _ws.UpdateWarehouseReceiptLineQty(RegistryUtils.GetLastUsername(), _receiptNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
                     isUpdate, lines, normativeLines, lJedinica.Text, quantity);
 
-                DialogResult = DialogResult.OK;
+                DialogResult = DialogResult.Yes;
+                listBox1.Dispose();
                 Close();
             }
             catch (FormatException)
@@ -293,7 +290,7 @@ namespace KIPS_WMS.UI.Prijem
                 Cursor.Current = Cursors.WaitCursor;
 
                 int newLineNo = 0;
-                _ws.SplitDocumentLine("1", Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
 
                 _lineSplit = true;
 
@@ -317,7 +314,8 @@ namespace KIPS_WMS.UI.Prijem
 
                 string warehouseReceiptsCsv = String.Empty;
 
-                _ws.GetWarehouseReceiptLines("1", "1", "1", _receiptNo, ref warehouseReceiptsCsv);
+                var loginData = RegistryUtils.GetLoginData();
+                _ws.GetWarehouseReceiptLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _receiptNo, ref warehouseReceiptsCsv);
 
                 var engine = new FileHelperEngine(typeof(WarehouseReceiptLineModel));
                 WarehouseReceiptLines = ((WarehouseReceiptLineModel[])engine.ReadString(warehouseReceiptsCsv)).ToList();
@@ -345,7 +343,7 @@ namespace KIPS_WMS.UI.Prijem
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.ChangeBinOnDocumentLine("1", Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode;
             }
@@ -366,7 +364,8 @@ namespace KIPS_WMS.UI.Prijem
 
         private void bNazad_Click(object sender, EventArgs e)
         {
-            DialogResult = _lineSplit ? DialogResult.OK : DialogResult.Abort;
+            DialogResult = _lineSplit ? DialogResult.Yes : DialogResult.No;
+            listBox1.Dispose();
             Close();
         }
     }
