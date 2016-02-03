@@ -111,6 +111,7 @@
             // 
             // lbNaziv
             // 
+            this.lbNaziv.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.lbNaziv.Location = new System.Drawing.Point(6, 26);
             this.lbNaziv.Name = "lbNaziv";
             this.lbNaziv.Size = new System.Drawing.Size(231, 15);
@@ -118,6 +119,7 @@
             // 
             // label1
             // 
+            this.label1.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.label1.Location = new System.Drawing.Point(6, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 20);
@@ -125,6 +127,7 @@
             // 
             // label2
             // 
+            this.label2.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.label2.Location = new System.Drawing.Point(6, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 20);
@@ -132,20 +135,23 @@
             // 
             // tbSaRegala
             // 
-            this.tbSaRegala.Location = new System.Drawing.Point(78, 44);
+            this.tbSaRegala.Location = new System.Drawing.Point(66, 44);
             this.tbSaRegala.Name = "tbSaRegala";
-            this.tbSaRegala.Size = new System.Drawing.Size(100, 21);
+            this.tbSaRegala.Size = new System.Drawing.Size(112, 21);
             this.tbSaRegala.TabIndex = 10;
+            this.tbSaRegala.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbSaRegala_KeyUp);
             // 
             // tbNaRegal
             // 
-            this.tbNaRegal.Location = new System.Drawing.Point(78, 65);
+            this.tbNaRegal.Location = new System.Drawing.Point(66, 62);
             this.tbNaRegal.Name = "tbNaRegal";
-            this.tbNaRegal.Size = new System.Drawing.Size(100, 21);
+            this.tbNaRegal.Size = new System.Drawing.Size(112, 21);
             this.tbNaRegal.TabIndex = 11;
+            this.tbNaRegal.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbNaRegal_KeyUp);
             // 
             // label3
             // 
+            this.label3.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.label3.Location = new System.Drawing.Point(6, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 20);
@@ -153,21 +159,22 @@
             // 
             // tbKolicina
             // 
-            this.tbKolicina.Location = new System.Drawing.Point(78, 92);
+            this.tbKolicina.Location = new System.Drawing.Point(66, 89);
             this.tbKolicina.Name = "tbKolicina";
             this.tbKolicina.Size = new System.Drawing.Size(32, 21);
             this.tbKolicina.TabIndex = 14;
             // 
             // lbJM
             // 
-            this.lbJM.Location = new System.Drawing.Point(116, 93);
+            this.lbJM.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
+            this.lbJM.Location = new System.Drawing.Point(104, 93);
             this.lbJM.Name = "lbJM";
-            this.lbJM.Size = new System.Drawing.Size(62, 20);
+            this.lbJM.Size = new System.Drawing.Size(74, 20);
             this.lbJM.Text = "JM: ";
             // 
             // bDodaj
             // 
-            this.bDodaj.Location = new System.Drawing.Point(184, 90);
+            this.bDodaj.Location = new System.Drawing.Point(184, 92);
             this.bDodaj.Name = "bDodaj";
             this.bDodaj.Size = new System.Drawing.Size(53, 20);
             this.bDodaj.TabIndex = 16;

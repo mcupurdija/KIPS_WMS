@@ -85,6 +85,7 @@
             this.tbSN.Name = "tbSN";
             this.tbSN.Size = new System.Drawing.Size(70, 21);
             this.tbSN.TabIndex = 4;
+            this.tbSN.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbSN_KeyUp);
             // 
             // tbKolicina
             // 

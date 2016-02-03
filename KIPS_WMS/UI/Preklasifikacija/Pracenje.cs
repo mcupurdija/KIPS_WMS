@@ -76,7 +76,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 {
                     "1", tbSN.Text
                 });
-                _lines.Add(new SendTrackingModel(_trackingType + "", "", "", "1"));
+                _lines.Add(new SendTrackingModel(_trackingType + "", tbSN.Text, "", "1"));
                 listView1.Items.Add(lvi);
                 _currQuantity++;
                 lKolicina.Text = _currQuantity + "/" + _quantity;
@@ -100,7 +100,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
                             {
                                 tbKolicina.Text, tbSN.Text, dtDatum.Text
                             });
-                            _lines.Add(new SendTrackingModel(_trackingType + "", "", dtDatum.Text, tbKolicina.Text));
+                            _lines.Add(new SendTrackingModel(_trackingType + "", tbSN.Text, dtDatum.Text, tbKolicina.Text));
                         }
                         if (_trackingType == 3)
                         {
@@ -108,7 +108,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
                             {
                                 tbKolicina.Text, tbSN.Text
                             });
-                            _lines.Add(new SendTrackingModel(_trackingType + "", "", "", tbKolicina.Text));
+                            _lines.Add(new SendTrackingModel(_trackingType + "", tbSN.Text, "", tbKolicina.Text));
                         }
                         listView1.Items.Add(lvi);
                         _currQuantity += Int32.Parse(tbKolicina.Text);
@@ -156,6 +156,14 @@ namespace KIPS_WMS.UI.Preklasifikacija
             listView1.Items.RemoveAt(index);
             _currQuantity -= Int32.Parse(_lines[index].Quantity);
             lKolicina.Text = _currQuantity + "/" + _quantity;
+        }
+
+        private void tbSN_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                tbKolicina.Focus();
+            }
         }
     }
 }

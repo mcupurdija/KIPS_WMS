@@ -27,15 +27,15 @@ namespace KIPS_WMS.UI.Preklasifikacija
         {
             InitializeComponent();
             //TODO
-//            tbSaRegala.Text = "99-99-9";
-//            tbNaRegal.Text = "01-01-1";
+            //            tbSaRegala.Text = "99-99-9";
+            //            tbNaRegal.Text = "01-01-1";
             listView1.View = View.Details;
             listView1.Columns.Add(Resources.Sifra, 100, HorizontalAlignment.Left);
             listView1.Columns.Add(Resources.Artikal, 200, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.Kolicina, 50, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.JM, 50, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.SaRegala, 100, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.NaRegal, 100, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.Kolicina, 80, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.JM, 80, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.SaRegala, 130, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.NaRegal, 130, HorizontalAlignment.Left);
         }
 
         private void bPronadji_Click(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
             {
                 _itemName = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemDescription].ToString();
                 _itemUnitOfMeasure = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
-                _itemNo = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemBarcode].ToString();
+                _itemNo = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemCode].ToString();
                 _itemQuantity = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString();
                 _itemTrackingType = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemTracking].ToString();
                 _itemVariant = odabirArtikla.SelectedItem[DatabaseModel.ItemDbModel.ItemVariant].ToString();
@@ -64,10 +64,10 @@ namespace KIPS_WMS.UI.Preklasifikacija
             {
                 //List<object> baseUnit = SQLiteHelper.oneRowQuery(DbStatements.FindItemBaseUnitOfMeasure,
                 //            new object[] { _itemNo });
-                int kolicina = Int32.Parse(tbKolicina.Text)*Int32.Parse(_itemQuantity);
+                int kolicina = Int32.Parse(tbKolicina.Text) * Int32.Parse(_itemQuantity);
                 string lines = "";
                 int numOfLine = 0;
-                Cursor.Current = Cursors.WaitCursor;
+
 
                 if (Int32.Parse(_itemTrackingType) != 0)
                 {
@@ -75,12 +75,12 @@ namespace KIPS_WMS.UI.Preklasifikacija
                     DialogResult result = pracenje.ShowDialog();
 
                     if (result == DialogResult.OK)
-                    {                      
+                    {
                         var engine = new FileHelperEngine(typeof(SendTrackingModel));
-                        lines = engine.WriteString(pracenje._lines);                        
+                        lines = engine.WriteString(pracenje._lines);
                     }
                 }
-
+                Cursor.Current = Cursors.WaitCursor;
                 var loginData = RegistryUtils.GetLoginData();
                 _ws.BinToBinMovement(_itemNo, tbKolicina.Text.Trim(), _itemUnitOfMeasure, loginData.Magacin, loginData.Podmagacin, tbSaRegala.Text,
                     tbNaRegal.Text, RegistryUtils.GetLastUsername(), lines, ref numOfLine);
@@ -191,7 +191,8 @@ namespace KIPS_WMS.UI.Preklasifikacija
 
                     var _items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
                         new object[] { tbPronadji.Text });
-                    if (_items.Count > 1 || _items.Count == 0) {
+                    if (_items.Count > 1 || _items.Count == 0)
+                    {
                         MessageBox.Show("Neispravan barkod.", Resources.Greska);
                     }
                     else
@@ -199,7 +200,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
 
                         _itemName = _items[0][DatabaseModel.ItemDbModel.ItemDescription].ToString();
                         _itemUnitOfMeasure = _items[0][DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
-                        _itemNo = _items[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
+                        _itemNo = _items[0][DatabaseModel.ItemDbModel.ItemCode].ToString();
                         _itemQuantity = _items[0][DatabaseModel.ItemDbModel.ItemQuantity].ToString();
                         _itemTrackingType = _items[0][DatabaseModel.ItemDbModel.ItemTracking].ToString();
                         _itemVariant = _items[0][DatabaseModel.ItemDbModel.ItemVariant].ToString();
@@ -218,6 +219,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 finally
                 {
                     Cursor.Current = Cursors.Default;
+                    tbSaRegala.Focus();
                 }
             }
         }
@@ -230,6 +232,22 @@ namespace KIPS_WMS.UI.Preklasifikacija
         private void bStanje_Click(object sender, EventArgs e)
         {
             new ArtikliPoRegalimaDijalog(tbSaRegala.Text, _itemNo, _itemVariant).ShowDialog();
+        }
+
+        private void tbSaRegala_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                tbNaRegal.Focus();
+            }
+        }
+
+        private void tbNaRegal_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                tbKolicina.Focus();
+            }
         }
     }
 }
