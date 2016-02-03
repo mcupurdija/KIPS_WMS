@@ -13,7 +13,7 @@ namespace KIPS_WMS.UI
 {
     public partial class NoviKupciDijalog : NonFullscreenForm
     {
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
 
         public NoviKupciDijalog()
         {

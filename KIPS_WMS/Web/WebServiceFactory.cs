@@ -4,14 +4,14 @@ namespace KIPS_WMS.Web
 {
     static class WebServiceFactory
     {
-        public static KIPS_wms WebService;
+        public static MobileWMSSync WebService;
 
         static WebServiceFactory()
         {
-            WebService = new KIPS_wms { Url = Utils.NavWsUrl, Credentials = Utils.GoProCredentials, PreAuthenticate = true };
+            WebService = new MobileWMSSync { Url = Utils.NavWsUrl, Credentials = Utils.KipsCredentials, PreAuthenticate = true };
         }
 
-        public static KIPS_wms GetWebService()
+        public static MobileWMSSync GetWebService()
         {
             return WebService;
         }

@@ -15,7 +15,7 @@ namespace KIPS_WMS.UI.Skladistenje
     public partial class SkladistenjeLinije : Form
     {
         private readonly string _receiptNo;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private List<WarehouseReceiptLineModel> _filteredReceiptLines;
         private WarehouseReceiptLineModel _selectedLine;
         private List<WarehouseReceiptLineModel> _warehouseReceiptLines;

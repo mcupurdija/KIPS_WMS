@@ -15,7 +15,7 @@ namespace KIPS_WMS
     public partial class Form1 : Form
     {
 
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private List<WarehouseReceiptLineModel> _warehouseReceiptLines;
 
 

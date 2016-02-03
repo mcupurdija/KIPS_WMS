@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Data;
@@ -17,7 +16,7 @@ namespace KIPS_WMS.UI.Prijem
     public partial class PrijemLinije : Form
     {
         private readonly string _receiptNo;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private string _barcode;
         private List<WarehouseReceiptLineModel> _filteredReceiptLines;
         private WarehouseReceiptLineModel _selectedLine;
@@ -30,7 +29,7 @@ namespace KIPS_WMS.UI.Prijem
             _receiptNo = receiptNo;
             listBox1.DrawMode = DrawMode.OwnerDrawFixed;
 
-            new Thread(GetData).Start();
+            GetData();
         }
 
         protected override void OnActivated(EventArgs e)
@@ -49,13 +48,14 @@ namespace KIPS_WMS.UI.Prijem
 
                 string warehouseReceiptsCsv = String.Empty;
 
-                _ws.GetWarehouseReceiptLines("1", "1", "1", _receiptNo, ref warehouseReceiptsCsv);
+                var loginData = RegistryUtils.GetLoginData();
+                _ws.GetWarehouseReceiptLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _receiptNo, ref warehouseReceiptsCsv);
 
                 var engine = new FileHelperEngine(typeof (WarehouseReceiptLineModel));
                 _warehouseReceiptLines =
                     ((WarehouseReceiptLineModel[]) engine.ReadString(warehouseReceiptsCsv)).ToList();
 
-                listBox1.Invoke(new EventHandler((sender, e) => DisplayData(null, false)));
+                DisplayData(null, false);
             }
             catch (Exception ex)
             {
@@ -69,15 +69,23 @@ namespace KIPS_WMS.UI.Prijem
 
         private void bNazad_Click(object sender, EventArgs e)
         {
+            listBox1.Dispose();
             Close();
         }
 
         private void DisplayData(string filterText, bool fromScanner)
         {
+            if (_warehouseReceiptLines == null)
+            {
+                return;
+            }
+
             listBox1.Items.Clear();
             listBox1.ItemHeight = 40;
 
             _selectedLine = null;
+            listBox1.SelectedIndex = -1;
+
             _filteredReceiptLines = filterText != null
                 ? _warehouseReceiptLines.FindAll(x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
                 : _warehouseReceiptLines;
@@ -91,6 +99,7 @@ namespace KIPS_WMS.UI.Prijem
             {
                 listBox1.Items.Add(new ListItem {Tag = 0});
             }
+
             tbPronadji.Focus();
 
             if (fromScanner && _filteredReceiptLines.Count == 1)

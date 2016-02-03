@@ -59,5 +59,10 @@ namespace KIPS_WMS.UI
         {
             new Form1().Show();
         }
+
+        private void bLogout_Click(object sender, System.EventArgs e)
+        {
+            Close();
+        }
     }
 }

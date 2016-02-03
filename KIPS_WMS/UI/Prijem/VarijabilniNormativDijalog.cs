@@ -10,7 +10,7 @@ namespace KIPS_WMS.UI.Prijem
     public partial class VarijabilniNormativDijalog : NonFullscreenForm
     {
         private readonly WarehouseReceiptLineModel _selectedLine;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
 
         public VarijabilniNormativDijalog(WarehouseReceiptLineModel selectedLine)
         {

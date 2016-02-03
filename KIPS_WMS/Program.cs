@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using KIPS_WMS.UI;
+using KIPS_WMS.UI.Ostalo;
 
 namespace KIPS_WMS
 {
@@ -12,7 +12,7 @@ namespace KIPS_WMS
         [MTAThread]
         static void Main()
         {
-            Application.Run(new Meni());
+            Application.Run(new Login());
         }
     }
 }

@@ -11,7 +11,7 @@ namespace KIPS_WMS.UI.Prijem
     public partial class OstecenoNekompletnoDijalog : NonFullscreenForm
     {
         private readonly WarehouseReceiptLineModel _selectedLine;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
 
         public OstecenoNekompletnoDijalog(WarehouseReceiptLineModel selectedLine)
         {
@@ -48,7 +48,7 @@ namespace KIPS_WMS.UI.Prijem
 
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.UpdateDamagedIncomplete("1", Convert.ToString(Utils.DocumentTypePrijem),
+                _ws.UpdateDamagedIncomplete(RegistryUtils.GetLastUsername(), Convert.ToString(Utils.DocumentTypePrijem),
                     Convert.ToInt16(_selectedLine.LineNo), damaged, incomplete);
 
                 DialogResult = DialogResult.OK;

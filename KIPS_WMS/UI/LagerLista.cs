@@ -11,7 +11,7 @@ namespace KIPS_WMS.UI
 {
     public partial class LagerLista : Form
     {
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private ItemLagerListModel[] _items;
 
         public LagerLista()
@@ -39,7 +39,7 @@ namespace KIPS_WMS.UI
 
                 string csvLagerList = string.Empty;
 
-                _ws.GetItemLagerList(itemNo, string.Empty, string.Empty, "001", ref csvLagerList);
+                _ws.GetItemLagerList(itemNo, string.Empty, string.Empty, RegistryUtils.GetLoginData().Magacin, ref csvLagerList);
 
                 var engine = new FileHelperEngine(typeof(ItemLagerListModel));
                 _items = (ItemLagerListModel[])engine.ReadString(csvLagerList);

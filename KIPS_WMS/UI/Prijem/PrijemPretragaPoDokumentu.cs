@@ -15,7 +15,7 @@ namespace KIPS_WMS.UI.Prijem
 {
     public partial class PrijemPretragaPoDokumentu : Form
     {
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private List<WarehouseReceiptModel> _filteredList;
         private WarehouseReceiptModel _selectedReceipt;
         private List<WarehouseReceiptModel> _warehouseReceipts;
@@ -26,7 +26,8 @@ namespace KIPS_WMS.UI.Prijem
 
             listBox1.DrawMode = DrawMode.OwnerDrawFixed;
 
-            new Thread(GetData).Start();
+//            new Thread(GetData).Start();
+            GetData();
         }
 
         private void GetData()
@@ -37,14 +38,16 @@ namespace KIPS_WMS.UI.Prijem
 
                 string warehouseReceiptsCsv = String.Empty;
 
-                _ws.GetWarehouseReceipts("1", "001", "002", "", ref warehouseReceiptsCsv);
+                var loginData = RegistryUtils.GetLoginData();
+                _ws.GetWarehouseReceipts(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "", ref warehouseReceiptsCsv);
 
                 var engine = new FileHelperEngine(typeof (WarehouseReceiptModel));
                 _warehouseReceipts = ((WarehouseReceiptModel[]) engine.ReadString(warehouseReceiptsCsv)).ToList();
                 _warehouseReceipts.Sort((x, y) => String.Compare(x.SourceDescription, y.SourceDescription, StringComparison.Ordinal));
                 _filteredList = _warehouseReceipts;
 
-                Invoke(new EventHandler((sender, e) => DisplayData(null)));
+//                Invoke(new EventHandler((sender, e) => DisplayData(null)));
+                DisplayData(null);
             }
             catch (Exception ex)
             {

@@ -11,7 +11,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
 {
     public partial class PreklasifikacijaDetalji : Form
     {
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private readonly List<int> lineNumbers = new List<int>();
 
         private string _itemName;
@@ -73,8 +73,9 @@ namespace KIPS_WMS.UI.Preklasifikacija
                     var engine = new FileHelperEngine(typeof (SendTrackingModel));
                     string lines = engine.WriteString(pracenje._lines);
 
-                    _ws.BinToBinMovement(_itemNo, _itemQuantity, _itemUnitOfMeasure, "001", "1", tbSaRegala.Text,
-                        tbNaRegal.Text, "1", lines, ref numOfLine);
+                    var loginData = RegistryUtils.GetLoginData();
+                    _ws.BinToBinMovement(_itemNo, _itemQuantity, _itemUnitOfMeasure, loginData.Magacin, loginData.Podmagacin, tbSaRegala.Text,
+                        tbNaRegal.Text, RegistryUtils.GetLastUsername(), lines, ref numOfLine);
                     lineNumbers.Add(numOfLine);
 
                     var lvi = new ListViewItem(new[]
@@ -115,7 +116,9 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 Cursor.Current = Cursors.WaitCursor;
 
                 int index = listView1.SelectedIndices[0];
-                _ws.DeleteReclassificationLines(lineNumbers[index], "1", "001", "1", 0);
+
+                var loginData = RegistryUtils.GetLoginData();
+                _ws.DeleteReclassificationLines(lineNumbers[index], RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, 0);
                 lineNumbers.RemoveAt(index);
                 listView1.Items.RemoveAt(index);
             }
@@ -135,7 +138,8 @@ namespace KIPS_WMS.UI.Preklasifikacija
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.DeleteReclassificationLines(0, "1", "001", "1", 1);
+                var loginData = RegistryUtils.GetLoginData();
+                _ws.DeleteReclassificationLines(0, RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, 1);
                 listView1.Items.Clear();
             }
             catch (Exception ex)
@@ -155,7 +159,8 @@ namespace KIPS_WMS.UI.Preklasifikacija
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.PostReclassification("1", "001", "1", ref status);
+                var loginData = RegistryUtils.GetLoginData();
+                _ws.PostReclassification(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, ref status);
             }
             catch (Exception ex)
             {

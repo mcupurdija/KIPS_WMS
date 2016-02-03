@@ -12,7 +12,7 @@ namespace KIPS_WMS.UI.Ponude
     public partial class OdabirJediniceDijalog : NonFullscreenForm
     {
         private readonly string _itemNo;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
 
         private ItemUnitOfMeasureModel[] _itemUnitsOfMeasure;
         public ItemUnitOfMeasureModel SelectedUnitOfMeasure;
@@ -39,7 +39,7 @@ namespace KIPS_WMS.UI.Ponude
                 Cursor.Current = Cursors.WaitCursor;
 
                 string itemUnitOfMeasureCsv = String.Empty;
-                _ws.GetItemUnitsOfMeasure(_itemNo, "", ref itemUnitOfMeasureCsv);
+                _ws.GetItemUnitsOfMeasure(_itemNo, RegistryUtils.GetLastUsername(), ref itemUnitOfMeasureCsv);
 
                 var engine = new FileHelperEngine(typeof (ItemUnitOfMeasureModel));
                 _itemUnitsOfMeasure = (ItemUnitOfMeasureModel[])engine.ReadString(itemUnitOfMeasureCsv);

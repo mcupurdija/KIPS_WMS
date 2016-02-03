@@ -35,6 +35,7 @@
             this.bCrossDocking = new System.Windows.Forms.MenuItem();
             this.bUvozPodataka = new System.Windows.Forms.MenuItem();
             this.bPodesavanja = new System.Windows.Forms.MenuItem();
+            this.bLogout = new System.Windows.Forms.MenuItem();
             this.bPonude = new System.Windows.Forms.Button();
             this.bPreklasifikacija = new System.Windows.Forms.Button();
             this.bMagPrijemnice = new System.Windows.Forms.Button();
@@ -50,6 +51,7 @@
             // mainMenu1
             // 
             this.mainMenu1.MenuItems.Add(this.menuItem1);
+            this.mainMenu1.MenuItems.Add(this.bLogout);
             // 
             // menuItem1
             // 
@@ -76,6 +78,11 @@
             // 
             this.bPodesavanja.Text = "Podešavanja";
             this.bPodesavanja.Click += new System.EventHandler(this.bPodesavanja_Click);
+            // 
+            // bLogout
+            // 
+            this.bLogout.Text = "Odjavi se";
+            this.bLogout.Click += new System.EventHandler(this.bLogout_Click);
             // 
             // bPonude
             // 
@@ -170,6 +177,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
+            this.ControlBox = false;
             this.Controls.Add(this.bPopis);
             this.Controls.Add(this.bLagerLista);
             this.Controls.Add(this.bKontrolnaCena);
@@ -205,5 +213,6 @@
         private System.Windows.Forms.MenuItem bCrossDocking;
         private System.Windows.Forms.MenuItem bPodesavanja;
         private System.Windows.Forms.MenuItem bUvozPodataka;
+        private System.Windows.Forms.MenuItem bLogout;
     }
 }

@@ -17,7 +17,7 @@ namespace KIPS_WMS.UI.Ostalo
         private readonly string _binCode;
         private readonly string _itemNo;
         private readonly string _variantCode;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private List<ItemBinContentModel> _items;
 
         public ArtikliPoRegalimaDijalog(string binCode, string itemNo, string variantCode)
@@ -45,7 +45,8 @@ namespace KIPS_WMS.UI.Ostalo
 
                 string itemBinContentCsv = String.Empty;
 
-                _ws.GetItemBinContent("1", "001", "002", _binCode, _itemNo, _variantCode, ref itemBinContentCsv);
+                var loginData = RegistryUtils.GetLoginData();
+                _ws.GetItemBinContent(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _binCode, _itemNo, _variantCode, ref itemBinContentCsv);
 
                 var engine = new FileHelperEngine(typeof (ItemBinContentModel));
                 _items = ((ItemBinContentModel[]) engine.ReadString(itemBinContentCsv)).ToList();

@@ -84,6 +84,7 @@ C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Izdvajanje.IzdvajanjeLinije.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Izdvajanje.IzdvajanjePocetna.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Izdvajanje.IzdvajanjePretragaPoDokumentu.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ostalo.ArtikliPoRegalimaDijalog.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ostalo.CsvImport.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.Form1.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.LagerLista.resources
@@ -92,6 +93,7 @@ C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.NoviArtikliDijalog.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.NoviKupciDijalog.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ostalo.Login.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ostalo.OdabirMagacina.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.NovaPonuda.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.OdabirJediniceDijalog.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.PonudaKorpa.resources
@@ -103,6 +105,8 @@ C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Preklasifikacija.OdabirArtiklaDijalog.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Preklasifikacija.Pracenje.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Preklasifikacija.PreklasifikacijaDetalji.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.VarijabilniNormativDijalog.resources
+C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.OstecenoNekompletnoDijalog.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.PrijemDetalji.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.PrijemLinije.resources
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.PrijemPocetna.resources
@@ -114,6 +118,3 @@ C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.csproj.GenerateResource.Cache
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.exe
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.pdb
-C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.OstecenoNekompletnoDijalog.resources
-C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ostalo.ArtikliPoRegalimaDijalog.resources
-C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.VarijabilniNormativDijalog.resources

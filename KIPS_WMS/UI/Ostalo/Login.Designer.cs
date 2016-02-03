@@ -31,6 +31,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
+            this.bIzlaz = new System.Windows.Forms.MenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -38,6 +39,15 @@
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.bLogin = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // mainMenu1
+            // 
+            this.mainMenu1.MenuItems.Add(this.bIzlaz);
+            // 
+            // bIzlaz
+            // 
+            this.bIzlaz.Text = "Izlaz";
+            this.bIzlaz.Click += new System.EventHandler(this.bIzlaz_Click);
             // 
             // pictureBox1
             // 
@@ -53,6 +63,7 @@
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(107, 21);
             this.tbUsername.TabIndex = 1;
+            this.tbUsername.Text = "k1";
             // 
             // label1
             // 
@@ -72,8 +83,10 @@
             // 
             this.tbPassword.Location = new System.Drawing.Point(113, 117);
             this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(107, 21);
             this.tbPassword.TabIndex = 4;
+            this.tbPassword.Text = "123456";
             // 
             // bLogin
             // 
@@ -112,6 +125,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Button bLogin;
+        private System.Windows.Forms.MenuItem bIzlaz;
 
     }
 }

@@ -11,12 +11,12 @@ namespace KIPS_WMS.UI.Ponude
 {
     public partial class PonudePocetna : Form
     {
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
 
         public PonudePocetna()
         {
             InitializeComponent();
-            tbUcitaj.Text = "PPO13-003215"; // TMP
+            tbUcitaj.Text = "PPO13-003215";
 
             QuoteHeaderHelper savedQuoteHeader = RegistryUtils.GetQuoteHeader();
             if (savedQuoteHeader == null) return;
@@ -62,7 +62,7 @@ namespace KIPS_WMS.UI.Ponude
                     string customerName = String.Empty;
                     string quoteLinesCsv = String.Empty;
 
-                    _ws.GetQuote(quoteNo, "1", "", ref customerCode, ref customerName, ref isAuthenticatedCustomer,
+                    _ws.GetQuote(quoteNo, RegistryUtils.GetLastUsername(), RegistryUtils.GetLoginData().Magacin, ref customerCode, ref customerName, ref isAuthenticatedCustomer,
                         ref quoteLinesCsv);
 
                     var engine = new FileHelperEngine(typeof (ItemQuoteModel));

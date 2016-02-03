@@ -14,7 +14,7 @@ namespace KIPS_WMS.UI.Izdvajanje
 {
     public partial class IzdvajanjePretragaPoDokumentu : Form
     {
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private List<WarehouseReceiptModel> _filteredList;
         private WarehouseReceiptModel _selectedReceipt;
         private List<WarehouseReceiptModel> _warehouseReceipts;

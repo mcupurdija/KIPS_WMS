@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Data;
@@ -21,7 +19,7 @@ namespace KIPS_WMS.UI.Prijem
     {
         private readonly string _receiptNo;
         private WarehouseReceiptLineModel _selectedLine;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private Object[] _dbItem;
         private bool _lineSplit;
 
@@ -47,16 +45,6 @@ namespace KIPS_WMS.UI.Prijem
             base.OnActivated(e);
 
             Text = _receiptNo;
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
-
-            int index = WarehouseReceiptLines.IndexOf(_selectedLine);
-
-            _selectedLine.QuantityToReceive = tbKolicina.Text;
-            WarehouseReceiptLines[index] = _selectedLine;
         }
 
         private void DisplayData(string barcode)
@@ -233,11 +221,14 @@ namespace KIPS_WMS.UI.Prijem
 
                 Convert.ToInt16(quantity);
 
-                _ws.UpdateWarehouseReceiptLineQty("1", _receiptNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
+                _ws.UpdateWarehouseReceiptLineQty(RegistryUtils.GetLastUsername(), _receiptNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
                     isUpdate, "", "", "", "");
 
-                DialogResult = DialogResult.OK;
-                Close();
+
+                int index = WarehouseReceiptLines.IndexOf(_selectedLine);
+
+                _selectedLine.QuantityToReceive = tbKolicina.Text;
+                WarehouseReceiptLines[index] = _selectedLine;
             }
             catch (FormatException)
             {
@@ -266,11 +257,12 @@ namespace KIPS_WMS.UI.Prijem
                 Cursor.Current = Cursors.WaitCursor;
 
                 int newLineNo = 0;
-                _ws.SplitDocumentLine("1", Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
 
                 _lineSplit = true;
 
-                new Thread(() => GetData(newLineNo)).Start();
+//                new Thread(() => GetData(newLineNo)).Start();
+                GetData(newLineNo);
             }
             catch (Exception ex)
             {
@@ -290,14 +282,16 @@ namespace KIPS_WMS.UI.Prijem
 
                 string warehouseReceiptsCsv = String.Empty;
 
-                _ws.GetWarehouseReceiptLines("1", "1", "1", _receiptNo, ref warehouseReceiptsCsv);
+                var loginData = RegistryUtils.GetLoginData();
+                _ws.GetWarehouseReceiptLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _receiptNo, ref warehouseReceiptsCsv);
 
                 var engine = new FileHelperEngine(typeof(WarehouseReceiptLineModel));
                 WarehouseReceiptLines = ((WarehouseReceiptLineModel[])engine.ReadString(warehouseReceiptsCsv)).ToList();
 
                 _selectedLine = WarehouseReceiptLines.Find(x => x.LineNo == Convert.ToString(lineNo));
 
-                Invoke(new EventHandler((e, args) => DisplayData(null)));
+//                Invoke(new EventHandler((e, args) => DisplayData(null)));
+                DisplayData(null);
             }
             catch (Exception ex)
             {
@@ -318,7 +312,7 @@ namespace KIPS_WMS.UI.Prijem
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.ChangeBinOnDocumentLine("1", Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode;
             }
@@ -339,7 +333,16 @@ namespace KIPS_WMS.UI.Prijem
 
         private void bNazad_Click(object sender, EventArgs e)
         {
-            DialogResult = _lineSplit ? DialogResult.OK : DialogResult.Abort;
+            if (_lineSplit)
+            {
+                int index = WarehouseReceiptLines.IndexOf(_selectedLine);
+
+                _selectedLine.QuantityToReceive = tbKolicina.Text;
+                WarehouseReceiptLines[index] = _selectedLine;
+            }
+
+            listBox1.Dispose();
+            DialogResult = DialogResult.OK;
             Close();
         }
     }

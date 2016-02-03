@@ -16,7 +16,7 @@ namespace KIPS_WMS.UI.Prijem
 {
     public partial class PrijemPretragaPoArtiklu : Form
     {
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
 
         private List<Object[]> _searchedItems;
         private Object[] _selectedItem;
@@ -134,7 +134,8 @@ namespace KIPS_WMS.UI.Prijem
 
                 string warehouseReceiptsCsv = String.Empty;
 
-                _ws.GetWarehouseReceipts("1", "001", "002", itemNo, ref warehouseReceiptsCsv);
+                var loginData = RegistryUtils.GetLoginData();
+                _ws.GetWarehouseReceipts(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, itemNo, ref warehouseReceiptsCsv);
 
                 var engine = new FileHelperEngine(typeof (WarehouseReceiptModel));
                 _warehouseReceipts = ((WarehouseReceiptModel[]) engine.ReadString(warehouseReceiptsCsv)).ToList();

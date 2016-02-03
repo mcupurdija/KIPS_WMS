@@ -23,16 +23,76 @@ namespace KIPS_WMS.NAV_WS {
     /// <remarks/>
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="KIPS_wms_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms")]
-    public partial class KIPS_wms : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="MobileWMSSync_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync")]
+    public partial class MobileWMSSync : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         /// <remarks/>
-        public KIPS_wms() {
-            this.Url = "http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/KIPS_wms";
+        public MobileWMSSync() {
+            this.Url = "http://192.168.10.72:6047/TEST/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync";
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:LogIn", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="LogIn_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItems", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItems_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetItems(ref string cSVStringP, string itemNoP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime lastDateModifiedP) {
+            object[] results = this.Invoke("GetItems", new object[] {
+                        cSVStringP,
+                        itemNoP,
+                        lastDateModifiedP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetItems(string cSVStringP, string itemNoP, System.DateTime lastDateModifiedP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetItems", new object[] {
+                        cSVStringP,
+                        itemNoP,
+                        lastDateModifiedP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetItems(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemPriceAndInventory", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItemPriceAndInventory_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetItemPriceAndInventory(string itemNoP, string variantCodeP, string unitOfMeasureP, string salesQtyP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, ref string cSVStringP) {
+            object[] results = this.Invoke("GetItemPriceAndInventory", new object[] {
+                        itemNoP,
+                        variantCodeP,
+                        unitOfMeasureP,
+                        salesQtyP,
+                        customerNoP,
+                        isAuthenticatedCustomerP,
+                        locationCodeP,
+                        userIdP,
+                        cSVStringP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetItemPriceAndInventory(string itemNoP, string variantCodeP, string unitOfMeasureP, string salesQtyP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetItemPriceAndInventory", new object[] {
+                        itemNoP,
+                        variantCodeP,
+                        unitOfMeasureP,
+                        salesQtyP,
+                        customerNoP,
+                        isAuthenticatedCustomerP,
+                        locationCodeP,
+                        userIdP,
+                        cSVStringP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetItemPriceAndInventory(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:LogIn", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="LogIn_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void LogIn(string usernameP, string passwordP, ref string cSVStringP) {
             object[] results = this.Invoke("LogIn", new object[] {
                         usernameP,
@@ -56,7 +116,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetQuote", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetQuote_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetQuote", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetQuote_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetQuote(string documentNoP, string userIdP, string locationCodeP, ref string customerCodeP, ref string customerNameP, ref int isAuthenticatedCustomerP, ref string cSVStringP) {
             object[] results = this.Invoke("GetQuote", new object[] {
                         documentNoP,
@@ -94,7 +154,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:SendQuote", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="SendQuote_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SendQuote", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="SendQuote_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void SendQuote(string userIdP, string locationCodeP, ref string documentNoP, string customerNoP, int isAuthenticatedCustomerP, string cSVStringLinesP, ref int statusP, ref int creditLimitOverdoP) {
             object[] results = this.Invoke("SendQuote", new object[] {
                         userIdP,
@@ -132,7 +192,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetCustomerCreditLimit", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetCustomerCreditLimit_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetCustomerCreditLimit", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetCustomerCreditLimit_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetCustomerCreditLimit(string userIdP, string customerCodeP, ref string creditLimitP, ref string usedCreditLimitP) {
             object[] results = this.Invoke("GetCustomerCreditLimit", new object[] {
                         userIdP,
@@ -160,7 +220,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemInformation", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItemInformation_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemInformation", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItemInformation_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetItemInformation(string itemNoa47BarCodeP, string variantCodeP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, ref string cSVStringP) {
             object[] results = this.Invoke("GetItemInformation", new object[] {
                         itemNoa47BarCodeP,
@@ -192,43 +252,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemPriceAndInventory", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItemPriceAndInventory_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetItemPriceAndInventory(string itemNoP, string variantCodeP, string unitOfMeasureP, string salesQtyP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, ref string cSVStringP) {
-            object[] results = this.Invoke("GetItemPriceAndInventory", new object[] {
-                        itemNoP,
-                        variantCodeP,
-                        unitOfMeasureP,
-                        salesQtyP,
-                        customerNoP,
-                        isAuthenticatedCustomerP,
-                        locationCodeP,
-                        userIdP,
-                        cSVStringP});
-            cSVStringP = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginGetItemPriceAndInventory(string itemNoP, string variantCodeP, string unitOfMeasureP, string salesQtyP, string customerNoP, int isAuthenticatedCustomerP, string locationCodeP, string userIdP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("GetItemPriceAndInventory", new object[] {
-                        itemNoP,
-                        variantCodeP,
-                        unitOfMeasureP,
-                        salesQtyP,
-                        customerNoP,
-                        isAuthenticatedCustomerP,
-                        locationCodeP,
-                        userIdP,
-                        cSVStringP}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public void EndGetItemPriceAndInventory(System.IAsyncResult asyncResult, out string cSVStringP) {
-            object[] results = this.EndInvoke(asyncResult);
-            cSVStringP = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemUnitsOfMeasure", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItemUnitsOfMeasure_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemUnitsOfMeasure", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItemUnitsOfMeasure_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetItemUnitsOfMeasure(string itemNoP, string userIdP, ref string cSVStringP) {
             object[] results = this.Invoke("GetItemUnitsOfMeasure", new object[] {
                         itemNoP,
@@ -252,7 +276,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemLagerList", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItemLagerList_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemLagerList", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItemLagerList_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetItemLagerList(string itemNoP, string variantCodeP, string trackingCodeP, string locationCodeP, ref string cSVStringP) {
             object[] results = this.Invoke("GetItemLagerList", new object[] {
                         itemNoP,
@@ -280,31 +304,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItems", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItems_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetItems(ref string cSVStringP, string itemNoP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime lastDateModifiedP) {
-            object[] results = this.Invoke("GetItems", new object[] {
-                        cSVStringP,
-                        itemNoP,
-                        lastDateModifiedP});
-            cSVStringP = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginGetItems(string cSVStringP, string itemNoP, System.DateTime lastDateModifiedP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("GetItems", new object[] {
-                        cSVStringP,
-                        itemNoP,
-                        lastDateModifiedP}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public void EndGetItems(System.IAsyncResult asyncResult, out string cSVStringP) {
-            object[] results = this.EndInvoke(asyncResult);
-            cSVStringP = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetCustomers", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetCustomers_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetCustomers", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetCustomers_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetCustomers(ref string cSVStringP, string customerNoP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime lastDateModifiedP) {
             object[] results = this.Invoke("GetCustomers", new object[] {
                         cSVStringP,
@@ -328,7 +328,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetWarehouseReceipts", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetWarehouseReceipts_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehouseReceipts", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetWarehouseReceipts_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetWarehouseReceipts(string userIdP, string locationCodeP, string sublocationCodeP, string itemNoP, ref string cSVStringP) {
             object[] results = this.Invoke("GetWarehouseReceipts", new object[] {
                         userIdP,
@@ -356,7 +356,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetWarehouseReceiptLines", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetWarehouseReceiptLines_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehouseReceiptLines", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetWarehouseReceiptLines_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetWarehouseReceiptLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsReceiptNoP, ref string cSVStringP) {
             object[] results = this.Invoke("GetWarehouseReceiptLines", new object[] {
                         userIdP,
@@ -384,7 +384,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetReceiptLineQtyToReceive", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetReceiptLineQtyToReceive_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetReceiptLineQtyToReceive", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetReceiptLineQtyToReceive_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetReceiptLineQtyToReceive(string userIdP, string whsReceiptNoP, int whsReceiptLineNoP, ref string qtyToReceiveP) {
             object[] results = this.Invoke("GetReceiptLineQtyToReceive", new object[] {
                         userIdP,
@@ -410,7 +410,8 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:UpdateWarehouseReceiptLineQty", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="UpdateWarehouseReceiptLineQty_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:UpdateWarehouseReceiptLineQ" +
+            "ty", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="UpdateWarehouseReceiptLineQty_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void UpdateWarehouseReceiptLineQty(string userIdP, string whsReceiptNoP, int whsReceiptLineNoP, string qtyP, int isUpdateP, string trackingCSVStringP, string normCSVStringP, string scannedUoMCodeP, string qtyInScannedUoMP) {
             this.Invoke("UpdateWarehouseReceiptLineQty", new object[] {
                         userIdP,
@@ -444,7 +445,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:UpdateDamagedIncomplete", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="UpdateDamagedIncomplete_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:UpdateDamagedIncomplete", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="UpdateDamagedIncomplete_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void UpdateDamagedIncomplete(string userIdP, string documentNoP, int documentLineNoP, string damagedQtyP, string incompleteQtyP) {
             this.Invoke("UpdateDamagedIncomplete", new object[] {
                         userIdP,
@@ -470,7 +471,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:BinToBinMovement", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="BinToBinMovement_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:BinToBinMovement", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="BinToBinMovement_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void BinToBinMovement(string itemNoP, string qtyAsTxtP, string unitOfMeasureCodeP, string locationCodeP, string sublocationCodeP, string fromBinCodeP, string toBinCodeP, string userIdP, string trackingCSVStringP, ref int nAVLineNoP) {
             object[] results = this.Invoke("BinToBinMovement", new object[] {
                         itemNoP,
@@ -508,33 +509,8 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemFromAnotherBin", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItemFromAnotherBin_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetItemFromAnotherBin(ref string linesCSV, string docNo, string lineNo, string userID) {
-            object[] results = this.Invoke("GetItemFromAnotherBin", new object[] {
-                        linesCSV,
-                        docNo,
-                        lineNo,
-                        userID});
-            linesCSV = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginGetItemFromAnotherBin(string linesCSV, string docNo, string lineNo, string userID, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("GetItemFromAnotherBin", new object[] {
-                        linesCSV,
-                        docNo,
-                        lineNo,
-                        userID}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public void EndGetItemFromAnotherBin(System.IAsyncResult asyncResult, out string linesCSV) {
-            object[] results = this.EndInvoke(asyncResult);
-            linesCSV = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:DeleteReclassificationLines", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="DeleteReclassificationLines_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:DeleteReclassificationLines" +
+            "", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="DeleteReclassificationLines_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void DeleteReclassificationLines(int lineNoP, string userID, string locationCodeP, string sublocationCodeP, int deleteAllLinesP) {
             this.Invoke("DeleteReclassificationLines", new object[] {
                         lineNoP,
@@ -560,7 +536,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:PostReclassification", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="PostReclassification_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:PostReclassification", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="PostReclassification_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void PostReclassification(string userIdP, string locationCodeP, string sublocationCodeP, ref int statusP) {
             object[] results = this.Invoke("PostReclassification", new object[] {
                         userIdP,
@@ -586,7 +562,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemBinContent", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="GetItemBinContent_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemBinContent", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItemBinContent_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetItemBinContent(string userIdP, string locationCodeP, string sublocationCodeP, string binCodeP, string itemNoP, string variantCodeP, ref string cSVStringP) {
             object[] results = this.Invoke("GetItemBinContent", new object[] {
                         userIdP,
@@ -618,7 +594,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ChangeBinOnDocumentLine", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="ChangeBinOnDocumentLine_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:ChangeBinOnDocumentLine", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="ChangeBinOnDocumentLine_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void ChangeBinOnDocumentLine(string userIdP, int documentTypeP, string documentNoP, int documentLineNoP, string newBinCodeP) {
             this.Invoke("ChangeBinOnDocumentLine", new object[] {
                         userIdP,
@@ -644,7 +620,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:SplitDocumentLine", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="SplitDocumentLine_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SplitDocumentLine", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="SplitDocumentLine_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void SplitDocumentLine(string userIdP, int documentTypeP, string documentNoP, int documentLineNoP, ref int newDocumentLineNoP) {
             object[] results = this.Invoke("SplitDocumentLine", new object[] {
                         userIdP,
@@ -672,7 +648,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:TestItemHasTracking", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", ResponseElementName="TestItemHasTracking_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:TestItemHasTracking", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="TestItemHasTracking_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void TestItemHasTracking(string itemNoP, ref int trackingTypeP) {
             object[] results = this.Invoke("TestItemHasTracking", new object[] {
                         itemNoP,

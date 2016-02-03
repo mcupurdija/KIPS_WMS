@@ -24,7 +24,7 @@ namespace KIPS_WMS.UI.Ponude
 
         public List<ItemQuoteModel> QuoteItems;
 
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
 
         private readonly string _customerCode;
         private readonly int _isAuthenticated;
@@ -124,7 +124,7 @@ namespace KIPS_WMS.UI.Ponude
                 Cursor.Current = Cursors.WaitCursor;
 
                 string itemInformationCsv = String.Empty;
-                _ws.GetItemInformation(itemNo, itemVariant, _customerCode, _isAuthenticated, "001", "1",
+                _ws.GetItemInformation(itemNo, itemVariant, _customerCode, _isAuthenticated, RegistryUtils.GetLoginData().Magacin, RegistryUtils.GetLastUsername(),
                     ref itemInformationCsv);
 
                 var engine = new FileHelperEngine(typeof (ItemInformationModel));
@@ -322,7 +322,7 @@ namespace KIPS_WMS.UI.Ponude
 
                 string itemPriceInventoryCsv = String.Empty;
                 _ws.GetItemPriceAndInventory(_itemCode, _variantCode, bJedinicaMere.Text, tbKolicina.Text, _customerCode,
-                    _isAuthenticated, "001", "1", ref itemPriceInventoryCsv);
+                    _isAuthenticated, RegistryUtils.GetLoginData().Magacin, RegistryUtils.GetLastUsername(), ref itemPriceInventoryCsv);
 
                 var engine = new FileHelperEngine(typeof (ItemPriceInventoryModel));
                 var itemPriceInventory = (ItemPriceInventoryModel[]) engine.ReadString(itemPriceInventoryCsv);

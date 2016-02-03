@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms" xmlns="http://schemas.xmlsoap.org/wsdl/">
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
-    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms" xmlns="http://www.w3.org/2001/XMLSchema">
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="GetItems">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastDateModifiedP" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItems_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemPriceAndInventory">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="variantCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="unitOfMeasureP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="salesQtyP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isAuthenticatedCustomerP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItemPriceAndInventory_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="LogIn">
         <complexType>
           <sequence>
@@ -102,28 +140,6 @@
           </sequence>
         </complexType>
       </element>
-      <element name="GetItemPriceAndInventory">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="variantCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="unitOfMeasureP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="salesQtyP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="customerNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="isAuthenticatedCustomerP" type="int" />
-            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetItemPriceAndInventory_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
       <element name="GetItemUnitsOfMeasure">
         <complexType>
           <sequence>
@@ -152,22 +168,6 @@
         </complexType>
       </element>
       <element name="GetItemLagerList_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetItems">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="lastDateModifiedP" type="date" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetItems_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
@@ -302,23 +302,6 @@
           </sequence>
         </complexType>
       </element>
-      <element name="GetItemFromAnotherBin">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="linesCSV" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="docNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="lineNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="userID" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetItemFromAnotherBin_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="linesCSV" type="string" />
-          </sequence>
-        </complexType>
-      </element>
       <element name="DeleteReclassificationLines">
         <complexType>
           <sequence>
@@ -423,6 +406,18 @@
       </element>
     </schema>
   </types>
+  <message name="GetItems">
+    <part name="parameters" element="tns:GetItems" />
+  </message>
+  <message name="GetItems_Result">
+    <part name="parameters" element="tns:GetItems_Result" />
+  </message>
+  <message name="GetItemPriceAndInventory">
+    <part name="parameters" element="tns:GetItemPriceAndInventory" />
+  </message>
+  <message name="GetItemPriceAndInventory_Result">
+    <part name="parameters" element="tns:GetItemPriceAndInventory_Result" />
+  </message>
   <message name="LogIn">
     <part name="parameters" element="tns:LogIn" />
   </message>
@@ -453,12 +448,6 @@
   <message name="GetItemInformation_Result">
     <part name="parameters" element="tns:GetItemInformation_Result" />
   </message>
-  <message name="GetItemPriceAndInventory">
-    <part name="parameters" element="tns:GetItemPriceAndInventory" />
-  </message>
-  <message name="GetItemPriceAndInventory_Result">
-    <part name="parameters" element="tns:GetItemPriceAndInventory_Result" />
-  </message>
   <message name="GetItemUnitsOfMeasure">
     <part name="parameters" element="tns:GetItemUnitsOfMeasure" />
   </message>
@@ -470,12 +459,6 @@
   </message>
   <message name="GetItemLagerList_Result">
     <part name="parameters" element="tns:GetItemLagerList_Result" />
-  </message>
-  <message name="GetItems">
-    <part name="parameters" element="tns:GetItems" />
-  </message>
-  <message name="GetItems_Result">
-    <part name="parameters" element="tns:GetItems_Result" />
   </message>
   <message name="GetCustomers">
     <part name="parameters" element="tns:GetCustomers" />
@@ -519,12 +502,6 @@
   <message name="BinToBinMovement_Result">
     <part name="parameters" element="tns:BinToBinMovement_Result" />
   </message>
-  <message name="GetItemFromAnotherBin">
-    <part name="parameters" element="tns:GetItemFromAnotherBin" />
-  </message>
-  <message name="GetItemFromAnotherBin_Result">
-    <part name="parameters" element="tns:GetItemFromAnotherBin_Result" />
-  </message>
   <message name="DeleteReclassificationLines">
     <part name="parameters" element="tns:DeleteReclassificationLines" />
   </message>
@@ -561,7 +538,15 @@
   <message name="TestItemHasTracking_Result">
     <part name="parameters" element="tns:TestItemHasTracking_Result" />
   </message>
-  <portType name="KIPS_wms_Port">
+  <portType name="MobileWMSSync_Port">
+    <operation name="GetItems">
+      <input name="GetItems" message="tns:GetItems" />
+      <output name="GetItems_Result" message="tns:GetItems_Result" />
+    </operation>
+    <operation name="GetItemPriceAndInventory">
+      <input name="GetItemPriceAndInventory" message="tns:GetItemPriceAndInventory" />
+      <output name="GetItemPriceAndInventory_Result" message="tns:GetItemPriceAndInventory_Result" />
+    </operation>
     <operation name="LogIn">
       <input name="LogIn" message="tns:LogIn" />
       <output name="LogIn_Result" message="tns:LogIn_Result" />
@@ -582,10 +567,6 @@
       <input name="GetItemInformation" message="tns:GetItemInformation" />
       <output name="GetItemInformation_Result" message="tns:GetItemInformation_Result" />
     </operation>
-    <operation name="GetItemPriceAndInventory">
-      <input name="GetItemPriceAndInventory" message="tns:GetItemPriceAndInventory" />
-      <output name="GetItemPriceAndInventory_Result" message="tns:GetItemPriceAndInventory_Result" />
-    </operation>
     <operation name="GetItemUnitsOfMeasure">
       <input name="GetItemUnitsOfMeasure" message="tns:GetItemUnitsOfMeasure" />
       <output name="GetItemUnitsOfMeasure_Result" message="tns:GetItemUnitsOfMeasure_Result" />
@@ -593,10 +574,6 @@
     <operation name="GetItemLagerList">
       <input name="GetItemLagerList" message="tns:GetItemLagerList" />
       <output name="GetItemLagerList_Result" message="tns:GetItemLagerList_Result" />
-    </operation>
-    <operation name="GetItems">
-      <input name="GetItems" message="tns:GetItems" />
-      <output name="GetItems_Result" message="tns:GetItems_Result" />
     </operation>
     <operation name="GetCustomers">
       <input name="GetCustomers" message="tns:GetCustomers" />
@@ -626,10 +603,6 @@
       <input name="BinToBinMovement" message="tns:BinToBinMovement" />
       <output name="BinToBinMovement_Result" message="tns:BinToBinMovement_Result" />
     </operation>
-    <operation name="GetItemFromAnotherBin">
-      <input name="GetItemFromAnotherBin" message="tns:GetItemFromAnotherBin" />
-      <output name="GetItemFromAnotherBin_Result" message="tns:GetItemFromAnotherBin_Result" />
-    </operation>
     <operation name="DeleteReclassificationLines">
       <input name="DeleteReclassificationLines" message="tns:DeleteReclassificationLines" />
       <output name="DeleteReclassificationLines_Result" message="tns:DeleteReclassificationLines_Result" />
@@ -655,10 +628,28 @@
       <output name="TestItemHasTracking_Result" message="tns:TestItemHasTracking_Result" />
     </operation>
   </portType>
-  <binding name="KIPS_wms_Binding" type="tns:KIPS_wms_Port">
+  <binding name="MobileWMSSync_Binding" type="tns:MobileWMSSync_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="GetItems">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItems" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItems">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItems_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetItemPriceAndInventory">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemPriceAndInventory" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItemPriceAndInventory">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItemPriceAndInventory_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="LogIn">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:LogIn" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:LogIn" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="LogIn">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -667,7 +658,7 @@
       </output>
     </operation>
     <operation name="GetQuote">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetQuote" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetQuote" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetQuote">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -676,7 +667,7 @@
       </output>
     </operation>
     <operation name="SendQuote">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:SendQuote" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SendQuote" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="SendQuote">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -685,7 +676,7 @@
       </output>
     </operation>
     <operation name="GetCustomerCreditLimit">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetCustomerCreditLimit" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetCustomerCreditLimit" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetCustomerCreditLimit">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -694,7 +685,7 @@
       </output>
     </operation>
     <operation name="GetItemInformation">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemInformation" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemInformation" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetItemInformation">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -702,17 +693,8 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="GetItemPriceAndInventory">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemPriceAndInventory" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetItemPriceAndInventory">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GetItemPriceAndInventory_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="GetItemUnitsOfMeasure">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemUnitsOfMeasure" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemUnitsOfMeasure" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetItemUnitsOfMeasure">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -721,7 +703,7 @@
       </output>
     </operation>
     <operation name="GetItemLagerList">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemLagerList" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemLagerList" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetItemLagerList">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -729,17 +711,8 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="GetItems">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItems" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetItems">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GetItems_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="GetCustomers">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetCustomers" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetCustomers" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetCustomers">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -748,7 +721,7 @@
       </output>
     </operation>
     <operation name="GetWarehouseReceipts">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetWarehouseReceipts" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehouseReceipts" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetWarehouseReceipts">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -757,7 +730,7 @@
       </output>
     </operation>
     <operation name="GetWarehouseReceiptLines">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetWarehouseReceiptLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehouseReceiptLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetWarehouseReceiptLines">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -766,7 +739,7 @@
       </output>
     </operation>
     <operation name="GetReceiptLineQtyToReceive">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetReceiptLineQtyToReceive" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetReceiptLineQtyToReceive" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetReceiptLineQtyToReceive">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -775,7 +748,7 @@
       </output>
     </operation>
     <operation name="UpdateWarehouseReceiptLineQty">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:UpdateWarehouseReceiptLineQty" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:UpdateWarehouseReceiptLineQty" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="UpdateWarehouseReceiptLineQty">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -784,7 +757,7 @@
       </output>
     </operation>
     <operation name="UpdateDamagedIncomplete">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:UpdateDamagedIncomplete" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:UpdateDamagedIncomplete" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="UpdateDamagedIncomplete">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -793,7 +766,7 @@
       </output>
     </operation>
     <operation name="BinToBinMovement">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:BinToBinMovement" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:BinToBinMovement" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="BinToBinMovement">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -801,17 +774,8 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="GetItemFromAnotherBin">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemFromAnotherBin" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetItemFromAnotherBin">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GetItemFromAnotherBin_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="DeleteReclassificationLines">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:DeleteReclassificationLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:DeleteReclassificationLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="DeleteReclassificationLines">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -820,7 +784,7 @@
       </output>
     </operation>
     <operation name="PostReclassification">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:PostReclassification" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:PostReclassification" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="PostReclassification">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -829,7 +793,7 @@
       </output>
     </operation>
     <operation name="GetItemBinContent">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:GetItemBinContent" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemBinContent" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetItemBinContent">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -838,7 +802,7 @@
       </output>
     </operation>
     <operation name="ChangeBinOnDocumentLine">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:ChangeBinOnDocumentLine" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:ChangeBinOnDocumentLine" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="ChangeBinOnDocumentLine">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -847,7 +811,7 @@
       </output>
     </operation>
     <operation name="SplitDocumentLine">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:SplitDocumentLine" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SplitDocumentLine" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="SplitDocumentLine">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -856,7 +820,7 @@
       </output>
     </operation>
     <operation name="TestItemHasTracking">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/KIPS_wms:TestItemHasTracking" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:TestItemHasTracking" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="TestItemHasTracking">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -865,9 +829,9 @@
       </output>
     </operation>
   </binding>
-  <service name="KIPS_wms">
-    <port name="KIPS_wms_Port" binding="tns:KIPS_wms_Binding">
-      <address location="http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/KIPS_wms" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+  <service name="MobileWMSSync">
+    <port name="MobileWMSSync_Port" binding="tns:MobileWMSSync_Binding">
+      <address location="http://192.168.10.72:6047/TEST/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>

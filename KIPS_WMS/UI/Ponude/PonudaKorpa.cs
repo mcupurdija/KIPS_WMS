@@ -21,7 +21,7 @@ namespace KIPS_WMS.UI.Ponude
         private readonly string _customerName;
         private readonly int _isAuthenticated;
         private readonly string _quoteNo;
-        private readonly KIPS_wms _ws = WebServiceFactory.GetWebService();
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private List<ItemQuoteModel> _quoteItems;
 
         private List<Object[]> _searchedItems;
@@ -280,13 +280,13 @@ namespace KIPS_WMS.UI.Ponude
                     ItemQuantity = item.Quantity,
                     UnitOfMeasureCode = item.UnitOfMeasureCode,
                     VariantCode = "",
-                    WarehouseCode = "001"
+                    WarehouseCode = RegistryUtils.GetLoginData().Magacin
                 }).ToList();
 
                 var engine = new FileHelperEngine(typeof (SendQuoteModel));
                 string lines = engine.WriteString(quotes);
 
-                _ws.SendQuote("1", "001", ref documentNo, _customerCode, _isAuthenticated, lines, ref status,
+                _ws.SendQuote(RegistryUtils.GetLastUsername(), RegistryUtils.GetLoginData().Magacin, ref documentNo, _customerCode, _isAuthenticated, lines, ref status,
                     ref creditLimit);
 
                 if (status == 1)
