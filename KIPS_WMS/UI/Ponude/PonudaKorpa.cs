@@ -112,7 +112,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             if (listView1.SelectedIndices.Count == 1 && !_tableBasket && _selectedItem != null && e.KeyCode == Keys.Return)
             {
-                ShowLinesForm(PonudaLinija.ItemState.New);
+                ShowLinesForm(PonudaLinija.ItemState.New, false);
             }
         }
 
@@ -139,7 +139,8 @@ namespace KIPS_WMS.UI.Ponude
                 new object[] {tbPronadji.Text});
             if (_searchedItems.Count == 1)
             {
-                ShowLinesForm(PonudaLinija.ItemState.New);
+                _selectedItem = _searchedItems[0];
+                ShowLinesForm(PonudaLinija.ItemState.New, true);
             }
 
             DisplaySearchResults(_searchedItems);
@@ -191,10 +192,9 @@ namespace KIPS_WMS.UI.Ponude
             tbPronadji.Focus();
         }
 
-        private void ShowLinesForm(PonudaLinija.ItemState itemState)
+        private void ShowLinesForm(PonudaLinija.ItemState itemState, bool fromScanner)
         {
-            var ponudaLinija = new PonudaLinija(_customerCode, _isAuthenticated, itemState, _quoteNo, _selectedItem,
-                _quoteItems);
+            var ponudaLinija = new PonudaLinija(_customerCode, _isAuthenticated, itemState, _quoteNo, _selectedItem, _quoteItems, fromScanner);
             DialogResult result = ponudaLinija.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -208,7 +208,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             if (!_tableBasket && _selectedItem != null)
             {
-                ShowLinesForm(PonudaLinija.ItemState.New);
+                ShowLinesForm(PonudaLinija.ItemState.New, false);
             }
             else
             {
@@ -220,7 +220,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             if (_tableBasket && _selectedItem is ItemQuoteModel)
             {
-                ShowLinesForm(PonudaLinija.ItemState.Edit);
+                ShowLinesForm(PonudaLinija.ItemState.Edit, false);
             }
             else
             {
@@ -337,6 +337,12 @@ namespace KIPS_WMS.UI.Ponude
                 _sent = true;
                 Close();
             }
+        }
+
+        private void bOdustani_Click(object sender, EventArgs e)
+        {
+            _sent = true;
+            Close();
         }
     }
 }

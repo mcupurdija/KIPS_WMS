@@ -33,7 +33,9 @@ namespace KIPS_WMS.UI.Ponude
         private readonly Object _selectedItem;
         private string _conversionCoefficient;
         private string _itemCode;
+        private string _itemBarcode;
         private string _variantCode;
+        private bool _fromScanner;
         private bool _quantityWatcherEnabled = true;
         private bool _convertedQuantityWatcherEnabled = true;
 
@@ -44,7 +46,7 @@ namespace KIPS_WMS.UI.Ponude
         }
 
         public PonudaLinija(string customerCode, int isAuthenticated, ItemState itemState, string quoteNo,
-            object selectedItem, List<ItemQuoteModel> quoteItems)
+            object selectedItem, List<ItemQuoteModel> quoteItems, bool fromScanner)
         {
             InitializeComponent();
             MakeButtonMultiline(bUcitaj);
@@ -54,6 +56,7 @@ namespace KIPS_WMS.UI.Ponude
             _itemState = itemState;
             _quoteNo = quoteNo;
             _selectedItem = selectedItem;
+            _fromScanner = fromScanner;
             QuoteItems = quoteItems;
 
             DisplayData();
@@ -86,6 +89,7 @@ namespace KIPS_WMS.UI.Ponude
 
                     var modelNew = ((Object[]) _selectedItem);
                     _itemCode = modelNew[DatabaseModel.ItemDbModel.ItemCode].ToString();
+                    _itemBarcode = modelNew[DatabaseModel.ItemDbModel.ItemBarcode].ToString();
                     _variantCode = (modelNew[DatabaseModel.ItemDbModel.ItemVariant] ?? String.Empty).ToString();
 
                     new Thread(() => GetItemInformation(_itemCode, _variantCode)).Start();
@@ -124,7 +128,8 @@ namespace KIPS_WMS.UI.Ponude
                 Cursor.Current = Cursors.WaitCursor;
 
                 string itemInformationCsv = String.Empty;
-                _ws.GetItemInformation(itemNo, itemVariant, _customerCode, _isAuthenticated, RegistryUtils.GetLoginData().Magacin, RegistryUtils.GetLastUsername(),
+
+                _ws.GetItemInformation(_fromScanner ? _itemBarcode : itemNo, itemVariant, _customerCode, _isAuthenticated, RegistryUtils.GetLoginData().Magacin, RegistryUtils.GetLastUsername(),
                     ref itemInformationCsv);
 
                 var engine = new FileHelperEngine(typeof (ItemInformationModel));

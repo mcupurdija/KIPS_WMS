@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Data;
@@ -224,6 +223,7 @@ namespace KIPS_WMS.UI.Prijem
                 Cursor.Current = Cursors.WaitCursor;
 
                 Convert.ToInt16(quantity);
+
                 if (Convert.ToInt16(_selectedLine.TrackingType) != 0)
                 {
                     var pracenje = new Pracenje(_selectedLine.ItemNo, Convert.ToInt16(quantity), Convert.ToInt16(_selectedLine.TrackingType));
@@ -234,6 +234,7 @@ namespace KIPS_WMS.UI.Prijem
                         lines = engine.WriteString(pracenje._lines);
                     }
                 }
+
                 if (Convert.ToInt16(_selectedLine.NormUomType) != 0)
                 {
                     var varijabilniNormativ = new VarijabilniNormativDijalog(_selectedLine, Convert.ToDecimal(quantity));
@@ -246,14 +247,24 @@ namespace KIPS_WMS.UI.Prijem
                     }
                     
                 }
+
                 _ws.UpdateWarehouseReceiptLineQty(RegistryUtils.GetLastUsername(), _receiptNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
                     isUpdate, lines, normativeLines, lJedinica.Text, quantity);
 
-                UpdateLines();
+                int index = WarehouseReceiptLines.IndexOf(_selectedLine);
+                if (isUpdate == 1)
+                {
+                    CultureInfo culture = Utils.GetLocalCulture();
+                    decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text);
+                    _selectedLine.QuantityToReceive = newQty.ToString("N0", culture);
+                }
+                else
+                {
+                    _selectedLine.QuantityToReceive = tbKolicina.Text;
+                }
+                WarehouseReceiptLines[index] = _selectedLine;
 
-                DialogResult = DialogResult.Yes;
-                listBox1.Dispose();
-                Close();
+                DisplayData(null);
             }
             catch (FormatException)
             {
@@ -267,14 +278,6 @@ namespace KIPS_WMS.UI.Prijem
             {
                 Cursor.Current = Cursors.Default;
             }
-        }
-
-        private void UpdateLines()
-        {
-            int index = WarehouseReceiptLines.IndexOf(_selectedLine);
-
-            _selectedLine.QuantityToReceive = tbKolicina.Text;
-            WarehouseReceiptLines[index] = _selectedLine;
         }
 
         private void bArtikalPoRegalima_Click(object sender, EventArgs e)
@@ -294,7 +297,8 @@ namespace KIPS_WMS.UI.Prijem
 
                 _lineSplit = true;
 
-                new Thread(() => GetData(newLineNo)).Start();
+//                new Thread(() => GetData(newLineNo)).Start();
+                GetData(newLineNo);
             }
             catch (Exception ex)
             {
@@ -322,7 +326,8 @@ namespace KIPS_WMS.UI.Prijem
 
                 _selectedLine = WarehouseReceiptLines.Find(x => x.LineNo == Convert.ToString(lineNo));
 
-                Invoke(new EventHandler((e, args) => DisplayData(null)));
+//                Invoke(new EventHandler((e, args) => DisplayData(null)));
+                DisplayData(null);
             }
             catch (Exception ex)
             {
@@ -364,17 +369,7 @@ namespace KIPS_WMS.UI.Prijem
 
         private void bNazad_Click(object sender, EventArgs e)
         {
-            if (_lineSplit)
-            {
-                UpdateLines();
-
-                DialogResult = DialogResult.Yes;
-            }
-            else
-            {
-                DialogResult = DialogResult.No;
-            }
-            
+            DialogResult = DialogResult.Yes;
             listBox1.Dispose();
             Close();
         }

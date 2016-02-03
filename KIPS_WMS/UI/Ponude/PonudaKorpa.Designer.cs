@@ -42,6 +42,7 @@
             this.lKupac = new System.Windows.Forms.Label();
             this.bDodaj = new System.Windows.Forms.Button();
             this.lUkupno = new System.Windows.Forms.Label();
+            this.bOdustani = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -54,6 +55,7 @@
             this.bOpcije.MenuItems.Add(this.bIzmeniLiniju);
             this.bOpcije.MenuItems.Add(this.bObrisiLiniju);
             this.bOpcije.MenuItems.Add(this.bUcitajNoveArtikle);
+            this.bOpcije.MenuItems.Add(this.bOdustani);
             this.bOpcije.Text = "Opcije";
             // 
             // bIzmeniLiniju
@@ -140,6 +142,11 @@
             this.lUkupno.Size = new System.Drawing.Size(124, 17);
             this.lUkupno.Text = "Ukupno: 0,00";
             // 
+            // bOdustani
+            // 
+            this.bOdustani.Text = "Odustani";
+            this.bOdustani.Click += new System.EventHandler(this.bOdustani_Click);
+            // 
             // PonudaKorpa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -175,5 +182,6 @@
         private System.Windows.Forms.Button bDodaj;
         private System.Windows.Forms.MenuItem bPosalji;
         private System.Windows.Forms.Label lUkupno;
+        private System.Windows.Forms.MenuItem bOdustani;
     }
 }

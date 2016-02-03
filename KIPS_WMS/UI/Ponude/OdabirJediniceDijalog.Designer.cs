@@ -32,6 +32,7 @@
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.bPotvrdi = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.bOtkazi = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bPotvrdi
@@ -54,6 +55,15 @@
             this.listView1.View = System.Windows.Forms.View.List;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
+            // bOtkazi
+            // 
+            this.bOtkazi.Location = new System.Drawing.Point(3, 97);
+            this.bOtkazi.Name = "bOtkazi";
+            this.bOtkazi.Size = new System.Drawing.Size(72, 20);
+            this.bOtkazi.TabIndex = 2;
+            this.bOtkazi.Text = "Otkaži";
+            this.bOtkazi.Click += new System.EventHandler(this.bOtkazi_Click);
+            // 
             // OdabirJediniceDijalog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -61,6 +71,7 @@
             this.CenterFormOnScreen = true;
             this.ClientSize = new System.Drawing.Size(160, 120);
             this.ControlBox = false;
+            this.Controls.Add(this.bOtkazi);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bPotvrdi);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -75,6 +86,7 @@
 
         private System.Windows.Forms.Button bPotvrdi;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button bOtkazi;
 
     }
 }

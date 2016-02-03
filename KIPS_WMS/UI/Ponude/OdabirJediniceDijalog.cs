@@ -86,5 +86,11 @@ namespace KIPS_WMS.UI.Ponude
             }
         }
 
+        private void bOtkazi_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+
     }
 }

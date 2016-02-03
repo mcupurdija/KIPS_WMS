@@ -69,17 +69,19 @@ namespace KIPS_WMS.UI.Ostalo
 
                 Cursor.Current = Cursors.Default;
 
-                var odabirMagacina = new OdabirMagacina(_loginData);
-                DialogResult result = odabirMagacina.ShowDialog();
-
-                if (result == DialogResult.OK)
+                if (_loginData.Count > 1)
                 {
-                    LoginModel selectedWarehouse = _loginData[odabirMagacina.SelectedWarehouseIndex];
+                    var odabirMagacina = new OdabirMagacina(_loginData);
+                    DialogResult result = odabirMagacina.ShowDialog();
 
-                    RegistryUtils.SaveLastUsername(username);
-                    RegistryUtils.SaveLoginData(selectedWarehouse);
-
-                    new Meni().Show();
+                    if (result == DialogResult.OK)
+                    {
+                        SaveLoginDataContinue(username, _loginData[odabirMagacina.SelectedWarehouseIndex]);
+                    }
+                }
+                else
+                {
+                    SaveLoginDataContinue(username, _loginData[0]);
                 }
             }
             catch (Exception ex)
@@ -87,6 +89,14 @@ namespace KIPS_WMS.UI.Ostalo
                 Utils.GeneralExceptionProcessing(ex);
                 Cursor.Current = Cursors.Default;
             }
+        }
+
+        private void SaveLoginDataContinue(string username, LoginModel selectedWarehouse)
+        {
+            RegistryUtils.SaveLastUsername(username);
+            RegistryUtils.SaveLoginData(selectedWarehouse);
+
+            new Meni().Show();
         }
 
         private void bIzlaz_Click(object sender, EventArgs e)
