@@ -32,13 +32,6 @@ namespace KIPS_WMS.UI.Ponude
                     case SearchType.Scanner:
                         _customers = SQLiteHelper.multiRowQuery(DbStatements.FindCustomersStatementBarcode,
                             new object[] {tbPronadji.Text});
-                        if (_customers.Count == 1)
-                        {
-                            new PonudaKorpa(_customers[0][DatabaseModel.CustomerDbModel.CustomerCode].ToString(),
-                                _customers[0][DatabaseModel.CustomerDbModel.CustomerName].ToString(), 1, String.Empty,
-                                new List<ItemQuoteModel>()).Show();
-                            Close();
-                        }
                         break;
                     case SearchType.Button:
                         _customers = SQLiteHelper.multiRowQuery(DbStatements.FindCustomersStatementComplete,
@@ -46,25 +39,35 @@ namespace KIPS_WMS.UI.Ponude
                         break;
                 }
 
-                lvKupci.Clear();
-                lvKupci.View = View.Details;
-                lvKupci.Columns.Add(Resources.Sifra, 120, HorizontalAlignment.Left);
-                lvKupci.Columns.Add(Resources.ImeKupca, 200, HorizontalAlignment.Left);
-
-                foreach (var customer in _customers)
+                if (_customers.Count == 1)
                 {
-                    var lvi = new ListViewItem(new[]
+                    new PonudaKorpa(_customers[0][DatabaseModel.CustomerDbModel.CustomerCode].ToString(),
+                        _customers[0][DatabaseModel.CustomerDbModel.CustomerName].ToString(), 1, String.Empty,
+                        new List<ItemQuoteModel>()).Show();
+                    Close();
+                }
+                else
+                {
+                    lvKupci.Clear();
+                    lvKupci.View = View.Details;
+                    lvKupci.Columns.Add(Resources.Sifra, 120, HorizontalAlignment.Left);
+                    lvKupci.Columns.Add(Resources.ImeKupca, 200, HorizontalAlignment.Left);
+
+                    foreach (var customer in _customers)
+                    {
+                        var lvi = new ListViewItem(new[]
                     {
                         customer[DatabaseModel.CustomerDbModel.CustomerCode].ToString(),
                         customer[DatabaseModel.CustomerDbModel.CustomerName].ToString()
                     });
-                    lvKupci.Items.Add(lvi);
-                }
+                        lvKupci.Items.Add(lvi);
+                    }
 
-                if (lvKupci.Items.Count > 0)
-                {
-                    lvKupci.Focus();
-                    lvKupci.Items[0].Selected = true;
+                    if (lvKupci.Items.Count > 0)
+                    {
+                        lvKupci.Focus();
+                        lvKupci.Items[0].Selected = true;
+                    }
                 }
             }
         }

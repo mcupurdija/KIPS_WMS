@@ -41,14 +41,14 @@ namespace KIPS_WMS.UI.Prijem
                 {
                     Convert.ToInt16(damaged);
                 }
-                if (damaged.Length > 0)
+                if (incomplete.Length > 0)
                 {
                     Convert.ToInt16(incomplete);
                 }
 
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.UpdateDamagedIncomplete(RegistryUtils.GetLastUsername(), Convert.ToString(Utils.DocumentTypePrijem),
+                _ws.UpdateDamagedIncomplete(RegistryUtils.GetLastUsername(), _selectedLine.DocumentNo,
                     Convert.ToInt16(_selectedLine.LineNo), damaged, incomplete);
 
                 DialogResult = DialogResult.OK;

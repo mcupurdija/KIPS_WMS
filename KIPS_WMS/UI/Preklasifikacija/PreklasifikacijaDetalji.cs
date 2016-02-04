@@ -169,6 +169,8 @@ namespace KIPS_WMS.UI.Preklasifikacija
 
                 var loginData = RegistryUtils.GetLoginData();
                 _ws.PostReclassification(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, ref status);
+                listView1.Items.Clear();
+                MessageBox.Show("Uspešno proknjiženo!");
             }
             catch (Exception ex)
             {
