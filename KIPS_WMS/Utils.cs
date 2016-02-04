@@ -28,9 +28,10 @@ namespace KIPS_WMS
         public static NetworkCredential GoProCredentials = new NetworkCredential("wurthtest", "remote", "gopro");
         public static NetworkCredential KipsCredentials = new NetworkCredential("gopro", "Sifra123", "KIPS");
 
-        private const string PrintServerAddress = "http://192.168.1.106/";
-        public const string PrintServerApiPath = PrintServerAddress + "WMSPrintServer/api/Print";
-        public const string PrintServerApiTestPath = PrintServerAddress + "WMSPrintServer/api/Test";
+        private const string GoProPrintServerAddress = "http://192.168.1.106/";
+        private const string KipsPrintServerAddress = "http://192.168.10.18/";
+        public const string PrintServerApiPath = KipsPrintServerAddress + "KIPSPrintServer/api/Print";
+        public const string PrintServerApiTestPath = KipsPrintServerAddress + "KIPSPrintServer/api/Test";
 
         public const string DateTimeApiPath = "http://api.timezonedb.com/?zone=Europe/Belgrade&format=json&key=5LSDOP8B3LXP";
 
