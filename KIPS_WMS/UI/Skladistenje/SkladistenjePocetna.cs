@@ -18,7 +18,8 @@ namespace KIPS_WMS.UI.Skladistenje
 
         private void bArtikal_Click(object sender, EventArgs e)
         {
-
+            new SkladistenjePretragaPoArtiklu().Show();
+            Close();
         }
     }
 }

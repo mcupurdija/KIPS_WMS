@@ -23,7 +23,7 @@ namespace KIPS_WMS.UI.Prijem
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private Object[] _dbItem;
         private bool _lineSplit;
-        private LoginModel loginData = RegistryUtils.GetLoginData();
+        private readonly LoginModel _loginData = RegistryUtils.GetLoginData();
 
         public List<WarehouseReceiptLineModel> WarehouseReceiptLines;
 
@@ -37,7 +37,8 @@ namespace KIPS_WMS.UI.Prijem
             _selectedLine = selectedLine;
             WarehouseReceiptLines = warehouseReceiptLines;
 
-            if (loginData.SkeniranjeBarkodaNaPrijemu == 0) {
+            if (_loginData.SkeniranjeBarkodaNaPrijemu == 0)
+            {
                 tbRegal.Visible = false;
                 label1.Visible = false;
             }
@@ -219,21 +220,22 @@ namespace KIPS_WMS.UI.Prijem
 
         private void UpdateLine(int isUpdate)
         {
-            
-            if (loginData.SkeniranjeBarkodaNaPrijemu == 1) {
-                if (tbRegal.Text.Trim().Length == 0 || tbRegal.Text.Trim()!=_selectedLine.BinCode) {
-                    MessageBox.Show("Potrebno je skenirati šifru regala.");
-                    return;
-                }
+            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim().Length == 0 || tbRegal.Text.Trim() != _selectedLine.BinCode))
+            {
+                MessageBox.Show("Potrebno je skenirati šifru regala.");
+                return;
             }
+
             string quantity = tbKolicina.Text;
+            string uomQuantity = tbJedinicaKolicina.Text;
             if (quantity.Trim().Length == 0) return;
 
             string lines = "";
             string normativeLines = "";
             try
             {
-                Convert.ToInt16(quantity);
+                if (Convert.ToInt16(quantity) < 0) return;
+                if (Convert.ToInt16(uomQuantity) < 0) return;
 
                 if (Convert.ToInt16(_selectedLine.TrackingType) != 0)
                 {
@@ -260,7 +262,7 @@ namespace KIPS_WMS.UI.Prijem
                 }
                 Cursor.Current = Cursors.WaitCursor;
                 _ws.UpdateWarehouseReceiptLineQty(RegistryUtils.GetLastUsername(), _receiptNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
-                    isUpdate, lines, normativeLines, lJedinica.Text, quantity);
+                    isUpdate, lines, normativeLines, lJedinica.Text, uomQuantity);
 
                 int index = WarehouseReceiptLines.IndexOf(_selectedLine);
                 if (isUpdate == 1)

@@ -37,7 +37,6 @@
             // 
             // tbSifra
             // 
-            this.tbSifra.Enabled = false;
             this.tbSifra.Location = new System.Drawing.Point(3, 3);
             this.tbSifra.Name = "tbSifra";
             this.tbSifra.Size = new System.Drawing.Size(156, 21);

@@ -113,6 +113,7 @@
             // 
             // bMagIsporuke
             // 
+            this.bMagIsporuke.Enabled = false;
             this.bMagIsporuke.Location = new System.Drawing.Point(123, 39);
             this.bMagIsporuke.Name = "bMagIsporuke";
             this.bMagIsporuke.Size = new System.Drawing.Size(114, 30);
@@ -130,6 +131,7 @@
             // 
             // bIzdvajanja
             // 
+            this.bIzdvajanja.Enabled = false;
             this.bIzdvajanja.Location = new System.Drawing.Point(123, 75);
             this.bIzdvajanja.Name = "bIzdvajanja";
             this.bIzdvajanja.Size = new System.Drawing.Size(114, 30);
@@ -139,6 +141,7 @@
             // 
             // bBarkodTest
             // 
+            this.bBarkodTest.Enabled = false;
             this.bBarkodTest.Location = new System.Drawing.Point(3, 111);
             this.bBarkodTest.Name = "bBarkodTest";
             this.bBarkodTest.Size = new System.Drawing.Size(114, 30);
@@ -147,6 +150,7 @@
             // 
             // bKontrolnaCena
             // 
+            this.bKontrolnaCena.Enabled = false;
             this.bKontrolnaCena.Location = new System.Drawing.Point(123, 111);
             this.bKontrolnaCena.Name = "bKontrolnaCena";
             this.bKontrolnaCena.Size = new System.Drawing.Size(114, 30);
@@ -164,6 +168,7 @@
             // 
             // bPopis
             // 
+            this.bPopis.Enabled = false;
             this.bPopis.Location = new System.Drawing.Point(123, 147);
             this.bPopis.Name = "bPopis";
             this.bPopis.Size = new System.Drawing.Size(114, 30);

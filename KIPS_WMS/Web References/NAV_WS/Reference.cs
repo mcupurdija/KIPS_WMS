@@ -495,6 +495,118 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePutAways", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetWarehousePutAways_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetWarehousePutAways(string userIdP, string locationCodeP, string sublocationCodeP, string itemNoP, ref string cSVStringP) {
+            object[] results = this.Invoke("GetWarehousePutAways", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        itemNoP,
+                        cSVStringP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetWarehousePutAways(string userIdP, string locationCodeP, string sublocationCodeP, string itemNoP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetWarehousePutAways", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        itemNoP,
+                        cSVStringP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetWarehousePutAways(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePutAwayLines", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetWarehousePutAwayLines_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetWarehousePutAwayLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPutAwayNoP, ref string cSVStringP) {
+            object[] results = this.Invoke("GetWarehousePutAwayLines", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        whsPutAwayNoP,
+                        cSVStringP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetWarehousePutAwayLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPutAwayNoP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetWarehousePutAwayLines", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        whsPutAwayNoP,
+                        cSVStringP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetWarehousePutAwayLines(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetPutAwayQtyToHandle", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetPutAwayQtyToHandle_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetPutAwayQtyToHandle(string userIdP, string putAwayNoP, int putAwayLineNoP, ref string qtyToHandleP) {
+            object[] results = this.Invoke("GetPutAwayQtyToHandle", new object[] {
+                        userIdP,
+                        putAwayNoP,
+                        putAwayLineNoP,
+                        qtyToHandleP});
+            qtyToHandleP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetPutAwayQtyToHandle(string userIdP, string putAwayNoP, int putAwayLineNoP, string qtyToHandleP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetPutAwayQtyToHandle", new object[] {
+                        userIdP,
+                        putAwayNoP,
+                        putAwayLineNoP,
+                        qtyToHandleP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetPutAwayQtyToHandle(System.IAsyncResult asyncResult, out string qtyToHandleP) {
+            object[] results = this.EndInvoke(asyncResult);
+            qtyToHandleP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:UpdatePutAwayLineQty", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="UpdatePutAwayLineQty_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdatePutAwayLineQty(string userIdP, string putAwayNoP, int putAwayLineNoP, string qtyP, int isUpdateP, string scannedUoMCodeP, string qtyInScannedUoMP) {
+            this.Invoke("UpdatePutAwayLineQty", new object[] {
+                        userIdP,
+                        putAwayNoP,
+                        putAwayLineNoP,
+                        qtyP,
+                        isUpdateP,
+                        scannedUoMCodeP,
+                        qtyInScannedUoMP});
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginUpdatePutAwayLineQty(string userIdP, string putAwayNoP, int putAwayLineNoP, string qtyP, int isUpdateP, string scannedUoMCodeP, string qtyInScannedUoMP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("UpdatePutAwayLineQty", new object[] {
+                        userIdP,
+                        putAwayNoP,
+                        putAwayLineNoP,
+                        qtyP,
+                        isUpdateP,
+                        scannedUoMCodeP,
+                        qtyInScannedUoMP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndUpdatePutAwayLineQty(System.IAsyncResult asyncResult) {
+            this.EndInvoke(asyncResult);
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:BinToBinMovement", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="BinToBinMovement_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void BinToBinMovement(string itemNoP, string qtyAsTxtP, string unitOfMeasureCodeP, string locationCodeP, string sublocationCodeP, string fromBinCodeP, string toBinCodeP, string userIdP, string trackingCSVStringP, ref int nAVLineNoP) {
             object[] results = this.Invoke("BinToBinMovement", new object[] {

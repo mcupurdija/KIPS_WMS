@@ -294,6 +294,77 @@
           <sequence />
         </complexType>
       </element>
+      <element name="GetWarehousePutAways">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehousePutAways_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehousePutAwayLines">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsPutAwayNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehousePutAwayLines_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetPutAwayQtyToHandle">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="putAwayNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="putAwayLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="qtyToHandleP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetPutAwayQtyToHandle_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="qtyToHandleP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdatePutAwayLineQty">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="putAwayNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="putAwayLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="qtyP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isUpdateP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="scannedUoMCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="qtyInScannedUoMP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdatePutAwayLineQty_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="BinToBinMovement">
         <complexType>
           <sequence>
@@ -534,6 +605,30 @@
   <message name="UpdateDamagedIncomplete_Result">
     <part name="parameters" element="tns:UpdateDamagedIncomplete_Result" />
   </message>
+  <message name="GetWarehousePutAways">
+    <part name="parameters" element="tns:GetWarehousePutAways" />
+  </message>
+  <message name="GetWarehousePutAways_Result">
+    <part name="parameters" element="tns:GetWarehousePutAways_Result" />
+  </message>
+  <message name="GetWarehousePutAwayLines">
+    <part name="parameters" element="tns:GetWarehousePutAwayLines" />
+  </message>
+  <message name="GetWarehousePutAwayLines_Result">
+    <part name="parameters" element="tns:GetWarehousePutAwayLines_Result" />
+  </message>
+  <message name="GetPutAwayQtyToHandle">
+    <part name="parameters" element="tns:GetPutAwayQtyToHandle" />
+  </message>
+  <message name="GetPutAwayQtyToHandle_Result">
+    <part name="parameters" element="tns:GetPutAwayQtyToHandle_Result" />
+  </message>
+  <message name="UpdatePutAwayLineQty">
+    <part name="parameters" element="tns:UpdatePutAwayLineQty" />
+  </message>
+  <message name="UpdatePutAwayLineQty_Result">
+    <part name="parameters" element="tns:UpdatePutAwayLineQty_Result" />
+  </message>
   <message name="BinToBinMovement">
     <part name="parameters" element="tns:BinToBinMovement" />
   </message>
@@ -646,6 +741,22 @@
     <operation name="UpdateDamagedIncomplete">
       <input name="UpdateDamagedIncomplete" message="tns:UpdateDamagedIncomplete" />
       <output name="UpdateDamagedIncomplete_Result" message="tns:UpdateDamagedIncomplete_Result" />
+    </operation>
+    <operation name="GetWarehousePutAways">
+      <input name="GetWarehousePutAways" message="tns:GetWarehousePutAways" />
+      <output name="GetWarehousePutAways_Result" message="tns:GetWarehousePutAways_Result" />
+    </operation>
+    <operation name="GetWarehousePutAwayLines">
+      <input name="GetWarehousePutAwayLines" message="tns:GetWarehousePutAwayLines" />
+      <output name="GetWarehousePutAwayLines_Result" message="tns:GetWarehousePutAwayLines_Result" />
+    </operation>
+    <operation name="GetPutAwayQtyToHandle">
+      <input name="GetPutAwayQtyToHandle" message="tns:GetPutAwayQtyToHandle" />
+      <output name="GetPutAwayQtyToHandle_Result" message="tns:GetPutAwayQtyToHandle_Result" />
+    </operation>
+    <operation name="UpdatePutAwayLineQty">
+      <input name="UpdatePutAwayLineQty" message="tns:UpdatePutAwayLineQty" />
+      <output name="UpdatePutAwayLineQty_Result" message="tns:UpdatePutAwayLineQty_Result" />
     </operation>
     <operation name="BinToBinMovement">
       <input name="BinToBinMovement" message="tns:BinToBinMovement" />
@@ -823,6 +934,42 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="UpdateDamagedIncomplete_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetWarehousePutAways">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePutAways" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetWarehousePutAways">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetWarehousePutAways_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetWarehousePutAwayLines">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePutAwayLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetWarehousePutAwayLines">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetWarehousePutAwayLines_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetPutAwayQtyToHandle">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetPutAwayQtyToHandle" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetPutAwayQtyToHandle">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetPutAwayQtyToHandle_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdatePutAwayLineQty">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:UpdatePutAwayLineQty" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdatePutAwayLineQty">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdatePutAwayLineQty_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

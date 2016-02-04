@@ -80,6 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JsonHelper.cs" />
+    <Compile Include="Model\WarehousePutAwayLineModel.cs" />
+    <Compile Include="Model\WarehousePutAwayModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\ItemBinContentModel.cs" />
     <Compile Include="Model\DateTimeModel.cs" />
@@ -309,8 +311,16 @@
       <DependentUpon>PrijemPretragaPoDokumentu.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Skladistenje\SkladistenjeDetalji.resx">
+      <DependentUpon>SkladistenjeDetalji.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Skladistenje\SkladistenjeLinije.resx">
       <DependentUpon>SkladistenjeLinije.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Skladistenje\SkladistenjePretragaPoArtiklu.resx">
+      <DependentUpon>SkladistenjePretragaPoArtiklu.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Skladistenje\SkladistenjePretragaPoDokumentu.resx">
@@ -474,11 +484,23 @@
     <Compile Include="UI\Prijem\PrijemPretragaPoDokumentu.Designer.cs">
       <DependentUpon>PrijemPretragaPoDokumentu.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Skladistenje\SkladistenjeDetalji.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Skladistenje\SkladistenjeDetalji.Designer.cs">
+      <DependentUpon>SkladistenjeDetalji.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Skladistenje\SkladistenjeLinije.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Skladistenje\SkladistenjeLinije.Designer.cs">
       <DependentUpon>SkladistenjeLinije.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Skladistenje\SkladistenjePretragaPoArtiklu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Skladistenje\SkladistenjePretragaPoArtiklu.Designer.cs">
+      <DependentUpon>SkladistenjePretragaPoArtiklu.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Skladistenje\SkladistenjePretragaPoDokumentu.cs">
       <SubType>Form</SubType>
