@@ -22,6 +22,8 @@ namespace KIPS_WMS.UI.Skladistenje
         private WarehousePutAwayLineModel _selectedLine;
         private List<WarehousePutAwayLineModel> _warehousePutAwayLines;
 
+        private LoginModel loginData = RegistryUtils.GetLoginData();
+
         public SkladistenjeLinije(string putAwayNo)
         {
             InitializeComponent();
@@ -48,7 +50,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
                 string warehousePutAwaysCsv = String.Empty;
 
-                var loginData = RegistryUtils.GetLoginData();
+                
                 _ws.GetWarehousePutAwayLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _putAwayNo, ref warehousePutAwaysCsv);
 
                 var engine = new FileHelperEngine(typeof (WarehousePutAwayLineModel));
@@ -236,11 +238,21 @@ namespace KIPS_WMS.UI.Skladistenje
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
+                int status = -1;
 
-                _ws.SetDocumentStatus(Utils.DocumentTypeSkladistenje, _putAwayNo, 1);
+                _ws.RegisterWhsDocument(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, Utils.DocumentTypeSkladistenje
+                    , _putAwayNo, ref status);
 
-                listBox1.Dispose();
-                Close();
+                if (status == 1)
+                {
+                    MessageBox.Show("Uspešno registrovano skladištenje.");
+                    listBox1.Dispose();
+                    Close();
+                }
+                else {
+                    MessageBox.Show( "Greška pri skladištenju", Resources.Greska);
+                }
+                
             }
             catch (Exception ex)
             {

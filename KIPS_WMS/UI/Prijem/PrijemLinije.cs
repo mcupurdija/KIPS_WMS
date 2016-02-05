@@ -120,6 +120,18 @@ namespace KIPS_WMS.UI.Prijem
                 _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
                 DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
             }
+            if (query.Count == 0) {
+                query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
+                new object[] { tbPronadji.Text.Trim() });
+                if (query.Count == 1)
+                {
+                    _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
+                    DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
+                }
+                else{
+                    MessageBox.Show("Nije pronađen aritkal.", Resources.Greska);
+                }
+            }
         }
 
         private void bPronadji_Click(object sender, EventArgs e)

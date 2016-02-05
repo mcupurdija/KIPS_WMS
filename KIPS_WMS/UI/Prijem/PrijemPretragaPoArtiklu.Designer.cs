@@ -67,6 +67,7 @@
             this.tbPronadji.Name = "tbPronadji";
             this.tbPronadji.Size = new System.Drawing.Size(156, 21);
             this.tbPronadji.TabIndex = 1;
+            this.tbPronadji.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPronadji_KeyUp);
             // 
             // listBox1
             // 

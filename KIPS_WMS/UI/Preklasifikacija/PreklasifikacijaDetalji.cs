@@ -193,9 +193,13 @@ namespace KIPS_WMS.UI.Preklasifikacija
 
                     var _items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
                         new object[] { tbPronadji.Text });
-                    if (_items.Count > 1 || _items.Count == 0)
+                    if (_items.Count == 0) {
+                        _items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
+                        new object[] { tbPronadji.Text });
+                    }
+                    if (_items.Count == 0)
                     {
-                        MessageBox.Show("Neispravan barkod.", Resources.Greska);
+                        MessageBox.Show("Nije pronađen artikal.", Resources.Greska);
                     }
                     else
                     {

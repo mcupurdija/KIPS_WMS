@@ -142,7 +142,15 @@ namespace KIPS_WMS.UI.Ponude
                 _selectedItem = _searchedItems[0];
                 ShowLinesForm(PonudaLinija.ItemState.New, true);
             }
-
+            if (_searchedItems.Count == 0) {
+                _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
+                new object[] { tbPronadji.Text });
+                if (_searchedItems.Count > 0)
+                {
+                    _selectedItem = _searchedItems[0];
+                    ShowLinesForm(PonudaLinija.ItemState.New, true);
+                }
+            }
             DisplaySearchResults(_searchedItems);
         }
 

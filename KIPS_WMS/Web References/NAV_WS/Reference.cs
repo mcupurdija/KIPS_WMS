@@ -836,6 +836,36 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:RegisterWhsDocument", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="RegisterWhsDocument_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RegisterWhsDocument(string userIdP, string locationCodeP, string sublocationCodeP, int documentTypeP, string whsDocumentNoP, ref int statusP) {
+            object[] results = this.Invoke("RegisterWhsDocument", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        documentTypeP,
+                        whsDocumentNoP,
+                        statusP});
+            statusP = ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginRegisterWhsDocument(string userIdP, string locationCodeP, string sublocationCodeP, int documentTypeP, string whsDocumentNoP, int statusP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("RegisterWhsDocument", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        documentTypeP,
+                        whsDocumentNoP,
+                        statusP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndRegisterWhsDocument(System.IAsyncResult asyncResult, out int statusP) {
+            object[] results = this.EndInvoke(asyncResult);
+            statusP = ((int)(results[0]));
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemBinContent", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItemBinContent_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetItemBinContent(string userIdP, string locationCodeP, string sublocationCodeP, string binCodeP, string itemNoP, string variantCodeP, ref string cSVStringP) {
             object[] results = this.Invoke("GetItemBinContent", new object[] {

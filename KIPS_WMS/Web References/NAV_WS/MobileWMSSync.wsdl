@@ -509,6 +509,25 @@
           </sequence>
         </complexType>
       </element>
+      <element name="RegisterWhsDocument">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentTypeP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="whsDocumentNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="RegisterWhsDocument_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="GetItemBinContent">
         <complexType>
           <sequence>
@@ -748,6 +767,12 @@
   <message name="PostReclassification_Result">
     <part name="parameters" element="tns:PostReclassification_Result" />
   </message>
+  <message name="RegisterWhsDocument">
+    <part name="parameters" element="tns:RegisterWhsDocument" />
+  </message>
+  <message name="RegisterWhsDocument_Result">
+    <part name="parameters" element="tns:RegisterWhsDocument_Result" />
+  </message>
   <message name="GetItemBinContent">
     <part name="parameters" element="tns:GetItemBinContent" />
   </message>
@@ -884,6 +909,10 @@
     <operation name="PostReclassification">
       <input name="PostReclassification" message="tns:PostReclassification" />
       <output name="PostReclassification_Result" message="tns:PostReclassification_Result" />
+    </operation>
+    <operation name="RegisterWhsDocument">
+      <input name="RegisterWhsDocument" message="tns:RegisterWhsDocument" />
+      <output name="RegisterWhsDocument_Result" message="tns:RegisterWhsDocument_Result" />
     </operation>
     <operation name="GetItemBinContent">
       <input name="GetItemBinContent" message="tns:GetItemBinContent" />
@@ -1153,6 +1182,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="PostReclassification_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="RegisterWhsDocument">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:RegisterWhsDocument" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="RegisterWhsDocument">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="RegisterWhsDocument_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

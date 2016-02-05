@@ -122,6 +122,7 @@
             // 
             // bSkladistenja
             // 
+            this.bSkladistenja.Enabled = false;
             this.bSkladistenja.Location = new System.Drawing.Point(3, 75);
             this.bSkladistenja.Name = "bSkladistenja";
             this.bSkladistenja.Size = new System.Drawing.Size(114, 30);
@@ -168,6 +169,7 @@
             // 
             // bPopis
             // 
+            this.bPopis.Enabled = false;
             this.bPopis.Location = new System.Drawing.Point(123, 147);
             this.bPopis.Name = "bPopis";
             this.bPopis.Size = new System.Drawing.Size(114, 30);
