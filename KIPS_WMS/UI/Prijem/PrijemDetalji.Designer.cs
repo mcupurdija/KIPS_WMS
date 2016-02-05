@@ -112,13 +112,15 @@ namespace KIPS_WMS.UI.Prijem
             this.tbKolicina.Size = new System.Drawing.Size(78, 21);
             this.tbKolicina.TabIndex = 2;
             this.tbKolicina.Text = "1";
+            this.tbKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKolicina_KeyPress);
             // 
             // tbBarkod
             // 
-            this.tbBarkod.Location = new System.Drawing.Point(3, 140);
+            this.tbBarkod.Location = new System.Drawing.Point(3, 141);
             this.tbBarkod.Name = "tbBarkod";
             this.tbBarkod.Size = new System.Drawing.Size(110, 21);
             this.tbBarkod.TabIndex = 3;
+            this.tbBarkod.TextChanged += new System.EventHandler(this.tbBarkod_TextChanged);
             this.tbBarkod.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbBarkod_KeyUp);
             // 
             // lJedinica
@@ -126,7 +128,6 @@ namespace KIPS_WMS.UI.Prijem
             this.lJedinica.Location = new System.Drawing.Point(119, 141);
             this.lJedinica.Name = "lJedinica";
             this.lJedinica.Size = new System.Drawing.Size(52, 20);
-            this.lJedinica.Text = "PAK";
             this.lJedinica.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // tbJedinicaKolicina
@@ -136,6 +137,7 @@ namespace KIPS_WMS.UI.Prijem
             this.tbJedinicaKolicina.Size = new System.Drawing.Size(60, 21);
             this.tbJedinicaKolicina.TabIndex = 5;
             this.tbJedinicaKolicina.TextChanged += new System.EventHandler(this.tbJedinicaKolicina_TextChanged);
+            this.tbJedinicaKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbJedinicaKolicina_KeyPress);
             // 
             // listBox1
             // 

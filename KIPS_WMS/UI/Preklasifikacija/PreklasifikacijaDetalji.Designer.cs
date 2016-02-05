@@ -163,6 +163,7 @@
             this.tbKolicina.Name = "tbKolicina";
             this.tbKolicina.Size = new System.Drawing.Size(32, 21);
             this.tbKolicina.TabIndex = 14;
+            this.tbKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKolicina_KeyPress);
             // 
             // lbJM
             // 

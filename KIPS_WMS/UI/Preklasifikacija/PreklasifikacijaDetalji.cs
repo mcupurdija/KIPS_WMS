@@ -64,7 +64,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
             {
                 //List<object> baseUnit = SQLiteHelper.oneRowQuery(DbStatements.FindItemBaseUnitOfMeasure,
                 //            new object[] { _itemNo });
-                int kolicina = Int32.Parse(tbKolicina.Text) * Int32.Parse(_itemQuantity);
+                decimal kolicina = decimal.Parse(tbKolicina.Text, Utils.GetLocalCulture()) * decimal.Parse(_itemQuantity);
                 string lines = "";
                 int numOfLine = 0;
 
@@ -249,6 +249,17 @@ namespace KIPS_WMS.UI.Preklasifikacija
             if (e.KeyCode == Keys.Enter)
             {
                 tbKolicina.Focus();
+            }
+        }
+
+        private void tbKolicina_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+            {
+                tbKolicina.Text += ",";
+                tbKolicina.SelectionStart = tbKolicina.Text.Length;
+                tbKolicina.SelectionLength = 0;
+                e.Handled = true;
             }
         }
     }

@@ -24,6 +24,7 @@ namespace KIPS_WMS.UI.Prijem
         private Object[] _dbItem;
         private bool _lineSplit;
         private readonly LoginModel _loginData = RegistryUtils.GetLoginData();
+        decimal coefficient = 0;
 
         public List<WarehouseReceiptLineModel> WarehouseReceiptLines;
 
@@ -43,7 +44,7 @@ namespace KIPS_WMS.UI.Prijem
                 label1.Visible = false;
             }
 
-//            _selectedLine.UnitOfMeasureCode = "PAK";
+            //            _selectedLine.UnitOfMeasureCode = "PAK";
 
             DisplayData(barcode);
         }
@@ -90,7 +91,7 @@ namespace KIPS_WMS.UI.Prijem
         {
             int index = e.Index;
 
-            e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
+            e.DrawBackground(index % 2 == 0 ? SystemColors.Control : Color.White);
 
             string text = String.Empty;
             switch (index)
@@ -123,7 +124,7 @@ namespace KIPS_WMS.UI.Prijem
 
             e.Graphics.DrawString(text,
                 new Font(FontFamily.GenericSansSerif, 9F, FontStyle.Regular), brush, e.Bounds.Left + 3, e.Bounds.Top,
-                new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
         }
 
         private string GetRemainingQuantity()
@@ -156,11 +157,14 @@ namespace KIPS_WMS.UI.Prijem
         private void ProcessBarcode(string barcode)
         {
             tbJedinicaKolicina.Text = String.Empty;
-            List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode, new object[] {barcode});
+            List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode, new object[] { barcode });
+            
             if (query.Count == 1)
             {
                 _dbItem = query[0];
                 lJedinica.Text = _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
+                
+                coefficient = GetCoefficient(_selectedLine.ItemNo, _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString());
                 tbJedinicaKolicina.Text = "1";
             }
             else
@@ -175,14 +179,13 @@ namespace KIPS_WMS.UI.Prijem
             {
                 if (_dbItem == null) return;
 
-                int coefficient = IsLineInPrimaryUnitOfMeasure(_selectedLine.ItemNo, _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString());
+               
+                decimal scannedItemQuantity = int.Parse(_dbItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString());
+                decimal unitQuantity = decimal.Parse(tbJedinicaKolicina.Text, Utils.GetLocalCulture());
 
-                int scannedItemQuantity = int.Parse(_dbItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString());
-                int unitQuantity = int.Parse(tbJedinicaKolicina.Text);
-
-                tbKolicina.Text = coefficient > 1
-                    ? ((scannedItemQuantity*unitQuantity)/coefficient).ToString(CultureInfo.InvariantCulture)
-                    : (scannedItemQuantity*unitQuantity).ToString(CultureInfo.InvariantCulture);
+                tbKolicina.Text = (scannedItemQuantity / coefficient) != 1
+                    ? ((scannedItemQuantity / coefficient) * unitQuantity).ToString("N3", Utils.GetLocalCulture())
+                    : (unitQuantity).ToString("N3", Utils.GetLocalCulture());
             }
             catch (Exception)
             {
@@ -190,15 +193,20 @@ namespace KIPS_WMS.UI.Prijem
             }
         }
 
-        private int IsLineInPrimaryUnitOfMeasure(string itemNo, string scannedItemUnitOfMeasure)
+        private decimal GetCoefficient(string itemNo, string scannedItemUnitOfMeasure)
         {
             try
             {
-                object query = SQLiteHelper.simpleQuery(DbStatements.FindItemBaseUnitOfMeasure, new object[] {itemNo});
-                if (query != null && !string.Equals(scannedItemUnitOfMeasure, query.ToString(), StringComparison.OrdinalIgnoreCase))
+                //object query = SQLiteHelper.simpleQuery(DbStatements.FindItemBaseUnitOfMeasure, new object[] {itemNo});
+                //if (query != null && !string.Equals(scannedItemUnitOfMeasure, query.ToString(), StringComparison.OrdinalIgnoreCase))
+                //{
+                //    object query2 = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity, new object[] {itemNo, _selectedLine.UnitOfMeasureCode});
+                //    return int.Parse(query2.ToString());
+                //}
+                object query = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity, new object[] { itemNo, _selectedLine.UnitOfMeasureCode });
+                if (query != null)
                 {
-                    object query2 = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity, new object[] {itemNo, _selectedLine.UnitOfMeasureCode});
-                    return int.Parse(query2.ToString());
+                    return decimal.Parse(query.ToString());
                 }
             }
             catch (Exception)
@@ -220,7 +228,7 @@ namespace KIPS_WMS.UI.Prijem
 
         private void UpdateLine(int isUpdate)
         {
-            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim().Length == 0 || tbRegal.Text.Trim() != _selectedLine.BinCode))
+            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim() != _selectedLine.BinCode))
             {
                 MessageBox.Show("Potrebno je skenirati šifru regala.");
                 return;
@@ -228,18 +236,21 @@ namespace KIPS_WMS.UI.Prijem
 
             string quantity = tbKolicina.Text;
             string uomQuantity = tbJedinicaKolicina.Text;
+            if (uomQuantity.Trim().Length == 0) {
+                uomQuantity = "0";
+            }
             if (quantity.Trim().Length == 0) return;
 
             string lines = "";
             string normativeLines = "";
             try
             {
-                if (Convert.ToInt16(quantity) < 0) return;
-                if (Convert.ToInt16(uomQuantity) < 0) return;
+                if (decimal.Parse(quantity) < 0) return;
+                if (decimal.Parse(uomQuantity) < 0) return;
 
                 if (Convert.ToInt16(_selectedLine.TrackingType) != 0)
                 {
-                    var pracenje = new Pracenje(_selectedLine.ItemNo, Convert.ToInt16(quantity), Convert.ToInt16(_selectedLine.TrackingType));
+                    var pracenje = new Pracenje(_selectedLine.ItemNo, decimal.Parse(quantity), Convert.ToInt16(_selectedLine.TrackingType));
                     DialogResult result = pracenje.ShowDialog();
                     if (result == DialogResult.OK)
                     {
@@ -250,7 +261,7 @@ namespace KIPS_WMS.UI.Prijem
 
                 if (Convert.ToInt16(_selectedLine.NormUomType) != 0)
                 {
-                    var varijabilniNormativ = new VarijabilniNormativDijalog(_selectedLine, Convert.ToDecimal(quantity));
+                    var varijabilniNormativ = new VarijabilniNormativDijalog(_selectedLine, decimal.Parse(quantity));
                     DialogResult result = varijabilniNormativ.ShowDialog();
 
                     if (result == DialogResult.OK)
@@ -258,11 +269,11 @@ namespace KIPS_WMS.UI.Prijem
                         var engine = new FileHelperEngine(typeof(SendNormativeModel));
                         normativeLines = engine.WriteString(varijabilniNormativ._normativeLines);
                     }
-                    
+
                 }
                 Cursor.Current = Cursors.WaitCursor;
-                _ws.UpdateWarehouseReceiptLineQty(RegistryUtils.GetLastUsername(), _receiptNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
-                    isUpdate, lines, normativeLines, lJedinica.Text, uomQuantity);
+                _ws.UpdateWarehouseReceiptLineQty(RegistryUtils.GetLastUsername(), _receiptNo, Convert.ToInt16(_selectedLine.LineNo), 
+                    quantity, isUpdate, lines, normativeLines, lJedinica.Text, uomQuantity);
 
                 int index = WarehouseReceiptLines.IndexOf(_selectedLine);
                 if (isUpdate == 1)
@@ -310,7 +321,7 @@ namespace KIPS_WMS.UI.Prijem
 
                 _lineSplit = true;
 
-//                new Thread(() => GetData(newLineNo)).Start();
+                //                new Thread(() => GetData(newLineNo)).Start();
                 GetData(newLineNo);
             }
             catch (Exception ex)
@@ -339,7 +350,7 @@ namespace KIPS_WMS.UI.Prijem
 
                 _selectedLine = WarehouseReceiptLines.Find(x => x.LineNo == Convert.ToString(lineNo));
 
-//                Invoke(new EventHandler((e, args) => DisplayData(null)));
+                //                Invoke(new EventHandler((e, args) => DisplayData(null)));
                 DisplayData(null);
             }
             catch (Exception ex)
@@ -385,6 +396,33 @@ namespace KIPS_WMS.UI.Prijem
             DialogResult = DialogResult.Yes;
             listBox1.Dispose();
             Close();
+        }
+
+        private void tbBarkod_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbJedinicaKolicina_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+            {
+                tbJedinicaKolicina.Text += ",";
+                tbJedinicaKolicina.SelectionStart = tbJedinicaKolicina.Text.Length;
+                tbJedinicaKolicina.SelectionLength = 0;
+                e.Handled = true;
+            }
+        }
+
+        private void tbKolicina_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+            {
+                tbKolicina.Text += ",";
+                tbKolicina.SelectionStart = tbKolicina.Text.Length;
+                tbKolicina.SelectionLength = 0;
+                e.Handled = true;
+            }
         }
     }
 }

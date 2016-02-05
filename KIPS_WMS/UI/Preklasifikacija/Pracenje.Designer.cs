@@ -93,6 +93,7 @@
             this.tbKolicina.Name = "tbKolicina";
             this.tbKolicina.Size = new System.Drawing.Size(70, 21);
             this.tbKolicina.TabIndex = 8;
+            this.tbKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKolicina_KeyPress);
             // 
             // bDodaj
             // 

@@ -365,6 +365,77 @@
           <sequence />
         </complexType>
       </element>
+      <element name="GetWarehousePicks">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehousePicks_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehousePickLines">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsPutAwayNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehousePickLines_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetPickLineQtyToHandle">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="putAwayNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="putAwayLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="qtyToHandleP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetPickLineQtyToHandle_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="qtyToHandleP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdatePickLineQty">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="putAwayNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="putAwayLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="qtyP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isUpdateP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="scannedUoMCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="qtyInScannedUoMP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdatePickLineQty_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="BinToBinMovement">
         <complexType>
           <sequence>
@@ -629,6 +700,30 @@
   <message name="UpdatePutAwayLineQty_Result">
     <part name="parameters" element="tns:UpdatePutAwayLineQty_Result" />
   </message>
+  <message name="GetWarehousePicks">
+    <part name="parameters" element="tns:GetWarehousePicks" />
+  </message>
+  <message name="GetWarehousePicks_Result">
+    <part name="parameters" element="tns:GetWarehousePicks_Result" />
+  </message>
+  <message name="GetWarehousePickLines">
+    <part name="parameters" element="tns:GetWarehousePickLines" />
+  </message>
+  <message name="GetWarehousePickLines_Result">
+    <part name="parameters" element="tns:GetWarehousePickLines_Result" />
+  </message>
+  <message name="GetPickLineQtyToHandle">
+    <part name="parameters" element="tns:GetPickLineQtyToHandle" />
+  </message>
+  <message name="GetPickLineQtyToHandle_Result">
+    <part name="parameters" element="tns:GetPickLineQtyToHandle_Result" />
+  </message>
+  <message name="UpdatePickLineQty">
+    <part name="parameters" element="tns:UpdatePickLineQty" />
+  </message>
+  <message name="UpdatePickLineQty_Result">
+    <part name="parameters" element="tns:UpdatePickLineQty_Result" />
+  </message>
   <message name="BinToBinMovement">
     <part name="parameters" element="tns:BinToBinMovement" />
   </message>
@@ -757,6 +852,22 @@
     <operation name="UpdatePutAwayLineQty">
       <input name="UpdatePutAwayLineQty" message="tns:UpdatePutAwayLineQty" />
       <output name="UpdatePutAwayLineQty_Result" message="tns:UpdatePutAwayLineQty_Result" />
+    </operation>
+    <operation name="GetWarehousePicks">
+      <input name="GetWarehousePicks" message="tns:GetWarehousePicks" />
+      <output name="GetWarehousePicks_Result" message="tns:GetWarehousePicks_Result" />
+    </operation>
+    <operation name="GetWarehousePickLines">
+      <input name="GetWarehousePickLines" message="tns:GetWarehousePickLines" />
+      <output name="GetWarehousePickLines_Result" message="tns:GetWarehousePickLines_Result" />
+    </operation>
+    <operation name="GetPickLineQtyToHandle">
+      <input name="GetPickLineQtyToHandle" message="tns:GetPickLineQtyToHandle" />
+      <output name="GetPickLineQtyToHandle_Result" message="tns:GetPickLineQtyToHandle_Result" />
+    </operation>
+    <operation name="UpdatePickLineQty">
+      <input name="UpdatePickLineQty" message="tns:UpdatePickLineQty" />
+      <output name="UpdatePickLineQty_Result" message="tns:UpdatePickLineQty_Result" />
     </operation>
     <operation name="BinToBinMovement">
       <input name="BinToBinMovement" message="tns:BinToBinMovement" />
@@ -970,6 +1081,42 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="UpdatePutAwayLineQty_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetWarehousePicks">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePicks" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetWarehousePicks">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetWarehousePicks_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetWarehousePickLines">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePickLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetWarehousePickLines">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetWarehousePickLines_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetPickLineQtyToHandle">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetPickLineQtyToHandle" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetPickLineQtyToHandle">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetPickLineQtyToHandle_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdatePickLineQty">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:UpdatePickLineQty" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdatePickLineQty">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdatePickLineQty_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

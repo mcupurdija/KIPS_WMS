@@ -59,13 +59,8 @@ namespace KIPS_WMS.UI
 
         private void bPopis_Click(object sender, System.EventArgs e)
         {
-            WarehouseReceiptLineModel wrlm = new WarehouseReceiptLineModel();
-            wrlm.UnitOfMeasureCode = "PAK";
-            wrlm.NormUom ="KOM";
-            wrlm.NormRoundingPrecision = "0,002";
-            wrlm.NormDeviation = "10";
-            wrlm.NormCoefficient = "0,5";
-            new VarijabilniNormativDijalog(wrlm, Convert.ToDecimal("250,00")).Show();
+            Pracenje pracenje = new Pracenje("145472", new decimal(3.5), 3);
+            pracenje.Show();
         }
 
         private void bLogout_Click(object sender, System.EventArgs e)
