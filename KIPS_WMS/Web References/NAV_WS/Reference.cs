@@ -32,6 +32,34 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePutAways", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetWarehousePutAways_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetWarehousePutAways(string userIdP, string locationCodeP, string sublocationCodeP, string itemNoP, ref string cSVStringP) {
+            object[] results = this.Invoke("GetWarehousePutAways", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        itemNoP,
+                        cSVStringP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetWarehousePutAways(string userIdP, string locationCodeP, string sublocationCodeP, string itemNoP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetWarehousePutAways", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        itemNoP,
+                        cSVStringP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetWarehousePutAways(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:LogIn", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="LogIn_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void LogIn(string usernameP, string passwordP, ref string cSVStringP) {
             object[] results = this.Invoke("LogIn", new object[] {
@@ -492,34 +520,6 @@ namespace KIPS_WMS.NAV_WS {
         /// <remarks/>
         public void EndUpdateDamagedIncomplete(System.IAsyncResult asyncResult) {
             this.EndInvoke(asyncResult);
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePutAways", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetWarehousePutAways_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetWarehousePutAways(string userIdP, string locationCodeP, string sublocationCodeP, string itemNoP, ref string cSVStringP) {
-            object[] results = this.Invoke("GetWarehousePutAways", new object[] {
-                        userIdP,
-                        locationCodeP,
-                        sublocationCodeP,
-                        itemNoP,
-                        cSVStringP});
-            cSVStringP = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginGetWarehousePutAways(string userIdP, string locationCodeP, string sublocationCodeP, string itemNoP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("GetWarehousePutAways", new object[] {
-                        userIdP,
-                        locationCodeP,
-                        sublocationCodeP,
-                        itemNoP,
-                        cSVStringP}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public void EndGetWarehousePutAways(System.IAsyncResult asyncResult, out string cSVStringP) {
-            object[] results = this.EndInvoke(asyncResult);
-            cSVStringP = ((string)(results[0]));
         }
         
         /// <remarks/>

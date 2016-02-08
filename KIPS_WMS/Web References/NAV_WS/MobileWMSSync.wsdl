@@ -2,6 +2,24 @@
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="GetWarehousePutAways">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehousePutAways_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="LogIn">
         <complexType>
           <sequence>
@@ -294,24 +312,6 @@
           <sequence />
         </complexType>
       </element>
-      <element name="GetWarehousePutAways">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetWarehousePutAways_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
       <element name="GetWarehousePutAwayLines">
         <complexType>
           <sequence>
@@ -599,6 +599,12 @@
       </element>
     </schema>
   </types>
+  <message name="GetWarehousePutAways">
+    <part name="parameters" element="tns:GetWarehousePutAways" />
+  </message>
+  <message name="GetWarehousePutAways_Result">
+    <part name="parameters" element="tns:GetWarehousePutAways_Result" />
+  </message>
   <message name="LogIn">
     <part name="parameters" element="tns:LogIn" />
   </message>
@@ -694,12 +700,6 @@
   </message>
   <message name="UpdateDamagedIncomplete_Result">
     <part name="parameters" element="tns:UpdateDamagedIncomplete_Result" />
-  </message>
-  <message name="GetWarehousePutAways">
-    <part name="parameters" element="tns:GetWarehousePutAways" />
-  </message>
-  <message name="GetWarehousePutAways_Result">
-    <part name="parameters" element="tns:GetWarehousePutAways_Result" />
   </message>
   <message name="GetWarehousePutAwayLines">
     <part name="parameters" element="tns:GetWarehousePutAwayLines" />
@@ -798,6 +798,10 @@
     <part name="parameters" element="tns:TestItemHasTracking_Result" />
   </message>
   <portType name="MobileWMSSync_Port">
+    <operation name="GetWarehousePutAways">
+      <input name="GetWarehousePutAways" message="tns:GetWarehousePutAways" />
+      <output name="GetWarehousePutAways_Result" message="tns:GetWarehousePutAways_Result" />
+    </operation>
     <operation name="LogIn">
       <input name="LogIn" message="tns:LogIn" />
       <output name="LogIn_Result" message="tns:LogIn_Result" />
@@ -861,10 +865,6 @@
     <operation name="UpdateDamagedIncomplete">
       <input name="UpdateDamagedIncomplete" message="tns:UpdateDamagedIncomplete" />
       <output name="UpdateDamagedIncomplete_Result" message="tns:UpdateDamagedIncomplete_Result" />
-    </operation>
-    <operation name="GetWarehousePutAways">
-      <input name="GetWarehousePutAways" message="tns:GetWarehousePutAways" />
-      <output name="GetWarehousePutAways_Result" message="tns:GetWarehousePutAways_Result" />
     </operation>
     <operation name="GetWarehousePutAwayLines">
       <input name="GetWarehousePutAwayLines" message="tns:GetWarehousePutAwayLines" />
@@ -933,6 +933,15 @@
   </portType>
   <binding name="MobileWMSSync_Binding" type="tns:MobileWMSSync_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="GetWarehousePutAways">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePutAways" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetWarehousePutAways">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetWarehousePutAways_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="LogIn">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:LogIn" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="LogIn">
@@ -1074,15 +1083,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="UpdateDamagedIncomplete_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="GetWarehousePutAways">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePutAways" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetWarehousePutAways">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GetWarehousePutAways_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

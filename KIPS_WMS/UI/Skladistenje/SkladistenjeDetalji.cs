@@ -250,7 +250,7 @@ namespace KIPS_WMS.UI.Skladistenje
                 if (isUpdate == 1)
                 {
                     CultureInfo culture = Utils.GetLocalCulture();
-                    decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text);
+                    decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text, culture);
                     _selectedLine.QuantityToReceive = newQty.ToString("N0", culture);
                 }
                 else

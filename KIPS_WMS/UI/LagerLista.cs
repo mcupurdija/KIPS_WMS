@@ -39,7 +39,7 @@ namespace KIPS_WMS.UI
 
                 string csvLagerList = string.Empty;
 
-                _ws.GetItemLagerList(itemNo, string.Empty, string.Empty, RegistryUtils.GetLoginData().Magacin, ref csvLagerList);
+                _ws.GetItemLagerList(itemNo, string.Empty, string.Empty, "", ref csvLagerList);
 
                 var engine = new FileHelperEngine(typeof(ItemLagerListModel));
                 _items = (ItemLagerListModel[])engine.ReadString(csvLagerList);

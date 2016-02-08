@@ -15,9 +15,9 @@ namespace KIPS_WMS.UI.Izdvajanje
     public partial class IzdvajanjePretragaPoDokumentu : Form
     {
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
-        private List<WarehousePutAwayModel> _filteredList;
-        private WarehousePutAwayModel _selectedPick;
-        private List<WarehousePutAwayModel> _warehousePicks;
+        private List<WarehousePickModel> _filteredList;
+        private WarehousePickModel _selectedPick;
+        private List<WarehousePickModel> _warehousePicks;
 
         public IzdvajanjePretragaPoDokumentu()
         {
@@ -40,8 +40,8 @@ namespace KIPS_WMS.UI.Izdvajanje
                 var loginData = RegistryUtils.GetLoginData();
                 _ws.GetWarehousePicks(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "", ref warehousePicksCsv);
 
-                var engine = new FileHelperEngine(typeof (WarehousePutAwayModel));
-                _warehousePicks = ((WarehousePutAwayModel[])engine.ReadString(warehousePicksCsv)).ToList();
+                var engine = new FileHelperEngine(typeof(WarehousePickModel));
+                _warehousePicks = ((WarehousePickModel[])engine.ReadString(warehousePicksCsv)).ToList();
                 _warehousePicks.Sort((x, y) => String.Compare(x.SourceDescription, y.SourceDescription, StringComparison.Ordinal));
                 _filteredList = _warehousePicks;
 
@@ -142,7 +142,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 brush = new SolidBrush(Color.Black);
             }
 
-            WarehousePutAwayModel line = _filteredList[index];
+            WarehousePickModel line = _filteredList[index];
 
             string firstLine = line.SourceDescription;
             string secondLine = string.Format("{0} - {1}", line.PutAwayCode, line.PostingDate);

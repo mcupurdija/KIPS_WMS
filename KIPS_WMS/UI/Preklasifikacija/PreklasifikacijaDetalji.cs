@@ -30,8 +30,8 @@ namespace KIPS_WMS.UI.Preklasifikacija
             //            tbSaRegala.Text = "99-99-9";
             //            tbNaRegal.Text = "01-01-1";
             listView1.View = View.Details;
-            listView1.Columns.Add(Resources.Sifra, 100, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.Artikal, 200, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.Sifra, 80, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.Naziv, 80, HorizontalAlignment.Left);
             listView1.Columns.Add(Resources.Kolicina, 80, HorizontalAlignment.Left);
             listView1.Columns.Add(Resources.JM, 80, HorizontalAlignment.Left);
             listView1.Columns.Add(Resources.SaRegala, 130, HorizontalAlignment.Left);

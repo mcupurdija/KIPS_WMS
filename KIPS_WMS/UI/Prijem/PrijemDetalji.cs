@@ -77,6 +77,7 @@ namespace KIPS_WMS.UI.Prijem
             else
             {
                 tbBarkod.Text = String.Empty;
+                lJedinica.Text = "";
             }
 
             tbKolicina.Focus();
@@ -279,7 +280,7 @@ namespace KIPS_WMS.UI.Prijem
                 if (isUpdate == 1)
                 {
                     CultureInfo culture = Utils.GetLocalCulture();
-                    decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text);
+                    decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text, culture);
                     _selectedLine.QuantityToReceive = newQty.ToString("N0", culture);
                 }
                 else

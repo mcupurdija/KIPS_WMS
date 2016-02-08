@@ -243,14 +243,14 @@ namespace KIPS_WMS.UI.Izdvajanje
                 if (decimal.Parse(uomQuantity) < 0) return;
 
                 Cursor.Current = Cursors.WaitCursor;
-                _ws.UpdatePutAwayLineQty(RegistryUtils.GetLastUsername(), _pickNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
+                _ws.UpdatePickLineQty(RegistryUtils.GetLastUsername(), _pickNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
                     isUpdate, lJedinica.Text, uomQuantity);
 
                 int index = WarehousePickLines.IndexOf(_selectedLine);
                 if (isUpdate == 1)
                 {
                     CultureInfo culture = Utils.GetLocalCulture();
-                    decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text);
+                    decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text, culture);
                     _selectedLine.QuantityToReceive = newQty.ToString("N0", culture);
                 }
                 else
@@ -316,7 +316,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 var loginData = RegistryUtils.GetLoginData();
                 _ws.GetWarehousePickLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _pickNo, ref warehousePicksCsv);
 
-                var engine = new FileHelperEngine(typeof(WarehousePutAwayLineModel));
+                var engine = new FileHelperEngine(typeof(WarehousePickLineModel));
                 WarehousePickLines = ((WarehousePickLineModel[])engine.ReadString(warehousePicksCsv)).ToList();
 
                 _selectedLine = WarehousePickLines.Find(x => x.LineNo == Convert.ToString(lineNo));

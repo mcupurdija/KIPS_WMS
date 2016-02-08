@@ -98,5 +98,15 @@ namespace KIPS_WMS.UI.Preklasifikacija
         {
             Close();
         }
+
+        private void listView1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (listView1.SelectedIndices.Count != 1) return;
+
+            int index = listView1.SelectedIndices[0];
+            SelectedItem = _items[index];
+            DialogResult = DialogResult.OK;
+            Close();
+        }
     }
 }
