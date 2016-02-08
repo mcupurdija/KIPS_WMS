@@ -113,6 +113,11 @@ namespace KIPS_WMS.UI.Preklasifikacija
         private void bPonisti_Click(object sender, EventArgs e)
         {
             tbPronadji.Text = "";
+            tbSaRegala.Text = "";
+            tbNaRegal.Text = "";
+            tbKolicina.Text = "";
+            lbJM.Text = Resources.JM + ": ";
+            lbNaziv.Text = Resources.NazivArtika + ": ";
         }
 
         private void bObrisi_Click(object sender, EventArgs e)
@@ -179,6 +184,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
             finally
             {
                 Cursor.Current = Cursors.Default;
+                tbPronadji.Focus();
             }
         }
 
@@ -200,6 +206,8 @@ namespace KIPS_WMS.UI.Preklasifikacija
                     if (_items.Count == 0)
                     {
                         MessageBox.Show("Nije pronađen artikal.", Resources.Greska);
+                        tbPronadji.Text = "";
+                        tbPronadji.Focus();
                     }
                     else
                     {

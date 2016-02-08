@@ -67,6 +67,7 @@
             this.tbPronadji.Name = "tbPronadji";
             this.tbPronadji.Size = new System.Drawing.Size(156, 21);
             this.tbPronadji.TabIndex = 1;
+            this.tbPronadji.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPronadji_KeyUp);
             // 
             // listBox1
             // 
@@ -81,7 +82,7 @@
             this.listBox1.DrawItem += new OpenNETCF.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // PrijemPretragaPoArtiklu
+            // SkladistenjePretragaPoArtiklu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -92,7 +93,7 @@
             this.Controls.Add(this.bPronadji);
             this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
-            this.Name = "PrijemPretragaPoArtiklu";
+            this.Name = "SkladistenjePretragaPoArtiklu";
             this.Text = "Pretraga po artiklu";
             this.ResumeLayout(false);
 

@@ -52,7 +52,7 @@
             this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
             this.Name = "IzdvajanjePocetna";
-            this.Text = "Skladištenje";
+            this.Text = "Izdvajanje";
             this.ResumeLayout(false);
 
         }

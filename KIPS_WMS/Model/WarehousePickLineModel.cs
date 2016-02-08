@@ -34,21 +34,12 @@ namespace KIPS_WMS.Model
         public string QuantityToReceive; // ZAPREMLJENA
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string TrackingType;
+        public string SerialNo;
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string NormUomType;
+        public string LotNo;
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string NormUom;
-
-        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string NormCoefficient;
-
-        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string NormRoundingPrecision;
-
-        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string NormDeviation;
+        public string ExpirationDate;
     }
 }

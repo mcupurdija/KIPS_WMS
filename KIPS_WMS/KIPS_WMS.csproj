@@ -82,14 +82,14 @@
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Model\WarehousePickLineModel.cs" />
     <Compile Include="Model\WarehousePickModel.cs" />
-    <Compile Include="Model\WarehousePutAwayLineModel.cs" />
+    <Compile Include="Model\WarehouseReceiptLineModel.cs" />
     <Compile Include="Model\WarehousePutAwayModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\ItemBinContentModel.cs" />
     <Compile Include="Model\DateTimeModel.cs" />
     <Compile Include="Model\SendNormativeModel.cs" />
     <Compile Include="Model\SendTrackingModel.cs" />
-    <Compile Include="Model\WarehouseReceiptLineModel.cs" />
+    <Compile Include="Model\WarehousePutAwayLineModel.cs" />
     <Compile Include="Model\ItemPriceInventoryModel.cs" />
     <Compile Include="Model\DatabaseModel.cs" />
     <Compile Include="Model\ItemQuoteModel.cs" />

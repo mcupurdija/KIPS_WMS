@@ -18,9 +18,11 @@ namespace KIPS_WMS.UI.Izdvajanje
         private readonly string _pickNo;
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private string _barcode;
-        private List<WarehousePutAwayLineModel> _filteredPickLines;
-        private WarehousePutAwayLineModel _selectedLine;
-        private List<WarehousePutAwayLineModel> _warehousePickLines;
+        private List<WarehousePickLineModel> _filteredPickLines;
+        private WarehousePickLineModel _selectedLine;
+        private List<WarehousePickLineModel> _warehousePickLines;
+
+        private LoginModel loginData = RegistryUtils.GetLoginData();
 
         public IzdvajanjeLinije(string pickNo)
         {
@@ -51,9 +53,9 @@ namespace KIPS_WMS.UI.Izdvajanje
                 var loginData = RegistryUtils.GetLoginData();
                 _ws.GetWarehousePickLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _pickNo, ref warehousePicksCsv);
 
-                var engine = new FileHelperEngine(typeof (WarehousePutAwayLineModel));
+                var engine = new FileHelperEngine(typeof(WarehousePickLineModel));
                 _warehousePickLines =
-                    ((WarehousePutAwayLineModel[]) engine.ReadString(warehousePicksCsv)).ToList();
+                    ((WarehousePickLineModel[])engine.ReadString(warehousePicksCsv)).ToList();
 
                 DisplayData(null, false);
             }
@@ -120,6 +122,20 @@ namespace KIPS_WMS.UI.Izdvajanje
                 _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
                 DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
             }
+            if (query.Count == 0)
+            {
+                query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
+                new object[] { tbPronadji.Text.Trim() });
+                if (query.Count == 1)
+                {
+                    _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
+                    DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
+                }
+                else
+                {
+                    MessageBox.Show("Nije pronađen aritkal.", Resources.Greska);
+                }
+            }
         }
 
         private void bPronadji_Click(object sender, EventArgs e)
@@ -147,12 +163,12 @@ namespace KIPS_WMS.UI.Izdvajanje
 
         private void ShowLineDetailsForm(string barcode)
         {
-            var skladistenjeDetalji = new IzdvajanjeDetalji(_pickNo, barcode, _selectedLine, _warehousePickLines);
-            DialogResult result = skladistenjeDetalji.ShowDialog();
+            var izdvajanjeDetalji = new IzdvajanjeDetalji(_pickNo, barcode, _selectedLine, _warehousePickLines);
+            DialogResult result = izdvajanjeDetalji.ShowDialog();
 
             if (result == DialogResult.Yes)
             {
-                _warehousePickLines = skladistenjeDetalji.WarehousePickLines;
+                _warehousePickLines = izdvajanjeDetalji.WarehousePickLines;
                 DisplayData(null, false);
             }
         }
@@ -186,7 +202,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 brush = new SolidBrush(Color.Black);
             }
 
-            WarehousePutAwayLineModel line = _filteredPickLines[index];
+            WarehousePickLineModel line = _filteredPickLines[index];
 
             var rectangle = new Rectangle(e.Bounds.Left, e.Bounds.Top, 7, e.Bounds.Height);
             e.Graphics.FillRectangle(new SolidBrush(GetLineStatusColor(line.QuantityOutstanding, line.QuantityToReceive)), rectangle);
@@ -236,11 +252,21 @@ namespace KIPS_WMS.UI.Izdvajanje
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
+                int status = -1;
 
-                _ws.SetDocumentStatus(Utils.DocumentTypeSkladistenje, _pickNo, 1);
+                _ws.RegisterWhsDocument(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, Utils.DocumentTypeIzdvajanje
+                    , _pickNo, ref status);
 
-                listBox1.Dispose();
-                Close();
+                if (status == 1)
+                {
+                    MessageBox.Show("Uspešno registrovano izdvajanje.");
+                    listBox1.Dispose();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Greška pri izdvajanju", Resources.Greska);
+                }
             }
             catch (Exception ex)
             {

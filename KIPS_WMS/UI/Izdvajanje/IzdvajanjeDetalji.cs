@@ -17,22 +17,23 @@ namespace KIPS_WMS.UI.Izdvajanje
 {
     public partial class IzdvajanjeDetalji : Form
     {
-        private readonly string _putAwayNo;
-        private WarehousePutAwayLineModel _selectedLine;
+        private readonly string _pickNo;
+        private WarehousePickLineModel _selectedLine;
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private Object[] _dbItem;
         private bool _lineSplit;
         private readonly LoginModel _loginData = RegistryUtils.GetLoginData();
+        decimal coefficient = 0;
 
-        public List<WarehousePutAwayLineModel> WarehousePickLines;
+        public List<WarehousePickLineModel> WarehousePickLines;
 
-        public IzdvajanjeDetalji(string putAwayNo, string barcode, WarehousePutAwayLineModel selectedLine, List<WarehousePutAwayLineModel> warehousePickLines)
+        public IzdvajanjeDetalji(string pickNo, string barcode, WarehousePickLineModel selectedLine, List<WarehousePickLineModel> warehousePickLines)
         {
             InitializeComponent();
 
             listBox1.DrawMode = DrawMode.OwnerDrawFixed;
 
-            _putAwayNo = putAwayNo;
+            _pickNo = pickNo;
             _selectedLine = selectedLine;
             WarehousePickLines = warehousePickLines;
 
@@ -51,7 +52,7 @@ namespace KIPS_WMS.UI.Izdvajanje
         {
             base.OnActivated(e);
 
-            Text = _putAwayNo;
+            Text = _pickNo;
         }
 
         private void DisplayData(string barcode)
@@ -104,10 +105,10 @@ namespace KIPS_WMS.UI.Izdvajanje
                     text = string.Format("{0}: {1}", "Regal", _selectedLine.BinCode);
                     break;
                 case 3:
-                    text = string.Format("{0}: {1}   {2}: {3}", "Količina za izdvajanje", _selectedLine.QuantityOutstanding, "JM", _selectedLine.UnitOfMeasureCode);
+                    text = string.Format("{0}: {1}   {2}: {3}", "Količina za sklad.", _selectedLine.QuantityOutstanding, "JM", _selectedLine.UnitOfMeasureCode);
                     break;
                 case 4:
-                    text = string.Format("{0}: {1}", "Izdvojena količina", _selectedLine.QuantityToReceive);
+                    text = string.Format("{0}: {1}", "Uskladištena količina", _selectedLine.QuantityToReceive);
                     break;
                 case 5:
                     text = string.Format("{0}: {1}", "Broj serije/SN", _selectedLine.SerialNo);
@@ -159,6 +160,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             {
                 _dbItem = query[0];
                 lJedinica.Text = _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
+                coefficient = GetCoefficient(_selectedLine.ItemNo, _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString());
                 tbJedinicaKolicina.Text = "1";
             }
             else
@@ -173,14 +175,12 @@ namespace KIPS_WMS.UI.Izdvajanje
             {
                 if (_dbItem == null) return;
 
-                int coefficient = IsLineInPrimaryUnitOfMeasure(_selectedLine.ItemNo, _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString());
+                decimal scannedItemQuantity = int.Parse(_dbItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString());
+                decimal unitQuantity = decimal.Parse(tbJedinicaKolicina.Text, Utils.GetLocalCulture());
 
-                int scannedItemQuantity = int.Parse(_dbItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString());
-                int unitQuantity = int.Parse(tbJedinicaKolicina.Text);
-
-                tbKolicina.Text = coefficient > 1
-                    ? ((scannedItemQuantity*unitQuantity)/coefficient).ToString(CultureInfo.InvariantCulture)
-                    : (scannedItemQuantity*unitQuantity).ToString(CultureInfo.InvariantCulture);
+                tbKolicina.Text = (scannedItemQuantity / coefficient) != 1
+                    ? ((scannedItemQuantity / coefficient) * unitQuantity).ToString("N3", Utils.GetLocalCulture())
+                    : (unitQuantity).ToString("N3", Utils.GetLocalCulture());
             }
             catch (Exception)
             {
@@ -188,15 +188,20 @@ namespace KIPS_WMS.UI.Izdvajanje
             }
         }
 
-        private int IsLineInPrimaryUnitOfMeasure(string itemNo, string scannedItemUnitOfMeasure)
+        private decimal GetCoefficient(string itemNo, string scannedItemUnitOfMeasure)
         {
             try
             {
-                object query = SQLiteHelper.simpleQuery(DbStatements.FindItemBaseUnitOfMeasure, new object[] {itemNo});
-                if (query != null && !string.Equals(scannedItemUnitOfMeasure, query.ToString(), StringComparison.OrdinalIgnoreCase))
+                //object query = SQLiteHelper.simpleQuery(DbStatements.FindItemBaseUnitOfMeasure, new object[] {itemNo});
+                //if (query != null && !string.Equals(scannedItemUnitOfMeasure, query.ToString(), StringComparison.OrdinalIgnoreCase))
+                //{
+                //    object query2 = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity, new object[] {itemNo, _selectedLine.UnitOfMeasureCode});
+                //    return int.Parse(query2.ToString());
+                //}
+                object query = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity, new object[] { itemNo, _selectedLine.UnitOfMeasureCode });
+                if (query != null)
                 {
-                    object query2 = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity, new object[] {itemNo, _selectedLine.UnitOfMeasureCode});
-                    return int.Parse(query2.ToString());
+                    return decimal.Parse(query.ToString());
                 }
             }
             catch (Exception)
@@ -218,7 +223,7 @@ namespace KIPS_WMS.UI.Izdvajanje
 
         private void UpdateLine(int isUpdate)
         {
-            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim().Length == 0 || tbRegal.Text.Trim() != _selectedLine.BinCode))
+            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim() != _selectedLine.BinCode))
             {
                 MessageBox.Show("Potrebno je skenirati šifru regala.");
                 return;
@@ -226,15 +231,19 @@ namespace KIPS_WMS.UI.Izdvajanje
 
             string quantity = tbKolicina.Text;
             string uomQuantity = tbJedinicaKolicina.Text;
+            if (uomQuantity.Trim().Length == 0)
+            {
+                uomQuantity = "0";
+            }
             if (quantity.Trim().Length == 0) return;
 
             try
             {
-                if (Convert.ToInt16(quantity) < 0) return;
-                if (Convert.ToInt16(uomQuantity) < 0) return;
+                if (decimal.Parse(quantity) < 0) return;
+                if (decimal.Parse(uomQuantity) < 0) return;
 
                 Cursor.Current = Cursors.WaitCursor;
-                _ws.UpdatePickLineQty(RegistryUtils.GetLastUsername(), _putAwayNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
+                _ws.UpdatePutAwayLineQty(RegistryUtils.GetLastUsername(), _pickNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
                     isUpdate, lJedinica.Text, uomQuantity);
 
                 int index = WarehousePickLines.IndexOf(_selectedLine);
@@ -279,7 +288,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 Cursor.Current = Cursors.WaitCursor;
 
                 int newLineNo = 0;
-                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _pickNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
 
                 _lineSplit = true;
 
@@ -302,13 +311,13 @@ namespace KIPS_WMS.UI.Izdvajanje
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                string warehousePutAwaysCsv = String.Empty;
+                string warehousePicksCsv = String.Empty;
 
                 var loginData = RegistryUtils.GetLoginData();
-                _ws.GetWarehousePickLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _putAwayNo, ref warehousePutAwaysCsv);
+                _ws.GetWarehousePickLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _pickNo, ref warehousePicksCsv);
 
                 var engine = new FileHelperEngine(typeof(WarehousePutAwayLineModel));
-                WarehousePickLines = ((WarehousePutAwayLineModel[])engine.ReadString(warehousePutAwaysCsv)).ToList();
+                WarehousePickLines = ((WarehousePickLineModel[])engine.ReadString(warehousePicksCsv)).ToList();
 
                 _selectedLine = WarehousePickLines.Find(x => x.LineNo == Convert.ToString(lineNo));
 
@@ -334,7 +343,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _pickNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode;
             }
@@ -354,5 +363,29 @@ namespace KIPS_WMS.UI.Izdvajanje
             listBox1.Dispose();
             Close();
         }
+
+        private void tbJedinicaKolicina_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+            {
+                tbJedinicaKolicina.Text += ",";
+                tbJedinicaKolicina.SelectionStart = tbJedinicaKolicina.Text.Length;
+                tbJedinicaKolicina.SelectionLength = 0;
+                e.Handled = true;
+            }
+        }
+
+        private void tbKolicina_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+            {
+                tbKolicina.Text += ",";
+                tbKolicina.SelectionStart = tbKolicina.Text.Length;
+                tbKolicina.SelectionLength = 0;
+                e.Handled = true;
+            }
+        }
+
+       
     }
 }

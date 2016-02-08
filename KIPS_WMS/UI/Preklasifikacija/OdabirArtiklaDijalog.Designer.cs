@@ -32,6 +32,7 @@
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.bPotvrdi = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.bOdustani = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bPotvrdi
@@ -54,6 +55,15 @@
             this.listView1.View = System.Windows.Forms.View.List;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
+            // bOdustani
+            // 
+            this.bOdustani.Location = new System.Drawing.Point(3, 117);
+            this.bOdustani.Name = "bOdustani";
+            this.bOdustani.Size = new System.Drawing.Size(72, 20);
+            this.bOdustani.TabIndex = 2;
+            this.bOdustani.Text = "Odustani";
+            this.bOdustani.Click += new System.EventHandler(this.button1_Click);
+            // 
             // OdabirArtiklaDijalog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -61,6 +71,7 @@
             this.CenterFormOnScreen = true;
             this.ClientSize = new System.Drawing.Size(220, 140);
             this.ControlBox = false;
+            this.Controls.Add(this.bOdustani);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bPotvrdi);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -76,6 +87,7 @@
 
         private System.Windows.Forms.Button bPotvrdi;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button bOdustani;
 
     }
 }

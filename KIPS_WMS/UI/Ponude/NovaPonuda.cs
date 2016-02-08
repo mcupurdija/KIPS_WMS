@@ -120,10 +120,16 @@ namespace KIPS_WMS.UI.Ponude
 
         private void CreateNewOffer()
         {
-            new PonudaKorpa(_selectedCustomer[DatabaseModel.CustomerDbModel.CustomerCode].ToString(),
-                _selectedCustomer[DatabaseModel.CustomerDbModel.CustomerName].ToString(), 0, String.Empty,
-                new List<ItemQuoteModel>()).Show();
-            Close();
+            if (_selectedCustomer != null)
+            {
+                new PonudaKorpa(_selectedCustomer[DatabaseModel.CustomerDbModel.CustomerCode].ToString(),
+                    _selectedCustomer[DatabaseModel.CustomerDbModel.CustomerName].ToString(), 0, String.Empty,
+                    new List<ItemQuoteModel>()).Show();
+                Close();
+            }
+            else {
+                MessageBox.Show("Niste unijeli ime kupca. Molimo unesite kupca ili kliknite na nepoznat kupac.", Resources.Greska);
+            }
         }
 
         private enum SearchType

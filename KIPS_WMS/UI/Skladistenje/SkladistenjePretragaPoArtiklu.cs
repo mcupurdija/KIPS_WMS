@@ -221,5 +221,44 @@ namespace KIPS_WMS.UI.Skladistenje
                     e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
             }
         }
+
+        private void tbPronadji_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+
+                    var _items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
+                        new object[] { tbPronadji.Text });
+                    if (_items.Count == 0)
+                    {
+                        _items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
+                        new object[] { tbPronadji.Text });
+                    }
+                    if (_items.Count == 0)
+                    {
+                        MessageBox.Show("Nije pronađen artikal.", Resources.Greska);
+                    }
+                    else
+                    {
+                        _selectedItem = _items[0];
+                        if (_selectedItem != null)
+                        {
+                            new Thread(() => GetData(_selectedItem[DatabaseModel.ItemDbModel.ItemCode].ToString())).Start();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Utils.GeneralExceptionProcessing(ex);
+                }
+                finally
+                {
+                    Cursor.Current = Cursors.Default;
+                }
+            }
+        }
     }
 }

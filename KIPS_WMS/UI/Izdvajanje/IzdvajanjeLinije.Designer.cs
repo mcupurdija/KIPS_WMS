@@ -109,7 +109,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.listBox1.DrawItem += new OpenNETCF.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // PrijemLinije
+            // IzdvajanjeLinije
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -121,8 +121,8 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.Controls.Add(this.tbPronadji);
             this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
-            this.Name = "PrijemLinije";
-            this.Text = "PrijemLinije";
+            this.Name = "IzdvajanjeLinije";
+            this.Text = "Izdvajanje";
             this.ResumeLayout(false);
 
         }

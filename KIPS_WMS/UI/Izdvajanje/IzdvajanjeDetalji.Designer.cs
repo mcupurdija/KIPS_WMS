@@ -105,6 +105,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.tbKolicina.Size = new System.Drawing.Size(78, 21);
             this.tbKolicina.TabIndex = 2;
             this.tbKolicina.Text = "1";
+            this.tbKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKolicina_KeyPress);
             // 
             // tbBarkod
             // 
@@ -119,7 +120,6 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.lJedinica.Location = new System.Drawing.Point(119, 141);
             this.lJedinica.Name = "lJedinica";
             this.lJedinica.Size = new System.Drawing.Size(52, 20);
-            this.lJedinica.Text = "PAK";
             this.lJedinica.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // tbJedinicaKolicina
@@ -129,6 +129,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.tbJedinicaKolicina.Size = new System.Drawing.Size(60, 21);
             this.tbJedinicaKolicina.TabIndex = 5;
             this.tbJedinicaKolicina.TextChanged += new System.EventHandler(this.tbJedinicaKolicina_TextChanged);
+            this.tbJedinicaKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbJedinicaKolicina_KeyPress);
             // 
             // listBox1
             // 
@@ -162,7 +163,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.label1.Size = new System.Drawing.Size(90, 20);
             this.label1.Text = "Bar kod regala:";
             // 
-            // SkladistenjeDetalji
+            // IzdvajanjeDetalji
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -180,8 +181,8 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.Controls.Add(this.bDodaj);
             this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
-            this.Name = "SkladistenjeDetalji";
-            this.Text = "SkladistenjeDetalji";
+            this.Name = "IzdvajanjeDetalji";
+            this.Text = "Izdvajanje";
             this.ResumeLayout(false);
 
         }

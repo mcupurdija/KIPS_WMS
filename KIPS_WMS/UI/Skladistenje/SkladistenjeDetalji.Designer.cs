@@ -105,6 +105,7 @@ namespace KIPS_WMS.UI.Skladistenje
             this.tbKolicina.Size = new System.Drawing.Size(78, 21);
             this.tbKolicina.TabIndex = 2;
             this.tbKolicina.Text = "1";
+            this.tbKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKolicina_KeyPress);
             // 
             // tbBarkod
             // 
@@ -119,7 +120,6 @@ namespace KIPS_WMS.UI.Skladistenje
             this.lJedinica.Location = new System.Drawing.Point(119, 141);
             this.lJedinica.Name = "lJedinica";
             this.lJedinica.Size = new System.Drawing.Size(52, 20);
-            this.lJedinica.Text = "PAK";
             this.lJedinica.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // tbJedinicaKolicina
@@ -129,13 +129,13 @@ namespace KIPS_WMS.UI.Skladistenje
             this.tbJedinicaKolicina.Size = new System.Drawing.Size(60, 21);
             this.tbJedinicaKolicina.TabIndex = 5;
             this.tbJedinicaKolicina.TextChanged += new System.EventHandler(this.tbJedinicaKolicina_TextChanged);
+            this.tbJedinicaKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbJedinicaKolicina_KeyPress);
             // 
             // listBox1
             // 
             this.listBox1.BackgroundImage = null;
             this.listBox1.DataSource = null;
             this.listBox1.DisplayMember = null;
-            this.listBox1.DrawMode = OpenNETCF.Windows.Forms.DrawMode.Normal;
             this.listBox1.EvenItemColor = System.Drawing.SystemColors.Control;
             this.listBox1.ImageList = null;
             this.listBox1.ItemHeight = 21;

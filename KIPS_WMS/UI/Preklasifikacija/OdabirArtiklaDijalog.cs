@@ -93,5 +93,10 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 Close();
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

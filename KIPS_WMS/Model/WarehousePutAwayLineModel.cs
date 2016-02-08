@@ -4,7 +4,7 @@ namespace KIPS_WMS.Model
 {
     [DelimitedRecord(";")]
     [IgnoreFirst(1)]
-    public class WarehouseReceiptLineModel
+    public class WarehousePutAwayLineModel
     {
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
         public string DocumentNo;
@@ -34,21 +34,12 @@ namespace KIPS_WMS.Model
         public string QuantityToReceive; // ZAPREMLJENA
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string TrackingType;
+        public string SerialNo;
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string NormUomType;
+        public string LotNo;
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string NormUom;
-
-        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string NormCoefficient;
-
-        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string NormRoundingPrecision;
-
-        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
-        public string NormDeviation;
+        public string ExpirationDate;
     }
 }
