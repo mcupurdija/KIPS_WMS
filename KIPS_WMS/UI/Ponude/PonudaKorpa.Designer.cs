@@ -1,4 +1,6 @@
-﻿namespace KIPS_WMS.UI.Ponude
+﻿using OpenNETCF.Windows.Forms;
+
+namespace KIPS_WMS.UI.Ponude
 {
     partial class PonudaKorpa
     {
@@ -34,15 +36,15 @@
             this.bIzmeniLiniju = new System.Windows.Forms.MenuItem();
             this.bObrisiLiniju = new System.Windows.Forms.MenuItem();
             this.bUcitajNoveArtikle = new System.Windows.Forms.MenuItem();
+            this.bOdustani = new System.Windows.Forms.MenuItem();
             this.bPosalji = new System.Windows.Forms.MenuItem();
             this.tbPronadji = new System.Windows.Forms.TextBox();
             this.bPronadji = new System.Windows.Forms.Button();
             this.bResetuj = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.lKupac = new System.Windows.Forms.Label();
             this.bDodaj = new System.Windows.Forms.Button();
             this.lUkupno = new System.Windows.Forms.Label();
-            this.bOdustani = new System.Windows.Forms.MenuItem();
+            this.listBox1 = new OpenNETCF.Windows.Forms.ListBox2();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -72,6 +74,11 @@
             // 
             this.bUcitajNoveArtikle.Text = "Učitaj nove artikle";
             this.bUcitajNoveArtikle.Click += new System.EventHandler(this.bUcitajNoveArtikle_Click);
+            // 
+            // bOdustani
+            // 
+            this.bOdustani.Text = "Odustani";
+            this.bOdustani.Click += new System.EventHandler(this.bOdustani_Click);
             // 
             // bPosalji
             // 
@@ -104,19 +111,6 @@
             this.bResetuj.Text = "X";
             this.bResetuj.Click += new System.EventHandler(this.bResetuj_Click);
             // 
-            // listView1
-            // 
-            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.listView1.FullRowSelect = true;
-            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView1.Location = new System.Drawing.Point(0, 50);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(240, 112);
-            this.listView1.TabIndex = 5;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            this.listView1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyUp);
-            // 
             // lKupac
             // 
             this.lKupac.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
@@ -142,10 +136,18 @@
             this.lUkupno.Size = new System.Drawing.Size(124, 17);
             this.lUkupno.Text = "Ukupno: 0,00";
             // 
-            // bOdustani
+            // listBox1
             // 
-            this.bOdustani.Text = "Odustani";
-            this.bOdustani.Click += new System.EventHandler(this.bOdustani_Click);
+            this.listBox1.BackgroundImage = null;
+            this.listBox1.ItemHeight = 40;
+            this.listBox1.Location = new System.Drawing.Point(0, 50);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.SelectedIndex = -1;
+            this.listBox1.Size = new System.Drawing.Size(240, 109);
+            this.listBox1.TabIndex = 9;
+            this.listBox1.DrawItem += new OpenNETCF.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
             // 
             // PonudaKorpa
             // 
@@ -153,10 +155,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.lUkupno);
             this.Controls.Add(this.bDodaj);
             this.Controls.Add(this.lKupac);
-            this.Controls.Add(this.listView1);
             this.Controls.Add(this.bResetuj);
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbPronadji);
@@ -177,11 +179,11 @@
         private System.Windows.Forms.MenuItem bIzmeniLiniju;
         private System.Windows.Forms.MenuItem bObrisiLiniju;
         private System.Windows.Forms.MenuItem bUcitajNoveArtikle;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label lKupac;
         private System.Windows.Forms.Button bDodaj;
         private System.Windows.Forms.MenuItem bPosalji;
         private System.Windows.Forms.Label lUkupno;
         private System.Windows.Forms.MenuItem bOdustani;
+        private ListBox2 listBox1;
     }
 }

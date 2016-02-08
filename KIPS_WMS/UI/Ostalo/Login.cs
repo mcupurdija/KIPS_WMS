@@ -39,6 +39,11 @@ namespace KIPS_WMS.UI.Ostalo
 
         private void bLogin_Click(object sender, EventArgs e)
         {
+            DoLogin();
+        }
+
+        private void DoLogin()
+        {
             string username = tbUsername.Text.Trim();
             string password = tbPassword.Text.Trim();
 
@@ -64,8 +69,8 @@ namespace KIPS_WMS.UI.Ostalo
 
                 _ws.LogIn(username, password, ref loginDataCsv);
 
-                var engine = new FileHelperEngine(typeof (LoginModel));
-                _loginData = ((LoginModel[]) engine.ReadString(loginDataCsv)).ToList();
+                var engine = new FileHelperEngine(typeof(LoginModel));
+                _loginData = ((LoginModel[])engine.ReadString(loginDataCsv)).ToList();
 
                 Cursor.Current = Cursors.Default;
 
@@ -103,6 +108,22 @@ namespace KIPS_WMS.UI.Ostalo
         {
             RegistryUtils.DeleteLoginData();
             Close();
+        }
+
+        private void tbUsername_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                tbPassword.Focus();
+            }
+        }
+
+        private void tbPassword_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DoLogin();
+            }
         }
     }
 }

@@ -64,6 +64,7 @@
             this.tbUsername.Size = new System.Drawing.Size(107, 21);
             this.tbUsername.TabIndex = 1;
             this.tbUsername.Text = "k1";
+            this.tbUsername.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbUsername_KeyUp);
             // 
             // label1
             // 
@@ -87,6 +88,7 @@
             this.tbPassword.Size = new System.Drawing.Size(107, 21);
             this.tbPassword.TabIndex = 4;
             this.tbPassword.Text = "123456";
+            this.tbPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPassword_KeyUp);
             // 
             // bLogin
             // 

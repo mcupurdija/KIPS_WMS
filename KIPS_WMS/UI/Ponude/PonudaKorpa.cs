@@ -10,8 +10,9 @@ using FileHelpers;
 using KIPS_WMS.Data;
 using KIPS_WMS.Model;
 using KIPS_WMS.NAV_WS;
-using KIPS_WMS.Web;
 using KIPS_WMS.Properties;
+using KIPS_WMS.Web;
+using OpenNETCF.Windows.Forms;
 
 namespace KIPS_WMS.UI.Ponude
 {
@@ -26,8 +27,8 @@ namespace KIPS_WMS.UI.Ponude
 
         private List<Object[]> _searchedItems;
         private Object _selectedItem;
-        private bool _tableBasket = true;
         private bool _sent;
+        private bool _tableBasket = true;
 
         public PonudaKorpa()
         {
@@ -39,14 +40,18 @@ namespace KIPS_WMS.UI.Ponude
         {
             InitializeComponent();
 
+            listBox1.DrawMode = DrawMode.OwnerDrawFixed;
+
             _customerCode = customerCode;
             _customerName = customerName;
             _isAuthenticated = isAuthenticated;
             _quoteNo = quoteNo;
             _quoteItems = quoteItems;
 
-            lKupac.Text = _customerCode != Utils.UnknownCustomerCode ? string.Format("{0} - {1}", _customerCode, _customerName) : Resources.NepoznatKupac;
-            
+            lKupac.Text = _customerCode != Utils.UnknownCustomerCode
+                ? string.Format("{0} - {1}", _customerCode, _customerName)
+                : Resources.NepoznatKupac;
+
             DisplayLines();
         }
 
@@ -70,7 +75,8 @@ namespace KIPS_WMS.UI.Ponude
             }
             else
             {
-                RegistryUtils.SaveQuoteHeader(new QuoteHeaderHelper(_quoteNo, _customerCode, _customerName, _isAuthenticated));
+                RegistryUtils.SaveQuoteHeader(new QuoteHeaderHelper(_quoteNo, _customerCode, _customerName,
+                    _isAuthenticated));
                 RegistryUtils.SaveQuoteLines(_quoteItems);
             }
         }
@@ -79,41 +85,20 @@ namespace KIPS_WMS.UI.Ponude
         {
             _tableBasket = true;
             bDodaj.Visible = false;
-            listView1.BackColor = Color.LightYellow;
+            listBox1.BackColor = Color.LightYellow;
 
-            listView1.Clear();
-            listView1.View = View.Details;
-            listView1.Columns.Add(Resources.Sifra, 120, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.NazivArtika, 250, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.Kolicina, 80, HorizontalAlignment.Center);
-            listView1.Columns.Add(Resources.Jedinica, 80, HorizontalAlignment.Center);
-
-            foreach (ItemQuoteModel item in _quoteItems)
+            listBox1.Items.Clear();
+            var listItem = new ListItem();
+            for (int i = 0; i < _quoteItems.Count; i++)
             {
-                var lvi = new ListViewItem(new[]
-                {
-                    item.ItemCode, item.ItemDescription, item.Quantity, item.UnitOfMeasureCode
-                });
-                listView1.Items.Add(lvi);
+                listBox1.Items.Add(listItem);
+            }
+            if (listBox1.Items.Count > 5)
+            {
+                listBox1.Items.Add(new ListItem {Tag = 0});
             }
 
             lUkupno.Text = string.Format(Resources.Ukupno + ": {0}", SumPrices());
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listView1.SelectedIndices.Count != 1) return;
-
-            int index = listView1.SelectedIndices[0];
-            _selectedItem = _tableBasket ? (object) _quoteItems[index] : _searchedItems[index];
-        }
-
-        private void listView1_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (listView1.SelectedIndices.Count == 1 && !_tableBasket && _selectedItem != null && e.KeyCode == Keys.Return)
-            {
-                ShowLinesForm(PonudaLinija.ItemState.New, false);
-            }
         }
 
         private string SumPrices()
@@ -122,7 +107,8 @@ namespace KIPS_WMS.UI.Ponude
             {
                 CultureInfo culture = Utils.GetLocalCulture();
                 return
-                    _quoteItems.Sum(item => decimal.Parse(item.UnitPriceWithDiscount, culture)*decimal.Parse(item.Quantity, culture))
+                    _quoteItems.Sum(
+                        item => decimal.Parse(item.UnitPriceWithDiscount, culture)*decimal.Parse(item.Quantity, culture))
                         .ToString("N", culture.NumberFormat);
             }
             catch (Exception)
@@ -142,9 +128,10 @@ namespace KIPS_WMS.UI.Ponude
                 _selectedItem = _searchedItems[0];
                 ShowLinesForm(PonudaLinija.ItemState.New, true);
             }
-            if (_searchedItems.Count == 0) {
+            if (_searchedItems.Count == 0)
+            {
                 _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
-                new object[] { tbPronadji.Text });
+                    new object[] {tbPronadji.Text});
                 if (_searchedItems.Count > 0)
                 {
                     _selectedItem = _searchedItems[0];
@@ -168,31 +155,32 @@ namespace KIPS_WMS.UI.Ponude
         {
             _tableBasket = false;
             bDodaj.Visible = true;
-            listView1.BackColor = Color.White;
+            listBox1.BackColor = Color.White;
 
-            listView1.Clear();
-            listView1.View = View.Details;
-            listView1.Columns.Add(Resources.Sifra, 120, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.NazivArtika, 250, HorizontalAlignment.Left);
-
+            listBox1.Items.Clear();
+            var listItem = new ListItem();
             foreach (var item in data)
             {
-                var lvi = new ListViewItem(new[]
-                {
-                    item[DatabaseModel.ItemDbModel.ItemCode].ToString(),
-                    item[DatabaseModel.ItemDbModel.ItemDescription].ToString()
-                });
-                listView1.Items.Add(lvi);
+                listBox1.Items.Add(listItem);
+            }
+            if (listBox1.Items.Count > 5)
+            {
+                listBox1.Items.Add(new ListItem {Tag = 0});
             }
 
-            if (listView1.Items.Count > 0)
+            if (listBox1.Items.Count > 0)
             {
-                listView1.Focus();
-                listView1.Items[0].Selected = true;
+                listBox1.Focus();
+                listBox1.SelectedIndex = 0;
             }
         }
 
         private void bResetuj_Click(object sender, EventArgs e)
+        {
+            ResetForm();
+        }
+
+        private void ResetForm()
         {
             DisplayLines();
             _selectedItem = null;
@@ -202,7 +190,8 @@ namespace KIPS_WMS.UI.Ponude
 
         private void ShowLinesForm(PonudaLinija.ItemState itemState, bool fromScanner)
         {
-            var ponudaLinija = new PonudaLinija(_customerCode, _isAuthenticated, itemState, _quoteNo, _selectedItem, _quoteItems, fromScanner);
+            var ponudaLinija = new PonudaLinija(_customerCode, _isAuthenticated, itemState, _quoteNo, _selectedItem,
+                _quoteItems, fromScanner);
             DialogResult result = ponudaLinija.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -210,6 +199,8 @@ namespace KIPS_WMS.UI.Ponude
                 _quoteItems = ponudaLinija.QuoteItems;
                 DisplayLines();
             }
+
+            ResetForm();
         }
 
         private void bDodaj_Click(object sender, EventArgs e)
@@ -240,7 +231,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             if (_tableBasket && _selectedItem is ItemQuoteModel)
             {
-                _quoteItems.Remove((ItemQuoteModel)_selectedItem);
+                _quoteItems.Remove((ItemQuoteModel) _selectedItem);
                 DisplayLines();
             }
             else
@@ -257,7 +248,8 @@ namespace KIPS_WMS.UI.Ponude
             {
                 if (tbPronadji.Text.Length < 3) return;
 
-                _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementComplete, new object[] { tbPronadji.Text });
+                _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementComplete,
+                    new object[] {tbPronadji.Text});
                 DisplaySearchResults(_searchedItems);
             }
         }
@@ -294,7 +286,8 @@ namespace KIPS_WMS.UI.Ponude
                 var engine = new FileHelperEngine(typeof (SendQuoteModel));
                 string lines = engine.WriteString(quotes);
 
-                _ws.SendQuote(RegistryUtils.GetLastUsername(), RegistryUtils.GetLoginData().Magacin, ref documentNo, _customerCode, _isAuthenticated, lines, ref status,
+                _ws.SendQuote(RegistryUtils.GetLastUsername(), RegistryUtils.GetLoginData().Magacin, ref documentNo,
+                    _customerCode, _isAuthenticated, lines, ref status,
                     ref creditLimit);
 
                 if (status == 1)
@@ -343,6 +336,8 @@ namespace KIPS_WMS.UI.Ponude
             if (result2 == DialogResult.OK)
             {
                 _sent = true;
+
+                listBox1.Dispose();
                 Close();
             }
         }
@@ -350,7 +345,76 @@ namespace KIPS_WMS.UI.Ponude
         private void bOdustani_Click(object sender, EventArgs e)
         {
             _sent = true;
+
+            listBox1.Dispose();
             Close();
+        }
+
+        private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            int index = e.Index;
+            if (index >= listBox1.Items.Count || listBox1.Items[index].Tag != null) return;
+
+            SolidBrush brush;
+            if (e.State == DrawItemState.Selected)
+            {
+                e.DrawBackground(Color.Blue);
+                brush = new SolidBrush(Color.White);
+            }
+            else
+            {
+                e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
+                brush = new SolidBrush(Color.Black);
+            }
+
+            string firstLine;
+            string secondLine;
+            if (_tableBasket)
+            {
+                ItemQuoteModel line = _quoteItems[index];
+
+                firstLine = string.Format("{0} {1}", line.ItemCode, line.ItemDescription);
+                secondLine = string.Format("{0} {1}", line.Quantity, line.UnitOfMeasureCode);
+            }
+            else
+            {
+                object[] line = _searchedItems[index];
+
+                firstLine = string.Format("{0} {1}", line[DatabaseModel.ItemDbModel.ItemCode],
+                    line[DatabaseModel.ItemDbModel.ItemDescription]);
+                secondLine = string.Format("{0}", line[DatabaseModel.ItemDbModel.ItemUnitOfMeasure]);
+            }
+
+            e.Graphics.DrawString(firstLine,
+                new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 3, e.Bounds.Top,
+                new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+            e.Graphics.DrawString(secondLine,
+                new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 3,
+                e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = listBox1.SelectedIndex;
+            if (index == -1 || index >= listBox1.Items.Count || listBox1.Items[index].Tag != null)
+            {
+                _selectedItem = null;
+                return;
+            }
+
+            _selectedItem = _tableBasket ? (object) _quoteItems[index] : _searchedItems[index];
+        }
+
+        private void listBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            int index = listBox1.SelectedIndex;
+            if (index == -1 || index >= listBox1.Items.Count ||
+                listBox1.Items[index].Tag != null && e.KeyCode != Keys.Return)
+            {
+                return;
+            }
+
+            ShowLinesForm(PonudaLinija.ItemState.New, false);
         }
     }
 }

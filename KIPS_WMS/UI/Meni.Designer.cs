@@ -167,7 +167,6 @@
             // 
             // bPopis
             // 
-            this.bPopis.Enabled = false;
             this.bPopis.Location = new System.Drawing.Point(123, 147);
             this.bPopis.Name = "bPopis";
             this.bPopis.Size = new System.Drawing.Size(114, 30);
