@@ -188,6 +188,11 @@ namespace KIPS_WMS.UI.Ponude
 
         private void bPrihvati_Click(object sender, EventArgs e)
         {
+            AcceptChanges();
+        }
+
+        private void AcceptChanges()
+        {
             switch (_itemState)
             {
                 case ItemState.New:
@@ -214,7 +219,7 @@ namespace KIPS_WMS.UI.Ponude
                     break;
                 case ItemState.Edit:
 
-                    var modelEdit = ((ItemQuoteModel) _selectedItem);
+                    var modelEdit = ((ItemQuoteModel)_selectedItem);
                     int index = QuoteItems.IndexOf(modelEdit);
 
                     modelEdit.Quantity = tbKolicina.Text;
@@ -357,6 +362,22 @@ namespace KIPS_WMS.UI.Ponude
         private void bLagerLista_Click(object sender, EventArgs e)
         {
             new LagerLista(_itemCode).ShowDialog();
+        }
+
+        private void tbKolicina_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                AcceptChanges();
+            }
+        }
+
+        private void tbKolicinaKonverzija_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                AcceptChanges();
+            }
         }
 
     }

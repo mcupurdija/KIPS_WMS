@@ -38,6 +38,12 @@ namespace KIPS_WMS.UI.Ostalo
                     });
                 listView1.Items.Add(lvi);
             }
+
+            if (listView1.Items.Count > 0)
+            {
+                listView1.Focus();
+                listView1.Items[0].Selected = true;
+            }
         }
 
         private void listView1_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -63,6 +69,15 @@ namespace KIPS_WMS.UI.Ostalo
         {
             DialogResult = DialogResult.Abort;
             Close();
+        }
+
+        private void listView1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (listView1.SelectedIndices.Count == 1 && e.KeyCode == Keys.Return)
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
         }
 
     }

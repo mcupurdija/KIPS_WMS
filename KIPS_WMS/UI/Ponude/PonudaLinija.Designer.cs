@@ -123,6 +123,7 @@
             this.tbKolicina.Size = new System.Drawing.Size(58, 19);
             this.tbKolicina.TabIndex = 8;
             this.tbKolicina.TextChanged += new System.EventHandler(this.tbKolicina_TextChanged);
+            this.tbKolicina.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbKolicina_KeyUp);
             // 
             // tbKolicinaKonverzija
             // 
@@ -132,6 +133,7 @@
             this.tbKolicinaKonverzija.Size = new System.Drawing.Size(58, 19);
             this.tbKolicinaKonverzija.TabIndex = 9;
             this.tbKolicinaKonverzija.TextChanged += new System.EventHandler(this.tbKolicinaKonverzija_TextChanged);
+            this.tbKolicinaKonverzija.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbKolicinaKonverzija_KeyUp);
             // 
             // tbCena
             // 

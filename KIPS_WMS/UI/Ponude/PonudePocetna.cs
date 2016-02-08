@@ -16,7 +16,6 @@ namespace KIPS_WMS.UI.Ponude
         public PonudePocetna()
         {
             InitializeComponent();
-            tbUcitaj.Text = "PPO13-003215";
 
             QuoteHeaderHelper savedQuoteHeader = RegistryUtils.GetQuoteHeader();
             if (savedQuoteHeader == null) return;

@@ -23,7 +23,7 @@ namespace KIPS_WMS.UI.Ponude
             Height = (int) (myAutoScaleFactor.Height*110);
 
             lStatus.Text = String.Format(Resources.UspesnoKreiranjeAzuriranje, _printHeaderModel.DocumentNo);
-            if (creditLimit == 1)
+            if (creditLimit == 1 && _printHeaderModel.CustomerCode != Utils.UnknownCustomerCode)
             {
                 lKreditniLimit.Text = Resources.PrekoracenKreditniLimit;
             }

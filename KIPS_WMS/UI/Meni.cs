@@ -59,8 +59,7 @@ namespace KIPS_WMS.UI
 
         private void bPopis_Click(object sender, System.EventArgs e)
         {
-            Pracenje pracenje = new Pracenje("145472", new decimal(3.5), 3);
-            pracenje.Show();
+            new Form1().Show();
         }
 
         private void bLogout_Click(object sender, System.EventArgs e)
