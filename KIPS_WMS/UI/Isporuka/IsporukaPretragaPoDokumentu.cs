@@ -10,16 +10,16 @@ using KIPS_WMS.Properties;
 using KIPS_WMS.Web;
 using OpenNETCF.Windows.Forms;
 
-namespace KIPS_WMS.UI.Izdvajanje
+namespace KIPS_WMS.UI.Isporuka
 {
-    public partial class IzdvajanjePretragaPoDokumentu : Form
+    public partial class IsporukaPretragaPoDokumentu : Form
     {
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
-        private List<WarehousePickModel> _filteredList;
-        private WarehousePickModel _selectedPick;
-        private List<WarehousePickModel> _warehousePicks;
+        private List<WarehouseShipmentModel> _filteredList;
+        private WarehouseShipmentModel _selectedShipment;
+        private List<WarehouseShipmentModel> _warehouseShipments;
 
-        public IzdvajanjePretragaPoDokumentu()
+        public IsporukaPretragaPoDokumentu()
         {
             InitializeComponent();
 
@@ -35,15 +35,15 @@ namespace KIPS_WMS.UI.Izdvajanje
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                string warehousePicksCsv = String.Empty;
+                string warehouseShipmentsCsv = String.Empty;
 
                 var loginData = RegistryUtils.GetLoginData();
-                _ws.GetWarehousePicks(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "", ref warehousePicksCsv);
+                _ws.GetWarehouseShipments(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "", ref warehouseShipmentsCsv);
 
-                var engine = new FileHelperEngine(typeof(WarehousePickModel));
-                _warehousePicks = ((WarehousePickModel[])engine.ReadString(warehousePicksCsv)).ToList();
-                _warehousePicks.Sort((x, y) => String.Compare(x.SourceDescription, y.SourceDescription, StringComparison.Ordinal));
-                _filteredList = _warehousePicks;
+                var engine = new FileHelperEngine(typeof (WarehouseShipmentModel));
+                _warehouseShipments = ((WarehouseShipmentModel[])engine.ReadString(warehouseShipmentsCsv)).ToList();
+                _warehouseShipments.Sort((x, y) => String.Compare(x.SourceDescription, y.SourceDescription, StringComparison.Ordinal));
+                _filteredList = _warehouseShipments;
 
 //                Invoke(new EventHandler((sender, e) => DisplayData(null)));
                 DisplayData(null);
@@ -62,10 +62,10 @@ namespace KIPS_WMS.UI.Izdvajanje
         {
             listBox1.Items.Clear();
 
-            _selectedPick = null;
+            _selectedShipment = null;
             _filteredList = documentNo != null
-                ? _warehousePicks.FindAll(x => x.PickCode.Contains(documentNo))
-                : _warehousePicks;
+                ? _warehouseShipments.FindAll(x => x.ShipmentCode.Contains(documentNo))
+                : _warehouseShipments;
 
             var listItem = new ListItem();
             for (int i = 0; i < _filteredList.Count; i++)
@@ -100,11 +100,11 @@ namespace KIPS_WMS.UI.Izdvajanje
             int index = listBox1.SelectedIndex;
             if (index == -1 || index >= listBox1.Items.Count || listBox1.Items[index].Tag != null)
             {
-                _selectedPick = null;
+                _selectedShipment = null;
                 return;
             }
 
-            _selectedPick = _filteredList[index];
+            _selectedShipment = _filteredList[index];
         }
 
         private void bNazad_Click(object sender, EventArgs e)
@@ -115,9 +115,9 @@ namespace KIPS_WMS.UI.Izdvajanje
 
         private void bDalje_Click(object sender, EventArgs e)
         {
-            if (_selectedPick != null)
+            if (_selectedShipment != null)
             {
-                new IzdvajanjeLinije(_selectedPick.PickCode).Show();
+                new IsporukaLinije(_selectedShipment.ShipmentCode).Show();
             }
             else
             {
@@ -142,10 +142,10 @@ namespace KIPS_WMS.UI.Izdvajanje
                 brush = new SolidBrush(Color.Black);
             }
 
-            WarehousePickModel line = _filteredList[index];
+            WarehouseShipmentModel line = _filteredList[index];
 
             string firstLine = line.SourceDescription;
-            string secondLine = string.Format("{0} - {1}", line.PickCode, line.PostingDate);
+            string secondLine = string.Format("{0} - {1}", line.ShipmentCode, line.ShipmentDate);
 
             e.Graphics.DrawString(firstLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 3, e.Bounds.Top,

@@ -119,6 +119,7 @@
             this.bMagIsporuke.Size = new System.Drawing.Size(114, 30);
             this.bMagIsporuke.TabIndex = 3;
             this.bMagIsporuke.Text = "Mag. isporuke";
+            this.bMagIsporuke.Click += new System.EventHandler(this.bMagIsporuke_Click);
             // 
             // bSkladistenja
             // 

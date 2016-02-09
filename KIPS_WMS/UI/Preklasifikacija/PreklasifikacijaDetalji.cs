@@ -233,7 +233,6 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 finally
                 {
                     Cursor.Current = Cursors.Default;
-                    tbSaRegala.Focus();
                 }
             }
         }

@@ -2,24 +2,6 @@
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync" xmlns="http://www.w3.org/2001/XMLSchema">
-      <element name="GetWarehousePutAways">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetWarehousePutAways_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
       <element name="LogIn">
         <complexType>
           <sequence>
@@ -312,6 +294,24 @@
           <sequence />
         </complexType>
       </element>
+      <element name="GetWarehousePutAways">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehousePutAways_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="GetWarehousePutAwayLines">
         <complexType>
           <sequence>
@@ -432,6 +432,79 @@
         </complexType>
       </element>
       <element name="UpdatePickLineQty_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="GetWarehouseShipments">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehouseShipments_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehouseShipmentLines">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsShipmentNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetWarehouseShipmentLines_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetShipmentLineQtyToShip">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsShipmentNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsShipmentLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="qtyToShipP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetShipmentLineQtyToShip_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="qtyToShipP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateWarehouseShipmentLineQty">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsShipmentNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsShipmentLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="qtyP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isUpdateP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="trackingCSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="normCSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="scannedUoMCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="qtyInScannedUoMP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateWarehouseShipmentLineQty_Result">
         <complexType>
           <sequence />
         </complexType>
@@ -599,12 +672,6 @@
       </element>
     </schema>
   </types>
-  <message name="GetWarehousePutAways">
-    <part name="parameters" element="tns:GetWarehousePutAways" />
-  </message>
-  <message name="GetWarehousePutAways_Result">
-    <part name="parameters" element="tns:GetWarehousePutAways_Result" />
-  </message>
   <message name="LogIn">
     <part name="parameters" element="tns:LogIn" />
   </message>
@@ -701,6 +768,12 @@
   <message name="UpdateDamagedIncomplete_Result">
     <part name="parameters" element="tns:UpdateDamagedIncomplete_Result" />
   </message>
+  <message name="GetWarehousePutAways">
+    <part name="parameters" element="tns:GetWarehousePutAways" />
+  </message>
+  <message name="GetWarehousePutAways_Result">
+    <part name="parameters" element="tns:GetWarehousePutAways_Result" />
+  </message>
   <message name="GetWarehousePutAwayLines">
     <part name="parameters" element="tns:GetWarehousePutAwayLines" />
   </message>
@@ -742,6 +815,30 @@
   </message>
   <message name="UpdatePickLineQty_Result">
     <part name="parameters" element="tns:UpdatePickLineQty_Result" />
+  </message>
+  <message name="GetWarehouseShipments">
+    <part name="parameters" element="tns:GetWarehouseShipments" />
+  </message>
+  <message name="GetWarehouseShipments_Result">
+    <part name="parameters" element="tns:GetWarehouseShipments_Result" />
+  </message>
+  <message name="GetWarehouseShipmentLines">
+    <part name="parameters" element="tns:GetWarehouseShipmentLines" />
+  </message>
+  <message name="GetWarehouseShipmentLines_Result">
+    <part name="parameters" element="tns:GetWarehouseShipmentLines_Result" />
+  </message>
+  <message name="GetShipmentLineQtyToShip">
+    <part name="parameters" element="tns:GetShipmentLineQtyToShip" />
+  </message>
+  <message name="GetShipmentLineQtyToShip_Result">
+    <part name="parameters" element="tns:GetShipmentLineQtyToShip_Result" />
+  </message>
+  <message name="UpdateWarehouseShipmentLineQty">
+    <part name="parameters" element="tns:UpdateWarehouseShipmentLineQty" />
+  </message>
+  <message name="UpdateWarehouseShipmentLineQty_Result">
+    <part name="parameters" element="tns:UpdateWarehouseShipmentLineQty_Result" />
   </message>
   <message name="BinToBinMovement">
     <part name="parameters" element="tns:BinToBinMovement" />
@@ -798,10 +895,6 @@
     <part name="parameters" element="tns:TestItemHasTracking_Result" />
   </message>
   <portType name="MobileWMSSync_Port">
-    <operation name="GetWarehousePutAways">
-      <input name="GetWarehousePutAways" message="tns:GetWarehousePutAways" />
-      <output name="GetWarehousePutAways_Result" message="tns:GetWarehousePutAways_Result" />
-    </operation>
     <operation name="LogIn">
       <input name="LogIn" message="tns:LogIn" />
       <output name="LogIn_Result" message="tns:LogIn_Result" />
@@ -866,6 +959,10 @@
       <input name="UpdateDamagedIncomplete" message="tns:UpdateDamagedIncomplete" />
       <output name="UpdateDamagedIncomplete_Result" message="tns:UpdateDamagedIncomplete_Result" />
     </operation>
+    <operation name="GetWarehousePutAways">
+      <input name="GetWarehousePutAways" message="tns:GetWarehousePutAways" />
+      <output name="GetWarehousePutAways_Result" message="tns:GetWarehousePutAways_Result" />
+    </operation>
     <operation name="GetWarehousePutAwayLines">
       <input name="GetWarehousePutAwayLines" message="tns:GetWarehousePutAwayLines" />
       <output name="GetWarehousePutAwayLines_Result" message="tns:GetWarehousePutAwayLines_Result" />
@@ -893,6 +990,22 @@
     <operation name="UpdatePickLineQty">
       <input name="UpdatePickLineQty" message="tns:UpdatePickLineQty" />
       <output name="UpdatePickLineQty_Result" message="tns:UpdatePickLineQty_Result" />
+    </operation>
+    <operation name="GetWarehouseShipments">
+      <input name="GetWarehouseShipments" message="tns:GetWarehouseShipments" />
+      <output name="GetWarehouseShipments_Result" message="tns:GetWarehouseShipments_Result" />
+    </operation>
+    <operation name="GetWarehouseShipmentLines">
+      <input name="GetWarehouseShipmentLines" message="tns:GetWarehouseShipmentLines" />
+      <output name="GetWarehouseShipmentLines_Result" message="tns:GetWarehouseShipmentLines_Result" />
+    </operation>
+    <operation name="GetShipmentLineQtyToShip">
+      <input name="GetShipmentLineQtyToShip" message="tns:GetShipmentLineQtyToShip" />
+      <output name="GetShipmentLineQtyToShip_Result" message="tns:GetShipmentLineQtyToShip_Result" />
+    </operation>
+    <operation name="UpdateWarehouseShipmentLineQty">
+      <input name="UpdateWarehouseShipmentLineQty" message="tns:UpdateWarehouseShipmentLineQty" />
+      <output name="UpdateWarehouseShipmentLineQty_Result" message="tns:UpdateWarehouseShipmentLineQty_Result" />
     </operation>
     <operation name="BinToBinMovement">
       <input name="BinToBinMovement" message="tns:BinToBinMovement" />
@@ -933,15 +1046,6 @@
   </portType>
   <binding name="MobileWMSSync_Binding" type="tns:MobileWMSSync_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-    <operation name="GetWarehousePutAways">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePutAways" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetWarehousePutAways">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GetWarehousePutAways_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="LogIn">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:LogIn" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="LogIn">
@@ -1086,6 +1190,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="GetWarehousePutAways">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePutAways" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetWarehousePutAways">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetWarehousePutAways_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="GetWarehousePutAwayLines">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePutAwayLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetWarehousePutAwayLines">
@@ -1146,6 +1259,42 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="UpdatePickLineQty_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetWarehouseShipments">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehouseShipments" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetWarehouseShipments">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetWarehouseShipments_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetWarehouseShipmentLines">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehouseShipmentLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetWarehouseShipmentLines">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetWarehouseShipmentLines_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetShipmentLineQtyToShip">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetShipmentLineQtyToShip" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetShipmentLineQtyToShip">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetShipmentLineQtyToShip_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateWarehouseShipmentLineQty">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:UpdateWarehouseShipmentLineQty" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateWarehouseShipmentLineQty">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateWarehouseShipmentLineQty_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
