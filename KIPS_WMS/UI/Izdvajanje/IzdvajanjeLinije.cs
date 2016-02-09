@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using FileHelpers;
@@ -15,14 +16,13 @@ namespace KIPS_WMS.UI.Izdvajanje
 {
     public partial class IzdvajanjeLinije : Form
     {
+        private readonly LoginModel _loginData = RegistryUtils.GetLoginData();
         private readonly string _pickNo;
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private string _barcode;
         private List<WarehousePickLineModel> _filteredPickLines;
         private WarehousePickLineModel _selectedLine;
         private List<WarehousePickLineModel> _warehousePickLines;
-
-        private LoginModel loginData = RegistryUtils.GetLoginData();
 
         public IzdvajanjeLinije(string pickNo)
         {
@@ -50,12 +50,13 @@ namespace KIPS_WMS.UI.Izdvajanje
 
                 string warehousePicksCsv = String.Empty;
 
-                var loginData = RegistryUtils.GetLoginData();
-                _ws.GetWarehousePickLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _pickNo, ref warehousePicksCsv);
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.GetWarehousePickLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin,
+                    _pickNo, ref warehousePicksCsv);
 
-                var engine = new FileHelperEngine(typeof(WarehousePickLineModel));
+                var engine = new FileHelperEngine(typeof (WarehousePickLineModel));
                 _warehousePickLines =
-                    ((WarehousePickLineModel[])engine.ReadString(warehousePicksCsv)).ToList();
+                    ((WarehousePickLineModel[]) engine.ReadString(warehousePicksCsv)).ToList();
 
                 DisplayData(null, false);
             }
@@ -89,7 +90,8 @@ namespace KIPS_WMS.UI.Izdvajanje
             listBox1.SelectedIndex = -1;
 
             _filteredPickLines = filterText != null
-                ? _warehousePickLines.FindAll(x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
+                ? _warehousePickLines.FindAll(
+                    x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
                 : _warehousePickLines;
 
             var listItem = new ListItem();
@@ -116,7 +118,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             if (e.KeyCode != Keys.Enter) return;
 
             List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
-                new object[] { tbPronadji.Text.Trim() });
+                new object[] {tbPronadji.Text.Trim()});
             if (query.Count == 1)
             {
                 _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
@@ -125,7 +127,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             if (query.Count == 0)
             {
                 query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
-                new object[] { tbPronadji.Text.Trim() });
+                    new object[] {tbPronadji.Text.Trim()});
                 if (query.Count == 1)
                 {
                     _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
@@ -205,11 +207,13 @@ namespace KIPS_WMS.UI.Izdvajanje
             WarehousePickLineModel line = _filteredPickLines[index];
 
             var rectangle = new Rectangle(e.Bounds.Left, e.Bounds.Top, 7, e.Bounds.Height);
-            e.Graphics.FillRectangle(new SolidBrush(GetLineStatusColor(line.QuantityOutstanding, line.QuantityToReceive)), rectangle);
+            e.Graphics.FillRectangle(
+                new SolidBrush(GetLineStatusColor(line.QuantityOutstanding, line.QuantityToReceive)), rectangle);
             e.Graphics.DrawRectangle(new Pen(Color.White), rectangle);
 
             string firstLine = string.Format("{0} {1}", line.ItemNo, line.ItemDescription);
-            string secondLine = string.Format("{0} - {1} / {2}", line.SerialNo, line.QuantityToReceive, line.QuantityOutstanding);
+            string secondLine = string.Format("{0} - {1} / {2}", line.SerialNo, line.QuantityToReceive,
+                line.QuantityOutstanding);
 
             e.Graphics.DrawString(firstLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 10, e.Bounds.Top,
@@ -223,7 +227,7 @@ namespace KIPS_WMS.UI.Izdvajanje
         {
             try
             {
-                var culture = Utils.GetLocalCulture();
+                CultureInfo culture = Utils.GetLocalCulture();
                 decimal receivedQuantity = decimal.Parse(toReceive, culture);
                 decimal outstandingQuantity = decimal.Parse(outstanding, culture);
 
@@ -254,18 +258,19 @@ namespace KIPS_WMS.UI.Izdvajanje
                 Cursor.Current = Cursors.WaitCursor;
                 int status = -1;
 
-                _ws.RegisterWhsDocument(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, Utils.DocumentTypeIzdvajanje
+                _ws.RegisterWhsDocument(RegistryUtils.GetLastUsername(), _loginData.Magacin, _loginData.Podmagacin,
+                    Utils.DocumentTypeIzdvajanje
                     , _pickNo, ref status);
 
                 if (status == 1)
                 {
-                    MessageBox.Show("Uspešno registrovano izdvajanje.");
+                    MessageBox.Show("Izdvajanje je uspešno registrovano");
                     listBox1.Dispose();
                     Close();
                 }
                 else
                 {
-                    MessageBox.Show("Greška pri izdvajanju", Resources.Greska);
+                    MessageBox.Show("Došlo je do greške");
                 }
             }
             catch (Exception ex)
@@ -277,6 +282,57 @@ namespace KIPS_WMS.UI.Izdvajanje
                 Cursor.Current = Cursors.Default;
             }
         }
-        
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    listBox1.Dispose();
+                    Close();
+                    break;
+                case 1:
+                    try
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+                        int status = -1;
+
+                        _ws.RegisterWhsDocument(RegistryUtils.GetLastUsername(), _loginData.Magacin,
+                            _loginData.Podmagacin,
+                            Utils.DocumentTypeIzdvajanje
+                            , _pickNo, ref status);
+
+                        if (status == 1)
+                        {
+                            MessageBox.Show("Izdvajanje je uspešno registrovano");
+                            listBox1.Dispose();
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Došlo je do greške");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Utils.GeneralExceptionProcessing(ex);
+                    }
+                    finally
+                    {
+                        Cursor.Current = Cursors.Default;
+                    }
+                    break;
+                case 2:
+                    if (_selectedLine != null)
+                    {
+                        ShowLineDetailsForm(null);
+                    }
+                    else
+                    {
+                        MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
+                    }
+                    break;
+            }
+        }
     }
 }

@@ -16,9 +16,9 @@ namespace KIPS_WMS.UI.Izdvajanje
             Close();
         }
 
-        private void bArtikal_Click(object sender, EventArgs e)
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
         {
-
+            Close();
         }
     }
 }

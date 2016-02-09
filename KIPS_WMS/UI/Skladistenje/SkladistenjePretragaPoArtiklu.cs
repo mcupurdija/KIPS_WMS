@@ -230,20 +230,20 @@ namespace KIPS_WMS.UI.Skladistenje
                 {
                     Cursor.Current = Cursors.WaitCursor;
 
-                    var _items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
+                    var items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
                         new object[] { tbPronadji.Text });
-                    if (_items.Count == 0)
+                    if (items.Count == 0)
                     {
-                        _items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
+                        items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
                         new object[] { tbPronadji.Text });
                     }
-                    if (_items.Count == 0)
+                    if (items.Count == 0)
                     {
                         MessageBox.Show("Nije pronađen artikal.", Resources.Greska);
                     }
                     else
                     {
-                        _selectedItem = _items[0];
+                        _selectedItem = items[0];
                         if (_selectedItem != null)
                         {
                             new Thread(() => GetData(_selectedItem[DatabaseModel.ItemDbModel.ItemCode].ToString())).Start();
@@ -258,6 +258,41 @@ namespace KIPS_WMS.UI.Skladistenje
                 {
                     Cursor.Current = Cursors.Default;
                 }
+            }
+        }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    listBox1.Dispose();
+                    Close();
+                    break;
+                case 1:
+                    if (_tableItems)
+                    {
+                        if (_selectedItem != null)
+                        {
+                            new Thread(() => GetData(_selectedItem[DatabaseModel.ItemDbModel.ItemCode].ToString())).Start();
+                        }
+                        else
+                        {
+                            MessageBox.Show(Resources.OdaberiteArtikal, Resources.Greska);
+                        }
+                    }
+                    else
+                    {
+                        if (_selectedPutAway != null)
+                        {
+                            new SkladistenjeLinije(_selectedPutAway.PutAwayCode).Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show(Resources.OdaberiteDokument, Resources.Greska);
+                        }
+                    }
+                    break;
             }
         }
     }

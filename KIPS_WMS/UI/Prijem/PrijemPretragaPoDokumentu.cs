@@ -154,5 +154,26 @@ namespace KIPS_WMS.UI.Prijem
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 3,
                 e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
         }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    listBox1.Dispose();
+                    Close();
+                    break;
+                case 1:
+                    if (_selectedReceipt != null)
+                    {
+                        new PrijemLinije(_selectedReceipt.ReceiptCode).Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show(Resources.OdaberiteDokument, Resources.Greska);
+                    }
+                    break;
+            }
+        }
     }
 }

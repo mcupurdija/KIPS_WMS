@@ -117,5 +117,10 @@ namespace KIPS_WMS.UI
             //    }
             //}
         }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            Close();
+        }
     }
 }

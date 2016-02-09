@@ -29,6 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Meni));
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.bUnosBarkoda = new System.Windows.Forms.MenuItem();
@@ -46,6 +47,15 @@
             this.bKontrolnaCena = new System.Windows.Forms.Button();
             this.bLagerLista = new System.Windows.Forms.Button();
             this.bPopis = new System.Windows.Forms.Button();
+            this.contextMenu1 = new System.Windows.Forms.ContextMenu();
+            this.cUnosBarkoda = new System.Windows.Forms.MenuItem();
+            this.cCrossDocking = new System.Windows.Forms.MenuItem();
+            this.cUvozPodataka = new System.Windows.Forms.MenuItem();
+            this.cPodesavanja = new System.Windows.Forms.MenuItem();
+            this.toolBar1 = new System.Windows.Forms.ToolBar();
+            this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
+            this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -72,12 +82,10 @@
             // bUvozPodataka
             // 
             this.bUvozPodataka.Text = "Uvoz podataka";
-            this.bUvozPodataka.Click += new System.EventHandler(this.bUvozPodataka_Click);
             // 
             // bPodesavanja
             // 
             this.bPodesavanja.Text = "Podešavanja";
-            this.bPodesavanja.Click += new System.EventHandler(this.bPodesavanja_Click);
             // 
             // bLogout
             // 
@@ -113,7 +121,6 @@
             // 
             // bMagIsporuke
             // 
-            this.bMagIsporuke.Enabled = false;
             this.bMagIsporuke.Location = new System.Drawing.Point(123, 39);
             this.bMagIsporuke.Name = "bMagIsporuke";
             this.bMagIsporuke.Size = new System.Drawing.Size(114, 30);
@@ -168,12 +175,63 @@
             // 
             // bPopis
             // 
+            this.bPopis.Enabled = false;
             this.bPopis.Location = new System.Drawing.Point(123, 147);
             this.bPopis.Name = "bPopis";
             this.bPopis.Size = new System.Drawing.Size(114, 30);
             this.bPopis.TabIndex = 9;
             this.bPopis.Text = "Popis";
             this.bPopis.Click += new System.EventHandler(this.bPopis_Click);
+            // 
+            // contextMenu1
+            // 
+            this.contextMenu1.MenuItems.Add(this.cUnosBarkoda);
+            this.contextMenu1.MenuItems.Add(this.cCrossDocking);
+            this.contextMenu1.MenuItems.Add(this.cUvozPodataka);
+            this.contextMenu1.MenuItems.Add(this.cPodesavanja);
+            // 
+            // cUnosBarkoda
+            // 
+            this.cUnosBarkoda.Text = "Unos barkoda";
+            this.cUnosBarkoda.Click += new System.EventHandler(this.cUnosBarkoda_Click);
+            // 
+            // cCrossDocking
+            // 
+            this.cCrossDocking.Text = "Cross docking";
+            this.cCrossDocking.Click += new System.EventHandler(this.cCrossDocking_Click);
+            // 
+            // cUvozPodataka
+            // 
+            this.cUvozPodataka.Text = "Uvoz podataka";
+            this.cUvozPodataka.Click += new System.EventHandler(this.cUvozPodataka_Click);
+            // 
+            // cPodesavanja
+            // 
+            this.cPodesavanja.Text = "Podešavanja";
+            this.cPodesavanja.Click += new System.EventHandler(this.cPodesavanja_Click);
+            // 
+            // toolBar1
+            // 
+            this.toolBar1.Buttons.Add(this.toolBarButton1);
+            this.toolBar1.Buttons.Add(this.toolBarButton2);
+            this.toolBar1.ImageList = this.imageList1;
+            this.toolBar1.Name = "toolBar1";
+            this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
+            // 
+            // toolBarButton1
+            // 
+            this.toolBarButton1.ImageIndex = 0;
+            // 
+            // toolBarButton2
+            // 
+            this.toolBarButton2.ImageIndex = 1;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
             // 
             // Meni
             // 
@@ -182,6 +240,7 @@
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
             this.ControlBox = false;
+            this.Controls.Add(this.toolBar1);
             this.Controls.Add(this.bPopis);
             this.Controls.Add(this.bLagerLista);
             this.Controls.Add(this.bKontrolnaCena);
@@ -192,7 +251,6 @@
             this.Controls.Add(this.bMagPrijemnice);
             this.Controls.Add(this.bPreklasifikacija);
             this.Controls.Add(this.bPonude);
-            this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
             this.Name = "Meni";
             this.Text = "Meni";
@@ -218,5 +276,14 @@
         private System.Windows.Forms.MenuItem bPodesavanja;
         private System.Windows.Forms.MenuItem bUvozPodataka;
         private System.Windows.Forms.MenuItem bLogout;
+        private System.Windows.Forms.ContextMenu contextMenu1;
+        private System.Windows.Forms.MenuItem cUnosBarkoda;
+        private System.Windows.Forms.MenuItem cCrossDocking;
+        private System.Windows.Forms.MenuItem cUvozPodataka;
+        private System.Windows.Forms.MenuItem cPodesavanja;
+        private System.Windows.Forms.ToolBar toolBar1;
+        private System.Windows.Forms.ToolBarButton toolBarButton1;
+        private System.Windows.Forms.ToolBarButton toolBarButton2;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

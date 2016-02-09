@@ -29,6 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.bSacuvaj = new System.Windows.Forms.MenuItem();
             this.cbPrinters = new System.Windows.Forms.ComboBox();
@@ -38,6 +39,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbTest = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.toolBar1 = new System.Windows.Forms.ToolBar();
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
+            this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -103,12 +108,36 @@
             this.label3.Size = new System.Drawing.Size(234, 20);
             this.label3.Text = "Testiraj štampu:";
             // 
+            // toolBar1
+            // 
+            this.toolBar1.Buttons.Add(this.toolBarButton1);
+            this.toolBar1.Buttons.Add(this.toolBarButton2);
+            this.toolBar1.ImageList = this.imageList1;
+            this.toolBar1.Name = "toolBar1";
+            this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
+            // 
+            // toolBarButton1
+            // 
+            this.toolBarButton1.ImageIndex = 0;
+            // 
+            // toolBarButton2
+            // 
+            this.toolBarButton2.ImageIndex = 1;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
+            this.Controls.Add(this.toolBar1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbTest);
             this.Controls.Add(this.label1);
@@ -116,7 +145,6 @@
             this.Controls.Add(this.bShort);
             this.Controls.Add(this.tbSavedPrinter);
             this.Controls.Add(this.cbPrinters);
-            this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
             this.Name = "Settings";
             this.Text = "Settings";
@@ -134,5 +162,9 @@
         private System.Windows.Forms.MenuItem bSacuvaj;
         private System.Windows.Forms.TextBox tbTest;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolBar toolBar1;
+        private System.Windows.Forms.ToolBarButton toolBarButton1;
+        private System.Windows.Forms.ToolBarButton toolBarButton2;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

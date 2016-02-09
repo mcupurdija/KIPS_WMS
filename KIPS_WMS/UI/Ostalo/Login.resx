@@ -234,6 +234,17 @@
         0GDB0ASsQYMFQxOwBg0WDE3AGjRYMDQBa9BgsQD+H7g9xUT7x8rzAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>134, 17</value>
+  </metadata>
+  <data name="resource" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAEYAAAAkAQMAAAAO3N6WAAAABGdBTUEAALGPC/xhBQAAAAZQTFRFAAAA
+        zs/vQoE27QAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtz
+        IENTNui8sowAAABESURBVCjPY/gPBX/oxrKHsj7AWT8RrEaLhHoI66exHZT12d4GKvvcwhLGMoaxzqsb
+        Q1nz1dShJjcaKNTT0UcEWf//AABMCS/sHDEIbAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="$this.FormFactorShadowProperty" xml:space="preserve">
     <value>Pocket_PC_Phone_Square_Screen</value>
   </metadata>

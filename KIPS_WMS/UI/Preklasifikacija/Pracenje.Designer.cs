@@ -29,6 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pracenje));
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.bObrisi = new System.Windows.Forms.MenuItem();
             this.bDalje = new System.Windows.Forms.MenuItem();
@@ -41,6 +42,10 @@
             this.lKolicina = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.dtDatum = new System.Windows.Forms.DateTimePicker();
+            this.toolBar1 = new System.Windows.Forms.ToolBar();
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
+            this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -114,9 +119,9 @@
             // listView1
             // 
             this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(4, 102);
+            this.listView1.Location = new System.Drawing.Point(0, 98);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(230, 86);
+            this.listView1.Size = new System.Drawing.Size(240, 90);
             this.listView1.TabIndex = 11;
             // 
             // dtDatum
@@ -128,12 +133,36 @@
             this.dtDatum.Size = new System.Drawing.Size(91, 22);
             this.dtDatum.TabIndex = 16;
             // 
+            // toolBar1
+            // 
+            this.toolBar1.Buttons.Add(this.toolBarButton1);
+            this.toolBar1.Buttons.Add(this.toolBarButton2);
+            this.toolBar1.ImageList = this.imageList1;
+            this.toolBar1.Name = "toolBar1";
+            this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
+            // 
+            // toolBarButton1
+            // 
+            this.toolBarButton1.ImageIndex = 0;
+            // 
+            // toolBarButton2
+            // 
+            this.toolBarButton2.ImageIndex = 1;
+            // 
             // Pracenje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(240, 188);
             this.ControlBox = false;
+            this.Controls.Add(this.toolBar1);
             this.Controls.Add(this.dtDatum);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.lKolicina);
@@ -143,7 +172,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lTekst);
             this.Controls.Add(this.lSifra);
-            this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
             this.Name = "Pracenje";
             this.Text = "Praćenje";
@@ -164,5 +192,9 @@
         private System.Windows.Forms.Label lKolicina;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.DateTimePicker dtDatum;
+        private System.Windows.Forms.ToolBar toolBar1;
+        private System.Windows.Forms.ToolBarButton toolBarButton1;
+        private System.Windows.Forms.ToolBarButton toolBarButton2;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

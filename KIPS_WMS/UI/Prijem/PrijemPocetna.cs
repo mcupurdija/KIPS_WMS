@@ -21,5 +21,10 @@ namespace KIPS_WMS.UI.Prijem
             new PrijemPretragaPoArtiklu().Show();
             Close();
         }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            Close();
+        }
     }
 }

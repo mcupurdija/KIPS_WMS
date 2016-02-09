@@ -105,6 +105,23 @@ namespace KIPS_WMS.UI.Ostalo
             Close();
         }
 
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    Close();
+                    break;
+                case 1:
+                    if (tbSavedPrinter.Text.Length > 0)
+                    {
+                        RegistryUtils.SavePrinterName(tbSavedPrinter.Text);
+                    }
+                    Close();
+                    break;
+            }
+        }
+
 //        public void TestPrint()
 //        {
 //            WebRequest request = WebRequest.Create("http://192.168.1.164/PrintingSrv/api/print");

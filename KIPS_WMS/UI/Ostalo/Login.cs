@@ -125,5 +125,11 @@ namespace KIPS_WMS.UI.Ostalo
                 DoLogin();
             }
         }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            RegistryUtils.DeleteLoginData();
+            Close();
+        }
     }
 }
