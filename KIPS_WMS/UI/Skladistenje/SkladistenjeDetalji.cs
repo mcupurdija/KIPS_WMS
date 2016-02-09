@@ -248,7 +248,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
                 Cursor.Current = Cursors.WaitCursor;
                 _ws.UpdatePutAwayLineQty(RegistryUtils.GetLastUsername(), _putAwayNo,
-                    Convert.ToInt16(_selectedLine.LineNo), quantity,
+                    Convert.ToInt32(_selectedLine.LineNo), quantity,
                     isUpdate, lJedinica.Text, uomQuantity);
 
                 int index = WarehousePutAwayLines.IndexOf(_selectedLine);
