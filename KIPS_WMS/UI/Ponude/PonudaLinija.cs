@@ -380,5 +380,16 @@ namespace KIPS_WMS.UI.Ponude
             }
         }
 
+        private void tbKolicina_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+            {
+                tbKolicina.Text += ",";
+                tbKolicina.SelectionStart = tbKolicina.Text.Length;
+                tbKolicina.SelectionLength = 0;
+                e.Handled = true;
+            }
+        }
+
     }
 }

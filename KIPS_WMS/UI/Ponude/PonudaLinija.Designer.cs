@@ -124,6 +124,7 @@
             this.tbKolicina.TabIndex = 8;
             this.tbKolicina.TextChanged += new System.EventHandler(this.tbKolicina_TextChanged);
             this.tbKolicina.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbKolicina_KeyUp);
+            this.tbKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKolicina_KeyPress);
             // 
             // tbKolicinaKonverzija
             // 
