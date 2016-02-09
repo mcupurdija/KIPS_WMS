@@ -111,7 +111,7 @@ namespace KIPS_WMS.UI.Skladistenje
                     text = string.Format("{0}: {1}", "Uskladištena količina", _selectedLine.QuantityToReceive);
                     break;
                 case 5:
-                    text = string.Format("{0}: {1}", "Broj serije/SN", _selectedLine.SerialNo);
+                    text = string.Format("{0}: {1}{2}", "Broj serije/SN", _selectedLine.LotNo, _selectedLine.SerialNo);
                     break;
                 case 6:
                     text = string.Format("{0}: {1}", "Datum prestanka važenja", _selectedLine.ExpirationDate);
@@ -243,7 +243,7 @@ namespace KIPS_WMS.UI.Skladistenje
                 if (decimal.Parse(uomQuantity) < 0) return;
 
                 Cursor.Current = Cursors.WaitCursor;
-                _ws.UpdatePutAwayLineQty(RegistryUtils.GetLastUsername(), _putAwayNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
+                _ws.UpdatePutAwayLineQty(RegistryUtils.GetLastUsername(), _putAwayNo, Convert.ToInt32(_selectedLine.LineNo), quantity,
                     isUpdate, lJedinica.Text, uomQuantity);
 
                 int index = WarehousePutAwayLines.IndexOf(_selectedLine);
@@ -251,7 +251,7 @@ namespace KIPS_WMS.UI.Skladistenje
                 {
                     CultureInfo culture = Utils.GetLocalCulture();
                     decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text, culture);
-                    _selectedLine.QuantityToReceive = newQty.ToString("N0", culture);
+                    _selectedLine.QuantityToReceive = newQty.ToString("N3", culture);
                 }
                 else
                 {
@@ -272,6 +272,7 @@ namespace KIPS_WMS.UI.Skladistenje
             finally
             {
                 Cursor.Current = Cursors.Default;
+                lJedinica.Text = "";
             }
         }
 
