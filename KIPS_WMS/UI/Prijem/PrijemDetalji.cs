@@ -24,7 +24,7 @@ namespace KIPS_WMS.UI.Prijem
         private Object[] _dbItem;
         private bool _lineSplit;
         private readonly LoginModel _loginData = RegistryUtils.GetLoginData();
-        decimal coefficient = 0;
+        decimal _coefficient;
 
         public List<WarehouseReceiptLineModel> WarehouseReceiptLines;
 
@@ -164,8 +164,8 @@ namespace KIPS_WMS.UI.Prijem
             {
                 _dbItem = query[0];
                 lJedinica.Text = _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
-                
-                coefficient = GetCoefficient(_selectedLine.ItemNo, _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString());
+
+                _coefficient = GetCoefficient(_selectedLine.ItemNo, _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString());
                 tbJedinicaKolicina.Text = "1";
             }
             else
@@ -184,8 +184,8 @@ namespace KIPS_WMS.UI.Prijem
                 decimal scannedItemQuantity = int.Parse(_dbItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString());
                 decimal unitQuantity = decimal.Parse(tbJedinicaKolicina.Text, Utils.GetLocalCulture());
 
-                tbKolicina.Text = (scannedItemQuantity / coefficient) != 1
-                    ? ((scannedItemQuantity / coefficient) * unitQuantity).ToString("N3", Utils.GetLocalCulture())
+                tbKolicina.Text = (scannedItemQuantity / _coefficient) != 1
+                    ? ((scannedItemQuantity / _coefficient) * unitQuantity).ToString("N3", Utils.GetLocalCulture())
                     : (unitQuantity).ToString("N3", Utils.GetLocalCulture());
             }
             catch (Exception)
@@ -256,7 +256,7 @@ namespace KIPS_WMS.UI.Prijem
                     if (result == DialogResult.OK)
                     {
                         var engine = new FileHelperEngine(typeof(SendTrackingModel));
-                        lines = engine.WriteString(pracenje._lines);
+                        lines = engine.WriteString(pracenje.Lines);
                     }
                 }
 
@@ -423,6 +423,79 @@ namespace KIPS_WMS.UI.Prijem
                 tbKolicina.SelectionStart = tbKolicina.Text.Length;
                 tbKolicina.SelectionLength = 0;
                 e.Handled = true;
+            }
+        }
+
+        private void cArtikalPoRegalima_Click(object sender, EventArgs e)
+        {
+            new ArtikliPoRegalimaDijalog(_selectedLine.BinCode, _selectedLine.ItemNo, _selectedLine.ItemVariant)
+                .ShowDialog();
+        }
+
+        private void cPodeliRed_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                int newLineNo = 0;
+                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+
+                _lineSplit = true;
+
+                //                new Thread(() => GetData(newLineNo)).Start();
+                GetData(newLineNo);
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void cZameniRegal_Click(object sender, EventArgs e)
+        {
+            string newBinCode = tbRegal.Text.Trim();
+            if (newBinCode.Length == 0 || newBinCode == _selectedLine.BinCode) return;
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+
+                tbRegal.Text = newBinCode;
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void cOsteceno_Click(object sender, EventArgs e)
+        {
+            new OstecenoNekompletnoDijalog(_selectedLine).ShowDialog();
+        }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    DialogResult = DialogResult.Yes;
+                    listBox1.Dispose();
+                    Close();
+                    break;
+                case 1:
+                    contextMenu1.Show(toolBar1, new Point(80, 10));
+                    break;
             }
         }
     }

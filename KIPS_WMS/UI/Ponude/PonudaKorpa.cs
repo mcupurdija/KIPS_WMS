@@ -158,6 +158,7 @@ namespace KIPS_WMS.UI.Ponude
             listBox1.BackColor = Color.White;
 
             listBox1.Items.Clear();
+            listBox1.SelectedIndex = -1;
             var listItem = new ListItem();
             foreach (var item in data)
             {
@@ -415,6 +416,75 @@ namespace KIPS_WMS.UI.Ponude
             }
 
             ShowLinesForm(PonudaLinija.ItemState.New, false);
+        }
+
+        private void cIzmeniLiniju_Click(object sender, EventArgs e)
+        {
+            if (_tableBasket && _selectedItem is ItemQuoteModel)
+            {
+                ShowLinesForm(PonudaLinija.ItemState.Edit, false);
+            }
+            else
+            {
+                MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
+            }
+        }
+
+        private void cObrisiLiniju_Click(object sender, EventArgs e)
+        {
+            if (_tableBasket && _selectedItem is ItemQuoteModel)
+            {
+                _quoteItems.Remove((ItemQuoteModel)_selectedItem);
+                DisplayLines();
+            }
+            else
+            {
+                MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
+            }
+        }
+
+        private void cUcitajNoveArtikle_Click(object sender, EventArgs e)
+        {
+            var loadingForm = new NoviArtikliDijalog();
+            DialogResult result = loadingForm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                if (tbPronadji.Text.Length < 3) return;
+
+                _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementComplete,
+                    new object[] { tbPronadji.Text });
+                DisplaySearchResults(_searchedItems);
+            }
+        }
+
+        private void cOdustani_Click(object sender, EventArgs e)
+        {
+            _sent = true;
+
+            listBox1.Dispose();
+            Close();
+        }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    Close();
+                    break;
+                case 1:
+                    contextMenu1.Show(toolBar1, new Point(80, 10));
+                    break;
+                case 2:
+                    var stampaDijalog = new StampaDijalog();
+                    DialogResult result = stampaDijalog.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        new Thread(() => SendQuote(stampaDijalog.PrintTypeSelected)).Start();
+                    }
+                    break;
+            }
         }
     }
 }

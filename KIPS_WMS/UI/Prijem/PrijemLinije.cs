@@ -15,6 +15,7 @@ namespace KIPS_WMS.UI.Prijem
 {
     public partial class PrijemLinije : Form
     {
+        private readonly LoginModel _loginData = RegistryUtils.GetLoginData();
         private readonly string _receiptNo;
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private string _barcode;
@@ -48,8 +49,7 @@ namespace KIPS_WMS.UI.Prijem
 
                 string warehouseReceiptsCsv = String.Empty;
 
-                var loginData = RegistryUtils.GetLoginData();
-                _ws.GetWarehouseReceiptLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _receiptNo, ref warehouseReceiptsCsv);
+                _ws.GetWarehouseReceiptLines(RegistryUtils.GetLastUsername(), _loginData.Magacin, _loginData.Podmagacin, _receiptNo, ref warehouseReceiptsCsv);
 
                 var engine = new FileHelperEngine(typeof (WarehouseReceiptLineModel));
                 _warehouseReceiptLines =
@@ -261,6 +261,46 @@ namespace KIPS_WMS.UI.Prijem
             finally
             {
                 Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    listBox1.Dispose();
+                    Close();
+                    break;
+                case 1:
+                    try
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+
+                        _ws.SetDocumentStatus(Utils.DocumentTypePrijem, _receiptNo, 1);
+
+                        listBox1.Dispose();
+                        Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Utils.GeneralExceptionProcessing(ex);
+                    }
+                    finally
+                    {
+                        Cursor.Current = Cursors.Default;
+                    }
+                    break;
+                case 2:
+                    if (_selectedLine != null)
+                    {
+                        ShowLineDetailsForm(null);
+                    }
+                    else
+                    {
+                        MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
+                    }
+                    break;
             }
         }
         

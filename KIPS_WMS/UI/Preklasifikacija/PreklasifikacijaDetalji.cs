@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using FileHelpers;
+using KIPS_WMS.Data;
 using KIPS_WMS.Model;
 using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Properties;
 using KIPS_WMS.UI.Ostalo;
 using KIPS_WMS.Web;
-using KIPS_WMS.Data;
 
 namespace KIPS_WMS.UI.Preklasifikacija
 {
     public partial class PreklasifikacijaDetalji : Form
     {
+        private readonly List<int> _lineNumbers = new List<int>();
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
-        private readonly List<int> lineNumbers = new List<int>();
 
         private string _itemName;
-        private string _itemVariant;
         private string _itemNo;
         private string _itemQuantity;
         private string _itemTrackingType;
         private string _itemUnitOfMeasure;
+        private string _itemVariant;
 
         public PreklasifikacijaDetalji()
         {
@@ -64,7 +65,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
             {
                 //List<object> baseUnit = SQLiteHelper.oneRowQuery(DbStatements.FindItemBaseUnitOfMeasure,
                 //            new object[] { _itemNo });
-                decimal kolicina = decimal.Parse(tbKolicina.Text, Utils.GetLocalCulture()) * decimal.Parse(_itemQuantity);
+                decimal kolicina = decimal.Parse(tbKolicina.Text, Utils.GetLocalCulture())*decimal.Parse(_itemQuantity);
                 string lines = "";
                 int numOfLine = 0;
 
@@ -76,20 +77,21 @@ namespace KIPS_WMS.UI.Preklasifikacija
 
                     if (result == DialogResult.OK)
                     {
-                        var engine = new FileHelperEngine(typeof(SendTrackingModel));
-                        lines = engine.WriteString(pracenje._lines);
+                        var engine = new FileHelperEngine(typeof (SendTrackingModel));
+                        lines = engine.WriteString(pracenje.Lines);
                     }
                 }
                 Cursor.Current = Cursors.WaitCursor;
-                var loginData = RegistryUtils.GetLoginData();
-                _ws.BinToBinMovement(_itemNo, tbKolicina.Text.Trim(), _itemUnitOfMeasure, loginData.Magacin, loginData.Podmagacin, tbSaRegala.Text,
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.BinToBinMovement(_itemNo, tbKolicina.Text.Trim(), _itemUnitOfMeasure, loginData.Magacin,
+                    loginData.Podmagacin, tbSaRegala.Text,
                     tbNaRegal.Text, RegistryUtils.GetLastUsername(), lines, ref numOfLine);
-                lineNumbers.Add(numOfLine);
+                _lineNumbers.Add(numOfLine);
 
                 var lvi = new ListViewItem(new[]
-                    {
-                        _itemNo, _itemName, tbKolicina.Text, _itemUnitOfMeasure, tbSaRegala.Text, tbNaRegal.Text
-                    });
+                {
+                    _itemNo, _itemName, tbKolicina.Text, _itemUnitOfMeasure, tbSaRegala.Text, tbNaRegal.Text
+                });
                 listView1.Items.Add(lvi);
 
                 tbKolicina.Text = "";
@@ -98,7 +100,6 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 lbJM.Text = Resources.JM + ": ";
                 tbNaRegal.Text = "";
                 tbSaRegala.Text = "";
-
             }
             catch (Exception ex)
             {
@@ -130,9 +131,10 @@ namespace KIPS_WMS.UI.Preklasifikacija
 
                 int index = listView1.SelectedIndices[0];
 
-                var loginData = RegistryUtils.GetLoginData();
-                _ws.DeleteReclassificationLines(lineNumbers[index], RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, 0);
-                lineNumbers.RemoveAt(index);
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.DeleteReclassificationLines(_lineNumbers[index], RegistryUtils.GetLastUsername(), loginData.Magacin,
+                    loginData.Podmagacin, 0);
+                _lineNumbers.RemoveAt(index);
                 listView1.Items.RemoveAt(index);
             }
             catch (Exception ex)
@@ -151,8 +153,9 @@ namespace KIPS_WMS.UI.Preklasifikacija
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                var loginData = RegistryUtils.GetLoginData();
-                _ws.DeleteReclassificationLines(0, RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, 1);
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.DeleteReclassificationLines(0, RegistryUtils.GetLastUsername(), loginData.Magacin,
+                    loginData.Podmagacin, 1);
                 listView1.Items.Clear();
             }
             catch (Exception ex)
@@ -172,8 +175,9 @@ namespace KIPS_WMS.UI.Preklasifikacija
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                var loginData = RegistryUtils.GetLoginData();
-                _ws.PostReclassification(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, ref status);
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.PostReclassification(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin,
+                    ref status);
                 listView1.Items.Clear();
                 MessageBox.Show("Uspešno proknjiženo!");
             }
@@ -197,13 +201,14 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 {
                     Cursor.Current = Cursors.WaitCursor;
 
-                    var _items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
-                        new object[] { tbPronadji.Text });
-                    if (_items.Count == 0) {
-                        _items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
-                        new object[] { tbPronadji.Text });
+                    List<object[]> items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
+                        new object[] {tbPronadji.Text});
+                    if (items.Count == 0)
+                    {
+                        items = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
+                            new object[] {tbPronadji.Text});
                     }
-                    if (_items.Count == 0)
+                    if (items.Count == 0)
                     {
                         MessageBox.Show("Nije pronađen artikal.", Resources.Greska);
                         tbPronadji.Text = "";
@@ -211,19 +216,17 @@ namespace KIPS_WMS.UI.Preklasifikacija
                     }
                     else
                     {
-
-                        _itemName = _items[0][DatabaseModel.ItemDbModel.ItemDescription].ToString();
-                        _itemUnitOfMeasure = _items[0][DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
-                        _itemNo = _items[0][DatabaseModel.ItemDbModel.ItemCode].ToString();
-                        _itemQuantity = _items[0][DatabaseModel.ItemDbModel.ItemQuantity].ToString();
-                        _itemTrackingType = _items[0][DatabaseModel.ItemDbModel.ItemTracking].ToString();
-                        _itemVariant = _items[0][DatabaseModel.ItemDbModel.ItemVariant].ToString();
+                        _itemName = items[0][DatabaseModel.ItemDbModel.ItemDescription].ToString();
+                        _itemUnitOfMeasure = items[0][DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
+                        _itemNo = items[0][DatabaseModel.ItemDbModel.ItemCode].ToString();
+                        _itemQuantity = items[0][DatabaseModel.ItemDbModel.ItemQuantity].ToString();
+                        _itemTrackingType = items[0][DatabaseModel.ItemDbModel.ItemTracking].ToString();
+                        _itemVariant = items[0][DatabaseModel.ItemDbModel.ItemVariant].ToString();
 
                         lbNaziv.Text = Resources.NazivArtika + ": " + _itemName;
                         lbJM.Text = _itemUnitOfMeasure;
                         tbPronadji.Text = _itemNo;
                         tbSaRegala.Focus();
-
                     }
                 }
                 catch (Exception ex)
@@ -272,6 +275,90 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 tbKolicina.SelectionStart = tbKolicina.Text.Length;
                 tbKolicina.SelectionLength = 0;
                 e.Handled = true;
+            }
+        }
+
+        private void cObrisi_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedIndices.Count != 1) return;
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                int index = listView1.SelectedIndices[0];
+
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.DeleteReclassificationLines(_lineNumbers[index], RegistryUtils.GetLastUsername(), loginData.Magacin,
+                    loginData.Podmagacin, 0);
+                _lineNumbers.RemoveAt(index);
+                listView1.Items.RemoveAt(index);
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void cObrisiSve_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.DeleteReclassificationLines(0, RegistryUtils.GetLastUsername(), loginData.Magacin,
+                    loginData.Podmagacin, 1);
+                listView1.Items.Clear();
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void cKnjizi_Click(object sender, EventArgs e)
+        {
+            int status = 0;
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.PostReclassification(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin,
+                    ref status);
+                listView1.Items.Clear();
+                MessageBox.Show("Uspešno proknjiženo!");
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+                tbPronadji.Focus();
+            }
+        }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    Close();
+                    break;
+                case 1:
+                    contextMenu1.Show(toolBar1, new Point(80, 10));
+                    break;
             }
         }
     }

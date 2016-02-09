@@ -29,6 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PreklasifikacijaDetalji));
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.bNazad = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
@@ -49,6 +50,14 @@
             this.bDodaj = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.bStanje = new System.Windows.Forms.Button();
+            this.contextMenu1 = new System.Windows.Forms.ContextMenu();
+            this.cObrisi = new System.Windows.Forms.MenuItem();
+            this.cObrisiSve = new System.Windows.Forms.MenuItem();
+            this.cKnjizi = new System.Windows.Forms.MenuItem();
+            this.toolBar1 = new System.Windows.Forms.ToolBar();
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
+            this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -103,9 +112,9 @@
             // 
             // tbPronadji
             // 
-            this.tbPronadji.Location = new System.Drawing.Point(6, 3);
+            this.tbPronadji.Location = new System.Drawing.Point(3, 3);
             this.tbPronadji.Name = "tbPronadji";
-            this.tbPronadji.Size = new System.Drawing.Size(125, 21);
+            this.tbPronadji.Size = new System.Drawing.Size(128, 21);
             this.tbPronadji.TabIndex = 3;
             this.tbPronadji.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPronadji_KeyUp);
             // 
@@ -187,7 +196,7 @@
             this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(0, 116);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(237, 72);
+            this.listView1.Size = new System.Drawing.Size(240, 72);
             this.listView1.TabIndex = 17;
             // 
             // bStanje
@@ -199,11 +208,56 @@
             this.bStanje.Text = "Stanje";
             this.bStanje.Click += new System.EventHandler(this.bStanje_Click);
             // 
+            // contextMenu1
+            // 
+            this.contextMenu1.MenuItems.Add(this.cObrisi);
+            this.contextMenu1.MenuItems.Add(this.cObrisiSve);
+            this.contextMenu1.MenuItems.Add(this.cKnjizi);
+            // 
+            // cObrisi
+            // 
+            this.cObrisi.Text = "Obriši";
+            this.cObrisi.Click += new System.EventHandler(this.cObrisi_Click);
+            // 
+            // cObrisiSve
+            // 
+            this.cObrisiSve.Text = "Obriši sve";
+            this.cObrisiSve.Click += new System.EventHandler(this.cObrisiSve_Click);
+            // 
+            // cKnjizi
+            // 
+            this.cKnjizi.Text = "Knjiži";
+            this.cKnjizi.Click += new System.EventHandler(this.cKnjizi_Click);
+            // 
+            // toolBar1
+            // 
+            this.toolBar1.Buttons.Add(this.toolBarButton1);
+            this.toolBar1.Buttons.Add(this.toolBarButton2);
+            this.toolBar1.ImageList = this.imageList1;
+            this.toolBar1.Name = "toolBar1";
+            this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
+            // 
+            // toolBarButton1
+            // 
+            this.toolBarButton1.ImageIndex = 0;
+            // 
+            // toolBarButton2
+            // 
+            this.toolBarButton2.ImageIndex = 1;
+            // 
             // PreklasifikacijaDetalji
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(240, 188);
+            this.Controls.Add(this.toolBar1);
             this.Controls.Add(this.bStanje);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bDodaj);
@@ -218,7 +272,6 @@
             this.Controls.Add(this.bPonisti);
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbPronadji);
-            this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
             this.Name = "PreklasifikacijaDetalji";
             this.Text = "Preklasifikacija";
@@ -247,6 +300,14 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.MenuItem bObrisiSve;
         private System.Windows.Forms.Button bStanje;
+        private System.Windows.Forms.ContextMenu contextMenu1;
+        private System.Windows.Forms.MenuItem cObrisi;
+        private System.Windows.Forms.MenuItem cObrisiSve;
+        private System.Windows.Forms.MenuItem cKnjizi;
+        private System.Windows.Forms.ToolBar toolBar1;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ToolBarButton toolBarButton1;
+        private System.Windows.Forms.ToolBarButton toolBarButton2;
 
 
     }

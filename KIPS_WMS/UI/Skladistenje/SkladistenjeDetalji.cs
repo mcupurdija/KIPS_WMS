@@ -17,17 +17,17 @@ namespace KIPS_WMS.UI.Skladistenje
 {
     public partial class SkladistenjeDetalji : Form
     {
+        private readonly LoginModel _loginData = RegistryUtils.GetLoginData();
         private readonly string _putAwayNo;
-        private WarehousePutAwayLineModel _selectedLine;
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
+        public List<WarehousePutAwayLineModel> WarehousePutAwayLines;
+        private decimal _coefficient;
         private Object[] _dbItem;
         private bool _lineSplit;
-        private readonly LoginModel _loginData = RegistryUtils.GetLoginData();
-        decimal coefficient = 0;
+        private WarehousePutAwayLineModel _selectedLine;
 
-        public List<WarehousePutAwayLineModel> WarehousePutAwayLines;
-
-        public SkladistenjeDetalji(string putAwayNo, string barcode, WarehousePutAwayLineModel selectedLine, List<WarehousePutAwayLineModel> warehousePutAwayLines)
+        public SkladistenjeDetalji(string putAwayNo, string barcode, WarehousePutAwayLineModel selectedLine,
+            List<WarehousePutAwayLineModel> warehousePutAwayLines)
         {
             InitializeComponent();
 
@@ -90,7 +90,7 @@ namespace KIPS_WMS.UI.Skladistenje
         {
             int index = e.Index;
 
-            e.DrawBackground(index % 2 == 0 ? SystemColors.Control : Color.White);
+            e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
 
             string text = String.Empty;
             switch (index)
@@ -105,7 +105,8 @@ namespace KIPS_WMS.UI.Skladistenje
                     text = string.Format("{0}: {1}", "Regal", _selectedLine.BinCode);
                     break;
                 case 3:
-                    text = string.Format("{0}: {1}   {2}: {3}", "Količina za sklad.", _selectedLine.QuantityOutstanding, "JM", _selectedLine.UnitOfMeasureCode);
+                    text = string.Format("{0}: {1}   {2}: {3}", "Količina za sklad.", _selectedLine.QuantityOutstanding,
+                        "JM", _selectedLine.UnitOfMeasureCode);
                     break;
                 case 4:
                     text = string.Format("{0}: {1}", "Uskladištena količina", _selectedLine.QuantityToReceive);
@@ -122,7 +123,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
             e.Graphics.DrawString(text,
                 new Font(FontFamily.GenericSansSerif, 9F, FontStyle.Regular), brush, e.Bounds.Left + 3, e.Bounds.Top,
-                new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
+                new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
         }
 
         private string GetRemainingQuantity()
@@ -155,12 +156,14 @@ namespace KIPS_WMS.UI.Skladistenje
         private void ProcessBarcode(string barcode)
         {
             tbJedinicaKolicina.Text = String.Empty;
-            List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode, new object[] { barcode });
+            List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
+                new object[] {barcode});
             if (query.Count == 1)
             {
                 _dbItem = query[0];
                 lJedinica.Text = _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
-                coefficient = GetCoefficient(_selectedLine.ItemNo, _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString());
+                _coefficient = GetCoefficient(_selectedLine.ItemNo,
+                    _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString());
                 tbJedinicaKolicina.Text = "1";
             }
             else
@@ -178,8 +181,8 @@ namespace KIPS_WMS.UI.Skladistenje
                 decimal scannedItemQuantity = int.Parse(_dbItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString());
                 decimal unitQuantity = decimal.Parse(tbJedinicaKolicina.Text, Utils.GetLocalCulture());
 
-                tbKolicina.Text = (scannedItemQuantity / coefficient) != 1
-                    ? ((scannedItemQuantity / coefficient) * unitQuantity).ToString("N3", Utils.GetLocalCulture())
+                tbKolicina.Text = (scannedItemQuantity/_coefficient) != 1
+                    ? ((scannedItemQuantity/_coefficient)*unitQuantity).ToString("N3", Utils.GetLocalCulture())
                     : (unitQuantity).ToString("N3", Utils.GetLocalCulture());
             }
             catch (Exception)
@@ -198,7 +201,8 @@ namespace KIPS_WMS.UI.Skladistenje
                 //    object query2 = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity, new object[] {itemNo, _selectedLine.UnitOfMeasureCode});
                 //    return int.Parse(query2.ToString());
                 //}
-                object query = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity, new object[] { itemNo, _selectedLine.UnitOfMeasureCode });
+                object query = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity,
+                    new object[] {itemNo, _selectedLine.UnitOfMeasureCode});
                 if (query != null)
                 {
                     return decimal.Parse(query.ToString());
@@ -243,14 +247,16 @@ namespace KIPS_WMS.UI.Skladistenje
                 if (decimal.Parse(uomQuantity) < 0) return;
 
                 Cursor.Current = Cursors.WaitCursor;
-                _ws.UpdatePutAwayLineQty(RegistryUtils.GetLastUsername(), _putAwayNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
+                _ws.UpdatePutAwayLineQty(RegistryUtils.GetLastUsername(), _putAwayNo,
+                    Convert.ToInt16(_selectedLine.LineNo), quantity,
                     isUpdate, lJedinica.Text, uomQuantity);
 
                 int index = WarehousePutAwayLines.IndexOf(_selectedLine);
                 if (isUpdate == 1)
                 {
                     CultureInfo culture = Utils.GetLocalCulture();
-                    decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text, culture);
+                    decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) +
+                                     decimal.Parse(tbKolicina.Text, culture);
                     _selectedLine.QuantityToReceive = newQty.ToString("N0", culture);
                 }
                 else
@@ -288,7 +294,8 @@ namespace KIPS_WMS.UI.Skladistenje
                 Cursor.Current = Cursors.WaitCursor;
 
                 int newLineNo = 0;
-                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo,
+                    Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
 
                 _lineSplit = true;
 
@@ -313,11 +320,12 @@ namespace KIPS_WMS.UI.Skladistenje
 
                 string warehousePutAwaysCsv = String.Empty;
 
-                var loginData = RegistryUtils.GetLoginData();
-                _ws.GetWarehousePutAwayLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _putAwayNo, ref warehousePutAwaysCsv);
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.GetWarehousePutAwayLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin,
+                    _putAwayNo, ref warehousePutAwaysCsv);
 
-                var engine = new FileHelperEngine(typeof(WarehousePutAwayLineModel));
-                WarehousePutAwayLines = ((WarehousePutAwayLineModel[])engine.ReadString(warehousePutAwaysCsv)).ToList();
+                var engine = new FileHelperEngine(typeof (WarehousePutAwayLineModel));
+                WarehousePutAwayLines = ((WarehousePutAwayLineModel[]) engine.ReadString(warehousePutAwaysCsv)).ToList();
 
                 _selectedLine = WarehousePutAwayLines.Find(x => x.LineNo == Convert.ToString(lineNo));
 
@@ -343,7 +351,8 @@ namespace KIPS_WMS.UI.Skladistenje
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo,
+                    Convert.ToInt16(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode;
             }
@@ -386,5 +395,74 @@ namespace KIPS_WMS.UI.Skladistenje
             }
         }
 
+        private void cArtikalPoRegalima_Click(object sender, EventArgs e)
+        {
+            new ArtikliPoRegalimaDijalog(_selectedLine.BinCode, _selectedLine.ItemNo, _selectedLine.ItemVariant)
+                .ShowDialog();
+        }
+
+        private void cPodeliRed_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                int newLineNo = 0;
+                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo,
+                    Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+
+                _lineSplit = true;
+
+                //                new Thread(() => GetData(newLineNo)).Start();
+                GetData(newLineNo);
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void cZameniRegal_Click(object sender, EventArgs e)
+        {
+            string newBinCode = tbRegal.Text.Trim();
+            if (newBinCode.Length == 0 || newBinCode == _selectedLine.BinCode) return;
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo,
+                    Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+
+                tbRegal.Text = newBinCode;
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    DialogResult = DialogResult.Yes;
+                    listBox1.Dispose();
+                    Close();
+                    break;
+                case 1:
+                    contextMenu1.Show(toolBar1, new Point(80, 10));
+                    break;
+            }
+        }
     }
 }

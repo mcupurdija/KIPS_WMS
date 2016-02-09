@@ -29,10 +29,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LagerLista));
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.tbSifra = new System.Windows.Forms.TextBox();
             this.bPronadji = new System.Windows.Forms.Button();
             this.lvLagerLista = new System.Windows.Forms.ListView();
+            this.toolBar1 = new System.Windows.Forms.ToolBar();
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.SuspendLayout();
             // 
             // tbSifra
@@ -56,18 +60,35 @@
             // 
             this.lvLagerLista.Location = new System.Drawing.Point(0, 30);
             this.lvLagerLista.Name = "lvLagerLista";
-            this.lvLagerLista.Size = new System.Drawing.Size(240, 155);
+            this.lvLagerLista.Size = new System.Drawing.Size(240, 158);
             this.lvLagerLista.TabIndex = 2;
+            // 
+            // toolBar1
+            // 
+            this.toolBar1.Buttons.Add(this.toolBarButton1);
+            this.toolBar1.ImageList = this.imageList1;
+            this.toolBar1.Name = "toolBar1";
+            this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            // 
+            // toolBarButton1
+            // 
+            this.toolBarButton1.ImageIndex = 0;
             // 
             // LagerLista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(240, 188);
+            this.Controls.Add(this.toolBar1);
             this.Controls.Add(this.lvLagerLista);
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbSifra);
-            this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
             this.Name = "LagerLista";
             this.Text = "Lager lista";
@@ -80,5 +101,8 @@
         private System.Windows.Forms.TextBox tbSifra;
         private System.Windows.Forms.Button bPronadji;
         private System.Windows.Forms.ListView lvLagerLista;
+        private System.Windows.Forms.ToolBar toolBar1;
+        private System.Windows.Forms.ToolBarButton toolBarButton1;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

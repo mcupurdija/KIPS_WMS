@@ -37,12 +37,14 @@ namespace KIPS_WMS.UI.Izdvajanje
 
                 string warehousePicksCsv = String.Empty;
 
-                var loginData = RegistryUtils.GetLoginData();
-                _ws.GetWarehousePicks(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "", ref warehousePicksCsv);
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.GetWarehousePicks(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "",
+                    ref warehousePicksCsv);
 
-                var engine = new FileHelperEngine(typeof(WarehousePickModel));
-                _warehousePicks = ((WarehousePickModel[])engine.ReadString(warehousePicksCsv)).ToList();
-                _warehousePicks.Sort((x, y) => String.Compare(x.SourceDescription, y.SourceDescription, StringComparison.Ordinal));
+                var engine = new FileHelperEngine(typeof (WarehousePickModel));
+                _warehousePicks = ((WarehousePickModel[]) engine.ReadString(warehousePicksCsv)).ToList();
+                _warehousePicks.Sort(
+                    (x, y) => String.Compare(x.SourceDescription, y.SourceDescription, StringComparison.Ordinal));
                 _filteredList = _warehousePicks;
 
 //                Invoke(new EventHandler((sender, e) => DisplayData(null)));
@@ -153,6 +155,27 @@ namespace KIPS_WMS.UI.Izdvajanje
             e.Graphics.DrawString(secondLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 3,
                 e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+        }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    listBox1.Dispose();
+                    Close();
+                    break;
+                case 1:
+                    if (_selectedPick != null)
+                    {
+                        new IzdvajanjeLinije(_selectedPick.PutAwayCode).Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show(Resources.OdaberiteDokument, Resources.Greska);
+                    }
+                    break;
+            }
         }
     }
 }

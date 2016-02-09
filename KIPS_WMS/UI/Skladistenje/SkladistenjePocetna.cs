@@ -21,5 +21,10 @@ namespace KIPS_WMS.UI.Skladistenje
             new SkladistenjePretragaPoArtiklu().Show();
             Close();
         }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            Close();
+        }
     }
 }

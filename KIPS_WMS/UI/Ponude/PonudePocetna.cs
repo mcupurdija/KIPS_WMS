@@ -31,6 +31,7 @@ namespace KIPS_WMS.UI.Ponude
         private void bNova_Click(object sender, EventArgs e)
         {
             new NovaPonuda().Show();
+            Close();
         }
 
         private void bUcitaj_Click(object sender, EventArgs e)
@@ -79,6 +80,11 @@ namespace KIPS_WMS.UI.Ponude
                     Cursor.Current = Cursors.Default;
                 }
             }
+        }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            Close();
         }
     }
 }

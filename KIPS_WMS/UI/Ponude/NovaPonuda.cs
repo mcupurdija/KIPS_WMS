@@ -137,5 +137,23 @@ namespace KIPS_WMS.UI.Ponude
             Scanner,
             Button
         }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    Close();
+                    break;
+                case 1:
+                    var loadingForm = new NoviKupciDijalog();
+                    DialogResult result = loadingForm.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        FindCustomers(SearchType.Button);
+                    }
+                    break;
+            }
+        }
     }
 }

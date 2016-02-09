@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Forms;
 using KIPS_WMS.Model;
 using KIPS_WMS.Properties;
-using System.Globalization;
 
 namespace KIPS_WMS.UI.Preklasifikacija
 {
     public partial class Pracenje : Form
     {
-        private readonly string _itemNo;
+        private readonly CultureInfo _culture = Utils.GetLocalCulture();
         private readonly decimal _quantity;
         private readonly int _trackingType;
 
-        private readonly CultureInfo culture = Utils.GetLocalCulture();
-
+        public List<SendTrackingModel> Lines;
         private decimal _currQuantity;
-        public List<SendTrackingModel> _lines;
 
         public Pracenje()
         {
@@ -26,20 +24,20 @@ namespace KIPS_WMS.UI.Preklasifikacija
         public Pracenje(string itemNo, decimal quantity, int trackingType)
         {
             InitializeComponent();
-            _lines = new List<SendTrackingModel>();
-            _itemNo = itemNo;
+            Lines = new List<SendTrackingModel>();
+            string itemNo1 = itemNo;
             _quantity = quantity;
             _trackingType = trackingType;
             _currQuantity = 0;
             if (_trackingType == 1)
             {
                 lTekst.Text = Resources.SN + ":";
-                lSifra.Text += _itemNo;
+                lSifra.Text += itemNo1;
                 tbKolicina.Text = "1";
                 tbKolicina.Enabled = false;
                 dtDatum.Visible = false;
 
-                lKolicina.Text = "0/" + _quantity.ToString("N3", culture);
+                lKolicina.Text = "0/" + _quantity.ToString("N3", _culture);
                 listView1.Clear();
                 listView1.View = View.Details;
                 listView1.Columns.Add(Resources.Kolicina, 100, HorizontalAlignment.Left);
@@ -48,8 +46,8 @@ namespace KIPS_WMS.UI.Preklasifikacija
             else
             {
                 lTekst.Text = Resources.BrSerije + ":";
-                lSifra.Text += _itemNo;
-                lKolicina.Text = "0/" + _quantity.ToString("N3", culture);
+                lSifra.Text += itemNo1;
+                lKolicina.Text = "0/" + _quantity.ToString("N3", _culture);
                 tbKolicina.Text = "";
                 tbKolicina.Enabled = true;
                 listView1.Clear();
@@ -79,10 +77,10 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 {
                     "1", tbSN.Text
                 });
-                _lines.Add(new SendTrackingModel(_trackingType + "", tbSN.Text, "", "1"));
+                Lines.Add(new SendTrackingModel(_trackingType + "", tbSN.Text, "", "1"));
                 listView1.Items.Add(lvi);
                 _currQuantity++;
-                lKolicina.Text = _currQuantity.ToString("N3", culture) + "/" + _quantity.ToString("N3", culture);
+                lKolicina.Text = _currQuantity.ToString("N3", _culture) + "/" + _quantity.ToString("N3", _culture);
                 tbSN.Text = "";
                 tbSN.Focus();
             }
@@ -90,7 +88,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
             {
                 try
                 {
-                    if ((decimal.Parse(tbKolicina.Text, culture) + _currQuantity) <= _quantity)
+                    if ((decimal.Parse(tbKolicina.Text, _culture) + _currQuantity) <= _quantity)
                     {
                         var lvi = new ListViewItem(new[]
                         {
@@ -103,7 +101,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
                             {
                                 tbKolicina.Text, tbSN.Text, dtDatum.Text
                             });
-                            _lines.Add(new SendTrackingModel(_trackingType + "", tbSN.Text, dtDatum.Text, tbKolicina.Text));
+                            Lines.Add(new SendTrackingModel(_trackingType + "", tbSN.Text, dtDatum.Text, tbKolicina.Text));
                         }
                         if (_trackingType == 3)
                         {
@@ -111,11 +109,12 @@ namespace KIPS_WMS.UI.Preklasifikacija
                             {
                                 tbKolicina.Text, tbSN.Text
                             });
-                            _lines.Add(new SendTrackingModel(_trackingType + "", tbSN.Text, "", tbKolicina.Text));
+                            Lines.Add(new SendTrackingModel(_trackingType + "", tbSN.Text, "", tbKolicina.Text));
                         }
                         listView1.Items.Add(lvi);
-                        _currQuantity += decimal.Parse(tbKolicina.Text, culture);
-                        lKolicina.Text = _currQuantity.ToString("N3", culture) + "/" + _quantity.ToString("N3", culture);
+                        _currQuantity += decimal.Parse(tbKolicina.Text, _culture);
+                        lKolicina.Text = _currQuantity.ToString("N3", _culture) + "/" +
+                                         _quantity.ToString("N3", _culture);
                         tbSN.Text = "";
                         tbSN.Focus();
                         tbKolicina.Text = "";
@@ -132,7 +131,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
                     MessageBox.Show(Resources.NeispravnaKolicina, Resources.Greska);
                 }
             }
-            if (_currQuantity.ToString("N3", culture) == _quantity.ToString("N3", culture))
+            if (_currQuantity.ToString("N3", _culture) == _quantity.ToString("N3", _culture))
             {
                 MessageBox.Show(Resources.DostignutaKolicina, Resources.Kraj);
             }
@@ -158,9 +157,9 @@ namespace KIPS_WMS.UI.Preklasifikacija
             int index = listView1.SelectedIndices[0];
             listView1.Items.RemoveAt(index);
 
-            _currQuantity -= decimal.Parse(_lines[index].Quantity, culture);
-            _lines.RemoveAt(index);
-            lKolicina.Text = _currQuantity.ToString("N3", culture) + "/" + _quantity.ToString("N3", culture);
+            _currQuantity -= decimal.Parse(Lines[index].Quantity, _culture);
+            Lines.RemoveAt(index);
+            lKolicina.Text = _currQuantity.ToString("N3", _culture) + "/" + _quantity.ToString("N3", _culture);
         }
 
         private void tbSN_KeyUp(object sender, KeyEventArgs e)
@@ -185,6 +184,34 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 tbKolicina.SelectionStart = tbKolicina.Text.Length;
                 tbKolicina.SelectionLength = 0;
                 e.Handled = true;
+            }
+        }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    if (listView1.SelectedIndices.Count != 1) return;
+
+                    int index = listView1.SelectedIndices[0];
+                    listView1.Items.RemoveAt(index);
+
+                    _currQuantity -= decimal.Parse(Lines[index].Quantity, _culture);
+                    Lines.RemoveAt(index);
+                    lKolicina.Text = _currQuantity.ToString("N3", _culture) + "/" + _quantity.ToString("N3", _culture);
+                    break;
+                case 1:
+                    if (_currQuantity == _quantity)
+                    {
+                        DialogResult = DialogResult.OK;
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show(Resources.NedostignutaKolicina, Resources.Greska);
+                    }
+                    break;
             }
         }
     }

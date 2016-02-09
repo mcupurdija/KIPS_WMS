@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using FileHelpers;
@@ -15,14 +16,13 @@ namespace KIPS_WMS.UI.Skladistenje
 {
     public partial class SkladistenjeLinije : Form
     {
+        private readonly LoginModel _loginData = RegistryUtils.GetLoginData();
         private readonly string _putAwayNo;
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private string _barcode;
         private List<WarehousePutAwayLineModel> _filteredPutAwayLines;
         private WarehousePutAwayLineModel _selectedLine;
         private List<WarehousePutAwayLineModel> _warehousePutAwayLines;
-
-        private LoginModel loginData = RegistryUtils.GetLoginData();
 
         public SkladistenjeLinije(string putAwayNo)
         {
@@ -50,8 +50,9 @@ namespace KIPS_WMS.UI.Skladistenje
 
                 string warehousePutAwaysCsv = String.Empty;
 
-                
-                _ws.GetWarehousePutAwayLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _putAwayNo, ref warehousePutAwaysCsv);
+
+                _ws.GetWarehousePutAwayLines(RegistryUtils.GetLastUsername(), _loginData.Magacin, _loginData.Podmagacin,
+                    _putAwayNo, ref warehousePutAwaysCsv);
 
                 var engine = new FileHelperEngine(typeof (WarehousePutAwayLineModel));
                 _warehousePutAwayLines =
@@ -89,7 +90,8 @@ namespace KIPS_WMS.UI.Skladistenje
             listBox1.SelectedIndex = -1;
 
             _filteredPutAwayLines = filterText != null
-                ? _warehousePutAwayLines.FindAll(x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
+                ? _warehousePutAwayLines.FindAll(
+                    x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
                 : _warehousePutAwayLines;
 
             var listItem = new ListItem();
@@ -116,7 +118,7 @@ namespace KIPS_WMS.UI.Skladistenje
             if (e.KeyCode != Keys.Enter) return;
 
             List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
-                new object[] { tbPronadji.Text.Trim() });
+                new object[] {tbPronadji.Text.Trim()});
             if (query.Count == 1)
             {
                 _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
@@ -125,7 +127,7 @@ namespace KIPS_WMS.UI.Skladistenje
             if (query.Count == 0)
             {
                 query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
-                new object[] { tbPronadji.Text.Trim() });
+                    new object[] {tbPronadji.Text.Trim()});
                 if (query.Count == 1)
                 {
                     _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
@@ -205,11 +207,13 @@ namespace KIPS_WMS.UI.Skladistenje
             WarehousePutAwayLineModel line = _filteredPutAwayLines[index];
 
             var rectangle = new Rectangle(e.Bounds.Left, e.Bounds.Top, 7, e.Bounds.Height);
-            e.Graphics.FillRectangle(new SolidBrush(GetLineStatusColor(line.QuantityOutstanding, line.QuantityToReceive)), rectangle);
+            e.Graphics.FillRectangle(
+                new SolidBrush(GetLineStatusColor(line.QuantityOutstanding, line.QuantityToReceive)), rectangle);
             e.Graphics.DrawRectangle(new Pen(Color.White), rectangle);
 
             string firstLine = string.Format("{0} {1}", line.ItemNo, line.ItemDescription);
-            string secondLine = string.Format("{0} - {1} / {2}", line.SerialNo, line.QuantityToReceive, line.QuantityOutstanding);
+            string secondLine = string.Format("{0} - {1} / {2}", line.SerialNo, line.QuantityToReceive,
+                line.QuantityOutstanding);
 
             e.Graphics.DrawString(firstLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 10, e.Bounds.Top,
@@ -223,7 +227,7 @@ namespace KIPS_WMS.UI.Skladistenje
         {
             try
             {
-                var culture = Utils.GetLocalCulture();
+                CultureInfo culture = Utils.GetLocalCulture();
                 decimal receivedQuantity = decimal.Parse(toReceive, culture);
                 decimal outstandingQuantity = decimal.Parse(outstanding, culture);
 
@@ -254,19 +258,20 @@ namespace KIPS_WMS.UI.Skladistenje
                 Cursor.Current = Cursors.WaitCursor;
                 int status = -1;
 
-                _ws.RegisterWhsDocument(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, Utils.DocumentTypeSkladistenje
+                _ws.RegisterWhsDocument(RegistryUtils.GetLastUsername(), _loginData.Magacin, _loginData.Podmagacin,
+                    Utils.DocumentTypeSkladistenje
                     , _putAwayNo, ref status);
 
                 if (status == 1)
                 {
-                    MessageBox.Show("Uspešno registrovano skladištenje.");
+                    MessageBox.Show("Skladištenje je uspešno registrovano");
                     listBox1.Dispose();
                     Close();
                 }
-                else {
-                    MessageBox.Show( "Greška pri skladištenju", Resources.Greska);
+                else
+                {
+                    MessageBox.Show("Došlo je do greške");
                 }
-                
             }
             catch (Exception ex)
             {
@@ -277,6 +282,57 @@ namespace KIPS_WMS.UI.Skladistenje
                 Cursor.Current = Cursors.Default;
             }
         }
-        
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    listBox1.Dispose();
+                    Close();
+                    break;
+                case 1:
+                    try
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+                        int status = -1;
+
+                        _ws.RegisterWhsDocument(RegistryUtils.GetLastUsername(), _loginData.Magacin,
+                            _loginData.Podmagacin,
+                            Utils.DocumentTypeSkladistenje
+                            , _putAwayNo, ref status);
+
+                        if (status == 1)
+                        {
+                            MessageBox.Show("Skladištenje je uspešno registrovano");
+                            listBox1.Dispose();
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Došlo je do greške");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Utils.GeneralExceptionProcessing(ex);
+                    }
+                    finally
+                    {
+                        Cursor.Current = Cursors.Default;
+                    }
+                    break;
+                case 2:
+                    if (_selectedLine != null)
+                    {
+                        ShowLineDetailsForm(null);
+                    }
+                    else
+                    {
+                        MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
+                    }
+                    break;
+            }
+        }
     }
 }

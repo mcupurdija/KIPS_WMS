@@ -120,6 +120,43 @@
   <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>134, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="resource" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAFAAAAAkCAMAAAApfE1IAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAGnUExURQAAAMXG5V5fbDAwMK2uyRcXGkdHSJiZsDw8PFJSUioqKgcHB7u82Xl6iyQkJHV2iExM
+        TDY2NlVVWqWmvkJCQs7P77O00AwMDm1ufR4eI7/A3VBQUFlZWUlKUqOkvTo6OmtrfDw8QlFRXi0tNMvM
+        6yMjKDMzM0BASn1+jwAAAKqqxTAxOJ+guURERExMUlRUVFhYWLe31BERFBsbG0BAQF5eXiYmLDk5QlBQ
+        Ur6/3CAgJcnK6bGyzXNzhUpKSsLD4S4uLkRESjg4OFhYXz4+PlBRWiYmJiwsLBkZHSEhJlJTVk5OTkZG
+        RgoKCygoKDU1PXt8jVZWV3+Akbi51Q8PEaytx15eYj09Rra308fI5ykpMEZGTsPE4wgICVRUXry92q+v
+        ys/P7xgYHAQEBKanwczN7VxcXFRUVkhISJqbs8DB3z8/RRMTFhwcHGBgYDs7QCIiIhwcISIiKLm614CB
+        knp6i1JSVA4ODi0uM0JCSn5/kMPD4Xx8jxEREUBAQru92cnL6b+/3R4eJK+vycXH5bW10aWlvaurxUxM
+        Vbm5162tx6epwXp6je4DXHMAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAcdEVYdFNvZnR3YXJlAEFkb2Jl
+        IEZpcmV3b3JrcyBDUzbovLKMAAACM0lEQVRIS9WV208TQRSHR7cKrU0t2EERBUUoiQIVBU0VSwGpuFwL
+        otyqRLQgeAkhQV948cGY+E97zpwzO7OLD8zCg3zJzu757cyXndnNrJCnzNkTNiwo5oFrS5w5ERFeeV2v
+        JrMXc41jY5XzIxw6ERb+qn69r3xNXuotZ46EhH+2hgptpb7BjryXmuDMFVt4t1AvTJX6nqPv90cOXbGE
+        S1v1ZHYbppsvz97s4tAZI9zwbySz07h8XmXtKYfuBMLhgyouH/heVEZXOIyBFrb4/lQpl8Plq+ye4/BY
+        CPs1BMJl31dfX75cztzm709Q18iAI/xTuOj7arrg+/JjR0UnEqb9tm2YLr6O7y+LKgdAiHe5wRO2VmkF
+        BqyKzTjdxrznPdxsTVMOcF8y0REpVcS5Bqqd5qyarpc6FHuLnAPQMxhFZdDSRSQhhEyM49vF6dbEE/N8
+        1FMP01Pj0VRSwZFGyI1xfLuel9kUwpow9eRh+qBGl6awgGqkX30t4BNicoBzQPU0j4INDdalVRmwKo6W
+        U+QTYm+fckD31w+pDUFpLixU9e5b5hLcUPwMZk09IVINnvkUnM2Fgap0N91Cuq+rKC6sH5hkHfAo1tav
+        0c/bcoF1wOo6h3EIFmD4M+uAO07bTRizookHrAPuncIGC7+UV6wD5mIbLaH8cJV1wOO4PxVbKNtnWAe8
+        ifnbCwllb411QA9njoSFsvd9TSM69dbtREQoPz27rLmV4MyJqPDE/O9CKf8C4Gr1pTQhnAkAAAAASUVO
+        RK5CYII=
+</value>
+  </data>
+  <data name="resource1" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAFAAAAAkAQMAAAAkbC85AAAABGdBTUEAALGPC/xhBQAAAAZQTFRFAAAA
+        zs/vQoE27QAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtz
+        IENTNui8sowAAABsSURBVCjPY/gPBwPBtAczPz4HskDM82AmVPTDc75Ke2Obxg/nGT48S6u0V7fpeebP
+        8Cnls7E9v808//MMn1WATHkYsx0m2gJkqkOYx9LP2xtbzAFq+3yc/7y9ZQPIMKgD5iOcg51J5yD5/x8A
+        Wm47dYg9ufkAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="$this.FormFactorShadowProperty" xml:space="preserve">
     <value>Pocket_PC_Phone_Square_Screen</value>
   </metadata>

@@ -391,5 +391,21 @@ namespace KIPS_WMS.UI.Ponude
             }
         }
 
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    Close();
+                    break;
+                case 1:
+                    new LagerLista(_itemCode).ShowDialog();
+                    break;
+                case 2:
+                    AcceptChanges();
+                    break;
+            }
+        }
+
     }
 }

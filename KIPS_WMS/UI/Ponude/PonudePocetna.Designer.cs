@@ -29,10 +29,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PonudePocetna));
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.tbUcitaj = new System.Windows.Forms.TextBox();
             this.bUcitaj = new System.Windows.Forms.Button();
             this.bNova = new System.Windows.Forms.Button();
+            this.toolBar1 = new System.Windows.Forms.ToolBar();
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.SuspendLayout();
             // 
             // tbUcitaj
@@ -61,16 +65,33 @@
             this.bNova.Text = "Nova";
             this.bNova.Click += new System.EventHandler(this.bNova_Click);
             // 
+            // toolBar1
+            // 
+            this.toolBar1.Buttons.Add(this.toolBarButton1);
+            this.toolBar1.ImageList = this.imageList1;
+            this.toolBar1.Name = "toolBar1";
+            this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            // 
+            // toolBarButton1
+            // 
+            this.toolBarButton1.ImageIndex = 0;
+            // 
             // PonudePocetna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
+            this.Controls.Add(this.toolBar1);
             this.Controls.Add(this.bNova);
             this.Controls.Add(this.bUcitaj);
             this.Controls.Add(this.tbUcitaj);
-            this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
             this.Name = "PonudePocetna";
             this.Text = "Ponude";
@@ -83,5 +104,8 @@
         private System.Windows.Forms.TextBox tbUcitaj;
         private System.Windows.Forms.Button bUcitaj;
         private System.Windows.Forms.Button bNova;
+        private System.Windows.Forms.ToolBar toolBar1;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ToolBarButton toolBarButton1;
     }
 }

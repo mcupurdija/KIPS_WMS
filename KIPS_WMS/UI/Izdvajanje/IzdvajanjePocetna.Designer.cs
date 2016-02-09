@@ -29,8 +29,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IzdvajanjePocetna));
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.bDokument = new System.Windows.Forms.Button();
+            this.toolBar1 = new System.Windows.Forms.ToolBar();
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.SuspendLayout();
             // 
             // bDokument
@@ -42,14 +46,31 @@
             this.bDokument.Text = "Pretraga po dokumentu";
             this.bDokument.Click += new System.EventHandler(this.bDokument_Click);
             // 
+            // toolBar1
+            // 
+            this.toolBar1.Buttons.Add(this.toolBarButton1);
+            this.toolBar1.ImageList = this.imageList1;
+            this.toolBar1.Name = "toolBar1";
+            this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            // 
+            // toolBarButton1
+            // 
+            this.toolBarButton1.ImageIndex = 0;
+            // 
             // IzdvajanjePocetna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
+            this.Controls.Add(this.toolBar1);
             this.Controls.Add(this.bDokument);
-            this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
             this.Name = "IzdvajanjePocetna";
             this.Text = "Izdvajanje";
@@ -60,5 +81,8 @@
         #endregion
 
         private System.Windows.Forms.Button bDokument;
+        private System.Windows.Forms.ToolBar toolBar1;
+        private System.Windows.Forms.ToolBarButton toolBarButton1;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
