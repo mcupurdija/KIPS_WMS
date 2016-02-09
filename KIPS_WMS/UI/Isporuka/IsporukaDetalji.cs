@@ -257,7 +257,7 @@ namespace KIPS_WMS.UI.Isporuka
                     if (result == DialogResult.OK)
                     {
                         var engine = new FileHelperEngine(typeof(SendTrackingModel));
-                        lines = engine.WriteString(pracenje._lines);
+                        lines = engine.WriteString(pracenje.Lines);
                     }
                 }
 

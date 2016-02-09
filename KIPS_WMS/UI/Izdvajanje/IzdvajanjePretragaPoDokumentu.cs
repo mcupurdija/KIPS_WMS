@@ -168,7 +168,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 case 1:
                     if (_selectedPick != null)
                     {
-                        new IzdvajanjeLinije(_selectedPick.PutAwayCode).Show();
+                        new IzdvajanjeLinije(_selectedPick.PickCode).Show();
                     }
                     else
                     {

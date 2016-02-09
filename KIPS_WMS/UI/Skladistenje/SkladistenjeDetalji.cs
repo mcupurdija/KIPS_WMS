@@ -90,7 +90,7 @@ namespace KIPS_WMS.UI.Skladistenje
         {
             int index = e.Index;
 
-            e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
+            e.DrawBackground(index % 2 == 0 ? SystemColors.Control : Color.White);
 
             string text = String.Empty;
             switch (index)
@@ -112,7 +112,7 @@ namespace KIPS_WMS.UI.Skladistenje
                     text = string.Format("{0}: {1}", "Uskladištena količina", _selectedLine.QuantityToReceive);
                     break;
                 case 5:
-                    text = string.Format("{0}: {1}", "Broj serije/SN", _selectedLine.SerialNo);
+                    text = string.Format("{0}: {1}{2}", "Broj serije/SN", _selectedLine.LotNo, _selectedLine.SerialNo);
                     break;
                 case 6:
                     text = string.Format("{0}: {1}", "Datum prestanka važenja", _selectedLine.ExpirationDate);
@@ -123,7 +123,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
             e.Graphics.DrawString(text,
                 new Font(FontFamily.GenericSansSerif, 9F, FontStyle.Regular), brush, e.Bounds.Left + 3, e.Bounds.Top,
-                new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
         }
 
         private string GetRemainingQuantity()
@@ -157,7 +157,7 @@ namespace KIPS_WMS.UI.Skladistenje
         {
             tbJedinicaKolicina.Text = String.Empty;
             List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
-                new object[] {barcode});
+                new object[] { barcode });
             if (query.Count == 1)
             {
                 _dbItem = query[0];
@@ -181,8 +181,8 @@ namespace KIPS_WMS.UI.Skladistenje
                 decimal scannedItemQuantity = int.Parse(_dbItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString());
                 decimal unitQuantity = decimal.Parse(tbJedinicaKolicina.Text, Utils.GetLocalCulture());
 
-                tbKolicina.Text = (scannedItemQuantity/_coefficient) != 1
-                    ? ((scannedItemQuantity/_coefficient)*unitQuantity).ToString("N3", Utils.GetLocalCulture())
+                tbKolicina.Text = (scannedItemQuantity / _coefficient) != 1
+                    ? ((scannedItemQuantity / _coefficient) * unitQuantity).ToString("N3", Utils.GetLocalCulture())
                     : (unitQuantity).ToString("N3", Utils.GetLocalCulture());
             }
             catch (Exception)
@@ -202,7 +202,7 @@ namespace KIPS_WMS.UI.Skladistenje
                 //    return int.Parse(query2.ToString());
                 //}
                 object query = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity,
-                    new object[] {itemNo, _selectedLine.UnitOfMeasureCode});
+                    new object[] { itemNo, _selectedLine.UnitOfMeasureCode });
                 if (query != null)
                 {
                     return decimal.Parse(query.ToString());
@@ -324,8 +324,8 @@ namespace KIPS_WMS.UI.Skladistenje
                 _ws.GetWarehousePutAwayLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin,
                     _putAwayNo, ref warehousePutAwaysCsv);
 
-                var engine = new FileHelperEngine(typeof (WarehousePutAwayLineModel));
-                WarehousePutAwayLines = ((WarehousePutAwayLineModel[]) engine.ReadString(warehousePutAwaysCsv)).ToList();
+                var engine = new FileHelperEngine(typeof(WarehousePutAwayLineModel));
+                WarehousePutAwayLines = ((WarehousePutAwayLineModel[])engine.ReadString(warehousePutAwaysCsv)).ToList();
 
                 _selectedLine = WarehousePutAwayLines.Find(x => x.LineNo == Convert.ToString(lineNo));
 

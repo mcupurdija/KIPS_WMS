@@ -121,6 +121,7 @@
             // 
             // bMagIsporuke
             // 
+            this.bMagIsporuke.Enabled = false;
             this.bMagIsporuke.Location = new System.Drawing.Point(123, 39);
             this.bMagIsporuke.Name = "bMagIsporuke";
             this.bMagIsporuke.Size = new System.Drawing.Size(114, 30);
