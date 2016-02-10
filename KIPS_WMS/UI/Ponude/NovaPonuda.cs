@@ -74,7 +74,7 @@ namespace KIPS_WMS.UI.Ponude
 
         private void bNepoznatKupac_Click(object sender, EventArgs e)
         {
-            new PonudaKorpa(Utils.UnknownCustomerCode, String.Empty, 0, String.Empty, new List<ItemQuoteModel>()).Show();
+            new PonudaKorpa(Utils.UnknownCustomerCode, "Nepoznat kupac", 0, String.Empty, new List<ItemQuoteModel>()).Show();
             Close();
         }
 

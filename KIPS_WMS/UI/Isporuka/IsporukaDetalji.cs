@@ -10,26 +10,26 @@ using KIPS_WMS.Model;
 using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Properties;
 using KIPS_WMS.UI.Ostalo;
-using KIPS_WMS.Web;
-using OpenNETCF.Windows.Forms;
 using KIPS_WMS.UI.Preklasifikacija;
 using KIPS_WMS.UI.Prijem;
+using KIPS_WMS.Web;
+using OpenNETCF.Windows.Forms;
 
 namespace KIPS_WMS.UI.Isporuka
 {
     public partial class IsporukaDetalji : Form
     {
+        private readonly LoginModel _loginData = RegistryUtils.GetLoginData();
         private readonly string _shipmentNo;
-        private WarehouseShipmentLineModel _selectedLine;
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
+        public List<WarehouseShipmentLineModel> WarehouseShipmentLines;
+        private decimal _coefficient;
         private Object[] _dbItem;
         private bool _lineSplit;
-        private readonly LoginModel _loginData = RegistryUtils.GetLoginData();
-        decimal coefficient = 0;
+        private WarehouseShipmentLineModel _selectedLine;
 
-        public List<WarehouseShipmentLineModel> WarehouseShipmentLines;
-
-        public IsporukaDetalji(string shipmentNo, string barcode, WarehouseShipmentLineModel selectedLine, List<WarehouseShipmentLineModel> warehouseShipmentLines)
+        public IsporukaDetalji(string shipmentNo, string barcode, WarehouseShipmentLineModel selectedLine,
+            List<WarehouseShipmentLineModel> warehouseShipmentLines)
         {
             InitializeComponent();
 
@@ -93,7 +93,7 @@ namespace KIPS_WMS.UI.Isporuka
         {
             int index = e.Index;
 
-            e.DrawBackground(index % 2 == 0 ? SystemColors.Control : Color.White);
+            e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
 
             string text = String.Empty;
             switch (index)
@@ -117,7 +117,8 @@ namespace KIPS_WMS.UI.Isporuka
                     text = string.Format("{0}: {1}", "Zaprimljena količina", _selectedLine.QuantityToReceive);
                     break;
                 case 6:
-                    e.DrawBackground(PrijemLinije.GetLineStatusColor(_selectedLine.QuantityOutstanding, _selectedLine.QuantityToReceive));
+                    e.DrawBackground(PrijemLinije.GetLineStatusColor(_selectedLine.QuantityOutstanding,
+                        _selectedLine.QuantityToReceive));
                     text = string.Format("{0}: {1}", "Preostalo za prijem", GetRemainingQuantity());
                     break;
             }
@@ -126,7 +127,7 @@ namespace KIPS_WMS.UI.Isporuka
 
             e.Graphics.DrawString(text,
                 new Font(FontFamily.GenericSansSerif, 9F, FontStyle.Regular), brush, e.Bounds.Left + 3, e.Bounds.Top,
-                new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
+                new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
         }
 
         private string GetRemainingQuantity()
@@ -159,14 +160,16 @@ namespace KIPS_WMS.UI.Isporuka
         private void ProcessBarcode(string barcode)
         {
             tbJedinicaKolicina.Text = String.Empty;
-            List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode, new object[] { barcode });
-            
+            List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
+                new object[] {barcode});
+
             if (query.Count == 1)
             {
                 _dbItem = query[0];
                 lJedinica.Text = _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
-                
-                coefficient = GetCoefficient(_selectedLine.ItemNo, _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString());
+
+                _coefficient = GetCoefficient(_selectedLine.ItemNo,
+                    _dbItem[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString());
                 tbJedinicaKolicina.Text = "1";
             }
             else
@@ -181,12 +184,12 @@ namespace KIPS_WMS.UI.Isporuka
             {
                 if (_dbItem == null) return;
 
-               
+
                 decimal scannedItemQuantity = int.Parse(_dbItem[DatabaseModel.ItemDbModel.ItemQuantity].ToString());
                 decimal unitQuantity = decimal.Parse(tbJedinicaKolicina.Text, Utils.GetLocalCulture());
 
-                tbKolicina.Text = (scannedItemQuantity / coefficient) != 1
-                    ? ((scannedItemQuantity / coefficient) * unitQuantity).ToString("N3", Utils.GetLocalCulture())
+                tbKolicina.Text = (scannedItemQuantity/_coefficient) != 1
+                    ? ((scannedItemQuantity/_coefficient)*unitQuantity).ToString("N3", Utils.GetLocalCulture())
                     : (unitQuantity).ToString("N3", Utils.GetLocalCulture());
             }
             catch (Exception)
@@ -205,7 +208,8 @@ namespace KIPS_WMS.UI.Isporuka
                 //    object query2 = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity, new object[] {itemNo, _selectedLine.UnitOfMeasureCode});
                 //    return int.Parse(query2.ToString());
                 //}
-                object query = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity, new object[] { itemNo, _selectedLine.UnitOfMeasureCode });
+                object query = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity,
+                    new object[] {itemNo, _selectedLine.UnitOfMeasureCode});
                 if (query != null)
                 {
                     return decimal.Parse(query.ToString());
@@ -238,7 +242,8 @@ namespace KIPS_WMS.UI.Isporuka
 
             string quantity = tbKolicina.Text;
             string uomQuantity = tbJedinicaKolicina.Text;
-            if (uomQuantity.Trim().Length == 0) {
+            if (uomQuantity.Trim().Length == 0)
+            {
                 uomQuantity = "0";
             }
             if (quantity.Trim().Length == 0) return;
@@ -250,38 +255,41 @@ namespace KIPS_WMS.UI.Isporuka
                 if (decimal.Parse(quantity) < 0) return;
                 if (decimal.Parse(uomQuantity) < 0) return;
 
-                if (Convert.ToInt16(_selectedLine.TrackingType) != 0)
+                if (Convert.ToInt32(_selectedLine.TrackingType) != 0)
                 {
-                    var pracenje = new Pracenje(_selectedLine.ItemNo, decimal.Parse(quantity), Convert.ToInt16(_selectedLine.TrackingType));
+                    var pracenje = new Pracenje(_selectedLine.ItemNo, decimal.Parse(quantity),
+                        Convert.ToInt32(_selectedLine.TrackingType));
                     DialogResult result = pracenje.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        var engine = new FileHelperEngine(typeof(SendTrackingModel));
+                        var engine = new FileHelperEngine(typeof (SendTrackingModel));
                         lines = engine.WriteString(pracenje.Lines);
                     }
                 }
 
-                if (Convert.ToInt16(_selectedLine.NormUomType) != 0)
+                if (Convert.ToInt32(_selectedLine.NormUomType) != 0)
                 {
-                    var varijabilniNormativ = new IsporukaVarijabilniNormativDijalog(_selectedLine, decimal.Parse(quantity));
+                    var varijabilniNormativ = new IsporukaVarijabilniNormativDijalog(_selectedLine,
+                        decimal.Parse(quantity));
                     DialogResult result = varijabilniNormativ.ShowDialog();
 
                     if (result == DialogResult.OK)
                     {
-                        var engine = new FileHelperEngine(typeof(SendNormativeModel));
+                        var engine = new FileHelperEngine(typeof (SendNormativeModel));
                         normativeLines = engine.WriteString(varijabilniNormativ._normativeLines);
                     }
-
                 }
                 Cursor.Current = Cursors.WaitCursor;
-                _ws.UpdateWarehouseShipmentLineQty(RegistryUtils.GetLastUsername(), _shipmentNo, Convert.ToInt16(_selectedLine.LineNo), 
+                _ws.UpdateWarehouseShipmentLineQty(RegistryUtils.GetLastUsername(), _shipmentNo,
+                    Convert.ToInt32(_selectedLine.LineNo),
                     quantity, isUpdate, lines, normativeLines, lJedinica.Text, uomQuantity);
 
                 int index = WarehouseShipmentLines.IndexOf(_selectedLine);
                 if (isUpdate == 1)
                 {
                     CultureInfo culture = Utils.GetLocalCulture();
-                    decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text, culture);
+                    decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) +
+                                     decimal.Parse(tbKolicina.Text, culture);
                     _selectedLine.QuantityToReceive = newQty.ToString("N0", culture);
                 }
                 else
@@ -319,7 +327,8 @@ namespace KIPS_WMS.UI.Isporuka
                 Cursor.Current = Cursors.WaitCursor;
 
                 int newLineNo = 0;
-                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeIsporuka, _shipmentNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeIsporuka, _shipmentNo,
+                    Convert.ToInt32(_selectedLine.LineNo), ref newLineNo);
 
                 _lineSplit = true;
 
@@ -344,11 +353,13 @@ namespace KIPS_WMS.UI.Isporuka
 
                 string warehouseShipmentsCsv = String.Empty;
 
-                var loginData = RegistryUtils.GetLoginData();
-                _ws.GetWarehouseReceiptLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _shipmentNo, ref warehouseShipmentsCsv);
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.GetWarehouseReceiptLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin,
+                    _shipmentNo, ref warehouseShipmentsCsv);
 
-                var engine = new FileHelperEngine(typeof(WarehouseShipmentLineModel));
-                WarehouseShipmentLines = ((WarehouseShipmentLineModel[])engine.ReadString(warehouseShipmentsCsv)).ToList();
+                var engine = new FileHelperEngine(typeof (WarehouseShipmentLineModel));
+                WarehouseShipmentLines =
+                    ((WarehouseShipmentLineModel[]) engine.ReadString(warehouseShipmentsCsv)).ToList();
 
                 _selectedLine = WarehouseShipmentLines.Find(x => x.LineNo == Convert.ToString(lineNo));
 
@@ -374,7 +385,8 @@ namespace KIPS_WMS.UI.Isporuka
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeIsporuka, _shipmentNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeIsporuka, _shipmentNo,
+                    Convert.ToInt32(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode;
             }
@@ -397,7 +409,6 @@ namespace KIPS_WMS.UI.Isporuka
 
         private void tbBarkod_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void tbJedinicaKolicina_KeyPress(object sender, KeyPressEventArgs e)
@@ -419,6 +430,70 @@ namespace KIPS_WMS.UI.Isporuka
                 tbKolicina.SelectionStart = tbKolicina.Text.Length;
                 tbKolicina.SelectionLength = 0;
                 e.Handled = true;
+            }
+        }
+
+        private void cPodeliRed_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                int newLineNo = 0;
+                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeIsporuka, _shipmentNo,
+                    Convert.ToInt32(_selectedLine.LineNo), ref newLineNo);
+
+                _lineSplit = true;
+
+                //                new Thread(() => GetData(newLineNo)).Start();
+                GetData(newLineNo);
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void cZameniRegal_Click(object sender, EventArgs e)
+        {
+            string newBinCode = tbRegal.Text.Trim();
+            if (newBinCode.Length == 0 || newBinCode == _selectedLine.BinCode) return;
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeIsporuka, _shipmentNo,
+                    Convert.ToInt32(_selectedLine.LineNo), newBinCode);
+
+                tbRegal.Text = newBinCode;
+            }
+            catch (Exception ex)
+            {
+                Utils.GeneralExceptionProcessing(ex);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    DialogResult = DialogResult.Yes;
+                    listBox1.Dispose();
+                    Close();
+                    break;
+                case 1:
+                    contextMenu1.Show(toolBar1, new Point(80, 10));
+                    break;
             }
         }
     }

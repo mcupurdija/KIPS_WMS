@@ -16,5 +16,10 @@ namespace KIPS_WMS.UI.Isporuka
             Close();
         }
 
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            Close();
+        }
+
     }
 }

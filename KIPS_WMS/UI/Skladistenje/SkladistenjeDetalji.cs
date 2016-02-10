@@ -248,7 +248,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
                 Cursor.Current = Cursors.WaitCursor;
                 _ws.UpdatePutAwayLineQty(RegistryUtils.GetLastUsername(), _putAwayNo,
-                    Convert.ToInt16(_selectedLine.LineNo), quantity,
+                    Convert.ToInt32(_selectedLine.LineNo), quantity,
                     isUpdate, lJedinica.Text, uomQuantity);
 
                 int index = WarehousePutAwayLines.IndexOf(_selectedLine);
@@ -295,7 +295,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
                 int newLineNo = 0;
                 _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo,
-                    Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+                    Convert.ToInt32(_selectedLine.LineNo), ref newLineNo);
 
                 _lineSplit = true;
 
@@ -352,7 +352,7 @@ namespace KIPS_WMS.UI.Skladistenje
                 Cursor.Current = Cursors.WaitCursor;
 
                 _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo,
-                    Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+                    Convert.ToInt32(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode;
             }
@@ -409,7 +409,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
                 int newLineNo = 0;
                 _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo,
-                    Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+                    Convert.ToInt32(_selectedLine.LineNo), ref newLineNo);
 
                 _lineSplit = true;
 
@@ -436,7 +436,7 @@ namespace KIPS_WMS.UI.Skladistenje
                 Cursor.Current = Cursors.WaitCursor;
 
                 _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo,
-                    Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+                    Convert.ToInt32(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode;
             }

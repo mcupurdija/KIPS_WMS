@@ -264,6 +264,46 @@ namespace KIPS_WMS.UI.Isporuka
                 Cursor.Current = Cursors.Default;
             }
         }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    listBox1.Dispose();
+                    Close();
+                    break;
+                case 1:
+                    try
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+
+                        _ws.SetDocumentStatus(Utils.DocumentTypeIsporuka, _shipmentNo, 1);
+
+                        listBox1.Dispose();
+                        Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Utils.GeneralExceptionProcessing(ex);
+                    }
+                    finally
+                    {
+                        Cursor.Current = Cursors.Default;
+                    }
+                    break;
+                case 2:
+                    if (_selectedLine != null)
+                    {
+                        ShowLineDetailsForm(null);
+                    }
+                    else
+                    {
+                        MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
+                    }
+                    break;
+            }
+        }
         
     }
 }

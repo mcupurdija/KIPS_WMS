@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -30,13 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Meni));
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
-            this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.bUnosBarkoda = new System.Windows.Forms.MenuItem();
-            this.bCrossDocking = new System.Windows.Forms.MenuItem();
-            this.bUvozPodataka = new System.Windows.Forms.MenuItem();
-            this.bPodesavanja = new System.Windows.Forms.MenuItem();
-            this.bLogout = new System.Windows.Forms.MenuItem();
             this.bPonude = new System.Windows.Forms.Button();
             this.bPreklasifikacija = new System.Windows.Forms.Button();
             this.bMagPrijemnice = new System.Windows.Forms.Button();
@@ -57,40 +49,6 @@
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
             this.imageList1 = new System.Windows.Forms.ImageList();
             this.SuspendLayout();
-            // 
-            // mainMenu1
-            // 
-            this.mainMenu1.MenuItems.Add(this.menuItem1);
-            this.mainMenu1.MenuItems.Add(this.bLogout);
-            // 
-            // menuItem1
-            // 
-            this.menuItem1.MenuItems.Add(this.bUnosBarkoda);
-            this.menuItem1.MenuItems.Add(this.bCrossDocking);
-            this.menuItem1.MenuItems.Add(this.bUvozPodataka);
-            this.menuItem1.MenuItems.Add(this.bPodesavanja);
-            this.menuItem1.Text = "Ostalo";
-            // 
-            // bUnosBarkoda
-            // 
-            this.bUnosBarkoda.Text = "Unos barkoda";
-            // 
-            // bCrossDocking
-            // 
-            this.bCrossDocking.Text = "Cross docking";
-            // 
-            // bUvozPodataka
-            // 
-            this.bUvozPodataka.Text = "Uvoz podataka";
-            // 
-            // bPodesavanja
-            // 
-            this.bPodesavanja.Text = "Podešavanja";
-            // 
-            // bLogout
-            // 
-            this.bLogout.Text = "Odjavi se";
-            this.bLogout.Click += new System.EventHandler(this.bLogout_Click);
             // 
             // bPonude
             // 
@@ -270,13 +228,7 @@
         private System.Windows.Forms.Button bBarkodTest;
         private System.Windows.Forms.Button bKontrolnaCena;
         private System.Windows.Forms.Button bLagerLista;
-        private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.Button bPopis;
-        private System.Windows.Forms.MenuItem bUnosBarkoda;
-        private System.Windows.Forms.MenuItem bCrossDocking;
-        private System.Windows.Forms.MenuItem bPodesavanja;
-        private System.Windows.Forms.MenuItem bUvozPodataka;
-        private System.Windows.Forms.MenuItem bLogout;
         private System.Windows.Forms.ContextMenu contextMenu1;
         private System.Windows.Forms.MenuItem cUnosBarkoda;
         private System.Windows.Forms.MenuItem cCrossDocking;
