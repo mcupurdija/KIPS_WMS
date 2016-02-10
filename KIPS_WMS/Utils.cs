@@ -30,7 +30,7 @@ namespace KIPS_WMS
 
         private const string GoProPrintServerAddress = "http://192.168.1.164/";
         private const string KipsPrintServerAddress = "http://192.168.10.18/";
-        public const string PrintServerApiPath = GoProPrintServerAddress + "WMSPrintServer/api/Print";
+        public const string PrintServerApiPath = KipsPrintServerAddress + "WMSPrintServer/api/Print";
         public const string PrintServerApiTestPath = KipsPrintServerAddress + "KIPSPrintServer/api/Test";
         public const string DateApiPath = KipsPrintServerAddress + "KIPSPrintServer/api/App";
 
