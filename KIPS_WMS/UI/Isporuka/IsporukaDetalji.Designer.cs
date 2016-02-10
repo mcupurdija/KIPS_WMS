@@ -31,6 +31,7 @@ namespace KIPS_WMS.UI.Isporuka
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IsporukaDetalji));
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.bNazad = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
@@ -45,6 +46,13 @@ namespace KIPS_WMS.UI.Isporuka
             this.listBox1 = new OpenNETCF.Windows.Forms.ListBox2();
             this.tbRegal = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.contextMenu1 = new System.Windows.Forms.ContextMenu();
+            this.cPodeliRed = new System.Windows.Forms.MenuItem();
+            this.cZameniRegal = new System.Windows.Forms.MenuItem();
+            this.toolBar1 = new System.Windows.Forms.ToolBar();
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
+            this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -130,6 +138,7 @@ namespace KIPS_WMS.UI.Isporuka
             this.listBox1.BackgroundImage = null;
             this.listBox1.DataSource = null;
             this.listBox1.DisplayMember = null;
+            this.listBox1.DrawMode = OpenNETCF.Windows.Forms.DrawMode.Normal;
             this.listBox1.EvenItemColor = System.Drawing.SystemColors.Control;
             this.listBox1.ImageList = null;
             this.listBox1.ItemHeight = 21;
@@ -145,17 +154,55 @@ namespace KIPS_WMS.UI.Isporuka
             // 
             // tbRegal
             // 
-            this.tbRegal.Location = new System.Drawing.Point(165, 116);
+            this.tbRegal.Location = new System.Drawing.Point(99, 116);
             this.tbRegal.Name = "tbRegal";
-            this.tbRegal.Size = new System.Drawing.Size(72, 21);
+            this.tbRegal.Size = new System.Drawing.Size(138, 21);
             this.tbRegal.TabIndex = 8;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(69, 117);
+            this.label1.Location = new System.Drawing.Point(3, 117);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 20);
             this.label1.Text = "Bar kod regala:";
+            // 
+            // contextMenu1
+            // 
+            this.contextMenu1.MenuItems.Add(this.cPodeliRed);
+            this.contextMenu1.MenuItems.Add(this.cZameniRegal);
+            // 
+            // cPodeliRed
+            // 
+            this.cPodeliRed.Text = "Podeli red";
+            this.cPodeliRed.Click += new System.EventHandler(this.cPodeliRed_Click);
+            // 
+            // cZameniRegal
+            // 
+            this.cZameniRegal.Text = "Zameni regal";
+            this.cZameniRegal.Click += new System.EventHandler(this.cZameniRegal_Click);
+            // 
+            // toolBar1
+            // 
+            this.toolBar1.Buttons.Add(this.toolBarButton1);
+            this.toolBar1.Buttons.Add(this.toolBarButton2);
+            this.toolBar1.ImageList = this.imageList1;
+            this.toolBar1.Name = "toolBar1";
+            this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
+            // 
+            // toolBarButton1
+            // 
+            this.toolBarButton1.ImageIndex = 0;
+            // 
+            // toolBarButton2
+            // 
+            this.toolBarButton2.ImageIndex = 1;
             // 
             // IsporukaDetalji
             // 
@@ -164,6 +211,7 @@ namespace KIPS_WMS.UI.Isporuka
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
             this.ControlBox = false;
+            this.Controls.Add(this.toolBar1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbRegal);
             this.Controls.Add(this.listBox1);
@@ -173,10 +221,9 @@ namespace KIPS_WMS.UI.Isporuka
             this.Controls.Add(this.tbKolicina);
             this.Controls.Add(this.bZameni);
             this.Controls.Add(this.bDodaj);
-            this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
             this.Name = "IsporukaDetalji";
-            this.Text = "PrijemDetalji";
+            this.Text = "IsporukaDetalji";
             this.ResumeLayout(false);
 
         }
@@ -196,5 +243,12 @@ namespace KIPS_WMS.UI.Isporuka
         private ListBox2 listBox1;
         private System.Windows.Forms.TextBox tbRegal;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenu contextMenu1;
+        private System.Windows.Forms.MenuItem cPodeliRed;
+        private System.Windows.Forms.MenuItem cZameniRegal;
+        private System.Windows.Forms.ToolBar toolBar1;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ToolBarButton toolBarButton1;
+        private System.Windows.Forms.ToolBarButton toolBarButton2;
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using KIPS_WMS.Model;
+using KIPS_WMS.UI.Isporuka;
 using KIPS_WMS.UI.Izdvajanje;
 using KIPS_WMS.UI.Ostalo;
 using KIPS_WMS.UI.Ponude;
 using KIPS_WMS.UI.Preklasifikacija;
 using KIPS_WMS.UI.Prijem;
 using KIPS_WMS.UI.Skladistenje;
-using KIPS_WMS.UI.Isporuka;
-using KIPS_WMS.Model;
 
 namespace KIPS_WMS.UI
 {
@@ -18,8 +18,9 @@ namespace KIPS_WMS.UI
         {
             InitializeComponent();
             LoginModel login = RegistryUtils.GetLoginData();
-            
-            if (login.RadiSkladistenje == 0) {
+
+            if (login.RadiSkladistenje == 0)
+            {
                 bSkladistenja.Enabled = false;
             }
             if (login.RadiPrijem == 0)
@@ -42,17 +43,14 @@ namespace KIPS_WMS.UI
             {
                 bMagIsporuke.Enabled = false;
             }
+
+//            MessageBox.Show(Utils.GetCurrentDateTime().ToShortDateString());
         }
 
         private void bPonude_Click(object sender, EventArgs e)
         {
             new PonudePocetna().Show();
         }
-
-//        private void bPodesavanja_Click(object sender, EventArgs e)
-//        {
-//            new Settings().Show();
-//        }
 
         private void bLagerLista_Click(object sender, EventArgs e)
         {
@@ -63,11 +61,6 @@ namespace KIPS_WMS.UI
         {
             new PreklasifikacijaDetalji().Show();
         }
-
-//        private void bUvozPodataka_Click(object sender, EventArgs e)
-//        {
-//            new CsvImport().Show();
-//        }
 
         private void bMagPrijemnice_Click(object sender, EventArgs e)
         {
@@ -86,12 +79,6 @@ namespace KIPS_WMS.UI
 
         private void bPopis_Click(object sender, EventArgs e)
         {
-            new Form1().Show();
-        }
-
-        private void bLogout_Click(object sender, EventArgs e)
-        {
-            Close();
         }
 
         private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
@@ -109,12 +96,10 @@ namespace KIPS_WMS.UI
 
         private void cUnosBarkoda_Click(object sender, EventArgs e)
         {
-
         }
 
         private void cCrossDocking_Click(object sender, EventArgs e)
         {
-
         }
 
         private void cUvozPodataka_Click(object sender, EventArgs e)

@@ -30,10 +30,9 @@ namespace KIPS_WMS
 
         private const string GoProPrintServerAddress = "http://192.168.1.106/";
         private const string KipsPrintServerAddress = "http://192.168.10.18/";
-        public const string PrintServerApiPath = KipsPrintServerAddress + "KIPSPrintServer/api/Print";
+        public const string PrintServerApiPath = GoProPrintServerAddress + "KIPSPrintServer/api/Print";
         public const string PrintServerApiTestPath = KipsPrintServerAddress + "KIPSPrintServer/api/Test";
-
-        public const string DateTimeApiPath = "http://api.timezonedb.com/?zone=Europe/Belgrade&format=json&key=5LSDOP8B3LXP";
+        public const string DateApiPath = KipsPrintServerAddress + "KIPSPrintServer/api/App";
 
         public const int DocumentTypePrijem = 1;
         public const int DocumentTypeIsporuka = 2;
@@ -101,18 +100,17 @@ namespace KIPS_WMS
 
         public static DateTime GetCurrentDateTime()
         {
-            var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            var dateTime = new DateTime(2017, 1, 1);
             try
             {
-                WebRequest request = WebRequest.Create(DateTimeApiPath);
+                WebRequest request = WebRequest.Create(DateApiPath);
 
                 using (WebResponse response = request.GetResponse())
                 {
-                    var model = JsonHelper.Deserialize<DateTimeModel>(response.GetResponseStream());
-                    
-                    if (model.status == "OK")
+                    if (((HttpWebResponse)response).StatusDescription == HttpStatusCode.OK.ToString())
                     {
-                        dateTime = dateTime.AddSeconds(model.timestamp);
+                        var model = JsonHelper.Deserialize<DateTimeModel>(response.GetResponseStream());
+                        return DateTime.ParseExact(model.Date, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
                     }
                 }
             }
@@ -120,6 +118,7 @@ namespace KIPS_WMS
             {
                 return dateTime;
             }
+
             return dateTime;
         }
     }

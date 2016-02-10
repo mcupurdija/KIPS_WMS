@@ -249,9 +249,9 @@ namespace KIPS_WMS.UI.Prijem
                 if (decimal.Parse(quantity) < 0) return;
                 if (decimal.Parse(uomQuantity) < 0) return;
 
-                if (Convert.ToInt16(_selectedLine.TrackingType) != 0)
+                if (Convert.ToInt32(_selectedLine.TrackingType) != 0)
                 {
-                    var pracenje = new Pracenje(_selectedLine.ItemNo, decimal.Parse(quantity), Convert.ToInt16(_selectedLine.TrackingType));
+                    var pracenje = new Pracenje(_selectedLine.ItemNo, decimal.Parse(quantity), Convert.ToInt32(_selectedLine.TrackingType));
                     DialogResult result = pracenje.ShowDialog();
                     if (result == DialogResult.OK)
                     {
@@ -260,7 +260,7 @@ namespace KIPS_WMS.UI.Prijem
                     }
                 }
 
-                if (Convert.ToInt16(_selectedLine.NormUomType) != 0)
+                if (Convert.ToInt32(_selectedLine.NormUomType) != 0)
                 {
                     var varijabilniNormativ = new VarijabilniNormativDijalog(_selectedLine, decimal.Parse(quantity));
                     DialogResult result = varijabilniNormativ.ShowDialog();
@@ -273,7 +273,7 @@ namespace KIPS_WMS.UI.Prijem
 
                 }
                 Cursor.Current = Cursors.WaitCursor;
-                _ws.UpdateWarehouseReceiptLineQty(RegistryUtils.GetLastUsername(), _receiptNo, Convert.ToInt16(_selectedLine.LineNo), 
+                _ws.UpdateWarehouseReceiptLineQty(RegistryUtils.GetLastUsername(), _receiptNo, Convert.ToInt32(_selectedLine.LineNo), 
                     quantity, isUpdate, lines, normativeLines, lJedinica.Text, uomQuantity);
 
                 int index = WarehouseReceiptLines.IndexOf(_selectedLine);
@@ -318,7 +318,7 @@ namespace KIPS_WMS.UI.Prijem
                 Cursor.Current = Cursors.WaitCursor;
 
                 int newLineNo = 0;
-                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt32(_selectedLine.LineNo), ref newLineNo);
 
                 _lineSplit = true;
 
@@ -373,7 +373,7 @@ namespace KIPS_WMS.UI.Prijem
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt32(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode;
             }
@@ -439,7 +439,7 @@ namespace KIPS_WMS.UI.Prijem
                 Cursor.Current = Cursors.WaitCursor;
 
                 int newLineNo = 0;
-                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt32(_selectedLine.LineNo), ref newLineNo);
 
                 _lineSplit = true;
 
@@ -465,7 +465,7 @@ namespace KIPS_WMS.UI.Prijem
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt32(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode;
             }

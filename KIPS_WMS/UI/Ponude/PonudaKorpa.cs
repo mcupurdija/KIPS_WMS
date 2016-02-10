@@ -88,6 +88,7 @@ namespace KIPS_WMS.UI.Ponude
             listBox1.BackColor = Color.LightYellow;
 
             listBox1.Items.Clear();
+            listBox1.SelectedIndex = -1;
             var listItem = new ListItem();
             for (int i = 0; i < _quoteItems.Count; i++)
             {
@@ -125,10 +126,21 @@ namespace KIPS_WMS.UI.Ponude
                 new object[] {tbPronadji.Text});
             if (_searchedItems.Count == 1)
             {
-                _selectedItem = _searchedItems[0];
-                ShowLinesForm(PonudaLinija.ItemState.New, true);
+                ItemQuoteModel item =
+                    _quoteItems.FirstOrDefault(
+                        x => (string) _searchedItems[0][DatabaseModel.ItemDbModel.ItemCode] == x.ItemCode);
+                if (item != null)
+                {
+                    _selectedItem = item;
+                    ShowLinesForm(PonudaLinija.ItemState.Edit, true);
+                }
+                else
+                {
+                    _selectedItem = _searchedItems[0];
+                    ShowLinesForm(PonudaLinija.ItemState.New, true);
+                }
             }
-            if (_searchedItems.Count == 0)
+            else if (_searchedItems.Count == 0)
             {
                 _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
                     new object[] {tbPronadji.Text});
@@ -138,7 +150,10 @@ namespace KIPS_WMS.UI.Ponude
                     ShowLinesForm(PonudaLinija.ItemState.New, true);
                 }
             }
-            DisplaySearchResults(_searchedItems);
+            else
+            {
+                DisplaySearchResults(_searchedItems);
+            }
         }
 
         private void bPronadji_Click(object sender, EventArgs e)
@@ -434,7 +449,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             if (_tableBasket && _selectedItem is ItemQuoteModel)
             {
-                _quoteItems.Remove((ItemQuoteModel)_selectedItem);
+                _quoteItems.Remove((ItemQuoteModel) _selectedItem);
                 DisplayLines();
             }
             else
@@ -452,7 +467,7 @@ namespace KIPS_WMS.UI.Ponude
                 if (tbPronadji.Text.Length < 3) return;
 
                 _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementComplete,
-                    new object[] { tbPronadji.Text });
+                    new object[] {tbPronadji.Text});
                 DisplaySearchResults(_searchedItems);
             }
         }

@@ -243,7 +243,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 if (decimal.Parse(uomQuantity) < 0) return;
 
                 Cursor.Current = Cursors.WaitCursor;
-                _ws.UpdatePickLineQty(RegistryUtils.GetLastUsername(), _pickNo, Convert.ToInt16(_selectedLine.LineNo), quantity,
+                _ws.UpdatePickLineQty(RegistryUtils.GetLastUsername(), _pickNo, Convert.ToInt32(_selectedLine.LineNo), quantity,
                     isUpdate, lJedinica.Text, uomQuantity);
 
                 int index = WarehousePickLines.IndexOf(_selectedLine);
@@ -289,7 +289,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 Cursor.Current = Cursors.WaitCursor;
 
                 int newLineNo = 0;
-                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _pickNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _pickNo, Convert.ToInt32(_selectedLine.LineNo), ref newLineNo);
 
                 _lineSplit = true;
 
@@ -344,7 +344,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _pickNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _pickNo, Convert.ToInt32(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode;
             }
@@ -400,7 +400,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 Cursor.Current = Cursors.WaitCursor;
 
                 int newLineNo = 0;
-                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _pickNo, Convert.ToInt16(_selectedLine.LineNo), ref newLineNo);
+                _ws.SplitDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _pickNo, Convert.ToInt32(_selectedLine.LineNo), ref newLineNo);
 
                 _lineSplit = true;
 
@@ -426,7 +426,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _pickNo, Convert.ToInt16(_selectedLine.LineNo), newBinCode);
+                _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _pickNo, Convert.ToInt32(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode;
             }
