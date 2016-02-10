@@ -28,9 +28,9 @@ namespace KIPS_WMS
         public static NetworkCredential GoProCredentials = new NetworkCredential("wurthtest", "remote", "gopro");
         public static NetworkCredential KipsCredentials = new NetworkCredential("gopro", "Sifra123", "KIPS");
 
-        private const string GoProPrintServerAddress = "http://192.168.1.106/";
+        private const string GoProPrintServerAddress = "http://192.168.1.164/";
         private const string KipsPrintServerAddress = "http://192.168.10.18/";
-        public const string PrintServerApiPath = GoProPrintServerAddress + "KIPSPrintServer/api/Print";
+        public const string PrintServerApiPath = GoProPrintServerAddress + "WMSPrintServer/api/Print";
         public const string PrintServerApiTestPath = KipsPrintServerAddress + "KIPSPrintServer/api/Test";
         public const string DateApiPath = KipsPrintServerAddress + "KIPSPrintServer/api/App";
 

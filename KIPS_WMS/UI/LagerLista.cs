@@ -88,32 +88,39 @@ namespace KIPS_WMS.UI
             if (e.KeyCode == Keys.Enter)
             {
                 var code = SQLiteHelper.oneRowQuery(DbStatements.FindItemsStatementBarcode, new object[] { tbSifra.Text });
-
-                string csvLagerList = string.Empty;
-                _ws.GetItemLagerList(code[1].ToString(), string.Empty, string.Empty, string.Empty, ref csvLagerList);
-                ItemLagerListModel[] lagerList;
-                var engine = new FileHelperEngine(typeof(ItemLagerListModel));
-                lagerList = (ItemLagerListModel[])engine.ReadString(csvLagerList);
-
-                lvLagerLista.Clear();
-                lvLagerLista.View = View.Details;
-                lvLagerLista.Columns.Add("Šifra", 60, HorizontalAlignment.Center);
-                lvLagerLista.Columns.Add("Naziv", 195, HorizontalAlignment.Center);
-                lvLagerLista.Columns.Add("JM", 60, HorizontalAlignment.Center);
-                lvLagerLista.Columns.Add("Ukupno", 80, HorizontalAlignment.Center);
-                lvLagerLista.Columns.Add("Raspoloživo", 80, HorizontalAlignment.Center);
-
-                foreach (ItemLagerListModel item in lagerList)
+                if (code.Count != 0)
                 {
-                    ListViewItem lvi;
+                    string csvLagerList = string.Empty;
+                    _ws.GetItemLagerList(code[1].ToString(), string.Empty, string.Empty, string.Empty, ref csvLagerList);
+                    ItemLagerListModel[] lagerList;
+                    var engine = new FileHelperEngine(typeof(ItemLagerListModel));
+                    lagerList = (ItemLagerListModel[])engine.ReadString(csvLagerList);
 
-                    lvi =
-                        new ListViewItem(new[]
+                    lvLagerLista.Clear();
+                    lvLagerLista.View = View.Details;
+                    lvLagerLista.Columns.Add("Šifra", 60, HorizontalAlignment.Center);
+                    lvLagerLista.Columns.Add("Naziv", 195, HorizontalAlignment.Center);
+                    lvLagerLista.Columns.Add("JM", 60, HorizontalAlignment.Center);
+                    lvLagerLista.Columns.Add("Ukupno", 80, HorizontalAlignment.Center);
+                    lvLagerLista.Columns.Add("Raspoloživo", 80, HorizontalAlignment.Center);
+
+                    foreach (ItemLagerListModel item in lagerList)
+                    {
+                        ListViewItem lvi;
+
+                        lvi =
+                            new ListViewItem(new[]
                         {
                             item.WarehouseCode, item.WarehouseName, item.UnitOfMeasure, item.TotalQuantity.ToString(), item.AvailableQuantity.ToString()
                         });
 
-                    lvLagerLista.Items.Add(lvi);
+                        lvLagerLista.Items.Add(lvi);
+                    }
+                }
+                else {
+                    MessageBox.Show("Artikal nije pronađen.",Resources.Greska);
+                    tbSifra.Text = "";
+                    tbSifra.Focus();
                 }
             }
         }

@@ -22,7 +22,7 @@ namespace KIPS_WMS.UI.Ponude
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                WebRequest request = WebRequest.Create(Utils.PrintServerApiPath);
+                WebRequest request = WebRequest.Create(Utils.PrintServerApiTestPath);
                 request.Method = "POST";
 
                 string body = JsonHelper.Serialize(model);

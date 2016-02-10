@@ -62,7 +62,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             }
             catch (Exception ex)
             {
-                Utils.GeneralExceptionProcessing(ex);
+                MessageBox.Show(ex.Message);
             }
             finally
             {

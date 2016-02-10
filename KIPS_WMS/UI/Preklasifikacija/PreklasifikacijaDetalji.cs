@@ -31,12 +31,12 @@ namespace KIPS_WMS.UI.Preklasifikacija
             //            tbSaRegala.Text = "99-99-9";
             //            tbNaRegal.Text = "01-01-1";
             listView1.View = View.Details;
-            listView1.Columns.Add(Resources.Sifra, 80, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.Naziv, 80, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.Kolicina, 80, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.JM, 80, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.SaRegala, 130, HorizontalAlignment.Left);
-            listView1.Columns.Add(Resources.NaRegal, 130, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.Sifra, 60, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.Naziv, 60, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.Kolicina, 60, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.JM, 60, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.SaRegala, 60, HorizontalAlignment.Left);
+            listView1.Columns.Add(Resources.NaRegal, 60, HorizontalAlignment.Left);
         }
 
         private void bPronadji_Click(object sender, EventArgs e)
@@ -119,6 +119,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
             tbKolicina.Text = "";
             lbJM.Text = Resources.JM + ": ";
             lbNaziv.Text = Resources.NazivArtika + ": ";
+            tbPronadji.Focus();
         }
 
         private void bObrisi_Click(object sender, EventArgs e)
@@ -358,6 +359,14 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 case 1:
                     contextMenu1.Show(toolBar1, new Point(80, 10));
                     break;
+            }
+        }
+
+        private void tbKolicina_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bDodaj_Click(sender, e);
             }
         }
     }

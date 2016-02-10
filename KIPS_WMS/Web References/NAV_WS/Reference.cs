@@ -636,23 +636,24 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePickLines", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetWarehousePickLines_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPutAwayNoP, ref string cSVStringP) {
+        public void GetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPickNoP, ref string cSVStringP)
+        {
             object[] results = this.Invoke("GetWarehousePickLines", new object[] {
                         userIdP,
                         locationCodeP,
                         sublocationCodeP,
-                        whsPutAwayNoP,
+                        whsPickNoP,
                         cSVStringP});
             cSVStringP = ((string)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPutAwayNoP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginGetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPickNoP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("GetWarehousePickLines", new object[] {
                         userIdP,
                         locationCodeP,
                         sublocationCodeP,
-                        whsPutAwayNoP,
+                        whsPickNoP,
                         cSVStringP}, callback, asyncState);
         }
         
@@ -664,21 +665,23 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetPickLineQtyToHandle", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetPickLineQtyToHandle_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetPickLineQtyToHandle(string userIdP, string putAwayNoP, int putAwayLineNoP, ref string qtyToHandleP) {
+        public void GetPickLineQtyToHandle(string userIdP, string pickNoP, int pickLineNoP, ref string qtyToHandleP)
+        {
             object[] results = this.Invoke("GetPickLineQtyToHandle", new object[] {
                         userIdP,
-                        putAwayNoP,
-                        putAwayLineNoP,
+                        pickNoP,
+                        pickLineNoP,
                         qtyToHandleP});
             qtyToHandleP = ((string)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetPickLineQtyToHandle(string userIdP, string putAwayNoP, int putAwayLineNoP, string qtyToHandleP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginGetPickLineQtyToHandle(string userIdP, string pickNoP, int pickLineNoP, string qtyToHandleP, System.AsyncCallback callback, object asyncState)
+        {
             return this.BeginInvoke("GetPickLineQtyToHandle", new object[] {
                         userIdP,
-                        putAwayNoP,
-                        putAwayLineNoP,
+                        pickNoP,
+                        pickLineNoP,
                         qtyToHandleP}, callback, asyncState);
         }
         
@@ -690,11 +693,12 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:UpdatePickLineQty", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="UpdatePickLineQty_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdatePickLineQty(string userIdP, string putAwayNoP, int putAwayLineNoP, string qtyP, int isUpdateP, string scannedUoMCodeP, string qtyInScannedUoMP) {
+        public void UpdatePickLineQty(string userIdP, string pickNoP, int pickLineNoP, string qtyP, int isUpdateP, string scannedUoMCodeP, string qtyInScannedUoMP)
+        {
             this.Invoke("UpdatePickLineQty", new object[] {
                         userIdP,
-                        putAwayNoP,
-                        putAwayLineNoP,
+                        pickNoP,
+                        pickLineNoP,
                         qtyP,
                         isUpdateP,
                         scannedUoMCodeP,
@@ -702,11 +706,12 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginUpdatePickLineQty(string userIdP, string putAwayNoP, int putAwayLineNoP, string qtyP, int isUpdateP, string scannedUoMCodeP, string qtyInScannedUoMP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginUpdatePickLineQty(string userIdP, string pickNoP, int pickLineNoP, string qtyP, int isUpdateP, string scannedUoMCodeP, string qtyInScannedUoMP, System.AsyncCallback callback, object asyncState)
+        {
             return this.BeginInvoke("UpdatePickLineQty", new object[] {
                         userIdP,
-                        putAwayNoP,
-                        putAwayLineNoP,
+                        pickNoP,
+                        pickLineNoP,
                         qtyP,
                         isUpdateP,
                         scannedUoMCodeP,

@@ -94,7 +94,7 @@ namespace KIPS_WMS.UI.Ponude
             {
                 listBox1.Items.Add(listItem);
             }
-            if (listBox1.Items.Count > 5)
+            if (listBox1.Items.Count > 3)
             {
                 listBox1.Items.Add(new ListItem {Tag = 0});
             }
@@ -149,11 +149,29 @@ namespace KIPS_WMS.UI.Ponude
                     _selectedItem = _searchedItems[0];
                     ShowLinesForm(PonudaLinija.ItemState.New, true);
                 }
+                if (_searchedItems.Count == 1)
+                {
+                    ItemQuoteModel item =
+                        _quoteItems.FirstOrDefault(
+                            x => (string)_searchedItems[0][DatabaseModel.ItemDbModel.ItemCode] == x.ItemCode);
+                    if (item != null)
+                    {
+                        _selectedItem = item;
+                        ShowLinesForm(PonudaLinija.ItemState.Edit, true);
+                    }
+                    else
+                    {
+                        _selectedItem = _searchedItems[0];
+                        ShowLinesForm(PonudaLinija.ItemState.New, true);
+                    }
+                }
             }
             else
             {
                 DisplaySearchResults(_searchedItems);
             }
+
+            ResetForm();
         }
 
         private void bPronadji_Click(object sender, EventArgs e)
@@ -179,7 +197,7 @@ namespace KIPS_WMS.UI.Ponude
             {
                 listBox1.Items.Add(listItem);
             }
-            if (listBox1.Items.Count > 5)
+            if (listBox1.Items.Count > 3)
             {
                 listBox1.Items.Add(new ListItem {Tag = 0});
             }
@@ -249,6 +267,8 @@ namespace KIPS_WMS.UI.Ponude
             {
                 _quoteItems.Remove((ItemQuoteModel) _selectedItem);
                 DisplayLines();
+                tbPronadji.Text = "";
+                tbPronadji.Focus();
             }
             else
             {
@@ -451,6 +471,8 @@ namespace KIPS_WMS.UI.Ponude
             {
                 _quoteItems.Remove((ItemQuoteModel) _selectedItem);
                 DisplayLines();
+                tbPronadji.Text = "";
+                tbPronadji.Focus();
             }
             else
             {
