@@ -112,9 +112,9 @@
             // 
             // lKolicina
             // 
-            this.lKolicina.Location = new System.Drawing.Point(67, 75);
+            this.lKolicina.Location = new System.Drawing.Point(4, 75);
             this.lKolicina.Name = "lKolicina";
-            this.lKolicina.Size = new System.Drawing.Size(70, 20);
+            this.lKolicina.Size = new System.Drawing.Size(230, 20);
             this.lKolicina.Text = "kolicina";
             // 
             // listView1

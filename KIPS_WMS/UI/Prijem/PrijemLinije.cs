@@ -109,7 +109,7 @@ namespace KIPS_WMS.UI.Prijem
 
             tbPronadji.Focus();
 
-            if (_filteredReceiptLines.Count == 1)
+            if (fromScanner && _filteredReceiptLines.Count == 1)
             {
                 _selectedLine = _filteredReceiptLines[0];
                 ShowLineDetailsForm(_barcode);
