@@ -52,9 +52,9 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.cPodeliRed = new System.Windows.Forms.MenuItem();
             this.cZameniRegal = new System.Windows.Forms.MenuItem();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
-            this.imageList1 = new System.Windows.Forms.ImageList();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -114,6 +114,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.tbKolicina.Size = new System.Drawing.Size(78, 21);
             this.tbKolicina.TabIndex = 2;
             this.tbKolicina.Text = "1";
+            this.tbKolicina.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbKolicina_KeyUp);
             this.tbKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKolicina_KeyPress);
             // 
             // tbBarkod
@@ -138,6 +139,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.tbJedinicaKolicina.Size = new System.Drawing.Size(60, 21);
             this.tbJedinicaKolicina.TabIndex = 5;
             this.tbJedinicaKolicina.TextChanged += new System.EventHandler(this.tbJedinicaKolicina_TextChanged);
+            this.tbJedinicaKolicina.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbJedinicaKolicina_KeyUp);
             this.tbJedinicaKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbJedinicaKolicina_KeyPress);
             // 
             // listBox1
@@ -201,13 +203,6 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.toolBar1.Name = "toolBar1";
             this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
-            this.imageList1.Images.Clear();
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
-            // 
             // toolBarButton1
             // 
             this.toolBarButton1.ImageIndex = 0;
@@ -215,6 +210,13 @@ namespace KIPS_WMS.UI.Izdvajanje
             // toolBarButton2
             // 
             this.toolBarButton2.ImageIndex = 1;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
             // 
             // IzdvajanjeDetalji
             // 

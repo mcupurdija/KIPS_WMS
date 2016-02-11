@@ -24,75 +24,75 @@ namespace KIPS_WMS.UI.Isporuka
         {
             InitializeComponent();
 
-            _selectedLine = selectedLine;
-            _quantity = quantity;
+            //_selectedLine = selectedLine;
+            //_quantity = quantity;
 
-            tbJedinicaMere.Text = _selectedLine.UnitOfMeasureCode;
-            tbZaprimljenaKolicina.Text = _quantity.ToString("N2", culture);
-            tbOsnovnaJedinicaMere.Text = _selectedLine.NormUom;
-            tbKolicinaOsnovnaJedinicaMere.Focus();
+            //tbJedinicaMere.Text = _selectedLine.UnitOfMeasureCode;
+            //tbZaprimljenaKolicina.Text = _quantity.ToString("N2", culture);
+            ////tbOsnovnaJedinicaMere.Text = _selectedLine.NormUom;
+            //tbKolicinaOsnovnaJedinicaMere.Focus();
 
-            var myAutoScaleFactor = new SizeF(
-                AutoScaleDimensions.Width / 96F,
-                AutoScaleDimensions.Height / 96F);
+            //var myAutoScaleFactor = new SizeF(
+            //    AutoScaleDimensions.Width / 96F,
+            //    AutoScaleDimensions.Height / 96F);
 
-            Height = (int)(myAutoScaleFactor.Height * 130) + 30;
+            //Height = (int)(myAutoScaleFactor.Height * 130) + 30;
         }
 
         private void bPosalji_Click(object sender, EventArgs e)
         {
-            if (tbKolicinaOsnovnaJedinicaMere.Text.Contains(","))
-            {
-                if (tbKolicinaOsnovnaJedinicaMere.Text.Split(',')[1].Length > _selectedLine.NormRoundingPrecision.Split(',')[1].Length)
-                {
-                    MessageBox.Show("Nije dobro zaokruženo. Treba zaokružiti na "
-                        + _selectedLine.NormRoundingPrecision.Split(',')[1].Length + " decimale.", Resources.Greska);
-                    return;
-                }
+            //if (tbKolicinaOsnovnaJedinicaMere.Text.Contains(","))
+            //{
+            //    if (tbKolicinaOsnovnaJedinicaMere.Text.Split(',')[1].Length > _selectedLine.NormRoundingPrecision.Split(',')[1].Length)
+            //    {
+            //        MessageBox.Show("Nije dobro zaokruženo. Treba zaokružiti na "
+            //            + _selectedLine.NormRoundingPrecision.Split(',')[1].Length + " decimale.", Resources.Greska);
+            //        return;
+            //    }
 
-            }
+            //}
 
-            try
-            {
-                decimal calculatedFactor = Decimal.Parse(tbFaktorKonverzije.Text, culture);
-                decimal normCoefficient = Decimal.Parse(_selectedLine.NormCoefficient, culture);
-                decimal percentage = Decimal.Parse(_selectedLine.NormDeviation, culture);
+            //try
+            //{
+            //    decimal calculatedFactor = Decimal.Parse(tbFaktorKonverzije.Text, culture);
+            //    decimal normCoefficient = Decimal.Parse(_selectedLine.NormCoefficient, culture);
+            //    decimal percentage = Decimal.Parse(_selectedLine.NormDeviation, culture);
 
-                if (Math.Abs((normCoefficient - calculatedFactor)) > (percentage / 100))
-                {
-                    var dijalog = new PrekoracenaVrednostYesNoDijalog(_selectedLine.NormCoefficient, _selectedLine.NormDeviation,
-                        tbFaktorKonverzije.Text);
-                    DialogResult result = dijalog.ShowDialog();
-                    if (result == DialogResult.Yes)
-                    {
-                        _normativeLines.Add(new SendNormativeModel("1", "", "", tbKolicinaOsnovnaJedinicaMere.Text));
-                        DialogResult = DialogResult.OK;
-                        Close();
-                    }
-                    else
-                    {
-                        tbKolicinaOsnovnaJedinicaMere.Focus();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Greska. "+ex.Message, Resources.Greska);
-            }
+            //    if (Math.Abs((normCoefficient - calculatedFactor)) > (percentage / 100))
+            //    {
+            //        var dijalog = new PrekoracenaVrednostYesNoDijalog(_selectedLine.NormCoefficient, _selectedLine.NormDeviation,
+            //            tbFaktorKonverzije.Text);
+            //        DialogResult result = dijalog.ShowDialog();
+            //        if (result == DialogResult.Yes)
+            //        {
+            //            _normativeLines.Add(new SendNormativeModel("1", "", "", tbKolicinaOsnovnaJedinicaMere.Text));
+            //            DialogResult = DialogResult.OK;
+            //            Close();
+            //        }
+            //        else
+            //        {
+            //            tbKolicinaOsnovnaJedinicaMere.Focus();
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Greska. "+ex.Message, Resources.Greska);
+            //}
 
         }
 
         private void tbKolicinaOsnovnaJedinicaMere_KeyUp(object sender, KeyEventArgs e)
         {
-            try
-            {
-                decimal diff = Convert.ToDecimal(tbKolicinaOsnovnaJedinicaMere.Text, culture) / _quantity;
-                tbFaktorKonverzije.Text = diff.ToString("N4", culture);
-            }
-            catch (Exception ex)
-            {
-                tbFaktorKonverzije.Text = "0";
-            }
+            //try
+            //{
+            //    decimal diff = Convert.ToDecimal(tbKolicinaOsnovnaJedinicaMere.Text, culture) / _quantity;
+            //    tbFaktorKonverzije.Text = diff.ToString("N4", culture);
+            //}
+            //catch (Exception ex)
+            //{
+            //    tbFaktorKonverzije.Text = "0";
+            //}
         }
 
         private void tbKolicinaOsnovnaJedinicaMere_TextChanged(object sender, EventArgs e)
@@ -102,13 +102,13 @@ namespace KIPS_WMS.UI.Isporuka
 
         private void tbKolicinaOsnovnaJedinicaMere_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == '.')
-            {
-                tbKolicinaOsnovnaJedinicaMere.Text += ",";
-                tbKolicinaOsnovnaJedinicaMere.SelectionStart = tbKolicinaOsnovnaJedinicaMere.Text.Length;
-                tbKolicinaOsnovnaJedinicaMere.SelectionLength = 0;
-                e.Handled = true;
-            }
+            //if (e.KeyChar == '.')
+            //{
+            //    tbKolicinaOsnovnaJedinicaMere.Text += ",";
+            //    tbKolicinaOsnovnaJedinicaMere.SelectionStart = tbKolicinaOsnovnaJedinicaMere.Text.Length;
+            //    tbKolicinaOsnovnaJedinicaMere.SelectionLength = 0;
+            //    e.Handled = true;
+            //}
         }
 
     }

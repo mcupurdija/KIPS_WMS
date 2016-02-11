@@ -182,5 +182,13 @@ namespace KIPS_WMS.UI.Izdvajanje
                     break;
             }
         }
+
+        private void tbPronadji_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DisplayData(tbPronadji.Text.Trim());
+            }
+        }
     }
 }

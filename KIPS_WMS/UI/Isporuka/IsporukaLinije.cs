@@ -86,11 +86,17 @@ namespace KIPS_WMS.UI.Isporuka
 
             _selectedLine = null;
             listBox1.SelectedIndex = -1;
-
-            _filteredShipmentLines = filterText != null
-                ? _warehouseShipmentLines.FindAll(x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
-                : _warehouseShipmentLines;
-
+            if (fromScanner) {
+                _filteredShipmentLines = filterText != null
+                        ? _warehouseShipmentLines.FindAll(x => x.ItemNo.Equals(filterText))
+                        : _warehouseShipmentLines;
+            }
+            else
+            {
+                _filteredShipmentLines = filterText != null
+                    ? _warehouseShipmentLines.FindAll(x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
+                    : _warehouseShipmentLines;
+            }
             var listItem = new ListItem();
             for (int i = 0; i < _filteredShipmentLines.Count; i++)
             {
@@ -122,16 +128,7 @@ namespace KIPS_WMS.UI.Isporuka
                 DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
             }
             if (query.Count == 0) {
-                query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
-                new object[] { tbPronadji.Text.Trim() });
-                if (query.Count == 1)
-                {
-                    _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
-                    DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
-                }
-                else{
-                    MessageBox.Show("Nije pronađen aritkal.", Resources.Greska);
-                }
+                DisplayData(tbPronadji.Text.Trim(), true);
             }
         }
 

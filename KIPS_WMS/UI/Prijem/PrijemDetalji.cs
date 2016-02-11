@@ -237,6 +237,7 @@ namespace KIPS_WMS.UI.Prijem
                 MessageBox.Show("Šifra regala nije skenirana ili se ne slaže sa šifrom iz linije.");
                 return;
             }
+            CultureInfo culture = Utils.GetLocalCulture();
 
             string quantity = tbKolicina.Text;
             string uomQuantity = tbJedinicaKolicina.Text;
@@ -250,8 +251,9 @@ namespace KIPS_WMS.UI.Prijem
             string normativeLines = "";
             try
             {
-                if (decimal.Parse(quantity) < 0) return;
-                if (decimal.Parse(uomQuantity) < 0) return;
+
+                if (decimal.Parse(quantity, culture) < 0) return;
+                if (decimal.Parse(uomQuantity, culture) < 0) return;
 
                 if (Convert.ToInt32(_selectedLine.TrackingType) != 0)
                 {
@@ -283,7 +285,7 @@ namespace KIPS_WMS.UI.Prijem
                 int index = WarehouseReceiptLines.IndexOf(_selectedLine);
                 if (isUpdate == 1)
                 {
-                    CultureInfo culture = Utils.GetLocalCulture();
+                    
                     decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text, culture);
                     _selectedLine.QuantityToReceive = newQty.ToString("N3", culture);
                 }
@@ -504,6 +506,14 @@ namespace KIPS_WMS.UI.Prijem
         }
 
         private void tbKolicina_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bDodaj_Click(sender, e);
+            }
+        }
+
+        private void tbJedinicaKolicina_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {

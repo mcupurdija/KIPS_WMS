@@ -37,7 +37,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             _selectedLine = selectedLine;
             WarehousePickLines = warehousePickLines;
 
-//            _selectedLine.UnitOfMeasureCode = "PAK";
+            //            _selectedLine.UnitOfMeasureCode = "PAK";
 
             DisplayData(barcode);
         }
@@ -84,7 +84,7 @@ namespace KIPS_WMS.UI.Izdvajanje
         {
             int index = e.Index;
 
-            e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
+            e.DrawBackground(index % 2 == 0 ? SystemColors.Control : Color.White);
 
             string text = String.Empty;
             switch (index)
@@ -116,7 +116,7 @@ namespace KIPS_WMS.UI.Izdvajanje
 
             e.Graphics.DrawString(text,
                 new Font(FontFamily.GenericSansSerif, 9F, FontStyle.Regular), brush, e.Bounds.Left + 3, e.Bounds.Top,
-                new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
         }
 
         private string GetRemainingQuantity()
@@ -149,7 +149,7 @@ namespace KIPS_WMS.UI.Izdvajanje
         private void ProcessBarcode(string barcode)
         {
             tbJedinicaKolicina.Text = String.Empty;
-            List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode, new object[] {barcode});
+            List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode, new object[] { barcode });
             if (query.Count == 1)
             {
                 _dbItem = query[0];
@@ -208,6 +208,9 @@ namespace KIPS_WMS.UI.Izdvajanje
         private void bDodaj_Click(object sender, EventArgs e)
         {
             UpdateLine(1);
+            DialogResult = DialogResult.Yes;
+            listBox1.Dispose();
+            Close();
         }
 
         private void bZameni_Click(object sender, EventArgs e)
@@ -222,7 +225,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 MessageBox.Show("Šifra regala nije skenirana ili se ne slaže sa šifrom iz linije.");
                 return;
             }
-
+            CultureInfo culture = Utils.GetLocalCulture();
             string quantity = tbKolicina.Text;
             string uomQuantity = tbJedinicaKolicina.Text;
             if (uomQuantity.Trim().Length == 0)
@@ -233,8 +236,8 @@ namespace KIPS_WMS.UI.Izdvajanje
 
             try
             {
-                if (decimal.Parse(quantity) < 0) return;
-                if (decimal.Parse(uomQuantity) < 0) return;
+                if (decimal.Parse(quantity, culture) < 0) return;
+                if (decimal.Parse(uomQuantity, culture) < 0) return;
 
                 Cursor.Current = Cursors.WaitCursor;
                 _ws.UpdatePickLineQty(RegistryUtils.GetLastUsername(), _pickNo, Convert.ToInt32(_selectedLine.LineNo), quantity,
@@ -243,7 +246,6 @@ namespace KIPS_WMS.UI.Izdvajanje
                 int index = WarehousePickLines.IndexOf(_selectedLine);
                 if (isUpdate == 1)
                 {
-                    CultureInfo culture = Utils.GetLocalCulture();
                     decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text, culture);
                     _selectedLine.QuantityToReceive = newQty.ToString("N3", culture);
                 }
@@ -287,7 +289,7 @@ namespace KIPS_WMS.UI.Izdvajanje
 
                 _lineSplit = true;
 
-//                new Thread(() => GetData(newLineNo)).Start();
+                //                new Thread(() => GetData(newLineNo)).Start();
                 GetData(newLineNo);
             }
             catch (Exception ex)
@@ -316,7 +318,7 @@ namespace KIPS_WMS.UI.Izdvajanje
 
                 _selectedLine = WarehousePickLines.Find(x => x.LineNo == Convert.ToString(lineNo));
 
-//                Invoke(new EventHandler((e, args) => DisplayData(null)));
+                //                Invoke(new EventHandler((e, args) => DisplayData(null)));
                 DisplayData(null);
             }
             catch (Exception ex)
@@ -440,6 +442,22 @@ namespace KIPS_WMS.UI.Izdvajanje
             listBox1.Dispose();
             Close();
         }
-       
+
+        private void tbKolicina_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bDodaj_Click(sender, e);
+            }
+        }
+
+        private void tbJedinicaKolicina_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bDodaj_Click(sender, e);
+            }
+        }
+
     }
 }

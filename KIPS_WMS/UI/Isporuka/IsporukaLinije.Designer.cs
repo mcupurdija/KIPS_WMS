@@ -41,9 +41,10 @@ namespace KIPS_WMS.UI.Isporuka
             this.bPonisti = new System.Windows.Forms.Button();
             this.listBox1 = new OpenNETCF.Windows.Forms.ListBox2();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
-            this.imageList1 = new System.Windows.Forms.ImageList();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.toolBarButton3 = new System.Windows.Forms.ToolBarButton();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -100,7 +101,6 @@ namespace KIPS_WMS.UI.Isporuka
             this.listBox1.BackgroundImage = null;
             this.listBox1.DataSource = null;
             this.listBox1.DisplayMember = null;
-            this.listBox1.DrawMode = OpenNETCF.Windows.Forms.DrawMode.Normal;
             this.listBox1.EvenItemColor = System.Drawing.SystemColors.Control;
             this.listBox1.ImageList = null;
             this.listBox1.ItemHeight = 15;
@@ -119,16 +119,10 @@ namespace KIPS_WMS.UI.Isporuka
             // 
             this.toolBar1.Buttons.Add(this.toolBarButton1);
             this.toolBar1.Buttons.Add(this.toolBarButton2);
+            this.toolBar1.Buttons.Add(this.toolBarButton3);
             this.toolBar1.ImageList = this.imageList1;
             this.toolBar1.Name = "toolBar1";
             this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
-            this.imageList1.Images.Clear();
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
             // 
             // toolBarButton1
             // 
@@ -137,6 +131,18 @@ namespace KIPS_WMS.UI.Isporuka
             // toolBarButton2
             // 
             this.toolBarButton2.ImageIndex = 1;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource2"))));
+            // 
+            // toolBarButton3
+            // 
+            this.toolBarButton3.ImageIndex = 2;
             // 
             // IsporukaLinije
             // 
@@ -169,5 +175,6 @@ namespace KIPS_WMS.UI.Isporuka
         private System.Windows.Forms.ToolBarButton toolBarButton1;
         private System.Windows.Forms.ToolBarButton toolBarButton2;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ToolBarButton toolBarButton3;
     }
 }

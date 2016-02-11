@@ -180,5 +180,13 @@ namespace KIPS_WMS.UI.Isporuka
                     break;
             }
         }
+
+        private void tbPronadji_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DisplayData(tbPronadji.Text.Trim());
+            }
+        }
     }
 }

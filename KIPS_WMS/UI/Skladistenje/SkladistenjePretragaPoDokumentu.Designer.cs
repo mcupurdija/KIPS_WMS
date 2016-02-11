@@ -38,9 +38,9 @@
             this.tbPronadji = new System.Windows.Forms.TextBox();
             this.listBox1 = new OpenNETCF.Windows.Forms.ListBox2();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
-            this.imageList1 = new System.Windows.Forms.ImageList();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -82,13 +82,13 @@
             this.tbPronadji.Name = "tbPronadji";
             this.tbPronadji.Size = new System.Drawing.Size(125, 21);
             this.tbPronadji.TabIndex = 2;
+            this.tbPronadji.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPronadji_KeyUp);
             // 
             // listBox1
             // 
             this.listBox1.BackgroundImage = null;
             this.listBox1.DataSource = null;
             this.listBox1.DisplayMember = null;
-            this.listBox1.DrawMode = OpenNETCF.Windows.Forms.DrawMode.Normal;
             this.listBox1.EvenItemColor = System.Drawing.SystemColors.Control;
             this.listBox1.ImageList = null;
             this.listBox1.ItemHeight = 40;
@@ -111,13 +111,6 @@
             this.toolBar1.Name = "toolBar1";
             this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
-            this.imageList1.Images.Clear();
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
-            // 
             // toolBarButton1
             // 
             this.toolBarButton1.ImageIndex = 0;
@@ -125,6 +118,13 @@
             // toolBarButton2
             // 
             this.toolBarButton2.ImageIndex = 1;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
             // 
             // SkladistenjePretragaPoDokumentu
             // 

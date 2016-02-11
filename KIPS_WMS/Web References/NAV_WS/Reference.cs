@@ -636,8 +636,7 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePickLines", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetWarehousePickLines_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPickNoP, ref string cSVStringP)
-        {
+        public void GetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPickNoP, ref string cSVStringP) {
             object[] results = this.Invoke("GetWarehousePickLines", new object[] {
                         userIdP,
                         locationCodeP,
@@ -648,7 +647,8 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPickNoP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginGetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPickNoP, string cSVStringP, System.AsyncCallback callback, object asyncState)
+        {
             return this.BeginInvoke("GetWarehousePickLines", new object[] {
                         userIdP,
                         locationCodeP,
@@ -676,12 +676,11 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetPickLineQtyToHandle(string userIdP, string pickNoP, int pickLineNoP, string qtyToHandleP, System.AsyncCallback callback, object asyncState)
-        {
+        public System.IAsyncResult BeginGetPickLineQtyToHandle(string userIdP, string putAwayNoP, int putAwayLineNoP, string qtyToHandleP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("GetPickLineQtyToHandle", new object[] {
                         userIdP,
-                        pickNoP,
-                        pickLineNoP,
+                        putAwayNoP,
+                        putAwayLineNoP,
                         qtyToHandleP}, callback, asyncState);
         }
         
@@ -706,12 +705,11 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginUpdatePickLineQty(string userIdP, string pickNoP, int pickLineNoP, string qtyP, int isUpdateP, string scannedUoMCodeP, string qtyInScannedUoMP, System.AsyncCallback callback, object asyncState)
-        {
+        public System.IAsyncResult BeginUpdatePickLineQty(string userIdP, string putAwayNoP, int putAwayLineNoP, string qtyP, int isUpdateP, string scannedUoMCodeP, string qtyInScannedUoMP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("UpdatePickLineQty", new object[] {
                         userIdP,
-                        pickNoP,
-                        pickLineNoP,
+                        putAwayNoP,
+                        putAwayLineNoP,
                         qtyP,
                         isUpdateP,
                         scannedUoMCodeP,

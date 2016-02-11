@@ -225,6 +225,9 @@ namespace KIPS_WMS.UI.Isporuka
         private void bDodaj_Click(object sender, EventArgs e)
         {
             UpdateLine(1);
+            DialogResult = DialogResult.Yes;
+            listBox1.Dispose();
+            Close();
         }
 
         private void bZameni_Click(object sender, EventArgs e)
@@ -248,12 +251,13 @@ namespace KIPS_WMS.UI.Isporuka
             }
             if (quantity.Trim().Length == 0) return;
 
+            CultureInfo culture = Utils.GetLocalCulture();
             string lines = "";
             string normativeLines = "";
             try
             {
-                if (decimal.Parse(quantity) < 0) return;
-                if (decimal.Parse(uomQuantity) < 0) return;
+                if (decimal.Parse(quantity, culture) < 0) return;
+                if (decimal.Parse(uomQuantity, culture) < 0) return;
 
                 if (Convert.ToInt32(_selectedLine.TrackingType) != 0)
                 {
@@ -267,18 +271,18 @@ namespace KIPS_WMS.UI.Isporuka
                     }
                 }
 
-                if (Convert.ToInt32(_selectedLine.NormUomType) != 0)
-                {
-                    var varijabilniNormativ = new IsporukaVarijabilniNormativDijalog(_selectedLine,
-                        decimal.Parse(quantity));
-                    DialogResult result = varijabilniNormativ.ShowDialog();
+                //if (Convert.ToInt32(_selectedLine.NormUomType) != 0)
+                //{
+                //    var varijabilniNormativ = new IsporukaVarijabilniNormativDijalog(_selectedLine,
+                //        decimal.Parse(quantity));
+                //    DialogResult result = varijabilniNormativ.ShowDialog();
 
-                    if (result == DialogResult.OK)
-                    {
-                        var engine = new FileHelperEngine(typeof (SendNormativeModel));
-                        normativeLines = engine.WriteString(varijabilniNormativ._normativeLines);
-                    }
-                }
+                //    if (result == DialogResult.OK)
+                //    {
+                //        var engine = new FileHelperEngine(typeof (SendNormativeModel));
+                //        normativeLines = engine.WriteString(varijabilniNormativ._normativeLines);
+                //    }
+                //}
                 Cursor.Current = Cursors.WaitCursor;
                 _ws.UpdateWarehouseShipmentLineQty(RegistryUtils.GetLastUsername(), _shipmentNo,
                     Convert.ToInt32(_selectedLine.LineNo),
@@ -287,7 +291,6 @@ namespace KIPS_WMS.UI.Isporuka
                 int index = WarehouseShipmentLines.IndexOf(_selectedLine);
                 if (isUpdate == 1)
                 {
-                    CultureInfo culture = Utils.GetLocalCulture();
                     decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) +
                                      decimal.Parse(tbKolicina.Text, culture);
                     _selectedLine.QuantityToReceive = newQty.ToString("N3", culture);
@@ -494,6 +497,22 @@ namespace KIPS_WMS.UI.Isporuka
                 case 1:
                     contextMenu1.Show(toolBar1, new Point(80, 10));
                     break;
+            }
+        }
+
+        private void tbKolicina_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bDodaj_Click(sender, e);
+            }
+        }
+
+        private void tbJedinicaKolicina_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bDodaj_Click(sender, e);
             }
         }
     }

@@ -148,6 +148,7 @@ namespace KIPS_WMS.UI.Prijem
             this.tbJedinicaKolicina.Size = new System.Drawing.Size(60, 21);
             this.tbJedinicaKolicina.TabIndex = 5;
             this.tbJedinicaKolicina.TextChanged += new System.EventHandler(this.tbJedinicaKolicina_TextChanged);
+            this.tbJedinicaKolicina.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbJedinicaKolicina_KeyUp);
             this.tbJedinicaKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbJedinicaKolicina_KeyPress);
             // 
             // listBox1

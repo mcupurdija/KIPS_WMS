@@ -51,9 +51,9 @@ namespace KIPS_WMS.UI.Prijem
 
                 _ws.GetWarehouseReceiptLines(RegistryUtils.GetLastUsername(), _loginData.Magacin, _loginData.Podmagacin, _receiptNo, ref warehouseReceiptsCsv);
 
-                var engine = new FileHelperEngine(typeof (WarehouseReceiptLineModel));
+                var engine = new FileHelperEngine(typeof(WarehouseReceiptLineModel));
                 _warehouseReceiptLines =
-                    ((WarehouseReceiptLineModel[]) engine.ReadString(warehouseReceiptsCsv)).ToList();
+                    ((WarehouseReceiptLineModel[])engine.ReadString(warehouseReceiptsCsv)).ToList();
 
                 DisplayData(null, false);
             }
@@ -85,11 +85,18 @@ namespace KIPS_WMS.UI.Prijem
 
             _selectedLine = null;
             listBox1.SelectedIndex = -1;
-
-            _filteredReceiptLines = filterText != null
-                ? _warehouseReceiptLines.FindAll(x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
-                : _warehouseReceiptLines;
-
+            if (fromScanner)
+            {
+                _filteredReceiptLines = filterText != null
+                        ? _warehouseReceiptLines.FindAll(x => x.ItemNo.Equals(filterText))
+                        : _warehouseReceiptLines;
+            }
+            else
+            {
+                _filteredReceiptLines = filterText != null
+                    ? _warehouseReceiptLines.FindAll(x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
+                    : _warehouseReceiptLines;
+            }
             var listItem = new ListItem();
             for (int i = 0; i < _filteredReceiptLines.Count; i++)
             {
@@ -97,12 +104,12 @@ namespace KIPS_WMS.UI.Prijem
             }
             if (listBox1.Items.Count > 5)
             {
-                listBox1.Items.Add(new ListItem {Tag = 0});
+                listBox1.Items.Add(new ListItem { Tag = 0 });
             }
 
             tbPronadji.Focus();
 
-            if (fromScanner && _filteredReceiptLines.Count == 1)
+            if (_filteredReceiptLines.Count == 1)
             {
                 _selectedLine = _filteredReceiptLines[0];
                 ShowLineDetailsForm(_barcode);
@@ -120,17 +127,9 @@ namespace KIPS_WMS.UI.Prijem
                 _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
                 DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
             }
-            if (query.Count == 0) {
-                query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
-                new object[] { tbPronadji.Text.Trim() });
-                if (query.Count == 1)
-                {
-                    _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
-                    DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
-                }
-                else{
-                    MessageBox.Show("Nije pronađen aritkal.", Resources.Greska);
-                }
+            if (query.Count == 0)
+            {
+                DisplayData(tbPronadji.Text.Trim(), true);
             }
         }
 
@@ -194,7 +193,7 @@ namespace KIPS_WMS.UI.Prijem
             }
             else
             {
-                e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
+                e.DrawBackground(index % 2 == 0 ? SystemColors.Control : Color.White);
                 brush = new SolidBrush(Color.Black);
             }
 
@@ -209,10 +208,10 @@ namespace KIPS_WMS.UI.Prijem
 
             e.Graphics.DrawString(firstLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 10, e.Bounds.Top,
-                new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
             e.Graphics.DrawString(secondLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 10,
-                e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                e.Bounds.Top + 20, new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
         }
 
         public static Color GetLineStatusColor(string outstanding, string toReceive)
@@ -303,6 +302,6 @@ namespace KIPS_WMS.UI.Prijem
                     break;
             }
         }
-        
+
     }
 }

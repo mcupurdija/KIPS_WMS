@@ -88,12 +88,19 @@ namespace KIPS_WMS.UI.Izdvajanje
 
             _selectedLine = null;
             listBox1.SelectedIndex = -1;
-
-            _filteredPickLines = filterText != null
-                ? _warehousePickLines.FindAll(
-                    x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
-                : _warehousePickLines;
-
+            if (fromScanner)
+            {
+                _filteredPickLines = filterText != null
+                    ? _warehousePickLines.FindAll(x => x.ItemNo.Equals(filterText))
+                    : _warehousePickLines;
+            }
+            else
+            {
+                _filteredPickLines = filterText != null
+                    ? _warehousePickLines.FindAll(
+                        x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
+                    : _warehousePickLines;
+            }
             var listItem = new ListItem();
             for (int i = 0; i < _filteredPickLines.Count; i++)
             {
@@ -126,17 +133,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             }
             if (query.Count == 0)
             {
-                query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
-                    new object[] {tbPronadji.Text.Trim()});
-                if (query.Count == 1)
-                {
-                    _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
-                    DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
-                }
-                else
-                {
-                    MessageBox.Show("Nije pronađen aritkal.", Resources.Greska);
-                }
+                DisplayData(tbPronadji.Text.Trim(), true);
             }
         }
 

@@ -54,9 +54,9 @@ namespace KIPS_WMS.UI.Skladistenje
                 _ws.GetWarehousePutAwayLines(RegistryUtils.GetLastUsername(), _loginData.Magacin, _loginData.Podmagacin,
                     _putAwayNo, ref warehousePutAwaysCsv);
 
-                var engine = new FileHelperEngine(typeof (WarehousePutAwayLineModel));
+                var engine = new FileHelperEngine(typeof(WarehousePutAwayLineModel));
                 _warehousePutAwayLines =
-                    ((WarehousePutAwayLineModel[]) engine.ReadString(warehousePutAwaysCsv)).ToList();
+                    ((WarehousePutAwayLineModel[])engine.ReadString(warehousePutAwaysCsv)).ToList();
 
                 DisplayData(null, false);
             }
@@ -88,12 +88,19 @@ namespace KIPS_WMS.UI.Skladistenje
 
             _selectedLine = null;
             listBox1.SelectedIndex = -1;
-
-            _filteredPutAwayLines = filterText != null
-                ? _warehousePutAwayLines.FindAll(
-                    x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
-                : _warehousePutAwayLines;
-
+            if (fromScanner)
+            {
+                _filteredPutAwayLines = filterText != null
+                        ? _warehousePutAwayLines.FindAll(x => x.ItemNo.Equals(filterText))
+                        : _warehousePutAwayLines;
+            }
+            else
+            {
+                _filteredPutAwayLines = filterText != null
+                    ? _warehousePutAwayLines.FindAll(
+                        x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
+                    : _warehousePutAwayLines;                
+            }
             var listItem = new ListItem();
             for (int i = 0; i < _filteredPutAwayLines.Count; i++)
             {
@@ -101,7 +108,7 @@ namespace KIPS_WMS.UI.Skladistenje
             }
             if (listBox1.Items.Count > 5)
             {
-                listBox1.Items.Add(new ListItem {Tag = 0});
+                listBox1.Items.Add(new ListItem { Tag = 0 });
             }
 
             tbPronadji.Focus();
@@ -118,7 +125,7 @@ namespace KIPS_WMS.UI.Skladistenje
             if (e.KeyCode != Keys.Enter) return;
 
             List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
-                new object[] {tbPronadji.Text.Trim()});
+                new object[] { tbPronadji.Text.Trim() });
             if (query.Count == 1)
             {
                 _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
@@ -126,17 +133,7 @@ namespace KIPS_WMS.UI.Skladistenje
             }
             if (query.Count == 0)
             {
-                query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
-                    new object[] {tbPronadji.Text.Trim()});
-                if (query.Count == 1)
-                {
-                    _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
-                    DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
-                }
-                else
-                {
-                    MessageBox.Show("Nije pronađen aritkal.", Resources.Greska);
-                }
+                DisplayData(tbPronadji.Text.Trim(), true);
             }
         }
 
@@ -200,7 +197,7 @@ namespace KIPS_WMS.UI.Skladistenje
             }
             else
             {
-                e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
+                e.DrawBackground(index % 2 == 0 ? SystemColors.Control : Color.White);
                 brush = new SolidBrush(Color.Black);
             }
 
@@ -217,10 +214,10 @@ namespace KIPS_WMS.UI.Skladistenje
 
             e.Graphics.DrawString(firstLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 10, e.Bounds.Top,
-                new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
             e.Graphics.DrawString(secondLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 10,
-                e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                e.Bounds.Top + 20, new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
         }
 
         public static Color GetLineStatusColor(string outstanding, string toReceive)
