@@ -175,5 +175,12 @@ namespace KIPS_WMS.UI.Prijem
                     break;
             }
         }
+
+        private void tbPronadji_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) { 
+                
+            }
+        }
     }
 }

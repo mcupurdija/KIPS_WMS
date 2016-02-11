@@ -214,5 +214,12 @@ namespace KIPS_WMS.UI.Preklasifikacija
                     break;
             }
         }
+
+        private void tbKolicina_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                bDodaj_Click(sender, e);
+            }
+        }
     }
 }

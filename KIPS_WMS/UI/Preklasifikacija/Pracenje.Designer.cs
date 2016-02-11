@@ -43,9 +43,9 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.dtDatum = new System.Windows.Forms.DateTimePicker();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
-            this.imageList1 = new System.Windows.Forms.ImageList();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -98,6 +98,7 @@
             this.tbKolicina.Name = "tbKolicina";
             this.tbKolicina.Size = new System.Drawing.Size(70, 21);
             this.tbKolicina.TabIndex = 8;
+            this.tbKolicina.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbKolicina_KeyUp);
             this.tbKolicina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbKolicina_KeyPress);
             // 
             // bDodaj
@@ -141,13 +142,6 @@
             this.toolBar1.Name = "toolBar1";
             this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
-            this.imageList1.Images.Clear();
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
-            // 
             // toolBarButton1
             // 
             this.toolBarButton1.ImageIndex = 0;
@@ -155,6 +149,13 @@
             // toolBarButton2
             // 
             this.toolBarButton2.ImageIndex = 1;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
             // 
             // Pracenje
             // 

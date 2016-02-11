@@ -37,12 +37,6 @@ namespace KIPS_WMS.UI.Skladistenje
             _selectedLine = selectedLine;
             WarehousePutAwayLines = warehousePutAwayLines;
 
-            if (_loginData.SkeniranjeBarkodaNaPrijemu == 0)
-            {
-                tbRegal.Visible = false;
-                label1.Visible = false;
-            }
-
             //            _selectedLine.UnitOfMeasureCode = "PAK";
 
             DisplayData(barcode);
@@ -133,7 +127,7 @@ namespace KIPS_WMS.UI.Skladistenje
             {
                 decimal toReceiveQuantity = decimal.Parse(_selectedLine.QuantityToReceive, culture);
                 decimal outstandingQuantity = decimal.Parse(_selectedLine.QuantityOutstanding, culture);
-                return (outstandingQuantity - toReceiveQuantity).ToString("N0", culture.NumberFormat);
+                return (outstandingQuantity - toReceiveQuantity).ToString("N3", culture.NumberFormat);
             }
             catch (Exception)
             {
@@ -218,6 +212,9 @@ namespace KIPS_WMS.UI.Skladistenje
         private void bDodaj_Click(object sender, EventArgs e)
         {
             UpdateLine(1);
+            DialogResult = DialogResult.Yes;
+            listBox1.Dispose();
+            Close();
         }
 
         private void bZameni_Click(object sender, EventArgs e)
@@ -229,7 +226,7 @@ namespace KIPS_WMS.UI.Skladistenje
         {
             if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim() != _selectedLine.BinCode))
             {
-                MessageBox.Show("Potrebno je skenirati šifru regala.");
+                MessageBox.Show("Šifra regala nije skenirana ili se ne slaže sa šifrom iz linije.");
                 return;
             }
 
@@ -257,7 +254,7 @@ namespace KIPS_WMS.UI.Skladistenje
                     CultureInfo culture = Utils.GetLocalCulture();
                     decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) +
                                      decimal.Parse(tbKolicina.Text, culture);
-                    _selectedLine.QuantityToReceive = newQty.ToString("N0", culture);
+                    _selectedLine.QuantityToReceive = newQty.ToString("N3", culture);
                 }
                 else
                 {
@@ -462,6 +459,14 @@ namespace KIPS_WMS.UI.Skladistenje
                 case 1:
                     contextMenu1.Show(toolBar1, new Point(80, 10));
                     break;
+            }
+        }
+
+        private void tbKolicina_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bDodaj_Click(sender, e);
             }
         }
     }

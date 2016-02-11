@@ -98,6 +98,7 @@
             // 
             // bIzdvajanja
             // 
+            this.bIzdvajanja.Enabled = false;
             this.bIzdvajanja.Location = new System.Drawing.Point(123, 75);
             this.bIzdvajanja.Name = "bIzdvajanja";
             this.bIzdvajanja.Size = new System.Drawing.Size(114, 30);
