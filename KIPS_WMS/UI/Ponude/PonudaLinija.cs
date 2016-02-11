@@ -115,6 +115,7 @@ namespace KIPS_WMS.UI.Ponude
                     tbRaspolozivoLokacija.Text = modelEdit.AvailableWarehouseQuantity;
                     tbRaspolozivoVezanaLokacija.Text = modelEdit.AvailableLinkedWarehouseQuantity;
 
+                    CalculatePrice();
                     FocusQuantity();
 
                     break;
