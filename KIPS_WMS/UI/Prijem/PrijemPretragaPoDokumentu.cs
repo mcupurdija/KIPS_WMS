@@ -78,6 +78,10 @@ namespace KIPS_WMS.UI.Prijem
             }
 
             tbPronadji.Focus();
+            if (_filteredList.Count == 1) {
+                _selectedReceipt = _filteredList[0];
+                new PrijemLinije(_selectedReceipt.ReceiptCode).Show();
+            }
         }
 
         private void bPronadji_Click(object sender, EventArgs e)
@@ -178,8 +182,8 @@ namespace KIPS_WMS.UI.Prijem
 
         private void tbPronadji_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) { 
-                
+            if (e.KeyCode == Keys.Enter) {
+                DisplayData(tbPronadji.Text.Trim());
             }
         }
     }

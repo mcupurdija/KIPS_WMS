@@ -111,7 +111,7 @@ namespace KIPS_WMS.UI.Isporuka
                     text = string.Format("{0}: {1}", "Jedinica mere za prijem", _selectedLine.UnitOfMeasureCode);
                     break;
                 case 4:
-                    text = string.Format("{0}: {1}", "Količina za prijem", _selectedLine.QuantityOutstanding);
+                    text = string.Format("{0}: {1} / {2}", "Količina za isporuku/rezervisana", _selectedLine.QuantityOutstanding, _selectedLine.QuantityReserved);
                     break;
                 case 5:
                     text = string.Format("{0}: {1}", "Zaprimljena količina", _selectedLine.QuantityToReceive);
