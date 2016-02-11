@@ -78,6 +78,11 @@ namespace KIPS_WMS.UI.Isporuka
             }
 
             tbPronadji.Focus();
+            if (_filteredList.Count == 1)
+            {
+                _selectedShipment = _filteredList[0];
+                new IsporukaLinije(_selectedShipment.ShipmentCode).Show();
+            }
         }
 
         private void bPronadji_Click(object sender, EventArgs e)

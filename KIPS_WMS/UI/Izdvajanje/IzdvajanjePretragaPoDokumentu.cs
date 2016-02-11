@@ -80,6 +80,11 @@ namespace KIPS_WMS.UI.Izdvajanje
             }
 
             tbPronadji.Focus();
+            if (_filteredList.Count == 1)
+            {
+                _selectedPick = _filteredList[0];
+                new IzdvajanjeLinije(_selectedPick.PickCode).Show();
+            }
         }
 
         private void bPronadji_Click(object sender, EventArgs e)

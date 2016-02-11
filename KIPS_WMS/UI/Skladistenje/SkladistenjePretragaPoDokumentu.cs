@@ -78,6 +78,11 @@ namespace KIPS_WMS.UI.Skladistenje
             }
 
             tbPronadji.Focus();
+            if (_filteredList.Count == 1)
+            {
+                _selectedPutAway = _filteredList[0];
+                new SkladistenjeLinije(_selectedPutAway.PutAwayCode).Show();
+            }
         }
 
         private void bPronadji_Click(object sender, EventArgs e)

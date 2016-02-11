@@ -31,6 +31,9 @@ namespace KIPS_WMS.Model
         public string QuantityOutstanding; // ZA PRIJEM 
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string QuantityReserved; 
+
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
         public string QuantityToReceive; // ZAPREMLJENA
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]

@@ -99,10 +99,10 @@ namespace KIPS_WMS.UI.Izdvajanje
                     text = string.Format("{0}: {1}", "Regal", _selectedLine.BinCode);
                     break;
                 case 3:
-                    text = string.Format("{0}: {1}   {2}: {3}", "Količina za sklad.", _selectedLine.QuantityOutstanding, "JM", _selectedLine.UnitOfMeasureCode);
+                    text = string.Format("{0}: {1}   {2}: {3}", "Količina za izdv.", _selectedLine.QuantityOutstanding, "JM", _selectedLine.UnitOfMeasureCode);
                     break;
                 case 4:
-                    text = string.Format("{0}: {1}", "Uskladištena količina", _selectedLine.QuantityToReceive);
+                    text = string.Format("{0}: {1}", "Izdvojena količina", _selectedLine.QuantityToReceive);
                     break;
                 case 5:
                     text = string.Format("{0}: {1}{2}", "Broj serije/SN", _selectedLine.LotNo, _selectedLine.SerialNo);
