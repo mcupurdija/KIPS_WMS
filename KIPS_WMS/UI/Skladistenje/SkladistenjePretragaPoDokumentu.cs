@@ -64,7 +64,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
             _selectedPutAway = null;
             _filteredList = documentNo != null
-                ? _warehousePutAways.FindAll(x => x.PutAwayCode.Contains(documentNo))
+                ? _warehousePutAways.FindAll(x => x.PutAwayCode.Contains(documentNo.ToUpper()))
                 : _warehousePutAways;
 
             var listItem = new ListItem();
@@ -187,6 +187,13 @@ namespace KIPS_WMS.UI.Skladistenje
             {
                 DisplayData(tbPronadji.Text.Trim());
             }
+        }
+
+        private void SkladistenjePretragaPoDokumentu_GotFocus(object sender, EventArgs e)
+        {
+            DisplayData(null);
+            tbPronadji.Text = "";
+            tbPronadji.Focus();
         }
     }
 }

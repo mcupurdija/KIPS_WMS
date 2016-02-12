@@ -64,7 +64,7 @@ namespace KIPS_WMS.UI.Isporuka
 
             _selectedShipment = null;
             _filteredList = documentNo != null
-                ? _warehouseShipments.FindAll(x => x.ShipmentCode.Contains(documentNo))
+                ? _warehouseShipments.FindAll(x => x.ShipmentCode.Contains(documentNo.ToUpper()))
                 : _warehouseShipments;
 
             var listItem = new ListItem();
@@ -187,6 +187,13 @@ namespace KIPS_WMS.UI.Isporuka
             {
                 DisplayData(tbPronadji.Text.Trim());
             }
+        }
+
+        private void IsporukaPretragaPoDokumentu_GotFocus(object sender, EventArgs e)
+        {
+            DisplayData(null);
+            tbPronadji.Text = "";
+            tbPronadji.Focus();
         }
     }
 }

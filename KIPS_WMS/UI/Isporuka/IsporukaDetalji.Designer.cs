@@ -159,6 +159,7 @@ namespace KIPS_WMS.UI.Isporuka
             this.tbRegal.Name = "tbRegal";
             this.tbRegal.Size = new System.Drawing.Size(138, 21);
             this.tbRegal.TabIndex = 8;
+            this.tbRegal.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbRegal_KeyUp);
             // 
             // label1
             // 

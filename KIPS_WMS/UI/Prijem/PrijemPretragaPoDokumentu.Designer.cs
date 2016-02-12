@@ -139,6 +139,7 @@
             this.Controls.Add(this.bPronadji);
             this.Name = "PrijemPretragaPoDokumentu";
             this.Text = "Pretraga po dokumentu";
+            this.GotFocus += new System.EventHandler(this.PrijemPretragaPoDokumentu_GotFocus);
             this.ResumeLayout(false);
 
         }

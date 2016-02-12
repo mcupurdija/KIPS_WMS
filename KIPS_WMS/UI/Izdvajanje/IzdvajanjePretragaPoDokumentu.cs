@@ -66,7 +66,7 @@ namespace KIPS_WMS.UI.Izdvajanje
 
             _selectedPick = null;
             _filteredList = documentNo != null
-                ? _warehousePicks.FindAll(x => x.PickCode.Contains(documentNo))
+                ? _warehousePicks.FindAll(x => x.PickCode.Contains(documentNo.ToUpper()))
                 : _warehousePicks;
 
             var listItem = new ListItem();
@@ -189,6 +189,13 @@ namespace KIPS_WMS.UI.Izdvajanje
             {
                 DisplayData(tbPronadji.Text.Trim());
             }
+        }
+
+        private void IzdvajanjePretragaPoDokumentu_GotFocus(object sender, EventArgs e)
+        {
+            DisplayData(null);
+            tbPronadji.Text = "";
+            tbPronadji.Focus();
         }
     }
 }

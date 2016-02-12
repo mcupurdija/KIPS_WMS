@@ -139,6 +139,7 @@
             this.Controls.Add(this.bPronadji);
             this.Name = "IzdvajanjePretragaPoDokumentu";
             this.Text = "Pretraga po dokumentu";
+            this.GotFocus += new System.EventHandler(this.IzdvajanjePretragaPoDokumentu_GotFocus);
             this.ResumeLayout(false);
 
         }

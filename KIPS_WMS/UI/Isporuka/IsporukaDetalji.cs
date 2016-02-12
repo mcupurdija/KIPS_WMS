@@ -48,6 +48,7 @@ namespace KIPS_WMS.UI.Isporuka
             //            _selectedLine.UnitOfMeasureCode = "PAK";
 
             DisplayData(barcode);
+            tbRegal.Focus();
         }
 
         protected override void OnActivated(EventArgs e)
@@ -515,6 +516,14 @@ namespace KIPS_WMS.UI.Isporuka
             if (e.KeyCode == Keys.Enter)
             {
                 bDodaj_Click(sender, e);
+            }
+        }
+
+        private void tbRegal_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                tbKolicina.Focus();
             }
         }
     }

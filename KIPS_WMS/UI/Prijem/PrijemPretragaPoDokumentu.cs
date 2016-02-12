@@ -64,7 +64,7 @@ namespace KIPS_WMS.UI.Prijem
 
             _selectedReceipt = null;
             _filteredList = documentNo != null
-                ? _warehouseReceipts.FindAll(x => x.ReceiptCode.Contains(documentNo))
+                ? _warehouseReceipts.FindAll(x => x.ReceiptCode.Contains(documentNo.ToUpper()))
                 : _warehouseReceipts;
 
             var listItem = new ListItem();
@@ -76,7 +76,6 @@ namespace KIPS_WMS.UI.Prijem
             {
                 listBox1.Items.Add(new ListItem {Tag = 0});
             }
-
             tbPronadji.Focus();
             if (_filteredList.Count == 1) {
                 _selectedReceipt = _filteredList[0];
@@ -122,6 +121,7 @@ namespace KIPS_WMS.UI.Prijem
             if (_selectedReceipt != null)
             {
                 new PrijemLinije(_selectedReceipt.ReceiptCode).Show();
+                
             }
             else
             {
@@ -185,6 +185,13 @@ namespace KIPS_WMS.UI.Prijem
             if (e.KeyCode == Keys.Enter) {
                 DisplayData(tbPronadji.Text.Trim());
             }
+        }
+
+        private void PrijemPretragaPoDokumentu_GotFocus(object sender, EventArgs e)
+        {
+            DisplayData(null);
+            tbPronadji.Text = "";
+            tbPronadji.Focus();
         }
     }
 }
