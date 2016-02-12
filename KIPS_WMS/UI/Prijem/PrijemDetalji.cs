@@ -523,5 +523,12 @@ namespace KIPS_WMS.UI.Prijem
                 bDodaj_Click(sender, e);
             }
         }
+
+        private void tbRegal_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                tbKolicina.Focus();
+            }
+        }
     }
 }

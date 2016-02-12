@@ -163,12 +163,12 @@ namespace KIPS_WMS.UI.Ponude
                         if (item != null)
                         {
                             _selectedItem = item;
-                            ShowLinesForm(PonudaLinija.ItemState.Edit, true);
+                            ShowLinesForm(PonudaLinija.ItemState.Edit, false);
                         }
                         else
                         {
                             _selectedItem = _searchedItems[0];
-                            ShowLinesForm(PonudaLinija.ItemState.New, true);
+                            ShowLinesForm(PonudaLinija.ItemState.New, false);
                         }
                     }
                 }

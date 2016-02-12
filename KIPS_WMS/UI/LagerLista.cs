@@ -91,7 +91,7 @@ namespace KIPS_WMS.UI
                 if (code.Count != 0)
                 {
                     string csvLagerList = string.Empty;
-                    _ws.GetItemLagerList(code[1].ToString(), string.Empty, string.Empty, string.Empty, ref csvLagerList);
+                    _ws.GetItemLagerList(code[2].ToString(), string.Empty, string.Empty, string.Empty, ref csvLagerList);
                     ItemLagerListModel[] lagerList;
                     var engine = new FileHelperEngine(typeof(ItemLagerListModel));
                     lagerList = (ItemLagerListModel[])engine.ReadString(csvLagerList);
