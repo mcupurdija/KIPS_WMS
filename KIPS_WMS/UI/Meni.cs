@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using KIPS_WMS.Model;
+using KIPS_WMS.Properties;
 using KIPS_WMS.UI.Isporuka;
 using KIPS_WMS.UI.Izdvajanje;
 using KIPS_WMS.UI.Ostalo;
@@ -43,42 +44,83 @@ namespace KIPS_WMS.UI
             {
                 bMagIsporuke.Enabled = false;
             }
-
-//            MessageBox.Show(Utils.GetCurrentDateTime().ToShortDateString());
         }
 
         private void bPonude_Click(object sender, EventArgs e)
         {
-            new PonudePocetna().Show();
+            if (Utils.CheckDate())
+            {
+                new PonudePocetna().Show();
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
         }
 
         private void bLagerLista_Click(object sender, EventArgs e)
         {
-            new LagerLista().Show();
+            if (Utils.CheckDate())
+            {
+                new LagerLista().Show();
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
         }
 
         private void bPreklasifikacija_Click(object sender, EventArgs e)
         {
-            new PreklasifikacijaDetalji().Show();
+            if (Utils.CheckDate())
+            {
+                new PreklasifikacijaDetalji().Show();
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
         }
 
         private void bMagPrijemnice_Click(object sender, EventArgs e)
         {
-            new PrijemPocetna().Show();
+            if (Utils.CheckDate())
+            {
+                new PrijemPocetna().Show();
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
         }
 
         private void bSkladistenja_Click(object sender, EventArgs e)
         {
-            new SkladistenjePocetna().Show();
+            if (Utils.CheckDate())
+            {
+                new SkladistenjePocetna().Show();
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
         }
 
         private void bIzdvajanja_Click(object sender, EventArgs e)
         {
-            new IzdvajanjePocetna().Show();
+            if (Utils.CheckDate())
+            {
+                new IzdvajanjePocetna().Show();
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
         }
 
         private void bPopis_Click(object sender, EventArgs e)
         {
+
         }
 
         private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
@@ -96,25 +138,67 @@ namespace KIPS_WMS.UI
 
         private void cUnosBarkoda_Click(object sender, EventArgs e)
         {
+//            if (Utils.CheckDate())
+//            {
+//                
+//            }
+//            else
+//            {
+//                ShowErrorMessage();
+//            }
         }
 
         private void cCrossDocking_Click(object sender, EventArgs e)
         {
+//            if (Utils.CheckDate())
+//            {
+//                
+//            }
+//            else
+//            {
+//                ShowErrorMessage();
+//            }
         }
 
         private void cUvozPodataka_Click(object sender, EventArgs e)
         {
-            new CsvImport().Show();
+            if (Utils.CheckDate())
+            {
+                new CsvImport().Show();
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
         }
 
         private void cPodesavanja_Click(object sender, EventArgs e)
         {
-            new Settings().Show();
+            if (Utils.CheckDate())
+            {
+                new Settings().Show();
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
         }
 
         private void bMagIsporuke_Click(object sender, EventArgs e)
         {
-            new IsporukaPretragaPoDokumentu().Show();
+            if (Utils.CheckDate())
+            {
+                new IsporukaPretragaPoDokumentu().Show();
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
+        }
+
+        private void ShowErrorMessage()
+        {
+            MessageBox.Show("Server na adresi 192.168.10.18 trenutno nije dostupan, molimo kontaktirajte administratora", Resources.Greska);
         }
     }
 }

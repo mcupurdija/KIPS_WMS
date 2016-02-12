@@ -98,28 +98,33 @@ namespace KIPS_WMS
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 3, e.Bounds.Top + 20, new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
         }
 
-        public static DateTime GetCurrentDateTime()
+        public static bool CheckDate()
         {
-            var dateTime = new DateTime(2017, 1, 1);
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
+
                 WebRequest request = WebRequest.Create(DateApiPath);
 
                 using (WebResponse response = request.GetResponse())
                 {
-                    if (((HttpWebResponse)response).StatusDescription == HttpStatusCode.OK.ToString())
+                    if (((HttpWebResponse) response).StatusDescription == HttpStatusCode.OK.ToString())
                     {
                         var model = JsonHelper.Deserialize<DateTimeModel>(response.GetResponseStream());
-                        return DateTime.ParseExact(model.Date, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
+                        return model.Allow;
                     }
                 }
             }
             catch (Exception)
             {
-                return dateTime;
+                return false;
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
             }
 
-            return dateTime;
+            return false;
         }
     }
 }
