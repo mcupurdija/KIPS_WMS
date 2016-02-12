@@ -139,6 +139,7 @@
             this.Controls.Add(this.bPronadji);
             this.Name = "SkladistenjePretragaPoDokumentu";
             this.Text = "Pretraga po dokumentu";
+            this.GotFocus += new System.EventHandler(this.SkladistenjePretragaPoDokumentu_GotFocus);
             this.ResumeLayout(false);
 
         }
