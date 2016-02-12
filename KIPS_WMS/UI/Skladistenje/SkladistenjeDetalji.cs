@@ -224,7 +224,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
         private void UpdateLine(int isUpdate)
         {
-            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim() != _selectedLine.BinCode))
+            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim().ToUpper() != _selectedLine.BinCode.ToUpper()))
             {
                 MessageBox.Show("Šifra regala nije skenirana ili se ne slaže sa šifrom iz linije.");
                 return;
@@ -435,7 +435,9 @@ namespace KIPS_WMS.UI.Skladistenje
                 _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo,
                     Convert.ToInt32(_selectedLine.LineNo), newBinCode);
 
-                tbRegal.Text = newBinCode;
+                tbRegal.Text = newBinCode.ToUpper();
+                _selectedLine.BinCode = newBinCode;
+                DisplayData(null);
             }
             catch (Exception ex)
             {

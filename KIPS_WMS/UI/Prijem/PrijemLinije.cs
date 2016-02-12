@@ -165,6 +165,8 @@ namespace KIPS_WMS.UI.Prijem
             {
                 _warehouseReceiptLines = prijemDetalji.WarehouseReceiptLines;
                 DisplayData(null, false);
+                tbPronadji.Text = "";
+                tbPronadji.Focus();
             }
         }
 

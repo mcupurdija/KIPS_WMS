@@ -232,7 +232,7 @@ namespace KIPS_WMS.UI.Prijem
 
         private void UpdateLine(int isUpdate)
         {
-            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim() != _selectedLine.BinCode))
+            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim().ToUpper() != _selectedLine.BinCode.ToUpper()))
             {
                 MessageBox.Show("Šifra regala nije skenirana ili se ne slaže sa šifrom iz linije.");
                 return;
@@ -257,7 +257,7 @@ namespace KIPS_WMS.UI.Prijem
 
                 if (Convert.ToInt32(_selectedLine.TrackingType) != 0)
                 {
-                    var pracenje = new Pracenje(_selectedLine.ItemNo, decimal.Parse(quantity), Convert.ToInt32(_selectedLine.TrackingType));
+                    var pracenje = new Pracenje(_selectedLine.ItemNo, decimal.Parse(quantity, culture), Convert.ToInt32(_selectedLine.TrackingType));
                     DialogResult result = pracenje.ShowDialog();
                     if (result == DialogResult.OK)
                     {
@@ -268,7 +268,7 @@ namespace KIPS_WMS.UI.Prijem
 
                 if (Convert.ToInt32(_selectedLine.NormUomType) != 0)
                 {
-                    var varijabilniNormativ = new VarijabilniNormativDijalog(_selectedLine, decimal.Parse(quantity));
+                    var varijabilniNormativ = new VarijabilniNormativDijalog(_selectedLine, decimal.Parse(quantity, culture));
                     DialogResult result = varijabilniNormativ.ShowDialog();
 
                     if (result == DialogResult.OK)
@@ -285,7 +285,7 @@ namespace KIPS_WMS.UI.Prijem
                 int index = WarehouseReceiptLines.IndexOf(_selectedLine);
                 if (isUpdate == 1)
                 {
-                    
+
                     decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text, culture);
                     _selectedLine.QuantityToReceive = newQty.ToString("N3", culture);
                 }
@@ -473,7 +473,9 @@ namespace KIPS_WMS.UI.Prijem
 
                 _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt32(_selectedLine.LineNo), newBinCode);
 
-                tbRegal.Text = newBinCode;
+                tbRegal.Text = newBinCode.ToUpper();
+                _selectedLine.BinCode = newBinCode;
+                DisplayData(null);
             }
             catch (Exception ex)
             {

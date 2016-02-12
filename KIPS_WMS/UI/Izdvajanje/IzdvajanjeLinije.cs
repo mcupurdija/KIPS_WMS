@@ -169,6 +169,8 @@ namespace KIPS_WMS.UI.Izdvajanje
             {
                 _warehousePickLines = izdvajanjeDetalji.WarehousePickLines;
                 DisplayData(null, false);
+                tbPronadji.Text = "";
+                tbPronadji.Focus();
             }
         }
 
