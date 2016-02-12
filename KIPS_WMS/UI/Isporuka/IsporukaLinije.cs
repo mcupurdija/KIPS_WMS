@@ -164,6 +164,8 @@ namespace KIPS_WMS.UI.Isporuka
             {
                 _warehouseShipmentLines = isporukaDetalji.WarehouseShipmentLines;
                 DisplayData(null, false);
+                tbPronadji.Text = "";
+                tbPronadji.Focus();
             }
         }
 

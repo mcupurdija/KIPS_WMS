@@ -47,6 +47,7 @@ namespace KIPS_WMS.UI.Prijem
             //            _selectedLine.UnitOfMeasureCode = "PAK";
 
             DisplayData(barcode);
+            tbRegal.Focus();
         }
 
         protected override void OnActivated(EventArgs e)
@@ -232,7 +233,7 @@ namespace KIPS_WMS.UI.Prijem
 
         private void UpdateLine(int isUpdate)
         {
-            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim() != _selectedLine.BinCode))
+            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim().ToUpper() != _selectedLine.BinCode.ToUpper()))
             {
                 MessageBox.Show("Šifra regala nije skenirana ili se ne slaže sa šifrom iz linije.");
                 return;
@@ -285,7 +286,7 @@ namespace KIPS_WMS.UI.Prijem
                 int index = WarehouseReceiptLines.IndexOf(_selectedLine);
                 if (isUpdate == 1)
                 {
-                    
+
                     decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text, culture);
                     _selectedLine.QuantityToReceive = newQty.ToString("N3", culture);
                 }
@@ -473,7 +474,9 @@ namespace KIPS_WMS.UI.Prijem
 
                 _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt32(_selectedLine.LineNo), newBinCode);
 
-                tbRegal.Text = newBinCode;
+                tbRegal.Text = newBinCode.ToUpper();
+                _selectedLine.BinCode = newBinCode;
+                DisplayData(null);
             }
             catch (Exception ex)
             {

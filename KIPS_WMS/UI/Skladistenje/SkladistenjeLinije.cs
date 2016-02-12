@@ -169,6 +169,8 @@ namespace KIPS_WMS.UI.Skladistenje
             {
                 _warehousePutAwayLines = skladistenjeDetalji.WarehousePutAwayLines;
                 DisplayData(null, false);
+                tbPronadji.Text = "";
+                tbPronadji.Focus();
             }
         }
 
