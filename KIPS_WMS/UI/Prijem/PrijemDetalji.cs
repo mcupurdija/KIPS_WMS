@@ -257,7 +257,7 @@ namespace KIPS_WMS.UI.Prijem
 
                 if (Convert.ToInt32(_selectedLine.TrackingType) != 0)
                 {
-                    var pracenje = new Pracenje(_selectedLine.ItemNo, decimal.Parse(quantity), Convert.ToInt32(_selectedLine.TrackingType));
+                    var pracenje = new Pracenje(_selectedLine.ItemNo, decimal.Parse(quantity, culture), Convert.ToInt32(_selectedLine.TrackingType));
                     DialogResult result = pracenje.ShowDialog();
                     if (result == DialogResult.OK)
                     {
@@ -268,7 +268,7 @@ namespace KIPS_WMS.UI.Prijem
 
                 if (Convert.ToInt32(_selectedLine.NormUomType) != 0)
                 {
-                    var varijabilniNormativ = new VarijabilniNormativDijalog(_selectedLine, decimal.Parse(quantity));
+                    var varijabilniNormativ = new VarijabilniNormativDijalog(_selectedLine, decimal.Parse(quantity, culture));
                     DialogResult result = varijabilniNormativ.ShowDialog();
 
                     if (result == DialogResult.OK)
