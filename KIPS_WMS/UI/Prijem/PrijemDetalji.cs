@@ -47,6 +47,7 @@ namespace KIPS_WMS.UI.Prijem
             //            _selectedLine.UnitOfMeasureCode = "PAK";
 
             DisplayData(barcode);
+            tbRegal.Focus();
         }
 
         protected override void OnActivated(EventArgs e)

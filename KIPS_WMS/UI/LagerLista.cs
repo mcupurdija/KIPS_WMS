@@ -118,9 +118,7 @@ namespace KIPS_WMS.UI
                     }
                 }
                 else {
-                    MessageBox.Show("Artikal nije pronađen.",Resources.Greska);
-                    tbSifra.Text = "";
-                    tbSifra.Focus();
+                    GetData(tbSifra.Text);
                 }
             }
         }

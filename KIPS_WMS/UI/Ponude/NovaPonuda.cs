@@ -16,6 +16,7 @@ namespace KIPS_WMS.UI.Ponude
         {
             InitializeComponent();
             _customers = new List<object[]>();
+            tbPronadji.Focus();
         }
 
         private void bPronadji_Click(object sender, EventArgs e)

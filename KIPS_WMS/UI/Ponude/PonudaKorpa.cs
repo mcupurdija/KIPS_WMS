@@ -53,6 +53,7 @@ namespace KIPS_WMS.UI.Ponude
                 : Resources.NepoznatKupac;
 
             DisplayLines();
+            tbPronadji.Focus();
         }
 
         protected override void OnActivated(EventArgs e)
@@ -121,34 +122,10 @@ namespace KIPS_WMS.UI.Ponude
         private void tbPronadji_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter || tbPronadji.Text.Length < 3) return;
-
-            _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
-                new object[] {tbPronadji.Text});
-            if (_searchedItems.Count == 1)
+            if (e.KeyCode == Keys.Enter)
             {
-                ItemQuoteModel item =
-                    _quoteItems.FirstOrDefault(
-                        x => (string) _searchedItems[0][DatabaseModel.ItemDbModel.ItemCode] == x.ItemCode);
-                if (item != null)
-                {
-                    _selectedItem = item;
-                    ShowLinesForm(PonudaLinija.ItemState.Edit, true);
-                }
-                else
-                {
-                    _selectedItem = _searchedItems[0];
-                    ShowLinesForm(PonudaLinija.ItemState.New, true);
-                }
-            }
-            else if (_searchedItems.Count == 0)
-            {
-                _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
-                    new object[] {tbPronadji.Text});
-                if (_searchedItems.Count > 0)
-                {
-                    _selectedItem = _searchedItems[0];
-                    ShowLinesForm(PonudaLinija.ItemState.New, true);
-                }
+                _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
+                    new object[] { tbPronadji.Text });
                 if (_searchedItems.Count == 1)
                 {
                     ItemQuoteModel item =
@@ -165,13 +142,43 @@ namespace KIPS_WMS.UI.Ponude
                         ShowLinesForm(PonudaLinija.ItemState.New, true);
                     }
                 }
-            }
-            else
-            {
-                DisplaySearchResults(_searchedItems);
-            }
+                else if (_searchedItems.Count == 0)
+                {
+                    _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
+                 new object[] { tbPronadji.Text });
 
-            ResetForm();
+                    
+                    //_searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
+                    //    new object[] { tbPronadji.Text });
+                    //if (_searchedItems.Count > 1)
+                    //{
+                    //    _selectedItem = _searchedItems[0];
+                    //    //ShowLinesForm(PonudaLinija.ItemState.New, true);
+                    //}
+                    if (_searchedItems.Count == 1)
+                    {
+                        ItemQuoteModel item =
+                            _quoteItems.FirstOrDefault(
+                                x => (string)_searchedItems[0][DatabaseModel.ItemDbModel.ItemCode] == x.ItemCode);
+                        if (item != null)
+                        {
+                            _selectedItem = item;
+                            ShowLinesForm(PonudaLinija.ItemState.Edit, true);
+                        }
+                        else
+                        {
+                            _selectedItem = _searchedItems[0];
+                            ShowLinesForm(PonudaLinija.ItemState.New, true);
+                        }
+                    }
+                }
+                else
+                {
+                    DisplaySearchResults(_searchedItems);
+                }
+
+                //ResetForm();
+            }
         }
 
         private void bPronadji_Click(object sender, EventArgs e)
