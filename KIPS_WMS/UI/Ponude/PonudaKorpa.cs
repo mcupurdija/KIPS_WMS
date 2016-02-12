@@ -130,7 +130,8 @@ namespace KIPS_WMS.UI.Ponude
                 {
                     ItemQuoteModel item =
                         _quoteItems.FirstOrDefault(
-                            x => (string)_searchedItems[0][DatabaseModel.ItemDbModel.ItemCode] == x.ItemCode);
+                            x => (string)_searchedItems[0][DatabaseModel.ItemDbModel.ItemCode] == x.ItemCode 
+                                && (string)_searchedItems[0][DatabaseModel.ItemDbModel.ItemUnitOfMeasure] == x.UnitOfMeasureCode);
                     if (item != null)
                     {
                         _selectedItem = item;
@@ -159,7 +160,8 @@ namespace KIPS_WMS.UI.Ponude
                     {
                         ItemQuoteModel item =
                             _quoteItems.FirstOrDefault(
-                                x => (string)_searchedItems[0][DatabaseModel.ItemDbModel.ItemCode] == x.ItemCode);
+                                x => (string)_searchedItems[0][DatabaseModel.ItemDbModel.ItemCode] == x.ItemCode 
+                                    && (string)_searchedItems[0][DatabaseModel.ItemDbModel.ItemUnitOfMeasure] == x.UnitOfMeasureCode);
                         if (item != null)
                         {
                             _selectedItem = item;
