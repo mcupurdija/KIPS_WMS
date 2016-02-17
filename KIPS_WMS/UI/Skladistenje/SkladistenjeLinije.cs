@@ -101,6 +101,7 @@ namespace KIPS_WMS.UI.Skladistenje
                         x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
                     : _warehousePutAwayLines;                
             }
+            
             var listItem = new ListItem();
             for (int i = 0; i < _filteredPutAwayLines.Count; i++)
             {
@@ -112,11 +113,18 @@ namespace KIPS_WMS.UI.Skladistenje
             }
 
             tbPronadji.Focus();
+            tbPronadji.SelectionStart = 0;
+            tbPronadji.SelectionLength = tbPronadji.Text.Length;
 
             if (fromScanner && _filteredPutAwayLines.Count == 1)
             {
                 _selectedLine = _filteredPutAwayLines[0];
                 ShowLineDetailsForm(_barcode);
+            }
+            if (_filteredPutAwayLines.Count == 0)
+            {
+                MessageBox.Show("Nije pronađen artikal.", Resources.Greska);
+                DisplayData(null, false);
             }
         }
 
@@ -131,7 +139,7 @@ namespace KIPS_WMS.UI.Skladistenje
                 _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
                 DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
             }
-            if (query.Count == 0)
+            else
             {
                 DisplayData(tbPronadji.Text.Trim(), true);
             }

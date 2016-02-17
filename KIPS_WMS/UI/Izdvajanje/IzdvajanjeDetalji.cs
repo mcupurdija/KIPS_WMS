@@ -106,10 +106,10 @@ namespace KIPS_WMS.UI.Izdvajanje
                     text = string.Format("{0}: {1}", "Izdvojena količina", _selectedLine.QuantityToReceive);
                     break;
                 case 5:
-                    text = string.Format("{0}: {1}{2}", "Broj serije/SN", _selectedLine.LotNo, _selectedLine.SerialNo);
+                    text = string.Format("{0}: {1}", "Preostala količina", GetRemainingQuantity());
                     break;
                 case 6:
-                    text = string.Format("{0}: {1}", "Datum prestanka važenja", _selectedLine.ExpirationDate);
+                    text = string.Format("{0}:{1}{2}, {3}:{4}","Broj serije/SN", _selectedLine.LotNo, _selectedLine.SerialNo, "Datum prestanka važenja", _selectedLine.ExpirationDate);
                     break;
             }
 
@@ -127,7 +127,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             {
                 decimal toReceiveQuantity = decimal.Parse(_selectedLine.QuantityToReceive, culture);
                 decimal outstandingQuantity = decimal.Parse(_selectedLine.QuantityOutstanding, culture);
-                return (outstandingQuantity - toReceiveQuantity).ToString("N3", culture.NumberFormat);
+                return (outstandingQuantity - toReceiveQuantity).ToString("0.###", culture.NumberFormat);
             }
             catch (Exception)
             {
@@ -174,8 +174,8 @@ namespace KIPS_WMS.UI.Izdvajanje
                 decimal unitQuantity = decimal.Parse(tbJedinicaKolicina.Text, Utils.GetLocalCulture());
 
                 tbKolicina.Text = (scannedItemQuantity / _coefficient) != 1
-                    ? ((scannedItemQuantity / _coefficient) * unitQuantity).ToString("N3", Utils.GetLocalCulture())
-                    : (unitQuantity).ToString("N3", Utils.GetLocalCulture());
+                    ? ((scannedItemQuantity / _coefficient) * unitQuantity).ToString("0.###", Utils.GetLocalCulture())
+                    : (unitQuantity).ToString("0.###", Utils.GetLocalCulture());
             }
             catch (Exception)
             {
@@ -209,9 +209,7 @@ namespace KIPS_WMS.UI.Izdvajanje
         private void bDodaj_Click(object sender, EventArgs e)
         {
             UpdateLine(1);
-            DialogResult = DialogResult.Yes;
-            listBox1.Dispose();
-            Close();
+
         }
 
         private void bZameni_Click(object sender, EventArgs e)
@@ -248,7 +246,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 if (isUpdate == 1)
                 {
                     decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text, culture);
-                    _selectedLine.QuantityToReceive = newQty.ToString("N3", culture);
+                    _selectedLine.QuantityToReceive = newQty.ToString("0.###", culture);
                 }
                 else
                 {
@@ -270,6 +268,9 @@ namespace KIPS_WMS.UI.Izdvajanje
             {
                 Cursor.Current = Cursors.Default;
                 lJedinica.Text = "";
+                DialogResult = DialogResult.Yes;
+                listBox1.Dispose();
+                Close();
             }
         }
 
@@ -426,7 +427,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _pickNo, Convert.ToInt32(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode.ToUpper();
-                _selectedLine.BinCode = newBinCode;
+                _selectedLine.BinCode = newBinCode.ToUpper();
                 DisplayData(null);
             }
             catch (Exception ex)

@@ -215,7 +215,8 @@ namespace KIPS_WMS.UI.Ponude
                         AvailableWarehouseQuantity = tbRaspolozivoLokacija.Text,
                         AvailableLinkedWarehouseQuantity = tbRaspolozivoVezanaLokacija.Text
                     };
-                    QuoteItems.Add(modelNew);
+                    //QuoteItems.Add(modelNew);
+                    QuoteItems.Insert(0, modelNew);
 
                     break;
                 case ItemState.Edit:
@@ -254,7 +255,7 @@ namespace KIPS_WMS.UI.Ponude
             {
                 decimal priceWithDiscount = decimal.Parse(tbCenaPopust.Text, culture);
                 decimal quantity = decimal.Parse(tbKolicina.Text, culture);
-                tbCenaUkupno.Text = (priceWithDiscount * quantity).ToString("N", culture.NumberFormat);
+                tbCenaUkupno.Text = (priceWithDiscount * quantity).ToString("0.###", culture);
             }
             catch (Exception)
             {
@@ -270,7 +271,7 @@ namespace KIPS_WMS.UI.Ponude
                 _quantityWatcherEnabled = false;
                 decimal conversionCoefficient = decimal.Parse(_conversionCoefficient, culture);
                 decimal convertedQuantity = decimal.Parse(tbKolicinaKonverzija.Text, culture);
-                tbKolicina.Text = (convertedQuantity/conversionCoefficient).ToString("N", culture.NumberFormat);
+                tbKolicina.Text = (convertedQuantity / conversionCoefficient).ToString("0.###", culture);
                 
             }
             catch (Exception)
@@ -291,7 +292,7 @@ namespace KIPS_WMS.UI.Ponude
                 _convertedQuantityWatcherEnabled = false;
                 decimal conversionCoefficient = decimal.Parse(_conversionCoefficient, culture);
                 decimal quantity = decimal.Parse(tbKolicina.Text, culture);
-                tbKolicinaKonverzija.Text = (conversionCoefficient*quantity).ToString("N", culture.NumberFormat);
+                tbKolicinaKonverzija.Text = (conversionCoefficient * quantity).ToString("0.###", culture);
             }
             catch (Exception)
             {
@@ -327,6 +328,7 @@ namespace KIPS_WMS.UI.Ponude
 
         private void bUcitaj_Click(object sender, EventArgs e)
         {
+            CultureInfo culture = Utils.GetLocalCulture();
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
