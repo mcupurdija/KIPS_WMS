@@ -441,9 +441,17 @@ namespace KIPS_WMS.UI.Izdvajanje
 
         private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
         {
-            DialogResult = DialogResult.Yes;
-            listBox1.Dispose();
-            Close();
+            switch (toolBar1.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    DialogResult = DialogResult.Yes;
+                    listBox1.Dispose();
+                    Close();
+                    break;
+                case 1:
+                    contextMenu1.Show(toolBar1, new Point(80, 10));
+                    break;
+            }
         }
 
         private void tbKolicina_KeyUp(object sender, KeyEventArgs e)

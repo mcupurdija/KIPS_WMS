@@ -24,7 +24,8 @@ namespace KIPS_WMS
         public const int PrintTypeIgnore = 3;
 
         public const string GoProNavWsUrl = "http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/MobileWMSSync";
-        public const string KipsNavWsUrl = "http://192.168.10.72:6047/TEST/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync";
+        public const string KipsNavWsUrlTest = "http://192.168.10.72:6047/TEST/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync";
+        public const string KipsNavWsUrlProdukcija = "http://192.168.10.72:7397/NAVNasService/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync";
         public static NetworkCredential GoProCredentials = new NetworkCredential("wurthtest", "remote", "gopro");
         public static NetworkCredential KipsCredentials = new NetworkCredential("gopro", "Sifra123", "KIPS");
 

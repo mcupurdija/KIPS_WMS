@@ -8,7 +8,7 @@ namespace KIPS_WMS.Web
 
         static WebServiceFactory()
         {
-            WebService = new MobileWMSSync { Url = Utils.KipsNavWsUrl, Credentials = Utils.KipsCredentials, PreAuthenticate = true };
+            WebService = new MobileWMSSync { Url = Utils.KipsNavWsUrlTest, Credentials = Utils.KipsCredentials, PreAuthenticate = true };
         }
 
         public static MobileWMSSync GetWebService()
