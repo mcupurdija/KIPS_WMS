@@ -489,5 +489,10 @@ namespace KIPS_WMS.UI.Skladistenje
                 tbKolicina.Focus();
             }
         }
+
+        private void cStanje_Click(object sender, EventArgs e)
+        {
+            new ArtikliPoRegalimaDijalog(_selectedLine.BinCode, _selectedLine.ItemNo, _selectedLine.ItemVariant).ShowDialog();
+        }
     }
 }

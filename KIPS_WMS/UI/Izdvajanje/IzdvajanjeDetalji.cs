@@ -479,5 +479,10 @@ namespace KIPS_WMS.UI.Izdvajanje
             }
         }
 
+        private void cStanje_Click(object sender, EventArgs e)
+        {
+            new ArtikliPoRegalimaDijalog(_selectedLine.BinCode, _selectedLine.ItemNo, _selectedLine.ItemVariant).ShowDialog();
+        }
+
     }
 }
