@@ -27,7 +27,7 @@ namespace KIPS_WMS.UI.Prijem
             _quantity = quantity;
 
             tbJedinicaMere.Text = _selectedLine.UnitOfMeasureCode;
-            tbZaprimljenaKolicina.Text = _quantity.ToString("N2", culture);
+            tbZaprimljenaKolicina.Text = _quantity.ToString("#,0.###", culture);
             tbOsnovnaJedinicaMere.Text = _selectedLine.NormUom;
             tbKolicinaOsnovnaJedinicaMere.Focus();
 
@@ -42,10 +42,17 @@ namespace KIPS_WMS.UI.Prijem
         {
             if (tbKolicinaOsnovnaJedinicaMere.Text.Contains(","))
             {
-                if (tbKolicinaOsnovnaJedinicaMere.Text.Split(',')[1].Length > _selectedLine.NormRoundingPrecision.Split(',')[1].Length)
+                int decPlaces;
+                if (_selectedLine.NormRoundingPrecision.Contains(","))
                 {
-                    MessageBox.Show("Nije dobro zaokruženo. Treba zaokružiti na "
-                        + _selectedLine.NormRoundingPrecision.Split(',')[1].Length + " decimale.", Resources.Greska);
+                    decPlaces = _selectedLine.NormRoundingPrecision.Split(',')[1].Length;
+                }
+                else decPlaces = 0;
+                MessageBox.Show(tbKolicinaOsnovnaJedinicaMere.Text.Split(',')[1]);
+                if (tbKolicinaOsnovnaJedinicaMere.Text.Split(',')[1].Length > decPlaces)
+                {
+                    MessageBox.Show("Nije dobro zaokruženo. Treba zaokružiti na decimala: "
+                        + decPlaces, Resources.Greska);
                     return;
                 }
 
@@ -86,7 +93,7 @@ namespace KIPS_WMS.UI.Prijem
             try
             {
                 decimal diff = Convert.ToDecimal(tbKolicinaOsnovnaJedinicaMere.Text, culture) / _quantity;
-                tbFaktorKonverzije.Text = diff.ToString("N4", culture);
+                tbFaktorKonverzije.Text = diff.ToString("#,0.####", culture);
             }
             catch (Exception ex)
             {

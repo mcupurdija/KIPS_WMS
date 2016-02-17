@@ -216,6 +216,8 @@ namespace KIPS_WMS.UI.Preklasifikacija
                     {
                         MessageBox.Show("Nije pronađen artikal.", Resources.Greska);
                         tbPronadji.Text = "";
+                        tbSaRegala.Text = "";
+                        tbNaRegal.Text = "";
                         tbPronadji.Focus();
                     }
                     else
@@ -304,6 +306,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
             finally
             {
                 Cursor.Current = Cursors.Default;
+                tbPronadji.Focus();
             }
         }
 
@@ -325,6 +328,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
             finally
             {
                 Cursor.Current = Cursors.Default;
+                tbPronadji.Focus();
             }
         }
 
