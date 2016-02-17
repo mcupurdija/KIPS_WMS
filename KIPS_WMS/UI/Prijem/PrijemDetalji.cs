@@ -136,7 +136,7 @@ namespace KIPS_WMS.UI.Prijem
             {
                 decimal toReceiveQuantity = decimal.Parse(_selectedLine.QuantityToReceive, culture);
                 decimal outstandingQuantity = decimal.Parse(_selectedLine.QuantityOutstanding, culture);
-                return (outstandingQuantity - toReceiveQuantity).ToString("N3", culture.NumberFormat);
+                return (outstandingQuantity - toReceiveQuantity).ToString("0.###", culture.NumberFormat);
             }
             catch (Exception)
             {
@@ -186,8 +186,8 @@ namespace KIPS_WMS.UI.Prijem
                 decimal unitQuantity = decimal.Parse(tbJedinicaKolicina.Text, Utils.GetLocalCulture());
 
                 tbKolicina.Text = (scannedItemQuantity / _coefficient) != 1
-                    ? ((scannedItemQuantity / _coefficient) * unitQuantity).ToString("N3", Utils.GetLocalCulture())
-                    : (unitQuantity).ToString("N3", Utils.GetLocalCulture());
+                    ? ((scannedItemQuantity / _coefficient) * unitQuantity).ToString("0.###", Utils.GetLocalCulture())
+                    : (unitQuantity).ToString("0.###", Utils.GetLocalCulture());
             }
             catch (Exception)
             {
@@ -221,9 +221,7 @@ namespace KIPS_WMS.UI.Prijem
         private void bDodaj_Click(object sender, EventArgs e)
         {
             UpdateLine(1);
-            DialogResult = DialogResult.Yes;
-            listBox1.Dispose();
-            Close();
+            
         }
 
         private void bZameni_Click(object sender, EventArgs e)
@@ -288,7 +286,7 @@ namespace KIPS_WMS.UI.Prijem
                 {
 
                     decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) + decimal.Parse(tbKolicina.Text, culture);
-                    _selectedLine.QuantityToReceive = newQty.ToString("N3", culture);
+                    _selectedLine.QuantityToReceive = newQty.ToString("0.###", culture);
                 }
                 else
                 {
@@ -309,6 +307,9 @@ namespace KIPS_WMS.UI.Prijem
             finally
             {
                 Cursor.Current = Cursors.Default;
+                DialogResult = DialogResult.Yes;
+                listBox1.Dispose();
+                Close();
             }
         }
 
@@ -475,7 +476,7 @@ namespace KIPS_WMS.UI.Prijem
                 _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypePrijem, _receiptNo, Convert.ToInt32(_selectedLine.LineNo), newBinCode);
 
                 tbRegal.Text = newBinCode.ToUpper();
-                _selectedLine.BinCode = newBinCode;
+                _selectedLine.BinCode = newBinCode.ToUpper();
                 DisplayData(null);
             }
             catch (Exception ex)
