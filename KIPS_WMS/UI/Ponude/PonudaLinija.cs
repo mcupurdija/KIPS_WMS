@@ -255,7 +255,7 @@ namespace KIPS_WMS.UI.Ponude
             {
                 decimal priceWithDiscount = decimal.Parse(tbCenaPopust.Text, culture);
                 decimal quantity = decimal.Parse(tbKolicina.Text, culture);
-                tbCenaUkupno.Text = (priceWithDiscount * quantity).ToString("0.###", culture);
+                tbCenaUkupno.Text = (priceWithDiscount * quantity).ToString("#,0.###", culture);
             }
             catch (Exception)
             {
@@ -271,7 +271,7 @@ namespace KIPS_WMS.UI.Ponude
                 _quantityWatcherEnabled = false;
                 decimal conversionCoefficient = decimal.Parse(_conversionCoefficient, culture);
                 decimal convertedQuantity = decimal.Parse(tbKolicinaKonverzija.Text, culture);
-                tbKolicina.Text = (convertedQuantity / conversionCoefficient).ToString("0.###", culture);
+                tbKolicina.Text = (convertedQuantity / conversionCoefficient).ToString("#,0.###", culture);
                 
             }
             catch (Exception)
@@ -292,7 +292,7 @@ namespace KIPS_WMS.UI.Ponude
                 _convertedQuantityWatcherEnabled = false;
                 decimal conversionCoefficient = decimal.Parse(_conversionCoefficient, culture);
                 decimal quantity = decimal.Parse(tbKolicina.Text, culture);
-                tbKolicinaKonverzija.Text = (conversionCoefficient * quantity).ToString("0.###", culture);
+                tbKolicinaKonverzija.Text = (conversionCoefficient * quantity).ToString("#,0.###", culture);
             }
             catch (Exception)
             {

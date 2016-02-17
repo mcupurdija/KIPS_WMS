@@ -138,7 +138,7 @@ namespace KIPS_WMS.UI.Isporuka
             {
                 decimal toReceiveQuantity = decimal.Parse(_selectedLine.QuantityToReceive, culture);
                 decimal outstandingQuantity = decimal.Parse(_selectedLine.QuantityOutstanding, culture);
-                return (outstandingQuantity - toReceiveQuantity).ToString("0.###", culture.NumberFormat);
+                return (outstandingQuantity - toReceiveQuantity).ToString("#,0.###", culture.NumberFormat);
             }
             catch (Exception)
             {
@@ -190,8 +190,8 @@ namespace KIPS_WMS.UI.Isporuka
                 decimal unitQuantity = decimal.Parse(tbJedinicaKolicina.Text, Utils.GetLocalCulture());
 
                 tbKolicina.Text = (scannedItemQuantity/_coefficient) != 1
-                    ? ((scannedItemQuantity/_coefficient)*unitQuantity).ToString("0.###", Utils.GetLocalCulture())
-                    : (unitQuantity).ToString("0.###", Utils.GetLocalCulture());
+                    ? ((scannedItemQuantity / _coefficient) * unitQuantity).ToString("#,0.###", Utils.GetLocalCulture())
+                    : (unitQuantity).ToString("#,0.###", Utils.GetLocalCulture());
             }
             catch (Exception)
             {
@@ -291,7 +291,7 @@ namespace KIPS_WMS.UI.Isporuka
                 {
                     decimal newQty = decimal.Parse(_selectedLine.QuantityToReceive, culture) +
                                      decimal.Parse(tbKolicina.Text, culture);
-                    _selectedLine.QuantityToReceive = newQty.ToString("0.###", culture);
+                    _selectedLine.QuantityToReceive = newQty.ToString("#,0.###", culture);
                 }
                 else
                 {
