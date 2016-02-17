@@ -38,16 +38,19 @@ namespace KIPS_WMS.UI.Prijem
             _selectedLine = selectedLine;
             WarehouseReceiptLines = warehouseReceiptLines;
 
-            if (_loginData.SkeniranjeBarkodaNaPrijemu == 0)
+            if (_loginData.SkeniranjeBarkodaNaPrijemu == 0 || _loginData.ObavezanRegal == 0)
             {
                 tbRegal.Visible = false;
                 label1.Visible = false;
+                tbKolicina.Focus();
+            }
+            else {
+                tbRegal.Focus();
             }
 
             //            _selectedLine.UnitOfMeasureCode = "PAK";
 
-            DisplayData(barcode);
-            tbRegal.Focus();
+            DisplayData(barcode);            
         }
 
         protected override void OnActivated(EventArgs e)
@@ -221,7 +224,7 @@ namespace KIPS_WMS.UI.Prijem
         private void bDodaj_Click(object sender, EventArgs e)
         {
             UpdateLine(1);
-            
+
         }
 
         private void bZameni_Click(object sender, EventArgs e)
@@ -231,7 +234,7 @@ namespace KIPS_WMS.UI.Prijem
 
         private void UpdateLine(int isUpdate)
         {
-            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim().ToUpper() != _selectedLine.BinCode.ToUpper()))
+            if (_loginData.ObavezanRegal == 1 && _loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim().ToUpper() != _selectedLine.BinCode.ToUpper()))
             {
                 MessageBox.Show("Šifra regala nije skenirana ili se ne slaže sa šifrom iz linije.");
                 return;
@@ -527,7 +530,8 @@ namespace KIPS_WMS.UI.Prijem
 
         private void tbRegal_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) {
+            if (e.KeyCode == Keys.Enter)
+            {
                 tbKolicina.Focus();
             }
         }

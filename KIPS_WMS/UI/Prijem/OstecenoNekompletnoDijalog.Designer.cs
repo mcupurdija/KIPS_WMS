@@ -75,6 +75,7 @@
             this.tbNekompletno.Name = "tbNekompletno";
             this.tbNekompletno.Size = new System.Drawing.Size(101, 21);
             this.tbNekompletno.TabIndex = 6;
+            this.tbNekompletno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNekompletno_KeyPress);
             // 
             // tbOsteceno
             // 
@@ -82,6 +83,7 @@
             this.tbOsteceno.Name = "tbOsteceno";
             this.tbOsteceno.Size = new System.Drawing.Size(101, 21);
             this.tbOsteceno.TabIndex = 7;
+            this.tbOsteceno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbOsteceno_KeyPress);
             // 
             // bPosalji
             // 

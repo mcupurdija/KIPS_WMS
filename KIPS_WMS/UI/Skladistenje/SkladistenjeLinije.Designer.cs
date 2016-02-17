@@ -157,7 +157,7 @@ namespace KIPS_WMS.UI.Skladistenje
             this.Controls.Add(this.tbPronadji);
             this.MinimizeBox = false;
             this.Name = "SkladistenjeLinije";
-            this.Text = "PrijemLinije";
+            this.Text = "Skladištenje";
             this.ResumeLayout(false);
 
         }

@@ -39,16 +39,20 @@ namespace KIPS_WMS.UI.Isporuka
             _selectedLine = selectedLine;
             WarehouseShipmentLines = warehouseShipmentLines;
 
-            if (_loginData.SkeniranjeBarkodaNaIsporuci == 0)
+            if (_loginData.SkeniranjeBarkodaNaIsporuci == 0 || _loginData.ObavezanRegal == 0)
             {
                 tbRegal.Visible = false;
                 label1.Visible = false;
+                tbKolicina.Focus();
+            }
+            else
+            {
+                tbRegal.Focus();
             }
 
             //            _selectedLine.UnitOfMeasureCode = "PAK";
 
             DisplayData(barcode);
-            tbRegal.Focus();
         }
 
         protected override void OnActivated(EventArgs e)
@@ -235,7 +239,7 @@ namespace KIPS_WMS.UI.Isporuka
 
         private void UpdateLine(int isUpdate)
         {
-            if (_loginData.SkeniranjeBarkodaNaIsporuci == 1 && (tbRegal.Text.Trim().ToUpper() != _selectedLine.BinCode.ToUpper()))
+            if (_loginData.ObavezanRegal == 1 && _loginData.SkeniranjeBarkodaNaIsporuci == 1 && (tbRegal.Text.Trim().ToUpper() != _selectedLine.BinCode.ToUpper()))
             {
                 MessageBox.Show("Šifra regala nije skenirana ili se ne slaže sa šifrom iz linije.");
                 return;

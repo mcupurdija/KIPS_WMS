@@ -44,5 +44,8 @@ namespace KIPS_WMS.Model
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
         public int RadiPopis;
+
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public int ObavezanRegal;
     }
 }

@@ -39,11 +39,11 @@ namespace KIPS_WMS.UI.Prijem
             {
                 if (damaged.Length > 0)
                 {
-                    Convert.ToInt16(damaged);
+                    decimal.Parse(damaged,Utils.GetLocalCulture());
                 }
                 if (incomplete.Length > 0)
                 {
-                    Convert.ToInt16(incomplete);
+                    decimal.Parse(incomplete, Utils.GetLocalCulture());
                 }
 
                 Cursor.Current = Cursors.WaitCursor;
@@ -72,6 +72,28 @@ namespace KIPS_WMS.UI.Prijem
         {
             DialogResult = DialogResult.Abort;
             Close();
+        }
+
+        private void tbOsteceno_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+            {
+                tbOsteceno.Text += ",";
+                tbOsteceno.SelectionStart = tbOsteceno.Text.Length;
+                tbOsteceno.SelectionLength = 0;
+                e.Handled = true;
+            }
+        }
+
+        private void tbNekompletno_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+            {
+                tbNekompletno.Text += ",";
+                tbNekompletno.SelectionStart = tbNekompletno.Text.Length;
+                tbNekompletno.SelectionLength = 0;
+                e.Handled = true;
+            }
         }
     }
 }
