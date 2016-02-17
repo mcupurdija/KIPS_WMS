@@ -18,6 +18,7 @@ namespace KIPS_WMS.UI.Ponude
 {
     public partial class PonudaKorpa : Form
     {
+        private readonly CultureInfo _culture = Utils.GetLocalCulture();
         private readonly string _customerCode;
         private readonly string _customerName;
         private readonly int _isAuthenticated;
@@ -107,11 +108,11 @@ namespace KIPS_WMS.UI.Ponude
         {
             try
             {
-                CultureInfo culture = Utils.GetLocalCulture();
                 return
                     _quoteItems.Sum(
-                        item => decimal.Parse(item.UnitPriceWithDiscount, culture)*decimal.Parse(item.Quantity, culture))
-                        .ToString("N", culture.NumberFormat);
+                        item =>
+                            decimal.Parse(item.UnitPriceWithDiscount, _culture)*decimal.Parse(item.Quantity, _culture))
+                        .ToString("#,0.###", _culture);
             }
             catch (Exception)
             {
@@ -125,13 +126,15 @@ namespace KIPS_WMS.UI.Ponude
             if (e.KeyCode == Keys.Enter)
             {
                 _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
-                    new object[] { tbPronadji.Text });
+                    new object[] {tbPronadji.Text});
                 if (_searchedItems.Count == 1)
                 {
                     ItemQuoteModel item =
                         _quoteItems.FirstOrDefault(
-                            x => (string)_searchedItems[0][DatabaseModel.ItemDbModel.ItemCode] == x.ItemCode 
-                                && (string)_searchedItems[0][DatabaseModel.ItemDbModel.ItemUnitOfMeasure] == x.UnitOfMeasureCode);
+                            x => (string) _searchedItems[0][DatabaseModel.ItemDbModel.ItemCode] == x.ItemCode
+                                 &&
+                                 (string) _searchedItems[0][DatabaseModel.ItemDbModel.ItemUnitOfMeasure] ==
+                                 x.UnitOfMeasureCode);
                     if (item != null)
                     {
                         _selectedItem = item;
@@ -146,9 +149,9 @@ namespace KIPS_WMS.UI.Ponude
                 else if (_searchedItems.Count == 0)
                 {
                     _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
-                 new object[] { tbPronadji.Text });
+                        new object[] {tbPronadji.Text});
 
-                    
+
                     //_searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
                     //    new object[] { tbPronadji.Text });
                     //if (_searchedItems.Count > 1)
@@ -160,8 +163,10 @@ namespace KIPS_WMS.UI.Ponude
                     {
                         ItemQuoteModel item =
                             _quoteItems.FirstOrDefault(
-                                x => (string)_searchedItems[0][DatabaseModel.ItemDbModel.ItemCode] == x.ItemCode 
-                                    && (string)_searchedItems[0][DatabaseModel.ItemDbModel.ItemUnitOfMeasure] == x.UnitOfMeasureCode);
+                                x => (string) _searchedItems[0][DatabaseModel.ItemDbModel.ItemCode] == x.ItemCode
+                                     &&
+                                     (string) _searchedItems[0][DatabaseModel.ItemDbModel.ItemUnitOfMeasure] ==
+                                     x.UnitOfMeasureCode);
                         if (item != null)
                         {
                             _selectedItem = item;
@@ -350,8 +355,8 @@ namespace KIPS_WMS.UI.Ponude
                         {
                             ItemCode = item.ItemCode,
                             ItemDescription = item.ItemDescription,
-                            ItemQuantity = item.Quantity,
-                            ItemPrice = item.UnitPriceWithDiscount
+                            ItemQuantity = decimal.Parse(item.Quantity, _culture).ToString("#,0.###", _culture),
+                            ItemPrice = decimal.Parse(item.UnitPriceWithDiscount, _culture).ToString("#,0.###", _culture)
                         }).ToList()
                     };
 
