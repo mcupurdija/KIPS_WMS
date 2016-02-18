@@ -361,6 +361,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
             switch (toolBar1.Buttons.IndexOf(e.Button))
             {
                 case 0:
+                    cObrisiSve_Click(null, null);
                     Close();
                     break;
                 case 1:
