@@ -69,8 +69,8 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 string lines = "";
                 int numOfLine = 0;
 
-
-                if (Int32.Parse(_itemTrackingType) != 0)
+                LoginModel login = RegistryUtils.GetLoginData();
+                if (Int32.Parse(_itemTrackingType) != 0 && login.RadiIzdvajanje == 0)
                 {
                     var pracenje = new Pracenje(_itemNo + "", kolicina, Int32.Parse(_itemTrackingType));
                     DialogResult result = pracenje.ShowDialog();
@@ -361,6 +361,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
             switch (toolBar1.Buttons.IndexOf(e.Button))
             {
                 case 0:
+                    cObrisiSve_Click(null, null);
                     Close();
                     break;
                 case 1:
