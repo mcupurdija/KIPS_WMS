@@ -9,5 +9,11 @@
         public string ItemQuantity { get; set; }
 
         public string ItemPrice { get; set; }
+
+        public string ItemTotal { get; set; }
+
+        public string ItemUnitOfMeasure { get; set; }
+
+        public string Warehouse { get; set; }
     }
 }

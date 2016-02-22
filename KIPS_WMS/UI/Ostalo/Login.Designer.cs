@@ -39,8 +39,8 @@
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
-            this.imageList1 = new System.Windows.Forms.ImageList();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -55,14 +55,14 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 75);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(240, 110);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             // 
             // tbUsername
             // 
-            this.tbUsername.Location = new System.Drawing.Point(112, 120);
+            this.tbUsername.Location = new System.Drawing.Point(113, 15);
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(107, 21);
             this.tbUsername.TabIndex = 1;
@@ -71,21 +71,21 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(19, 121);
+            this.label1.Location = new System.Drawing.Point(20, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 20);
             this.label1.Text = "Korisničko ime:";
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(19, 148);
+            this.label2.Location = new System.Drawing.Point(20, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 20);
             this.label2.Text = "Lozinka:";
             // 
             // tbPassword
             // 
-            this.tbPassword.Location = new System.Drawing.Point(112, 147);
+            this.tbPassword.Location = new System.Drawing.Point(113, 42);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(107, 21);
@@ -105,16 +105,16 @@
             // 
             this.toolBarButton1.ImageIndex = 0;
             // 
+            // toolBarButton2
+            // 
+            this.toolBarButton2.ImageIndex = 1;
+            // 
             // imageList1
             // 
             this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
             this.imageList1.Images.Clear();
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
-            // 
-            // toolBarButton2
-            // 
-            this.toolBarButton2.ImageIndex = 1;
             // 
             // Login
             // 

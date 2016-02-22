@@ -121,7 +121,6 @@ namespace KIPS_WMS.UI.Prijem
             if (_selectedReceipt != null)
             {
                 new PrijemLinije(_selectedReceipt.ReceiptCode).Show();
-                
             }
             else
             {
