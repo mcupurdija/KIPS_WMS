@@ -119,12 +119,12 @@ namespace KIPS_WMS.UI.Isporuka
                     text = string.Format("{0}: {1} / {2}", "Količina za isporuku/rezervisana", _selectedLine.QuantityOutstanding, _selectedLine.QuantityReserved);
                     break;
                 case 5:
-                    text = string.Format("{0}: {1}", "Zaprimljena količina", _selectedLine.QuantityToReceive);
+                    text = string.Format("{0}: {1}", "Isporučena količina", _selectedLine.QuantityToReceive);
                     break;
                 case 6:
                     e.DrawBackground(PrijemLinije.GetLineStatusColor(_selectedLine.QuantityOutstanding,
                         _selectedLine.QuantityToReceive));
-                    text = string.Format("{0}: {1}", "Preostalo za prijem", GetRemainingQuantity());
+                    text = string.Format("{0}: {1}", "Preostalo za isporuku", GetRemainingQuantity());
                     break;
             }
 
@@ -529,6 +529,13 @@ namespace KIPS_WMS.UI.Isporuka
             {
                 tbKolicina.Focus();
             }
+        }
+
+        private void IsporukaDetalji_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            DialogResult = DialogResult.Yes;
+            listBox1.Dispose();
+            Close();
         }
     }
 }

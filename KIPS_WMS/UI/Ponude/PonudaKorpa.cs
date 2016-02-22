@@ -355,8 +355,11 @@ namespace KIPS_WMS.UI.Ponude
                         {
                             ItemCode = item.ItemCode,
                             ItemDescription = item.ItemDescription,
-                            ItemQuantity = decimal.Parse(item.Quantity, _culture).ToString("#,0.###", _culture),
-                            ItemPrice = decimal.Parse(item.UnitPriceWithDiscount, _culture).ToString("#,0.###", _culture)
+                            ItemQuantity = decimal.Parse(item.Quantity, _culture).ToString("#,0.##", _culture),
+                            ItemPrice = decimal.Parse(item.UnitPriceWithDiscount, _culture).ToString("#,0.00", _culture),
+                            ItemTotal = (decimal.Parse(item.Quantity, _culture) * decimal.Parse(item.UnitPriceWithDiscount, _culture)).ToString("#,0.00", _culture),
+                            ItemUnitOfMeasure = item.UnitOfMeasureCode,
+                            Warehouse = item.LocationCode
                         }).ToList()
                     };
 
@@ -458,13 +461,13 @@ namespace KIPS_WMS.UI.Ponude
         private void listBox1_KeyUp(object sender, KeyEventArgs e)
         {
             int index = listBox1.SelectedIndex;
-            if (index == -1 || index >= listBox1.Items.Count ||
-                listBox1.Items[index].Tag != null && e.KeyCode != Keys.Return)
+            if (index == -1 || index >= listBox1.Items.Count || listBox1.Items[index].Tag != null ||
+                e.KeyCode != Keys.Return)
             {
                 return;
             }
 
-            ShowLinesForm(PonudaLinija.ItemState.New, false);
+            ShowLinesForm(_tableBasket ? PonudaLinija.ItemState.Edit : PonudaLinija.ItemState.New, false);
         }
 
         private void cIzmeniLiniju_Click(object sender, EventArgs e)

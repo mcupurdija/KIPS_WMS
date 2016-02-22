@@ -223,9 +223,11 @@ namespace KIPS_WMS.UI.Isporuka
             this.Controls.Add(this.tbKolicina);
             this.Controls.Add(this.bZameni);
             this.Controls.Add(this.bDodaj);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "IsporukaDetalji";
             this.Text = "IsporukaDetalji";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IsporukaDetalji_KeyPress);
             this.ResumeLayout(false);
 
         }
