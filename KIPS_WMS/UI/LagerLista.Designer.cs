@@ -35,8 +35,8 @@
             this.bPronadji = new System.Windows.Forms.Button();
             this.lvLagerLista = new System.Windows.Forms.ListView();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
-            this.imageList1 = new System.Windows.Forms.ImageList();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.SuspendLayout();
             // 
             // tbSifra
@@ -58,6 +58,7 @@
             // 
             // lvLagerLista
             // 
+            this.lvLagerLista.FullRowSelect = true;
             this.lvLagerLista.Location = new System.Drawing.Point(0, 30);
             this.lvLagerLista.Name = "lvLagerLista";
             this.lvLagerLista.Size = new System.Drawing.Size(240, 158);
@@ -70,15 +71,15 @@
             this.toolBar1.Name = "toolBar1";
             this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
             // 
+            // toolBarButton1
+            // 
+            this.toolBarButton1.ImageIndex = 0;
+            // 
             // imageList1
             // 
             this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
             this.imageList1.Images.Clear();
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
-            // 
-            // toolBarButton1
-            // 
-            this.toolBarButton1.ImageIndex = 0;
             // 
             // LagerLista
             // 
