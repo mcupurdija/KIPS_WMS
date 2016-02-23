@@ -46,6 +46,13 @@ namespace KIPS_WMS.UI
             }
         }
 
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+
+            Text = string.Format("{0} - {1}", RegistryUtils.GetLastUsername(), "Meni");
+        }
+
         private void bPonude_Click(object sender, EventArgs e)
         {
             if (Utils.CheckDate())
