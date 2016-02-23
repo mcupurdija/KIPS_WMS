@@ -37,7 +37,7 @@ namespace KIPS_WMS.UI.Prijem
             _receiptNo = receiptNo;
             _selectedLine = selectedLine;
             WarehouseReceiptLines = warehouseReceiptLines;
-
+            DisplayData(barcode);  
             if (_loginData.SkeniranjeBarkodaNaPrijemu == 0 || _loginData.ObavezanRegal == 0)
             {
                 tbRegal.Visible = false;
@@ -50,7 +50,7 @@ namespace KIPS_WMS.UI.Prijem
 
             //            _selectedLine.UnitOfMeasureCode = "PAK";
 
-            DisplayData(barcode);            
+                      
         }
 
         protected override void OnActivated(EventArgs e)
@@ -83,7 +83,6 @@ namespace KIPS_WMS.UI.Prijem
                 tbBarkod.Text = String.Empty;
                 lJedinica.Text = "";
             }
-
             tbKolicina.Focus();
             if (tbKolicina.Text.Length > 0)
             {

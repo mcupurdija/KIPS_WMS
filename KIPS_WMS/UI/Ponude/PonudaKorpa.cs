@@ -126,7 +126,7 @@ namespace KIPS_WMS.UI.Ponude
             if (e.KeyCode == Keys.Enter)
             {
                 _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
-                    new object[] {tbPronadji.Text});
+                    new object[] {tbPronadji.Text.Trim()});
                 if (_searchedItems.Count == 1)
                 {
                     ItemQuoteModel item =
@@ -149,7 +149,7 @@ namespace KIPS_WMS.UI.Ponude
                 else if (_searchedItems.Count == 0)
                 {
                     _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
-                        new object[] {tbPronadji.Text});
+                        new object[] { tbPronadji.Text.Trim() });
 
 
                     //_searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementCode,
@@ -193,7 +193,7 @@ namespace KIPS_WMS.UI.Ponude
             if (tbPronadji.Text.Length < 3) return;
 
             _searchedItems = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementComplete,
-                new object[] {tbPronadji.Text});
+                new object[] { tbPronadji.Text.Trim() });
 
             DisplaySearchResults(_searchedItems);
         }

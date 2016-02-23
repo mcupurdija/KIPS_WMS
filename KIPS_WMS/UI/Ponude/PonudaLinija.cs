@@ -39,6 +39,8 @@ namespace KIPS_WMS.UI.Ponude
         private bool _quantityWatcherEnabled = true;
         private bool _convertedQuantityWatcherEnabled = true;
 
+        private BinModel SelectedBin;
+
         public PonudaLinija()
         {
             InitializeComponent();
@@ -58,6 +60,7 @@ namespace KIPS_WMS.UI.Ponude
             _selectedItem = selectedItem;
             _fromScanner = fromScanner;
             QuoteItems = quoteItems;
+
 
             DisplayData();
         }
@@ -106,6 +109,7 @@ namespace KIPS_WMS.UI.Ponude
                     bJedinicaMere.Text = modelEdit.UnitOfMeasureCode;
                     tbJedinicaKonverzija.Text = modelEdit.UnitOfMeasureForConversion;
                     tbKolicina.Text = modelEdit.Quantity;
+                    bMagacin.Text = modelEdit.LocationCode;
 
                     tbCena.Text = modelEdit.UnitPrice;
                     tbCenaPopust.Text = modelEdit.UnitPriceWithDiscount;
@@ -168,6 +172,8 @@ namespace KIPS_WMS.UI.Ponude
             tbRaspolozivoLokacija.Text = model.AvailableWarehouseQuantity;
             tbRaspolozivoVezanaLokacija.Text = model.AvailableLinkedWarehouseQuantity;
 
+            bMagacin.Text = model.LocationCode;
+
             FocusQuantity();
         }
 
@@ -204,7 +210,7 @@ namespace KIPS_WMS.UI.Ponude
                         ItemDescription = tbNaziv.Text,
                         VariantCode = _variantCode,
                         UnitOfMeasureCode = bJedinicaMere.Text,
-                        LocationCode = "001",
+                        LocationCode = bMagacin.Text,
                         Quantity = tbKolicina.Text,
                         UnitPrice = tbCena.Text,
                         UnitPriceWithDiscount = tbCenaPopust.Text,
@@ -222,6 +228,7 @@ namespace KIPS_WMS.UI.Ponude
                 case ItemState.Edit:
 
                     var modelEdit = ((ItemQuoteModel)_selectedItem);
+                    modelEdit.LocationCode = bMagacin.Text;
                     int index = QuoteItems.IndexOf(modelEdit);
 
                     modelEdit.Quantity = tbKolicina.Text;
@@ -335,7 +342,7 @@ namespace KIPS_WMS.UI.Ponude
 
                 string itemPriceInventoryCsv = String.Empty;
                 _ws.GetItemPriceAndInventory(_itemCode, _variantCode, bJedinicaMere.Text, tbKolicina.Text, _customerCode,
-                    _isAuthenticated, RegistryUtils.GetLoginData().Magacin, RegistryUtils.GetLastUsername(), ref itemPriceInventoryCsv);
+                    _isAuthenticated, bMagacin.Text, RegistryUtils.GetLastUsername(), ref itemPriceInventoryCsv);
 
                 var engine = new FileHelperEngine(typeof (ItemPriceInventoryModel));
                 var itemPriceInventory = (ItemPriceInventoryModel[]) engine.ReadString(itemPriceInventoryCsv);
@@ -407,6 +414,21 @@ namespace KIPS_WMS.UI.Ponude
                 case 2:
                     AcceptChanges();
                     break;
+            }
+        }
+
+        private void bMagacin_Click(object sender, EventArgs e)
+        {
+            IzborMagacina izbor = new IzborMagacina(_itemCode);
+            DialogResult result = izbor.ShowDialog();
+
+            if (result == DialogResult.Yes) {
+                SelectedBin = izbor.SelectedBin;
+                bMagacin.Text = SelectedBin.BinCode;
+                tbKolicinaLokacija.Text = "";
+                tbKolicinaVezanaLokacija.Text = "";
+                tbRaspolozivoLokacija.Text = "";
+                tbRaspolozivoVezanaLokacija.Text = "";
             }
         }
 

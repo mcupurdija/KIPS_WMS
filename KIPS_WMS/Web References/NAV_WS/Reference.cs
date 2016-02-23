@@ -328,6 +328,34 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetLocationsForQuote", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetLocationsForQuote_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetLocationsForQuote(string userIdP, string locationCodeP, string sublocationCodeP, string itemNoP, ref string cSVStringP) {
+            object[] results = this.Invoke("GetLocationsForQuote", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        itemNoP,
+                        cSVStringP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetLocationsForQuote(string userIdP, string locationCodeP, string sublocationCodeP, string itemNoP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetLocationsForQuote", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        itemNoP,
+                        cSVStringP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetLocationsForQuote(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetCustomers", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetCustomers_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetCustomers(ref string cSVStringP, string customerNoP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime lastDateModifiedP) {
             object[] results = this.Invoke("GetCustomers", new object[] {
@@ -636,24 +664,23 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePickLines", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetWarehousePickLines_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPickNoP, ref string cSVStringP) {
+        public void GetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPutAwayNoP, ref string cSVStringP) {
             object[] results = this.Invoke("GetWarehousePickLines", new object[] {
                         userIdP,
                         locationCodeP,
                         sublocationCodeP,
-                        whsPickNoP,
+                        whsPutAwayNoP,
                         cSVStringP});
             cSVStringP = ((string)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPickNoP, string cSVStringP, System.AsyncCallback callback, object asyncState)
-        {
+        public System.IAsyncResult BeginGetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPutAwayNoP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("GetWarehousePickLines", new object[] {
                         userIdP,
                         locationCodeP,
                         sublocationCodeP,
-                        whsPickNoP,
+                        whsPutAwayNoP,
                         cSVStringP}, callback, asyncState);
         }
         
@@ -665,12 +692,11 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetPickLineQtyToHandle", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetPickLineQtyToHandle_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetPickLineQtyToHandle(string userIdP, string pickNoP, int pickLineNoP, ref string qtyToHandleP)
-        {
+        public void GetPickLineQtyToHandle(string userIdP, string putAwayNoP, int putAwayLineNoP, ref string qtyToHandleP) {
             object[] results = this.Invoke("GetPickLineQtyToHandle", new object[] {
                         userIdP,
-                        pickNoP,
-                        pickLineNoP,
+                        putAwayNoP,
+                        putAwayLineNoP,
                         qtyToHandleP});
             qtyToHandleP = ((string)(results[0]));
         }
@@ -692,12 +718,11 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:UpdatePickLineQty", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="UpdatePickLineQty_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdatePickLineQty(string userIdP, string pickNoP, int pickLineNoP, string qtyP, int isUpdateP, string scannedUoMCodeP, string qtyInScannedUoMP)
-        {
+        public void UpdatePickLineQty(string userIdP, string putAwayNoP, int putAwayLineNoP, string qtyP, int isUpdateP, string scannedUoMCodeP, string qtyInScannedUoMP) {
             this.Invoke("UpdatePickLineQty", new object[] {
                         userIdP,
-                        pickNoP,
-                        pickLineNoP,
+                        putAwayNoP,
+                        putAwayLineNoP,
                         qtyP,
                         isUpdateP,
                         scannedUoMCodeP,

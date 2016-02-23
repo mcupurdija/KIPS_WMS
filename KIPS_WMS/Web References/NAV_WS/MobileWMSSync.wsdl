@@ -189,6 +189,24 @@
           </sequence>
         </complexType>
       </element>
+      <element name="GetLocationsForQuote">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetLocationsForQuote_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="GetCustomers">
         <complexType>
           <sequence>
@@ -732,6 +750,12 @@
   <message name="GetItems_Result">
     <part name="parameters" element="tns:GetItems_Result" />
   </message>
+  <message name="GetLocationsForQuote">
+    <part name="parameters" element="tns:GetLocationsForQuote" />
+  </message>
+  <message name="GetLocationsForQuote_Result">
+    <part name="parameters" element="tns:GetLocationsForQuote_Result" />
+  </message>
   <message name="GetCustomers">
     <part name="parameters" element="tns:GetCustomers" />
   </message>
@@ -935,6 +959,10 @@
       <input name="GetItems" message="tns:GetItems" />
       <output name="GetItems_Result" message="tns:GetItems_Result" />
     </operation>
+    <operation name="GetLocationsForQuote">
+      <input name="GetLocationsForQuote" message="tns:GetLocationsForQuote" />
+      <output name="GetLocationsForQuote_Result" message="tns:GetLocationsForQuote_Result" />
+    </operation>
     <operation name="GetCustomers">
       <input name="GetCustomers" message="tns:GetCustomers" />
       <output name="GetCustomers_Result" message="tns:GetCustomers_Result" />
@@ -1133,6 +1161,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="GetItems_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetLocationsForQuote">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetLocationsForQuote" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetLocationsForQuote">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetLocationsForQuote_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

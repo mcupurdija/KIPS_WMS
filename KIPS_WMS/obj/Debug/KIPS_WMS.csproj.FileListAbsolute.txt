@@ -124,3 +124,15 @@ C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.csproj.GenerateResource.Cache
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.exe
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.pdb
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Isporuka.IsporukaDetalji.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Isporuka.IsporukaVarijabilniNormativDijalog.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Izdvajanje.IzdvajanjeDetalji.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ostalo.ArtikliPoRegalimaDijalog.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ostalo.OdabirMagacina.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.PrekoracenaVrednostYesNoDijalog.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.VarijabilniNormativDijalog.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.OstecenoNekompletnoDijalog.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Prijem.PrijemDetalji.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Skladistenje.SkladistenjeDetalji.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Skladistenje.SkladistenjePretragaPoArtiklu.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.IzborMagacina.resources
