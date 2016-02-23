@@ -48,7 +48,7 @@ namespace KIPS_WMS.UI.Prijem
                     decPlaces = _selectedLine.NormRoundingPrecision.Split(',')[1].Length;
                 }
                 else decPlaces = 0;
-                MessageBox.Show(tbKolicinaOsnovnaJedinicaMere.Text.Split(',')[1]);
+                //MessageBox.Show(tbKolicinaOsnovnaJedinicaMere.Text.Split(',')[1]);
                 if (tbKolicinaOsnovnaJedinicaMere.Text.Split(',')[1].Length > decPlaces)
                 {
                     MessageBox.Show("Nije dobro zaokruženo. Treba zaokružiti na decimala: "

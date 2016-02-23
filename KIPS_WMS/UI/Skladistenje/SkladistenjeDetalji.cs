@@ -223,7 +223,8 @@ namespace KIPS_WMS.UI.Skladistenje
 
         private void UpdateLine(int isUpdate)
         {
-            if (_loginData.SkeniranjeBarkodaNaPrijemu == 1 && (tbRegal.Text.Trim().ToUpper() != _selectedLine.BinCode.ToUpper()))
+            //ako je regal na liniji prazan nema skeniranja
+            if (_selectedLine.BinCode != "" && (tbRegal.Text.Trim().ToUpper() != _selectedLine.BinCode.ToUpper()))
             {
                 MessageBox.Show("Šifra regala nije skenirana ili se ne slaže sa šifrom iz linije.");
                 return;

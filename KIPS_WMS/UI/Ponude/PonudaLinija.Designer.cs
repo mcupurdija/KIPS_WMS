@@ -60,10 +60,11 @@
             this.tbCenaPopust = new System.Windows.Forms.TextBox();
             this.bJedinicaMere = new System.Windows.Forms.Button();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
-            this.imageList1 = new System.Windows.Forms.ImageList();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton3 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.bMagacin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -101,7 +102,7 @@
             this.tbSifra.Location = new System.Drawing.Point(43, 3);
             this.tbSifra.Name = "tbSifra";
             this.tbSifra.ReadOnly = true;
-            this.tbSifra.Size = new System.Drawing.Size(194, 19);
+            this.tbSifra.Size = new System.Drawing.Size(89, 19);
             this.tbSifra.TabIndex = 3;
             // 
             // tbNaziv
@@ -313,14 +314,6 @@
             this.toolBar1.Name = "toolBar1";
             this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
-            this.imageList1.Images.Clear();
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource2"))));
-            // 
             // toolBarButton1
             // 
             this.toolBarButton1.ImageIndex = 0;
@@ -333,12 +326,29 @@
             // 
             this.toolBarButton3.ImageIndex = 2;
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource2"))));
+            // 
+            // bMagacin
+            // 
+            this.bMagacin.Location = new System.Drawing.Point(138, 3);
+            this.bMagacin.Name = "bMagacin";
+            this.bMagacin.Size = new System.Drawing.Size(99, 19);
+            this.bMagacin.TabIndex = 76;
+            this.bMagacin.Click += new System.EventHandler(this.bMagacin_Click);
+            // 
             // PonudaLinija
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
+            this.Controls.Add(this.bMagacin);
             this.Controls.Add(this.toolBar1);
             this.Controls.Add(this.bJedinicaMere);
             this.Controls.Add(this.tbCenaPopust);
@@ -407,5 +417,6 @@
         private System.Windows.Forms.ToolBarButton toolBarButton1;
         private System.Windows.Forms.ToolBarButton toolBarButton2;
         private System.Windows.Forms.ToolBarButton toolBarButton3;
+        private System.Windows.Forms.Button bMagacin;
     }
 }

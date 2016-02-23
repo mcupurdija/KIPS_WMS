@@ -44,5 +44,9 @@ namespace KIPS_WMS.Model
 
         [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
         public string AvailableLinkedWarehouseQuantity;
+
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string LocationCode;
+
     }
 }
