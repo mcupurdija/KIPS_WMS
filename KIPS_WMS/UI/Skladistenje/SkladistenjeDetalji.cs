@@ -491,9 +491,9 @@ namespace KIPS_WMS.UI.Skladistenje
             }
         }
 
-        private void cStanje_Click(object sender, EventArgs e)
-        {
-            new ArtikliPoRegalimaDijalog(_selectedLine.BinCode, _selectedLine.ItemNo, _selectedLine.ItemVariant).ShowDialog();
-        }
+        //private void cStanje_Click(object sender, EventArgs e)
+        //{
+        //    new ArtikliPoRegalimaDijalog(_selectedLine.BinCode, _selectedLine.ItemNo, _selectedLine.ItemVariant).ShowDialog();
+        //}
     }
 }

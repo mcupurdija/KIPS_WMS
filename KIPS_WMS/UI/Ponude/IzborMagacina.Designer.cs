@@ -37,7 +37,7 @@
             // 
             // bPotvrdi
             // 
-            this.bPotvrdi.Location = new System.Drawing.Point(85, 97);
+            this.bPotvrdi.Location = new System.Drawing.Point(125, 137);
             this.bPotvrdi.Name = "bPotvrdi";
             this.bPotvrdi.Size = new System.Drawing.Size(72, 20);
             this.bPotvrdi.TabIndex = 0;
@@ -50,33 +50,33 @@
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.Location = new System.Drawing.Point(4, 4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(153, 87);
+            this.listView1.Size = new System.Drawing.Size(193, 127);
             this.listView1.TabIndex = 1;
             this.listView1.View = System.Windows.Forms.View.List;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // bOtkazi
             // 
-            this.bOtkazi.Location = new System.Drawing.Point(3, 97);
+            this.bOtkazi.Location = new System.Drawing.Point(4, 137);
             this.bOtkazi.Name = "bOtkazi";
             this.bOtkazi.Size = new System.Drawing.Size(72, 20);
             this.bOtkazi.TabIndex = 2;
             this.bOtkazi.Text = "Otkaži";
             this.bOtkazi.Click += new System.EventHandler(this.bOtkazi_Click);
             // 
-            // OdabirJediniceDijalog
+            // IzborMagacina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CenterFormOnScreen = true;
-            this.ClientSize = new System.Drawing.Size(160, 120);
+            this.ClientSize = new System.Drawing.Size(200, 160);
             this.ControlBox = false;
             this.Controls.Add(this.bOtkazi);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bPotvrdi);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Menu = this.mainMenu1;
-            this.Name = "OdabirJediniceDijalog";
+            this.Name = "IzborMagacina";
             this.Text = "Izaberite jedinicu mere";
             this.ResumeLayout(false);
 

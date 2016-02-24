@@ -55,7 +55,6 @@ namespace KIPS_WMS.UI.Skladistenje
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
             this.imageList1 = new System.Windows.Forms.ImageList();
-            this.cStanje = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -181,7 +180,6 @@ namespace KIPS_WMS.UI.Skladistenje
             this.contextMenu1.MenuItems.Add(this.cArtikalPoRegalima);
             this.contextMenu1.MenuItems.Add(this.cPodeliRed);
             this.contextMenu1.MenuItems.Add(this.cZameniRegal);
-            this.contextMenu1.MenuItems.Add(this.cStanje);
             // 
             // cArtikalPoRegalima
             // 
@@ -220,11 +218,6 @@ namespace KIPS_WMS.UI.Skladistenje
             this.imageList1.Images.Clear();
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
-            // 
-            // cStanje
-            // 
-            this.cStanje.Text = "Stanje";
-            this.cStanje.Click += new System.EventHandler(this.cStanje_Click);
             // 
             // SkladistenjeDetalji
             // 
@@ -274,6 +267,5 @@ namespace KIPS_WMS.UI.Skladistenje
         private System.Windows.Forms.ToolBarButton toolBarButton1;
         private System.Windows.Forms.ToolBarButton toolBarButton2;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.MenuItem cStanje;
     }
 }

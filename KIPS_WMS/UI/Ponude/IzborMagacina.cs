@@ -27,7 +27,7 @@ namespace KIPS_WMS.UI.Ponude
                 AutoScaleDimensions.Width/96F,
                 AutoScaleDimensions.Height/96F);
 
-            Height = (int) (myAutoScaleFactor.Height*110);
+            Height = (int) (myAutoScaleFactor.Height*150);
 
             GetData();
         }
