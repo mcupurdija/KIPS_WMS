@@ -35,8 +35,8 @@
             this.bUcitaj = new System.Windows.Forms.Button();
             this.bNova = new System.Windows.Forms.Button();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
-            this.imageList1 = new System.Windows.Forms.ImageList();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.SuspendLayout();
             // 
             // tbUcitaj
@@ -72,15 +72,15 @@
             this.toolBar1.Name = "toolBar1";
             this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
             // 
+            // toolBarButton1
+            // 
+            this.toolBarButton1.ImageIndex = 0;
+            // 
             // imageList1
             // 
             this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
             this.imageList1.Images.Clear();
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
-            // 
-            // toolBarButton1
-            // 
-            this.toolBarButton1.ImageIndex = 0;
             // 
             // PonudePocetna
             // 
@@ -92,9 +92,11 @@
             this.Controls.Add(this.bNova);
             this.Controls.Add(this.bUcitaj);
             this.Controls.Add(this.tbUcitaj);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "PonudePocetna";
             this.Text = "Ponude";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PonudePocetna_KeyPress);
             this.ResumeLayout(false);
 
         }

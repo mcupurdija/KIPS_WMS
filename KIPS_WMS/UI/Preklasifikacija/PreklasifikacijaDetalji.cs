@@ -377,5 +377,13 @@ namespace KIPS_WMS.UI.Preklasifikacija
                 bDodaj_Click(sender, e);
             }
         }
+
+        private void PreklasifikacijaDetalji_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                Close();
+            }
+        }
     }
 }

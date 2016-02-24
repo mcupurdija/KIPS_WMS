@@ -251,9 +251,11 @@ namespace KIPS_WMS.UI.Prijem
             this.Controls.Add(this.tbKolicina);
             this.Controls.Add(this.bZameni);
             this.Controls.Add(this.bDodaj);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "PrijemDetalji";
             this.Text = "PrijemDetalji";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrijemDetalji_KeyPress);
             this.ResumeLayout(false);
 
         }

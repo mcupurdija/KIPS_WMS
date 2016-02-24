@@ -52,10 +52,10 @@ namespace KIPS_WMS.UI.Ponude
             this.cUcitajNoveArtikle = new System.Windows.Forms.MenuItem();
             this.cOdustani = new System.Windows.Forms.MenuItem();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
-            this.imageList1 = new System.Windows.Forms.ImageList();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton3 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -164,8 +164,8 @@ namespace KIPS_WMS.UI.Ponude
             this.listBox1.TabIndex = 9;
             this.listBox1.WrapText = false;
             this.listBox1.DrawItem += new OpenNETCF.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
-            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
             // 
             // contextMenu1
             // 
@@ -203,14 +203,6 @@ namespace KIPS_WMS.UI.Ponude
             this.toolBar1.Name = "toolBar1";
             this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
-            this.imageList1.Images.Clear();
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource2"))));
-            // 
             // toolBarButton1
             // 
             this.toolBarButton1.ImageIndex = 0;
@@ -222,6 +214,14 @@ namespace KIPS_WMS.UI.Ponude
             // toolBarButton3
             // 
             this.toolBarButton3.ImageIndex = 2;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource2"))));
             // 
             // PonudaKorpa
             // 
@@ -237,9 +237,11 @@ namespace KIPS_WMS.UI.Ponude
             this.Controls.Add(this.bResetuj);
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbPronadji);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "PonudaKorpa";
             this.Text = "Nova ponuda";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PonudaKorpa_KeyPress);
             this.ResumeLayout(false);
 
         }

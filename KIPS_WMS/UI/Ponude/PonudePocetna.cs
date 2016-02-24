@@ -86,5 +86,13 @@ namespace KIPS_WMS.UI.Ponude
         {
             Close();
         }
+
+        private void PonudePocetna_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                Close();
+            }
+        }
     }
 }

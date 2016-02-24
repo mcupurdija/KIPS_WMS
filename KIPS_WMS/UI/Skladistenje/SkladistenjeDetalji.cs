@@ -491,6 +491,16 @@ namespace KIPS_WMS.UI.Skladistenje
             }
         }
 
+        private void SkladistenjeDetalji_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                DialogResult = DialogResult.Yes;
+                listBox1.Dispose();
+                Close();
+            }
+        }
+
         //private void cStanje_Click(object sender, EventArgs e)
         //{
         //    new ArtikliPoRegalimaDijalog(_selectedLine.BinCode, _selectedLine.ItemNo, _selectedLine.ItemVariant).ShowDialog();

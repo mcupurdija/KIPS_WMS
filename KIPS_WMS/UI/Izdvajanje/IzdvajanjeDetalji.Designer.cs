@@ -51,11 +51,11 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.cArtikalPoRegalima = new System.Windows.Forms.MenuItem();
             this.cPodeliRed = new System.Windows.Forms.MenuItem();
             this.cZameniRegal = new System.Windows.Forms.MenuItem();
+            this.cStanje = new System.Windows.Forms.MenuItem();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
             this.imageList1 = new System.Windows.Forms.ImageList();
-            this.cStanje = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -198,6 +198,11 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.cZameniRegal.Text = "Zameni regal";
             this.cZameniRegal.Click += new System.EventHandler(this.cZameniRegal_Click);
             // 
+            // cStanje
+            // 
+            this.cStanje.Text = "Stanje";
+            this.cStanje.Click += new System.EventHandler(this.cStanje_Click);
+            // 
             // toolBar1
             // 
             this.toolBar1.Buttons.Add(this.toolBarButton1);
@@ -221,11 +226,6 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
             // 
-            // cStanje
-            // 
-            this.cStanje.Text = "Stanje";
-            this.cStanje.Click += new System.EventHandler(this.cStanje_Click);
-            // 
             // IzdvajanjeDetalji
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -243,9 +243,11 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.Controls.Add(this.tbKolicina);
             this.Controls.Add(this.bZameni);
             this.Controls.Add(this.bDodaj);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "IzdvajanjeDetalji";
             this.Text = "Izdvajanje";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IzdvajanjeDetalji_KeyPress);
             this.ResumeLayout(false);
 
         }

@@ -236,9 +236,11 @@ namespace KIPS_WMS.UI.Skladistenje
             this.Controls.Add(this.tbKolicina);
             this.Controls.Add(this.bZameni);
             this.Controls.Add(this.bDodaj);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "SkladistenjeDetalji";
             this.Text = "SkladistenjeDetalji";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SkladistenjeDetalji_KeyPress);
             this.ResumeLayout(false);
 
         }

@@ -26,5 +26,13 @@ namespace KIPS_WMS.UI.Skladistenje
         {
             Close();
         }
+
+        private void SkladistenjePocetna_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                Close();
+            }
+        }
     }
 }

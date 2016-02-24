@@ -155,9 +155,11 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.Controls.Add(this.bPonisti);
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbPronadji);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "IzdvajanjeLinije";
             this.Text = "Izdvajanje";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IzdvajanjeLinije_KeyPress);
             this.ResumeLayout(false);
 
         }

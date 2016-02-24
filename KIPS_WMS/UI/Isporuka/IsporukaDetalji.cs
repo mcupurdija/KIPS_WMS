@@ -533,9 +533,12 @@ namespace KIPS_WMS.UI.Isporuka
 
         private void IsporukaDetalji_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DialogResult = DialogResult.Yes;
-            listBox1.Dispose();
-            Close();
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                DialogResult = DialogResult.Yes;
+                listBox1.Dispose();
+                Close();
+            }
         }
     }
 }

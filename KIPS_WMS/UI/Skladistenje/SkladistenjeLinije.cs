@@ -341,5 +341,15 @@ namespace KIPS_WMS.UI.Skladistenje
                     break;
             }
         }
+
+        private void SkladistenjeLinije_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                DialogResult = DialogResult.Yes;
+                listBox1.Dispose();
+                Close();
+            }
+        }
     }
 }

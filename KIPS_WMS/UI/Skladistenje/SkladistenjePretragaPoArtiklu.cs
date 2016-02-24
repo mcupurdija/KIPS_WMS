@@ -295,5 +295,14 @@ namespace KIPS_WMS.UI.Skladistenje
                     break;
             }
         }
+
+        private void SkladistenjePretragaPoArtiklu_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                listBox1.Dispose();
+                Close();
+            }
+        }
     }
 }

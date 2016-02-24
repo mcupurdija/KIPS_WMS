@@ -80,5 +80,10 @@ namespace KIPS_WMS.UI.Ostalo
             }
         }
 
+        private void OdabirMagacina_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bOdustani_Click(null, null);
+        }
+
     }
 }

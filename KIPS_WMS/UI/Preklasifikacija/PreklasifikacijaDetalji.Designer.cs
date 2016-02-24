@@ -273,9 +273,11 @@
             this.Controls.Add(this.bPonisti);
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbPronadji);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "PreklasifikacijaDetalji";
             this.Text = "Preklasifikacija";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PreklasifikacijaDetalji_KeyPress);
             this.ResumeLayout(false);
 
         }

@@ -137,9 +137,11 @@
             this.Controls.Add(this.tbPronadji);
             this.Controls.Add(this.bReset);
             this.Controls.Add(this.bPronadji);
+            this.KeyPreview = true;
             this.Name = "PrijemPretragaPoDokumentu";
             this.Text = "Pretraga po dokumentu";
             this.GotFocus += new System.EventHandler(this.PrijemPretragaPoDokumentu_GotFocus);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrijemPretragaPoDokumentu_KeyPress);
             this.ResumeLayout(false);
 
         }

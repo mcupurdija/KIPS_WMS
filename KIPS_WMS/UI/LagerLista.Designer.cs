@@ -90,9 +90,11 @@
             this.Controls.Add(this.lvLagerLista);
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbSifra);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "LagerLista";
             this.Text = "Lager lista";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LagerLista_KeyPress);
             this.ResumeLayout(false);
 
         }

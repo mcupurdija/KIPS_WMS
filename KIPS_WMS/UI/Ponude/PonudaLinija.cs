@@ -432,5 +432,14 @@ namespace KIPS_WMS.UI.Ponude
             }
         }
 
+        private void PonudaLinija_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+        }
+
     }
 }

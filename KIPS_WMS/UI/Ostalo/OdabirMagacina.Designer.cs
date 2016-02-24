@@ -74,10 +74,12 @@
             this.Controls.Add(this.bDalje);
             this.Controls.Add(this.listView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
             this.Name = "OdabirMagacina";
             this.Text = "Izaberite magacin";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OdabirMagacina_KeyPress);
             this.ResumeLayout(false);
 
         }

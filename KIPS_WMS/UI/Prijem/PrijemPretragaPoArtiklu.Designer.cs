@@ -37,9 +37,9 @@
             this.tbPronadji = new System.Windows.Forms.TextBox();
             this.listBox1 = new OpenNETCF.Windows.Forms.ListBox2();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
-            this.imageList1 = new System.Windows.Forms.ImageList();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -101,13 +101,6 @@
             this.toolBar1.Name = "toolBar1";
             this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
-            this.imageList1.Images.Clear();
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
-            // 
             // toolBarButton1
             // 
             this.toolBarButton1.ImageIndex = 0;
@@ -115,6 +108,13 @@
             // toolBarButton2
             // 
             this.toolBarButton2.ImageIndex = 1;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
             // 
             // PrijemPretragaPoArtiklu
             // 
@@ -126,9 +126,11 @@
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.tbPronadji);
             this.Controls.Add(this.bPronadji);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "PrijemPretragaPoArtiklu";
             this.Text = "Pretraga po artiklu";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrijemPretragaPoArtiklu_KeyPress);
             this.ResumeLayout(false);
 
         }

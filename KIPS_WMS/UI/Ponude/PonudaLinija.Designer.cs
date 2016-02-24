@@ -375,9 +375,11 @@
             this.Controls.Add(this.tbNaziv);
             this.Controls.Add(this.tbSifra);
             this.Controls.Add(this.lSifra);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "PonudaLinija";
             this.Text = "Nova ponuda";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PonudaLinija_KeyPress);
             this.ResumeLayout(false);
 
         }

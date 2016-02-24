@@ -86,5 +86,13 @@ namespace KIPS_WMS.UI.Ostalo
             DialogResult = DialogResult.Abort;
             Close();
         }
+
+        private void ArtikliPoRegalimaDijalog_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                bZatvori_Click(null, null);
+            }
+        }
     }
 }

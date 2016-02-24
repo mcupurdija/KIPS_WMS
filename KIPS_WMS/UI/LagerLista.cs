@@ -127,5 +127,13 @@ namespace KIPS_WMS.UI
         {
             Close();
         }
+
+        private void LagerLista_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                Close();
+            }
+        }
     }
 }

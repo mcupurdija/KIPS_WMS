@@ -117,7 +117,7 @@ namespace KIPS_WMS.UI
         {
             if (Utils.CheckDate())
             {
-                new IzdvajanjePocetna().Show();
+                new IzdvajanjePretragaPoDokumentu().Show();
             }
             else
             {

@@ -485,5 +485,15 @@ namespace KIPS_WMS.UI.Izdvajanje
             new ArtikliPoRegalimaDijalog(_selectedLine.BinCode, _selectedLine.ItemNo, _selectedLine.ItemVariant).ShowDialog();
         }
 
+        private void IzdvajanjeDetalji_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                DialogResult = DialogResult.Yes;
+                listBox1.Dispose();
+                Close();
+            }
+        }
+
     }
 }

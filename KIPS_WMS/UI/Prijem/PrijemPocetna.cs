@@ -26,5 +26,13 @@ namespace KIPS_WMS.UI.Prijem
         {
             Close();
         }
+
+        private void PrijemPocetna_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                Close();
+            }
+        }
     }
 }

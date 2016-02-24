@@ -197,5 +197,14 @@ namespace KIPS_WMS.UI.Izdvajanje
             tbPronadji.Text = "";
             tbPronadji.Focus();
         }
+
+        private void IzdvajanjePretragaPoDokumentu_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                listBox1.Dispose();
+                Close();
+            }
+        }
     }
 }

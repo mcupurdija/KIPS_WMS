@@ -534,5 +534,15 @@ namespace KIPS_WMS.UI.Prijem
                 tbKolicina.Focus();
             }
         }
+
+        private void PrijemDetalji_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                DialogResult = DialogResult.Yes;
+                listBox1.Dispose();
+                Close();
+            }
+        }
     }
 }

@@ -133,9 +133,11 @@
             this.Controls.Add(this.lvKupci);
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbPronadji);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "NovaPonuda";
             this.Text = "Nova ponuda";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NovaPonuda_KeyPress);
             this.ResumeLayout(false);
 
         }

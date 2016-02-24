@@ -43,8 +43,8 @@ namespace KIPS_WMS.UI.Isporuka
             this.toolBar1 = new System.Windows.Forms.ToolBar();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
-            this.imageList1 = new System.Windows.Forms.ImageList();
             this.toolBarButton3 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -132,6 +132,10 @@ namespace KIPS_WMS.UI.Isporuka
             // 
             this.toolBarButton2.ImageIndex = 1;
             // 
+            // toolBarButton3
+            // 
+            this.toolBarButton3.ImageIndex = 2;
+            // 
             // imageList1
             // 
             this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
@@ -139,10 +143,6 @@ namespace KIPS_WMS.UI.Isporuka
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource2"))));
-            // 
-            // toolBarButton3
-            // 
-            this.toolBarButton3.ImageIndex = 2;
             // 
             // IsporukaLinije
             // 
@@ -155,9 +155,11 @@ namespace KIPS_WMS.UI.Isporuka
             this.Controls.Add(this.bPonisti);
             this.Controls.Add(this.bPronadji);
             this.Controls.Add(this.tbPronadji);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "IsporukaLinije";
             this.Text = "IsporukaLinije";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IsporukaLinije_KeyPress);
             this.ResumeLayout(false);
 
         }

@@ -195,5 +195,14 @@ namespace KIPS_WMS.UI.Isporuka
             tbPronadji.Text = "";
             tbPronadji.Focus();
         }
+
+        private void IsporukaPretragaPoDokumentu_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                listBox1.Dispose();
+                Close();
+            }
+        }
     }
 }

@@ -62,10 +62,12 @@
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bZatvori);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
             this.Name = "ArtikliPoRegalimaDijalog";
             this.Text = "Artikli po regalima";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ArtikliPoRegalimaDijalog_KeyPress);
             this.ResumeLayout(false);
 
         }
