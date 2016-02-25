@@ -77,7 +77,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Menu = this.mainMenu1;
             this.Name = "IzborMagacina";
-            this.Text = "Izaberite jedinicu mere";
+            this.Text = "Izaberite magacin";
             this.ResumeLayout(false);
 
         }

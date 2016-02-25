@@ -330,7 +330,7 @@ namespace KIPS_WMS.UI.Ponude
                     ItemQuantity = item.Quantity,
                     UnitOfMeasureCode = item.UnitOfMeasureCode,
                     VariantCode = "",
-                    WarehouseCode = RegistryUtils.GetLoginData().Magacin
+                    WarehouseCode = item.LocationCode
                 }).ToList();
 
                 var engine = new FileHelperEngine(typeof (SendQuoteModel));

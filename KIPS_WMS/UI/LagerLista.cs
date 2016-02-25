@@ -61,11 +61,11 @@ namespace KIPS_WMS.UI
         {
             lvLagerLista.Clear();
             lvLagerLista.View = View.Details;
-            lvLagerLista.Columns.Add(Resources.Naziv, 160, HorizontalAlignment.Left);
-            lvLagerLista.Columns.Add(Resources.Raspolozivo, 100, HorizontalAlignment.Right);
-            lvLagerLista.Columns.Add(Resources.Ukupno, 100, HorizontalAlignment.Right);
-            lvLagerLista.Columns.Add(Resources.Jedinica, 80, HorizontalAlignment.Center);
-            lvLagerLista.Columns.Add(Resources.Sifra, 80, HorizontalAlignment.Left);
+            lvLagerLista.Columns.Add("Šifra", 60, HorizontalAlignment.Left);
+            lvLagerLista.Columns.Add("Naziv", 195, HorizontalAlignment.Left);
+            lvLagerLista.Columns.Add("JM", 60, HorizontalAlignment.Center);
+            lvLagerLista.Columns.Add("Ukupno", 80, HorizontalAlignment.Right);
+            lvLagerLista.Columns.Add("Raspoloživo", 80, HorizontalAlignment.Right);
                  
             foreach (ItemLagerListModel item in _items)
             {
@@ -98,11 +98,11 @@ namespace KIPS_WMS.UI
 
                     lvLagerLista.Clear();
                     lvLagerLista.View = View.Details;
-                    lvLagerLista.Columns.Add("Šifra", 60, HorizontalAlignment.Center);
-                    lvLagerLista.Columns.Add("Naziv", 195, HorizontalAlignment.Center);
+                    lvLagerLista.Columns.Add("Šifra", 60, HorizontalAlignment.Left);
+                    lvLagerLista.Columns.Add("Naziv", 195, HorizontalAlignment.Left);
                     lvLagerLista.Columns.Add("JM", 60, HorizontalAlignment.Center);
-                    lvLagerLista.Columns.Add("Ukupno", 80, HorizontalAlignment.Center);
-                    lvLagerLista.Columns.Add("Raspoloživo", 80, HorizontalAlignment.Center);
+                    lvLagerLista.Columns.Add("Ukupno", 80, HorizontalAlignment.Right);
+                    lvLagerLista.Columns.Add("Raspoloživo", 80, HorizontalAlignment.Right);
 
                     foreach (ItemLagerListModel item in lagerList)
                     {
