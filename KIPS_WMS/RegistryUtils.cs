@@ -164,8 +164,9 @@ namespace KIPS_WMS
                 key = key.OpenSubKey(GetAppName(), true);
                 key.SetValue(SavedQuoteLinesKey, JsonHelper.Serialize(quoteLines));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show("Neuspelo čuvanje ponude. " + ex.Message);
             }
         }
 

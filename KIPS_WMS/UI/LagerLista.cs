@@ -61,18 +61,17 @@ namespace KIPS_WMS.UI
         {
             lvLagerLista.Clear();
             lvLagerLista.View = View.Details;
-            lvLagerLista.Columns.Add("Šifra", 60, HorizontalAlignment.Left);
             lvLagerLista.Columns.Add("Naziv", 195, HorizontalAlignment.Left);
-            lvLagerLista.Columns.Add("JM", 60, HorizontalAlignment.Center);
-            lvLagerLista.Columns.Add("Ukupno", 80, HorizontalAlignment.Right);
-            lvLagerLista.Columns.Add("Raspoloživo", 80, HorizontalAlignment.Right);
-                 
+            lvLagerLista.Columns.Add("Raspoloživo", 80, HorizontalAlignment.Left);
+            lvLagerLista.Columns.Add("Ukupno", 80, HorizontalAlignment.Left); 
+            lvLagerLista.Columns.Add("JM", 60, HorizontalAlignment.Left);
+            lvLagerLista.Columns.Add("Šifra", 60, HorizontalAlignment.Left);           
+                                    
             foreach (ItemLagerListModel item in _items)
             {
                 var lvi = new ListViewItem(new[]
                 {
-                    item.WarehouseCode, item.WarehouseName, item.UnitOfMeasure, item.TotalQuantity,
-                    item.AvailableQuantity
+                    item.WarehouseName, item.AvailableQuantity, item.TotalQuantity, item.UnitOfMeasure, item.WarehouseCode
                 });
                 lvLagerLista.Items.Add(lvi);
             }
@@ -98,11 +97,11 @@ namespace KIPS_WMS.UI
 
                     lvLagerLista.Clear();
                     lvLagerLista.View = View.Details;
-                    lvLagerLista.Columns.Add("Šifra", 60, HorizontalAlignment.Left);
                     lvLagerLista.Columns.Add("Naziv", 195, HorizontalAlignment.Left);
-                    lvLagerLista.Columns.Add("JM", 60, HorizontalAlignment.Center);
-                    lvLagerLista.Columns.Add("Ukupno", 80, HorizontalAlignment.Right);
-                    lvLagerLista.Columns.Add("Raspoloživo", 80, HorizontalAlignment.Right);
+                    lvLagerLista.Columns.Add("Raspoloživo", 80, HorizontalAlignment.Left);
+                    lvLagerLista.Columns.Add("Ukupno", 80, HorizontalAlignment.Left);
+                    lvLagerLista.Columns.Add("JM", 60, HorizontalAlignment.Left);
+                    lvLagerLista.Columns.Add("Šifra", 60, HorizontalAlignment.Left);  
 
                     foreach (ItemLagerListModel item in lagerList)
                     {
@@ -111,7 +110,7 @@ namespace KIPS_WMS.UI
                         lvi =
                             new ListViewItem(new[]
                         {
-                            item.WarehouseCode, item.WarehouseName, item.UnitOfMeasure, item.TotalQuantity.ToString(), item.AvailableQuantity.ToString()
+                            item.WarehouseName, item.AvailableQuantity, item.TotalQuantity, item.UnitOfMeasure, item.WarehouseCode
                         });
 
                         lvLagerLista.Items.Add(lvi);
