@@ -27,6 +27,8 @@
             public const int SyncDataId = 0;
             public const int CustomersSyncDate = 1;
             public const int ItemsSyncDate = 2;
+            public const int QuoteHeader = 3;
+            public const int QuoteLines = 4;
         }
     }
 }

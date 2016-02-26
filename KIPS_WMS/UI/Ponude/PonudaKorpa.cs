@@ -77,9 +77,8 @@ namespace KIPS_WMS.UI.Ponude
             }
             else
             {
-                RegistryUtils.SaveQuoteHeader(new QuoteHeaderHelper(_quoteNo, _customerCode, _customerName,
-                    _isAuthenticated));
-                RegistryUtils.SaveQuoteLines(_quoteItems);
+                RegistryUtils.SaveQuoteData(new QuoteHeaderHelper(_quoteNo, _customerCode, _customerName,
+                    _isAuthenticated), _quoteItems);
             }
         }
 

@@ -22,5 +22,8 @@
         public const string GetSyncDateCustomers = "SELECT SyncData_customers FROM SyncData";
         public const string GetSyncDateItems = "SELECT SyncData_items FROM SyncData";
 
+        public const string GetQuoteHeaderStatement = "SELECT QuoteHeader FROM SyncData WHERE SyncDataID=1";
+        public const string GetQuoteLinesStatement = "SELECT QuoteLines FROM SyncData WHERE SyncDataID=1";
+        public const string UpdateQuoteDataStatement = "UPDATE SyncData SET QuoteHeader='{0}', QuoteLines='{1}' WHERE SyncDataID=1";
     }
 }

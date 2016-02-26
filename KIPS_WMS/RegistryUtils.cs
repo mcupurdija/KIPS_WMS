@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Windows.Forms;
+using KIPS_WMS.Data;
 using KIPS_WMS.Model;
 using KIPS_WMS.Properties;
 using Microsoft.Win32;
@@ -22,7 +23,7 @@ namespace KIPS_WMS
             try
             {
                 RegistryKey key = Registry.LocalMachine.OpenSubKey("Software", true).OpenSubKey(GetAppName(), false);
-                return (string)key.GetValue(LastUsernameKey);
+                return (string) key.GetValue(LastUsernameKey);
             }
             catch (Exception)
             {
@@ -49,7 +50,7 @@ namespace KIPS_WMS
             try
             {
                 RegistryKey key = Registry.LocalMachine.OpenSubKey("Software", true).OpenSubKey(GetAppName(), false);
-                var lines = (string)key.GetValue(LoginDataRegistryKey);
+                var lines = (string) key.GetValue(LoginDataRegistryKey);
                 return JsonHelper.Deserialize<LoginModel>(lines);
             }
             catch (Exception)
@@ -117,9 +118,9 @@ namespace KIPS_WMS
         {
             try
             {
-                RegistryKey key = Registry.LocalMachine.OpenSubKey("Software", true).OpenSubKey(GetAppName(), false);
-                var lines = (string) key.GetValue(SavedQuoteHeaderKey);
-                return JsonHelper.Deserialize<QuoteHeaderHelper>(lines);
+                var quoteHeader =
+                    (string) SQLiteHelper.simpleQuery(DbStatements.GetQuoteHeaderStatement, new object[] {});
+                return JsonHelper.Deserialize<QuoteHeaderHelper>(quoteHeader);
             }
             catch (Exception)
             {
@@ -127,14 +128,12 @@ namespace KIPS_WMS
             }
         }
 
-        public static void SaveQuoteHeader(QuoteHeaderHelper quoteHeader)
+        public static void SaveQuoteData(QuoteHeaderHelper quoteHeader, List<ItemQuoteModel> quoteLines)
         {
             try
             {
-                RegistryKey key = Registry.LocalMachine.OpenSubKey("Software", true);
-                key.CreateSubKey(GetAppName());
-                key = key.OpenSubKey(GetAppName(), true);
-                key.SetValue(SavedQuoteHeaderKey, JsonHelper.Serialize(quoteHeader));
+                SQLiteHelper.nonQuery(DbStatements.UpdateQuoteDataStatement,
+                    new object[] {JsonHelper.Serialize(quoteHeader), JsonHelper.Serialize(quoteLines)});
             }
             catch (Exception)
             {
@@ -145,9 +144,8 @@ namespace KIPS_WMS
         {
             try
             {
-                RegistryKey key = Registry.LocalMachine.OpenSubKey("Software", true).OpenSubKey(GetAppName(), false);
-                var lines = (string) key.GetValue(SavedQuoteLinesKey);
-                return JsonHelper.Deserialize<List<ItemQuoteModel>>(lines);
+                var quoteLines = (string) SQLiteHelper.simpleQuery(DbStatements.GetQuoteLinesStatement, new object[] {});
+                return JsonHelper.Deserialize<List<ItemQuoteModel>>(quoteLines);
             }
             catch (Exception)
             {
@@ -155,30 +153,12 @@ namespace KIPS_WMS
             }
         }
 
-        public static void SaveQuoteLines(List<ItemQuoteModel> quoteLines)
-        {
-            try
-            {
-                RegistryKey key = Registry.LocalMachine.OpenSubKey("Software", true);
-                key.CreateSubKey(GetAppName());
-                key = key.OpenSubKey(GetAppName(), true);
-                key.SetValue(SavedQuoteLinesKey, JsonHelper.Serialize(quoteLines));
-            }
-            catch (Exception)
-            {
-            }
-        }
-
         public static void DeleteSavedQuoteData()
         {
             try
             {
-                Registry.LocalMachine.OpenSubKey("Software", true)
-                    .OpenSubKey(GetAppName(), true)
-                    .DeleteValue(SavedQuoteHeaderKey, false);
-                Registry.LocalMachine.OpenSubKey("Software", true)
-                    .OpenSubKey(GetAppName(), true)
-                    .DeleteValue(SavedQuoteLinesKey, false);
+                SQLiteHelper.nonQuery(DbStatements.UpdateQuoteDataStatement,
+                    new object[] {null, null});
             }
             catch (Exception)
             {
