@@ -21,7 +21,7 @@ namespace KIPS_WMS.UI.Ostalo
                 AutoScaleDimensions.Width/96F,
                 AutoScaleDimensions.Height/96F);
 
-            Height = (int) (myAutoScaleFactor.Height*110);
+            Height = (int) (myAutoScaleFactor.Height*130);
 
             DisplayData();
         }
@@ -29,7 +29,8 @@ namespace KIPS_WMS.UI.Ostalo
         private void DisplayData()
         {
             listView1.Clear();
-            listView1.View = View.List;
+            listView1.View = View.Details;
+            listView1.Columns.Add("Magacin", 225, HorizontalAlignment.Left);
             foreach (LoginModel item in _loginData)
             {
                 var lvi = new ListViewItem(new[]

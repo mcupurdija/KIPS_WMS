@@ -37,16 +37,16 @@
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(4, 4);
+            this.listView1.Location = new System.Drawing.Point(4, 1);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(173, 87);
+            this.listView1.Size = new System.Drawing.Size(173, 101);
             this.listView1.TabIndex = 0;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyUp);
             // 
             // bDalje
             // 
-            this.bDalje.Location = new System.Drawing.Point(105, 97);
+            this.bDalje.Location = new System.Drawing.Point(105, 108);
             this.bDalje.Name = "bDalje";
             this.bDalje.Size = new System.Drawing.Size(72, 20);
             this.bDalje.TabIndex = 1;
@@ -55,7 +55,7 @@
             // 
             // bOdustani
             // 
-            this.bOdustani.Location = new System.Drawing.Point(4, 97);
+            this.bOdustani.Location = new System.Drawing.Point(3, 108);
             this.bOdustani.Name = "bOdustani";
             this.bOdustani.Size = new System.Drawing.Size(72, 20);
             this.bOdustani.TabIndex = 2;
@@ -68,7 +68,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.CenterFormOnScreen = true;
-            this.ClientSize = new System.Drawing.Size(180, 120);
+            this.ClientSize = new System.Drawing.Size(180, 140);
             this.ControlBox = false;
             this.Controls.Add(this.bOdustani);
             this.Controls.Add(this.bDalje);
