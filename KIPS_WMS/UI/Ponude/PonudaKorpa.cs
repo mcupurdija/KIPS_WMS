@@ -65,6 +65,8 @@ namespace KIPS_WMS.UI.Ponude
             {
                 Text = _quoteNo;
             }
+
+            SaveData();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -77,8 +79,7 @@ namespace KIPS_WMS.UI.Ponude
             }
             else
             {
-                RegistryUtils.SaveQuoteData(new QuoteHeaderHelper(_quoteNo, _customerCode, _customerName,
-                    _isAuthenticated), _quoteItems);
+                SaveData();
             }
         }
 
@@ -547,6 +548,12 @@ namespace KIPS_WMS.UI.Ponude
                 listBox1.Dispose();
                 Close();
             }
+        }
+
+        private void SaveData()
+        {
+            RegistryUtils.SaveQuoteData(new QuoteHeaderHelper(_quoteNo, _customerCode, _customerName,
+                    _isAuthenticated), _quoteItems);
         }
     }
 }
