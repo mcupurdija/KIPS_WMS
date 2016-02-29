@@ -53,6 +53,7 @@ namespace KIPS_WMS.UI.Isporuka
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
             this.imageList1 = new System.Windows.Forms.ImageList();
+            this.cArtikalPoRegalima = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -172,6 +173,7 @@ namespace KIPS_WMS.UI.Isporuka
             // 
             this.contextMenu1.MenuItems.Add(this.cPodeliRed);
             this.contextMenu1.MenuItems.Add(this.cZameniRegal);
+            this.contextMenu1.MenuItems.Add(this.cArtikalPoRegalima);
             // 
             // cPodeliRed
             // 
@@ -205,6 +207,11 @@ namespace KIPS_WMS.UI.Isporuka
             this.imageList1.Images.Clear();
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
+            // 
+            // cArtikalPoRegalima
+            // 
+            this.cArtikalPoRegalima.Text = "Artikal po regalima";
+            this.cArtikalPoRegalima.Click += new System.EventHandler(this.cArtikalPoRegalima_Click);
             // 
             // IsporukaDetalji
             // 
@@ -254,5 +261,6 @@ namespace KIPS_WMS.UI.Isporuka
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ToolBarButton toolBarButton1;
         private System.Windows.Forms.ToolBarButton toolBarButton2;
+        private System.Windows.Forms.MenuItem cArtikalPoRegalima;
     }
 }

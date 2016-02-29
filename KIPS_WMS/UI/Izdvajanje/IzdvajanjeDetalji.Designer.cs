@@ -51,7 +51,6 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.cArtikalPoRegalima = new System.Windows.Forms.MenuItem();
             this.cPodeliRed = new System.Windows.Forms.MenuItem();
             this.cZameniRegal = new System.Windows.Forms.MenuItem();
-            this.cStanje = new System.Windows.Forms.MenuItem();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
@@ -181,7 +180,6 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.contextMenu1.MenuItems.Add(this.cArtikalPoRegalima);
             this.contextMenu1.MenuItems.Add(this.cPodeliRed);
             this.contextMenu1.MenuItems.Add(this.cZameniRegal);
-            this.contextMenu1.MenuItems.Add(this.cStanje);
             // 
             // cArtikalPoRegalima
             // 
@@ -197,11 +195,6 @@ namespace KIPS_WMS.UI.Izdvajanje
             // 
             this.cZameniRegal.Text = "Zameni regal";
             this.cZameniRegal.Click += new System.EventHandler(this.cZameniRegal_Click);
-            // 
-            // cStanje
-            // 
-            this.cStanje.Text = "Stanje";
-            this.cStanje.Click += new System.EventHandler(this.cStanje_Click);
             // 
             // toolBar1
             // 
@@ -276,6 +269,5 @@ namespace KIPS_WMS.UI.Izdvajanje
         private System.Windows.Forms.ToolBarButton toolBarButton1;
         private System.Windows.Forms.ToolBarButton toolBarButton2;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.MenuItem cStanje;
     }
 }

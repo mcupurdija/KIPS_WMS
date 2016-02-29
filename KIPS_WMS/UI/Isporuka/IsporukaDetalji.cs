@@ -540,5 +540,11 @@ namespace KIPS_WMS.UI.Isporuka
                 Close();
             }
         }
+
+        private void cArtikalPoRegalima_Click(object sender, EventArgs e)
+        {
+            new ArtikliPoRegalimaDijalog(_selectedLine.BinCode, _selectedLine.ItemNo, _selectedLine.ItemVariant)
+                .ShowDialog();
+        }
     }
 }

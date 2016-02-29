@@ -46,7 +46,7 @@ namespace KIPS_WMS.UI.Ostalo
                 string itemBinContentCsv = String.Empty;
 
                 var loginData = RegistryUtils.GetLoginData();
-                _ws.GetItemBinContent(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, _binCode, _itemNo, _variantCode, ref itemBinContentCsv);
+                _ws.GetItemBinContent(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "", _itemNo, _variantCode, ref itemBinContentCsv);
 
                 var engine = new FileHelperEngine(typeof (ItemBinContentModel));
                 _items = ((ItemBinContentModel[]) engine.ReadString(itemBinContentCsv)).ToList();
