@@ -59,7 +59,7 @@ namespace KIPS_WMS
 
                 string warehouseReceiptsCsv = String.Empty;
 
-                _ws.GetWarehouseReceipts("1", "001", "002", "", ref warehouseReceiptsCsv);
+                _ws.GetWarehouseReceipts("1", "001", "002", "", ref warehouseReceiptsCsv, Utils.AppVersion);
 
                 _ws.GetWarehouseReceiptLines("1", "1", "1", "MPR15-0469", ref warehouseReceiptsCsv);
 

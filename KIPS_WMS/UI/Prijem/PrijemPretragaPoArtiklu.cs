@@ -136,7 +136,7 @@ namespace KIPS_WMS.UI.Prijem
                 string warehouseReceiptsCsv = String.Empty;
 
                 var loginData = RegistryUtils.GetLoginData();
-                _ws.GetWarehouseReceipts(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, itemNo, ref warehouseReceiptsCsv);
+                _ws.GetWarehouseReceipts(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, itemNo, ref warehouseReceiptsCsv, Utils.AppVersion);
 
                 var engine = new FileHelperEngine(typeof (WarehouseReceiptModel));
                 _warehouseReceipts = ((WarehouseReceiptModel[]) engine.ReadString(warehouseReceiptsCsv)).ToList();

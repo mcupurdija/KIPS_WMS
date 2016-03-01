@@ -338,7 +338,7 @@ namespace KIPS_WMS.UI.Ponude
 
                 _ws.SendQuote(RegistryUtils.GetLastUsername(), RegistryUtils.GetLoginData().Magacin, ref documentNo,
                     _customerCode, _isAuthenticated, lines, ref status,
-                    ref creditLimit);
+                    ref creditLimit, Utils.AppVersion);
 
                 if (status == 1)
                 {

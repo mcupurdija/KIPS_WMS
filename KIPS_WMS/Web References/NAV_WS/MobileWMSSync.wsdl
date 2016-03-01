@@ -66,6 +66,7 @@
             <element minOccurs="1" maxOccurs="1" name="cSVStringLinesP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
             <element minOccurs="1" maxOccurs="1" name="creditLimitOverdoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="appVersionP" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -231,6 +232,7 @@
             <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="appVersionP" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -320,6 +322,7 @@
             <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="appVersionP" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -391,6 +394,7 @@
             <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="appVersionP" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -462,6 +466,7 @@
             <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="appVersionP" type="string" />
           </sequence>
         </complexType>
       </element>

@@ -38,7 +38,7 @@ namespace KIPS_WMS.UI.Skladistenje
                 string warehousePutAwaysCsv = String.Empty;
 
                 var loginData = RegistryUtils.GetLoginData();
-                _ws.GetWarehousePutAways(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "", ref warehousePutAwaysCsv);
+                _ws.GetWarehousePutAways(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "", ref warehousePutAwaysCsv, Utils.AppVersion);
 
                 var engine = new FileHelperEngine(typeof (WarehousePutAwayModel));
                 _warehousePutAways = ((WarehousePutAwayModel[])engine.ReadString(warehousePutAwaysCsv)).ToList();

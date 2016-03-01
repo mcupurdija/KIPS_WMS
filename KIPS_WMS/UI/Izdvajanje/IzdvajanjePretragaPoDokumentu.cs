@@ -39,7 +39,7 @@ namespace KIPS_WMS.UI.Izdvajanje
 
                 LoginModel loginData = RegistryUtils.GetLoginData();
                 _ws.GetWarehousePicks(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "",
-                    ref warehousePicksCsv);
+                    ref warehousePicksCsv, Utils.AppVersion);
 
                 var engine = new FileHelperEngine(typeof (WarehousePickModel));
                 _warehousePicks = ((WarehousePickModel[]) engine.ReadString(warehousePicksCsv)).ToList();

@@ -38,7 +38,7 @@ namespace KIPS_WMS.UI.Isporuka
                 string warehouseShipmentsCsv = String.Empty;
 
                 var loginData = RegistryUtils.GetLoginData();
-                _ws.GetWarehouseShipments(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "", ref warehouseShipmentsCsv);
+                _ws.GetWarehouseShipments(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "", ref warehouseShipmentsCsv, Utils.AppVersion);
 
                 var engine = new FileHelperEngine(typeof (WarehouseShipmentModel));
                 _warehouseShipments = ((WarehouseShipmentModel[])engine.ReadString(warehouseShipmentsCsv)).ToList();
