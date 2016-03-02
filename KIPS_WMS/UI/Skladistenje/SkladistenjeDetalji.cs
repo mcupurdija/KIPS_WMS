@@ -39,7 +39,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
             //            _selectedLine.UnitOfMeasureCode = "PAK";
 
-            DisplayData(barcode);
+            DisplayData(barcode, true);
             tbRegal.Focus();
         }
 
@@ -50,7 +50,7 @@ namespace KIPS_WMS.UI.Skladistenje
             Text = _putAwayNo;
         }
 
-        private void DisplayData(string barcode)
+        private void DisplayData(string barcode, bool resetQuantity)
         {
             listBox1.Items.Clear();
             var listItem = new ListItem();
@@ -59,10 +59,12 @@ namespace KIPS_WMS.UI.Skladistenje
                 listBox1.Items.Add(listItem);
             }
 
-//            tbRegal.Text = String.Empty;
+            //            tbRegal.Text = String.Empty;
             tbJedinicaKolicina.Text = String.Empty;
-            tbKolicina.Text = "1";
-
+            if (resetQuantity)
+            {
+                tbKolicina.Text = "1";
+            }
             if (barcode != null)
             {
                 tbBarkod.Text = barcode;
@@ -213,7 +215,7 @@ namespace KIPS_WMS.UI.Skladistenje
         private void bDodaj_Click(object sender, EventArgs e)
         {
             UpdateLine(1);
-            
+
         }
 
         private void bZameni_Click(object sender, EventArgs e)
@@ -223,28 +225,42 @@ namespace KIPS_WMS.UI.Skladistenje
 
         private void UpdateLine(int isUpdate)
         {
-            //ako je regal na liniji prazan nema skeniranja
-            if (_selectedLine.BinCode != "" && (tbRegal.Text.Trim().ToUpper() != _selectedLine.BinCode.ToUpper()))
+            //ako postoji regal na liniji, a regal nije unet
+            if (_selectedLine.BinCode != "" && (tbRegal.Text.Trim().ToUpper() == ""))
             {
-                MessageBox.Show("Šifra regala nije skenirana ili se ne slaže sa šifrom iz linije.");
+                MessageBox.Show("Šifra regala nije skenirana.");
                 return;
-            }
-            CultureInfo culture = Utils.GetLocalCulture();
 
-            string quantity = tbKolicina.Text;
-            string uomQuantity = tbJedinicaKolicina.Text;
-            if (uomQuantity.Trim().Length == 0)
-            {
-                uomQuantity = "0";
             }
-            if (quantity.Trim().Length == 0) return;
-
             try
             {
+                if (_selectedLine.BinCode != tbRegal.Text.Trim())
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    string newBinCode = tbRegal.Text.Trim();
+                    _ws.ChangeBinOnDocumentLine(RegistryUtils.GetLastUsername(), Utils.DocumentTypeSkladistenje, _putAwayNo,
+                        Convert.ToInt32(_selectedLine.LineNo), newBinCode);
+
+                    tbRegal.Text = newBinCode.ToUpper();
+                    _selectedLine.BinCode = newBinCode.ToUpper();
+                    DisplayData(null, false);
+                }
+
+                CultureInfo culture = Utils.GetLocalCulture();
+
+                string quantity = tbKolicina.Text;
+                string uomQuantity = tbJedinicaKolicina.Text;
+                if (uomQuantity.Trim().Length == 0)
+                {
+                    uomQuantity = "0";
+                }
+                if (quantity.Trim().Length == 0) return;
+
+
                 if (decimal.Parse(quantity, culture) < 0) return;
                 if (decimal.Parse(uomQuantity, culture) < 0) return;
 
-                Cursor.Current = Cursors.WaitCursor;
+                //Cursor.Current = Cursors.WaitCursor;
                 _ws.UpdatePutAwayLineQty(RegistryUtils.GetLastUsername(), _putAwayNo,
                     Convert.ToInt32(_selectedLine.LineNo), quantity,
                     isUpdate, lJedinica.Text, uomQuantity);
@@ -262,7 +278,11 @@ namespace KIPS_WMS.UI.Skladistenje
                 }
                 WarehousePutAwayLines[index] = _selectedLine;
 
-                DisplayData(null);
+                //DisplayData(null, true);
+
+                DialogResult = DialogResult.Yes;
+                listBox1.Dispose();
+                Close();
             }
             catch (FormatException)
             {
@@ -274,10 +294,7 @@ namespace KIPS_WMS.UI.Skladistenje
             }
             finally
             {
-                Cursor.Current = Cursors.Default;
-                DialogResult = DialogResult.Yes;
-                listBox1.Dispose();
-                Close();
+                Cursor.Current = Cursors.Default;               
             }
         }
 
@@ -330,7 +347,7 @@ namespace KIPS_WMS.UI.Skladistenje
                 _selectedLine = WarehousePutAwayLines.Find(x => x.LineNo == Convert.ToString(lineNo));
 
                 //                Invoke(new EventHandler((e, args) => DisplayData(null)));
-                DisplayData(null);
+                DisplayData(null, true);
             }
             catch (Exception ex)
             {
@@ -440,7 +457,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
                 tbRegal.Text = newBinCode.ToUpper();
                 _selectedLine.BinCode = newBinCode.ToUpper();
-                DisplayData(null);
+                DisplayData(null, true);
             }
             catch (Exception ex)
             {

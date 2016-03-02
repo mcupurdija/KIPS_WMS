@@ -53,6 +53,9 @@ namespace KIPS_WMS.UI.Isporuka
             catch (Exception ex)
             {
                 Utils.GeneralExceptionProcessing(ex);
+                Cursor.Current = Cursors.Default;
+                listBox1.Dispose();
+                Close();
             }
             finally
             {
