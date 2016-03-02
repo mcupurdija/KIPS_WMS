@@ -89,6 +89,7 @@
             this.listBox1.BackgroundImage = null;
             this.listBox1.DataSource = null;
             this.listBox1.DisplayMember = null;
+            this.listBox1.DrawMode = OpenNETCF.Windows.Forms.DrawMode.Normal;
             this.listBox1.EvenItemColor = System.Drawing.SystemColors.Control;
             this.listBox1.ImageList = null;
             this.listBox1.ItemHeight = 40;
@@ -101,6 +102,7 @@
             this.listBox1.TabIndex = 3;
             this.listBox1.WrapText = false;
             this.listBox1.DrawItem += new OpenNETCF.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
+            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // toolBar1
@@ -140,7 +142,6 @@
             this.KeyPreview = true;
             this.Name = "IsporukaPretragaPoDokumentu";
             this.Text = "Pretraga po dokumentu";
-            this.GotFocus += new System.EventHandler(this.IsporukaPretragaPoDokumentu_GotFocus);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IsporukaPretragaPoDokumentu_KeyPress);
             this.ResumeLayout(false);
 

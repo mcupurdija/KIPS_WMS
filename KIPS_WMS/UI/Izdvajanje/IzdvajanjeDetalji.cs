@@ -59,7 +59,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 listBox1.Items.Add(listItem);
             }
 
-            tbRegal.Text = String.Empty;
+//            tbRegal.Text = String.Empty;
             tbJedinicaKolicina.Text = String.Empty;
             tbKolicina.Text = "1";
 

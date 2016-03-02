@@ -37,16 +37,18 @@ namespace KIPS_WMS.UI.Prijem
 
                 string warehouseReceiptsCsv = String.Empty;
 
-                var loginData = RegistryUtils.GetLoginData();
-                _ws.GetWarehouseReceipts(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "", ref warehouseReceiptsCsv, Utils.AppVersion);
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.GetWarehouseReceipts(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "",
+                    ref warehouseReceiptsCsv, Utils.AppVersion);
 
                 var engine = new FileHelperEngine(typeof (WarehouseReceiptModel));
                 _warehouseReceipts = ((WarehouseReceiptModel[]) engine.ReadString(warehouseReceiptsCsv)).ToList();
-                _warehouseReceipts.Sort((x, y) => String.Compare(x.SourceDescription, y.SourceDescription, StringComparison.Ordinal));
+                _warehouseReceipts.Sort(
+                    (x, y) => String.Compare(x.SourceDescription, y.SourceDescription, StringComparison.Ordinal));
                 _filteredList = _warehouseReceipts;
 
 //                Invoke(new EventHandler((sender, e) => DisplayData(null)));
-                DisplayData(null);
+                DisplayData(null, false);
             }
             catch (Exception ex)
             {
@@ -58,7 +60,7 @@ namespace KIPS_WMS.UI.Prijem
             }
         }
 
-        private void DisplayData(string documentNo)
+        private void DisplayData(string documentNo, bool isSearch)
         {
             listBox1.Items.Clear();
 
@@ -76,10 +78,21 @@ namespace KIPS_WMS.UI.Prijem
             {
                 listBox1.Items.Add(new ListItem {Tag = 0});
             }
-            tbPronadji.Focus();
-            if (_filteredList.Count == 1) {
+
+            if (_filteredList.Count == 1)
+            {
+                listBox1.Focus();
+                listBox1.SelectedIndex = 0;
                 _selectedReceipt = _filteredList[0];
-                new PrijemLinije(_selectedReceipt.ReceiptCode).Show();
+
+                if (isSearch)
+                {
+                    ResetListAndContinue();
+                }
+            }
+            else
+            {
+                tbPronadji.Focus();
             }
         }
 
@@ -88,12 +101,12 @@ namespace KIPS_WMS.UI.Prijem
             string searchQuery = tbPronadji.Text.Trim();
             if (searchQuery.Length == 0) return;
 
-            DisplayData(searchQuery);
+            DisplayData(searchQuery, true);
         }
 
         private void bReset_Click(object sender, EventArgs e)
         {
-            DisplayData(null);
+            DisplayData(null, false);
             tbPronadji.Text = String.Empty;
             tbPronadji.Focus();
         }
@@ -120,7 +133,7 @@ namespace KIPS_WMS.UI.Prijem
         {
             if (_selectedReceipt != null)
             {
-                new PrijemLinije(_selectedReceipt.ReceiptCode).Show();
+                ResetListAndContinue();
             }
             else
             {
@@ -169,7 +182,7 @@ namespace KIPS_WMS.UI.Prijem
                 case 1:
                     if (_selectedReceipt != null)
                     {
-                        new PrijemLinije(_selectedReceipt.ReceiptCode).Show();
+                        ResetListAndContinue();
                     }
                     else
                     {
@@ -181,25 +194,41 @@ namespace KIPS_WMS.UI.Prijem
 
         private void tbPronadji_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) {
-                DisplayData(tbPronadji.Text.Trim());
+            if (e.KeyCode == Keys.Enter)
+            {
+                DisplayData(tbPronadji.Text.Trim(), true);
             }
-        }
-
-        private void PrijemPretragaPoDokumentu_GotFocus(object sender, EventArgs e)
-        {
-            DisplayData(null);
-            tbPronadji.Text = "";
-            tbPronadji.Focus();
         }
 
         private void PrijemPretragaPoDokumentu_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Escape)
+            if (e.KeyChar == (char) Keys.Escape)
             {
                 listBox1.Dispose();
                 Close();
             }
+        }
+
+        private void listBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            int index = listBox1.SelectedIndex;
+            if (e.KeyCode == Keys.Enter && index != -1 && index < listBox1.Items.Count &&
+                listBox1.Items[index].Tag == null)
+            {
+                ResetListAndContinue();
+            }
+        }
+
+        private void ResetListAndContinue()
+        {
+            string code = _selectedReceipt.ReceiptCode;
+            DisplayData(null, false);
+            listBox1.SelectedIndex = -1;
+
+            tbPronadji.Text = String.Empty;
+            tbPronadji.Focus();
+
+            new PrijemLinije(code).Show();
         }
     }
 }

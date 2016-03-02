@@ -48,7 +48,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 _filteredList = _warehousePicks;
 
 //                Invoke(new EventHandler((sender, e) => DisplayData(null)));
-                DisplayData(null);
+                DisplayData(null, false);
             }
             catch (Exception ex)
             {
@@ -60,7 +60,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             }
         }
 
-        private void DisplayData(string documentNo)
+        private void DisplayData(string documentNo, bool isSearch)
         {
             listBox1.Items.Clear();
 
@@ -79,11 +79,20 @@ namespace KIPS_WMS.UI.Izdvajanje
                 listBox1.Items.Add(new ListItem {Tag = 0});
             }
 
-            tbPronadji.Focus();
             if (_filteredList.Count == 1)
             {
+                listBox1.Focus();
+                listBox1.SelectedIndex = 0;
                 _selectedPick = _filteredList[0];
-                new IzdvajanjeLinije(_selectedPick.PickCode).Show();
+
+                if (isSearch)
+                {
+                    ResetListAndContinue();
+                }
+            }
+            else
+            {
+                tbPronadji.Focus();
             }
         }
 
@@ -92,12 +101,12 @@ namespace KIPS_WMS.UI.Izdvajanje
             string searchQuery = tbPronadji.Text.Trim();
             if (searchQuery.Length == 0) return;
 
-            DisplayData(searchQuery);
+            DisplayData(searchQuery, true);
         }
 
         private void bReset_Click(object sender, EventArgs e)
         {
-            DisplayData(null);
+            DisplayData(null, false);
             tbPronadji.Text = String.Empty;
             tbPronadji.Focus();
         }
@@ -124,7 +133,7 @@ namespace KIPS_WMS.UI.Izdvajanje
         {
             if (_selectedPick != null)
             {
-                new IzdvajanjeLinije(_selectedPick.PickCode).Show();
+                ResetListAndContinue();
             }
             else
             {
@@ -173,7 +182,7 @@ namespace KIPS_WMS.UI.Izdvajanje
                 case 1:
                     if (_selectedPick != null)
                     {
-                        new IzdvajanjeLinije(_selectedPick.PickCode).Show();
+                        ResetListAndContinue();
                     }
                     else
                     {
@@ -187,24 +196,39 @@ namespace KIPS_WMS.UI.Izdvajanje
         {
             if (e.KeyCode == Keys.Enter)
             {
-                DisplayData(tbPronadji.Text.Trim());
+                DisplayData(tbPronadji.Text.Trim(), true);
             }
-        }
-
-        private void IzdvajanjePretragaPoDokumentu_GotFocus(object sender, EventArgs e)
-        {
-            DisplayData(null);
-            tbPronadji.Text = "";
-            tbPronadji.Focus();
         }
 
         private void IzdvajanjePretragaPoDokumentu_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Escape)
+            if (e.KeyChar == (char) Keys.Escape)
             {
                 listBox1.Dispose();
                 Close();
             }
+        }
+
+        private void listBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            int index = listBox1.SelectedIndex;
+            if (e.KeyCode == Keys.Enter && index != -1 && index < listBox1.Items.Count &&
+                listBox1.Items[index].Tag == null)
+            {
+                ResetListAndContinue();
+            }
+        }
+
+        private void ResetListAndContinue()
+        {
+            string code = _selectedPick.PickCode;
+            DisplayData(null, false);
+            listBox1.SelectedIndex = -1;
+
+            tbPronadji.Text = String.Empty;
+            tbPronadji.Focus();
+
+            new IzdvajanjeLinije(code).Show();
         }
     }
 }

@@ -102,6 +102,7 @@
             this.listBox1.WrapText = false;
             this.listBox1.DrawItem += new OpenNETCF.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
             // 
             // toolBar1
             // 
@@ -140,7 +141,6 @@
             this.KeyPreview = true;
             this.Name = "PrijemPretragaPoDokumentu";
             this.Text = "Pretraga po dokumentu";
-            this.GotFocus += new System.EventHandler(this.PrijemPretragaPoDokumentu_GotFocus);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrijemPretragaPoDokumentu_KeyPress);
             this.ResumeLayout(false);
 

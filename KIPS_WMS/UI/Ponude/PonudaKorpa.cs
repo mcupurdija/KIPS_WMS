@@ -535,7 +535,14 @@ namespace KIPS_WMS.UI.Ponude
 
                     if (result == DialogResult.OK)
                     {
-                        new Thread(() => SendQuote(stampaDijalog.PrintTypeSelected)).Start();
+                        if (Utils.CheckDate())
+                        {
+                            new Thread(() => SendQuote(stampaDijalog.PrintTypeSelected)).Start();
+                        }
+                        else
+                        {
+                            Meni.ShowErrorMessage();
+                        }
                     }
                     break;
             }

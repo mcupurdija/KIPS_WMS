@@ -203,7 +203,7 @@ namespace KIPS_WMS.UI
             }
         }
 
-        private void ShowErrorMessage()
+        public static void ShowErrorMessage()
         {
             MessageBox.Show("Server na adresi 192.168.10.18 trenutno nije dostupan, molimo kontaktirajte administratora", Resources.Greska);
         }

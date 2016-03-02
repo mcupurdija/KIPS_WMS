@@ -37,16 +37,18 @@ namespace KIPS_WMS.UI.Isporuka
 
                 string warehouseShipmentsCsv = String.Empty;
 
-                var loginData = RegistryUtils.GetLoginData();
-                _ws.GetWarehouseShipments(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "", ref warehouseShipmentsCsv, Utils.AppVersion);
+                LoginModel loginData = RegistryUtils.GetLoginData();
+                _ws.GetWarehouseShipments(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin, "",
+                    ref warehouseShipmentsCsv, Utils.AppVersion);
 
                 var engine = new FileHelperEngine(typeof (WarehouseShipmentModel));
-                _warehouseShipments = ((WarehouseShipmentModel[])engine.ReadString(warehouseShipmentsCsv)).ToList();
-                _warehouseShipments.Sort((x, y) => String.Compare(x.SourceDescription, y.SourceDescription, StringComparison.Ordinal));
+                _warehouseShipments = ((WarehouseShipmentModel[]) engine.ReadString(warehouseShipmentsCsv)).ToList();
+                _warehouseShipments.Sort(
+                    (x, y) => String.Compare(x.SourceDescription, y.SourceDescription, StringComparison.Ordinal));
                 _filteredList = _warehouseShipments;
 
 //                Invoke(new EventHandler((sender, e) => DisplayData(null)));
-                DisplayData(null);
+                DisplayData(null, false);
             }
             catch (Exception ex)
             {
@@ -58,7 +60,7 @@ namespace KIPS_WMS.UI.Isporuka
             }
         }
 
-        private void DisplayData(string documentNo)
+        private void DisplayData(string documentNo, bool isSearch)
         {
             listBox1.Items.Clear();
 
@@ -77,11 +79,20 @@ namespace KIPS_WMS.UI.Isporuka
                 listBox1.Items.Add(new ListItem {Tag = 0});
             }
 
-            tbPronadji.Focus();
             if (_filteredList.Count == 1)
             {
+                listBox1.Focus();
+                listBox1.SelectedIndex = 0;
                 _selectedShipment = _filteredList[0];
-                new IsporukaLinije(_selectedShipment.ShipmentCode).Show();
+
+                if (isSearch)
+                {
+                    ResetListAndContinue();
+                }
+            }
+            else
+            {
+                tbPronadji.Focus();
             }
         }
 
@@ -90,12 +101,12 @@ namespace KIPS_WMS.UI.Isporuka
             string searchQuery = tbPronadji.Text.Trim();
             if (searchQuery.Length == 0) return;
 
-            DisplayData(searchQuery);
+            DisplayData(searchQuery, true);
         }
 
         private void bReset_Click(object sender, EventArgs e)
         {
-            DisplayData(null);
+            DisplayData(null, false);
             tbPronadji.Text = String.Empty;
             tbPronadji.Focus();
         }
@@ -122,7 +133,7 @@ namespace KIPS_WMS.UI.Isporuka
         {
             if (_selectedShipment != null)
             {
-                new IsporukaLinije(_selectedShipment.ShipmentCode).Show();
+                ResetListAndContinue();
             }
             else
             {
@@ -171,7 +182,7 @@ namespace KIPS_WMS.UI.Isporuka
                 case 1:
                     if (_selectedShipment != null)
                     {
-                        new IsporukaLinije(_selectedShipment.ShipmentCode).Show();
+                        ResetListAndContinue();
                     }
                     else
                     {
@@ -185,24 +196,39 @@ namespace KIPS_WMS.UI.Isporuka
         {
             if (e.KeyCode == Keys.Enter)
             {
-                DisplayData(tbPronadji.Text.Trim());
+                DisplayData(tbPronadji.Text.Trim(), true);
             }
-        }
-
-        private void IsporukaPretragaPoDokumentu_GotFocus(object sender, EventArgs e)
-        {
-            DisplayData(null);
-            tbPronadji.Text = "";
-            tbPronadji.Focus();
         }
 
         private void IsporukaPretragaPoDokumentu_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Escape)
+            if (e.KeyChar == (char) Keys.Escape)
             {
                 listBox1.Dispose();
                 Close();
             }
+        }
+
+        private void listBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            int index = listBox1.SelectedIndex;
+            if (e.KeyCode == Keys.Enter && index != -1 && index < listBox1.Items.Count &&
+                listBox1.Items[index].Tag == null)
+            {
+                ResetListAndContinue();
+            }
+        }
+
+        private void ResetListAndContinue()
+        {
+            string code = _selectedShipment.ShipmentCode;
+            DisplayData(null, false);
+            listBox1.SelectedIndex = -1;
+
+            tbPronadji.Text = String.Empty;
+            tbPronadji.Focus();
+
+            new IsporukaLinije(code).Show();
         }
     }
 }

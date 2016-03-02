@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Model;
@@ -35,6 +34,8 @@ namespace KIPS_WMS.UI.Ponude
         private string _itemCode;
         private string _itemBarcode;
         private string _variantCode;
+        private string _itemDescription;
+        private string _itemUnitofMeasure;
         private bool _fromScanner;
         private bool _quantityWatcherEnabled = true;
         private bool _convertedQuantityWatcherEnabled = true;
@@ -94,8 +95,10 @@ namespace KIPS_WMS.UI.Ponude
                     _itemCode = modelNew[DatabaseModel.ItemDbModel.ItemCode].ToString();
                     _itemBarcode = modelNew[DatabaseModel.ItemDbModel.ItemBarcode].ToString();
                     _variantCode = (modelNew[DatabaseModel.ItemDbModel.ItemVariant] ?? String.Empty).ToString();
+                    _itemDescription = modelNew[DatabaseModel.ItemDbModel.ItemDescription].ToString();
+                    _itemUnitofMeasure = modelNew[DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
 
-                    new Thread(() => GetItemInformation(_itemCode, _variantCode)).Start();
+                    GetItemInformation(_itemCode, _variantCode);
 
                     break;
                 case ItemState.Edit:
@@ -141,12 +144,18 @@ namespace KIPS_WMS.UI.Ponude
                 var itemInformation = (ItemInformationModel[]) engine.ReadString(itemInformationCsv);
                 if (itemInformation.Length > 0)
                 {
-                    Invoke(new EventHandler((sender, e) => UpdateData(itemInformation[0])));
+                    UpdateData(itemInformation[0]);
                 }
             }
             catch (Exception ex)
             {
                 Utils.GeneralExceptionProcessing(ex);
+
+                tbSifra.Text = _itemCode;
+                tbNaziv.Text = _itemDescription;
+                bJedinicaMere.Text = _itemUnitofMeasure;
+                tbKolicina.Text = "1";
+                FocusQuantity();
             }
             finally
             {
@@ -419,7 +428,7 @@ namespace KIPS_WMS.UI.Ponude
 
         private void bMagacin_Click(object sender, EventArgs e)
         {
-            IzborMagacina izbor = new IzborMagacina(_itemCode);
+            var izbor = new IzborMagacina(_itemCode);
             DialogResult result = izbor.ShowDialog();
 
             if (result == DialogResult.Yes) {
@@ -429,6 +438,8 @@ namespace KIPS_WMS.UI.Ponude
                 tbKolicinaVezanaLokacija.Text = "";
                 tbRaspolozivoLokacija.Text = "";
                 tbRaspolozivoVezanaLokacija.Text = "";
+
+                bUcitaj_Click(null, null);
             }
         }
 
