@@ -55,14 +55,7 @@ namespace KIPS_WMS.UI
 
         private void bPonude_Click(object sender, EventArgs e)
         {
-            if (Utils.CheckDate())
-            {
-                new PonudePocetna().Show();
-            }
-            else
-            {
-                ShowErrorMessage();
-            }
+            new PonudePocetna().Show();
         }
 
         private void bLagerLista_Click(object sender, EventArgs e)

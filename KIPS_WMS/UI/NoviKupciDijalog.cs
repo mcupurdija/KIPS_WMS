@@ -58,6 +58,8 @@ namespace KIPS_WMS.UI
                             new object[] { customer.CustomerBarcode, customer.CustomerCode, customer.CustomerName });
                     }
                 }
+
+                SQLiteHelper.nonQuery(DbStatements.UpdateSyncDateCustomers, new object[] { DateTime.Now.ToString("yyyy-MM-dd") });
             }
             catch (Exception ex)
             {

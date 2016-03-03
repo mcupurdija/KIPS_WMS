@@ -43,7 +43,7 @@
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
             this.toolBarButton2 = new System.Windows.Forms.ToolBarButton();
             this.imageList1 = new System.Windows.Forms.ImageList();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lVersion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -132,13 +132,13 @@
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
             this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource1"))));
             // 
-            // label4
+            // lVersion
             // 
-            this.label4.Location = new System.Drawing.Point(137, 168);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(100, 20);
-            this.label4.Text = "v1.0.1";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lVersion.Location = new System.Drawing.Point(137, 168);
+            this.lVersion.Name = "lVersion";
+            this.lVersion.Size = new System.Drawing.Size(100, 20);
+            this.lVersion.Text = "v1.0.1";
+            this.lVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // Settings
             // 
@@ -146,7 +146,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lVersion);
             this.Controls.Add(this.toolBar1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbTest);
@@ -176,6 +176,6 @@
         private System.Windows.Forms.ToolBarButton toolBarButton1;
         private System.Windows.Forms.ToolBarButton toolBarButton2;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lVersion;
     }
 }

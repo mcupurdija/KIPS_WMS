@@ -8,31 +8,49 @@ namespace KIPS_WMS.Model
         /// <summary>
         ///     Customers: 1; Items: 2
         /// </summary>
-        public int TableNo { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public int TableNo;
 
         /// <summary>
         ///     Customers: Barcode; Items: Barcode
         /// </summary>
-        public string Field1 { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string Field1;
 
         /// <summary>
         ///     Customers: Customer code; Items: Item code
         /// </summary>
-        public string Field2 { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string Field2;
 
         /// <summary>
         ///     Customers: n/a; Items: Item variant
         /// </summary>
-        public string Field3 { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string Field3;
 
         /// <summary>
         ///     Customers: Customer name; Items: Item description
         /// </summary>
-        public string Field4 { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string Field4;
 
         /// <summary>
         ///     Customers: n/a; Items: Unit of measure
         /// </summary>
-        public string Field5 { get; set; }
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string Field5;
+
+        /// <summary>
+        ///     Customers: n/a; Items: Quantity coefficient
+        /// </summary>
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string Field6;
+
+        /// <summary>
+        ///     Customers: n/a; Items: Tracking code
+        /// </summary>
+        [FieldQuoted('"', QuoteMode.AlwaysQuoted, MultilineMode.NotAllow)]
+        public string Field7;
     }
 }

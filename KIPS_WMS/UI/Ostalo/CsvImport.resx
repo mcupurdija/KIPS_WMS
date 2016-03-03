@@ -123,6 +123,33 @@
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>134, 17</value>
   </metadata>
+  <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>274, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="resource" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAEYAAAAkCAMAAAADzLznAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAGkUExURQAAAMLD4VJSUioqKp+guRERFGtrfD4+Pre31Hp6izY2NkhISAcHB5qbsyQkJM7P75iZ
+        sKytx1VVWh4eI05OTjAwMD8/RTo6OllZWcfI57y92nV2iKanwQoKC1FRXhsbGzw8PEZGRl5eYrGyzUlK
+        Ui0tNCMjKBgYHLu82QAAAEFBQkBASjU1PX1+j1BQUkxMTHNzhVRUVDw8QlhYWKOkvV5fbMvM6yYmLDAx
+        OCAgJQ4ODqqqxURERDs7QBcXGi4uLsPE40RESsDB3zMzMzg4OFhYXzk5Qnh6i1BRWrO00Li51UBAQEpK
+        SiYmJiwsLBsbHyEhJlJTVl5eXigoKFZWV3+Aka+vylBQUExMUr6/3Hx8jwwMDikpMEZGTggICVRUXm1u
+        fcnK6QQEBMXG5T09RszN7Q8PEVxcXKWmvqusx0JCQlRUVhMTFhwcHGBgYCIiIhwcISIiKL/A3a2uyXt8
+        jbm614CBklJSVMPD4S0uM0JCSn5/kLu92UZGSLe31a+vy8nL6R4eJL/B3Xp6jaepwaWlvQ4OEKurxbW1
+        0bm510xMVcXH5f9Aw90AAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZp
+        cmV3b3JrcyBDUzbovLKMAAACKklEQVRIS82V208TQRSHhxalF+1R7IJ3qSht0KTUu6JWaDFyqbpagUat
+        3KQqaozVGB9N9MW/2nPOnJmd9oHMEh/4kp3d85uzHzuzsCj4L+xvzZEXzLd0Or32XjIP+jTvzneaiXJ2
+        cqxeb1wfkNCDXs2f5ueriXx2cjQTJN9I5kWP5vfOs8rKUmFotBYkH0nmh6uZrnQq+exdtvx9K6Efjubo
+        TgcX9GEoU6s+v3BDQk8izXJ4PFEu0LYEjdfrEvpiNeM/mvmlwiJaHjdmTkjojdHMh6HZlsbIAwm9UKQQ
+        TSoMy7gt9Vq1mrsivy+KG3TbLjiahTDkBaHl089ZjvagKekF0ebeedqihEANd+iBTjQ6pRvg0Rqm94zb
+        EpzbOFaiacZ04GCOvpIjPQDMDpcLi2MZ3Nxt9WSBexmct726tKO+cBIF3TmzoLa6HT2LnjfN9uH5Til1
+        oXNYnqM3FAS5DaWcJel5aTaHHkwZFbSogVV+z2hRqpiiGY2etz+WBr6wpVvh0ZqpJrVFqS/faYoxXeaB
+        zH22jC5YAyfv5Q5hyfyy69I3YcQDneVkz84FtUJpQgfExFeO4qE1kCqKBLkZ4+NpEA3M3xcJ8irWnyZj
+        NDD+USTIxU0JvbEa6B4QCXIr7gcn0sD0tkiQyzE/f44GTr8UCfIw3sfY1cC1MyJBtmL9a+jRwGBbJMgl
+        ybzo1cBgsW1QZ81n0IM+DRyeOmU42JXMg37NHtlPGoB/d9Gt+KuUYXgAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="$this.FormFactorShadowProperty" xml:space="preserve">
     <value>Pocket_PC_Phone_Square_Screen</value>
   </metadata>
