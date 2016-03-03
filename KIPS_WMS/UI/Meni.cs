@@ -10,11 +10,15 @@ using KIPS_WMS.UI.Ponude;
 using KIPS_WMS.UI.Preklasifikacija;
 using KIPS_WMS.UI.Prijem;
 using KIPS_WMS.UI.Skladistenje;
+using KIPS_WMS.NAV_WS;
+using KIPS_WMS.Web;
 
 namespace KIPS_WMS.UI
 {
     public partial class Meni : Form
     {
+        private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
+
         public Meni()
         {
             InitializeComponent();
@@ -55,13 +59,20 @@ namespace KIPS_WMS.UI
 
         private void bPonude_Click(object sender, EventArgs e)
         {
-            if (Utils.CheckDate())
+            try
             {
-                new PonudePocetna().Show();
+                if (Utils.CheckDate())
+                {
+                    _ws.TestIsAppVersionValid(Utils.AppVersion);
+                    new PonudePocetna().Show();
+                }
+                else
+                {
+                    ShowErrorMessage();
+                }
             }
-            else
-            {
-                ShowErrorMessage();
+            catch (Exception ex) {
+                Utils.GeneralExceptionProcessing(ex);
             }
         }
 

@@ -28,7 +28,7 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         public MobileWMSSync() {
-            this.Url = "http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/MobileWMSSync";
+            this.Url = "http://192.168.10.72:7397/NAVNasService/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync";
         }
         
         /// <remarks/>
@@ -56,24 +56,20 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SetDocumentStatus", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="SetDocumentStatus_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SetDocumentStatus(int documentTypeP, string documentNoP, int statusP) {
-            this.Invoke("SetDocumentStatus", new object[] {
-                        documentTypeP,
-                        documentNoP,
-                        statusP});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:TestIsAppVersionValid", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="TestIsAppVersionValid_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void TestIsAppVersionValid(string appVersionFromAplicationP) {
+            this.Invoke("TestIsAppVersionValid", new object[] {
+                        appVersionFromAplicationP});
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginSetDocumentStatus(int documentTypeP, string documentNoP, int statusP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("SetDocumentStatus", new object[] {
-                        documentTypeP,
-                        documentNoP,
-                        statusP}, callback, asyncState);
+        public System.IAsyncResult BeginTestIsAppVersionValid(string appVersionFromAplicationP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("TestIsAppVersionValid", new object[] {
+                        appVersionFromAplicationP}, callback, asyncState);
         }
         
         /// <remarks/>
-        public void EndSetDocumentStatus(System.IAsyncResult asyncResult) {
+        public void EndTestIsAppVersionValid(System.IAsyncResult asyncResult) {
             this.EndInvoke(asyncResult);
         }
         
@@ -306,30 +302,6 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItems", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItems_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetItems(ref string cSVStringP, string itemNoP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime lastDateModifiedP) {
-            object[] results = this.Invoke("GetItems", new object[] {
-                        cSVStringP,
-                        itemNoP,
-                        lastDateModifiedP});
-            cSVStringP = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginGetItems(string cSVStringP, string itemNoP, System.DateTime lastDateModifiedP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("GetItems", new object[] {
-                        cSVStringP,
-                        itemNoP,
-                        lastDateModifiedP}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public void EndGetItems(System.IAsyncResult asyncResult, out string cSVStringP) {
-            object[] results = this.EndInvoke(asyncResult);
-            cSVStringP = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetLocationsForQuote", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetLocationsForQuote_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GetLocationsForQuote(string userIdP, string locationCodeP, string sublocationCodeP, string itemNoP, ref string cSVStringP) {
             object[] results = this.Invoke("GetLocationsForQuote", new object[] {
@@ -353,6 +325,30 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         public void EndGetLocationsForQuote(System.IAsyncResult asyncResult, out string cSVStringP) {
+            object[] results = this.EndInvoke(asyncResult);
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItems", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItems_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetItems(ref string cSVStringP, string itemNoP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime lastDateModifiedP) {
+            object[] results = this.Invoke("GetItems", new object[] {
+                        cSVStringP,
+                        itemNoP,
+                        lastDateModifiedP});
+            cSVStringP = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetItems(string cSVStringP, string itemNoP, System.DateTime lastDateModifiedP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetItems", new object[] {
+                        cSVStringP,
+                        itemNoP,
+                        lastDateModifiedP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetItems(System.IAsyncResult asyncResult, out string cSVStringP) {
             object[] results = this.EndInvoke(asyncResult);
             cSVStringP = ((string)(results[0]));
         }
@@ -672,8 +668,7 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehousePickLines", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetWarehousePickLines_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPickNoP, ref string cSVStringP)
-        {
+        public void GetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPickNoP, ref string cSVStringP) {
             object[] results = this.Invoke("GetWarehousePickLines", new object[] {
                         userIdP,
                         locationCodeP,
@@ -684,8 +679,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPickNoP, string cSVStringP, System.AsyncCallback callback, object asyncState)
-        {
+        public System.IAsyncResult BeginGetWarehousePickLines(string userIdP, string locationCodeP, string sublocationCodeP, string whsPickNoP, string cSVStringP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("GetWarehousePickLines", new object[] {
                         userIdP,
                         locationCodeP,
@@ -712,8 +706,7 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetPickLineQtyToHandle(string userIdP, string pickNoP, int pickLineNoP, string qtyToHandleP, System.AsyncCallback callback, object asyncState)
-        {
+        public System.IAsyncResult BeginGetPickLineQtyToHandle(string userIdP, string pickNoP, int pickLineNoP, string qtyToHandleP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("GetPickLineQtyToHandle", new object[] {
                         userIdP,
                         pickNoP,
@@ -755,6 +748,36 @@ namespace KIPS_WMS.NAV_WS {
         /// <remarks/>
         public void EndUpdatePickLineQty(System.IAsyncResult asyncResult) {
             this.EndInvoke(asyncResult);
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:RegisterWhsDocument", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="RegisterWhsDocument_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RegisterWhsDocument(string userIdP, string locationCodeP, string sublocationCodeP, int documentTypeP, string whsDocumentNoP, ref int statusP) {
+            object[] results = this.Invoke("RegisterWhsDocument", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        documentTypeP,
+                        whsDocumentNoP,
+                        statusP});
+            statusP = ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginRegisterWhsDocument(string userIdP, string locationCodeP, string sublocationCodeP, int documentTypeP, string whsDocumentNoP, int statusP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("RegisterWhsDocument", new object[] {
+                        userIdP,
+                        locationCodeP,
+                        sublocationCodeP,
+                        documentTypeP,
+                        whsDocumentNoP,
+                        statusP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndRegisterWhsDocument(System.IAsyncResult asyncResult, out int statusP) {
+            object[] results = this.EndInvoke(asyncResult);
+            statusP = ((int)(results[0]));
         }
         
         /// <remarks/>
@@ -844,7 +867,7 @@ namespace KIPS_WMS.NAV_WS {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:UpdateWarehouseShipmentLine" +
             "Qty", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="UpdateWarehouseShipmentLineQty_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdateWarehouseShipmentLineQty(string userIdP, string whsShipmentNoP, int whsShipmentLineNoP, string qtyP, int isUpdateP, string trackingCSVStringP, string normCSVStringP, string scannedUoMCodeP, string qtyInScannedUoMP) {
+        public void UpdateWarehouseShipmentLineQty(string userIdP, string whsShipmentNoP, int whsShipmentLineNoP, string qtyP, int isUpdateP, string trackingCSVStringP, string scannedUoMCodeP, string qtyInScannedUoMP) {
             this.Invoke("UpdateWarehouseShipmentLineQty", new object[] {
                         userIdP,
                         whsShipmentNoP,
@@ -852,13 +875,12 @@ namespace KIPS_WMS.NAV_WS {
                         qtyP,
                         isUpdateP,
                         trackingCSVStringP,
-                        normCSVStringP,
                         scannedUoMCodeP,
                         qtyInScannedUoMP});
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginUpdateWarehouseShipmentLineQty(string userIdP, string whsShipmentNoP, int whsShipmentLineNoP, string qtyP, int isUpdateP, string trackingCSVStringP, string normCSVStringP, string scannedUoMCodeP, string qtyInScannedUoMP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginUpdateWarehouseShipmentLineQty(string userIdP, string whsShipmentNoP, int whsShipmentLineNoP, string qtyP, int isUpdateP, string trackingCSVStringP, string scannedUoMCodeP, string qtyInScannedUoMP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("UpdateWarehouseShipmentLineQty", new object[] {
                         userIdP,
                         whsShipmentNoP,
@@ -866,7 +888,6 @@ namespace KIPS_WMS.NAV_WS {
                         qtyP,
                         isUpdateP,
                         trackingCSVStringP,
-                        normCSVStringP,
                         scannedUoMCodeP,
                         qtyInScannedUoMP}, callback, asyncState);
         }
@@ -912,32 +933,6 @@ namespace KIPS_WMS.NAV_WS {
         public void EndBinToBinMovement(System.IAsyncResult asyncResult, out int nAVLineNoP) {
             object[] results = this.EndInvoke(asyncResult);
             nAVLineNoP = ((int)(results[0]));
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemFromAnotherBin", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="GetItemFromAnotherBin_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetItemFromAnotherBin(ref string linesCSV, string docNo, string lineNo, string userID) {
-            object[] results = this.Invoke("GetItemFromAnotherBin", new object[] {
-                        linesCSV,
-                        docNo,
-                        lineNo,
-                        userID});
-            linesCSV = ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginGetItemFromAnotherBin(string linesCSV, string docNo, string lineNo, string userID, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("GetItemFromAnotherBin", new object[] {
-                        linesCSV,
-                        docNo,
-                        lineNo,
-                        userID}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public void EndGetItemFromAnotherBin(System.IAsyncResult asyncResult, out string linesCSV) {
-            object[] results = this.EndInvoke(asyncResult);
-            linesCSV = ((string)(results[0]));
         }
         
         /// <remarks/>
@@ -994,33 +989,25 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:RegisterWhsDocument", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="RegisterWhsDocument_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void RegisterWhsDocument(string userIdP, string locationCodeP, string sublocationCodeP, int documentTypeP, string whsDocumentNoP, ref int statusP) {
-            object[] results = this.Invoke("RegisterWhsDocument", new object[] {
-                        userIdP,
-                        locationCodeP,
-                        sublocationCodeP,
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SetDocumentStatus", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="SetDocumentStatus_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SetDocumentStatus(int documentTypeP, string documentNoP, int statusP) {
+            this.Invoke("SetDocumentStatus", new object[] {
                         documentTypeP,
-                        whsDocumentNoP,
+                        documentNoP,
                         statusP});
-            statusP = ((int)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginRegisterWhsDocument(string userIdP, string locationCodeP, string sublocationCodeP, int documentTypeP, string whsDocumentNoP, int statusP, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("RegisterWhsDocument", new object[] {
-                        userIdP,
-                        locationCodeP,
-                        sublocationCodeP,
+        public System.IAsyncResult BeginSetDocumentStatus(int documentTypeP, string documentNoP, int statusP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("SetDocumentStatus", new object[] {
                         documentTypeP,
-                        whsDocumentNoP,
+                        documentNoP,
                         statusP}, callback, asyncState);
         }
         
         /// <remarks/>
-        public void EndRegisterWhsDocument(System.IAsyncResult asyncResult, out int statusP) {
-            object[] results = this.EndInvoke(asyncResult);
-            statusP = ((int)(results[0]));
+        public void EndSetDocumentStatus(System.IAsyncResult asyncResult) {
+            this.EndInvoke(asyncResult);
         }
         
         /// <remarks/>

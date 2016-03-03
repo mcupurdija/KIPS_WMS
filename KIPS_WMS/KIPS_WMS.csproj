@@ -578,10 +578,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/MobileWMSSync">
+    <WebReferenceUrl Include="http://192.168.10.72:7397/NAVNasService/WS/KIPS%2520d.o.o/Codeunit/MobileWMSSync">
       <UrlBehavior>Static</UrlBehavior>
       <RelPath>Web References\NAV_WS\</RelPath>
-      <UpdateFromURL>http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/MobileWMSSync</UpdateFromURL>
+      <UpdateFromURL>http://192.168.10.72:7397/NAVNasService/WS/KIPS%2520d.o.o/Codeunit/MobileWMSSync</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

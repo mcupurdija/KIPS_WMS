@@ -288,7 +288,7 @@ namespace KIPS_WMS.UI.Isporuka
                 Cursor.Current = Cursors.WaitCursor;
                 _ws.UpdateWarehouseShipmentLineQty(RegistryUtils.GetLastUsername(), _shipmentNo,
                     Convert.ToInt32(_selectedLine.LineNo),
-                    quantity, isUpdate, lines, normativeLines, lJedinica.Text, uomQuantity);
+                    quantity, isUpdate, lines, lJedinica.Text, uomQuantity);
 
                 int index = WarehouseShipmentLines.IndexOf(_selectedLine);
                 if (isUpdate == 1)

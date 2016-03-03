@@ -18,16 +18,14 @@
           </sequence>
         </complexType>
       </element>
-      <element name="SetDocumentStatus">
+      <element name="TestIsAppVersionValid">
         <complexType>
           <sequence>
-            <element minOccurs="1" maxOccurs="1" name="documentTypeP" type="int" />
-            <element minOccurs="1" maxOccurs="1" name="documentNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="appVersionFromAplicationP" type="string" />
           </sequence>
         </complexType>
       </element>
-      <element name="SetDocumentStatus_Result">
+      <element name="TestIsAppVersionValid_Result">
         <complexType>
           <sequence />
         </complexType>
@@ -174,22 +172,6 @@
           </sequence>
         </complexType>
       </element>
-      <element name="GetItems">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="lastDateModifiedP" type="date" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetItems_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
       <element name="GetLocationsForQuote">
         <complexType>
           <sequence>
@@ -202,6 +184,22 @@
         </complexType>
       </element>
       <element name="GetLocationsForQuote_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItems">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastDateModifiedP" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetItems_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
@@ -411,7 +409,7 @@
             <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="whsPutAwayNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="whsPickNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="cSVStringP" type="string" />
           </sequence>
         </complexType>
@@ -427,8 +425,8 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="putAwayNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="putAwayLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="pickNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="pickLineNoP" type="int" />
             <element minOccurs="1" maxOccurs="1" name="qtyToHandleP" type="string" />
           </sequence>
         </complexType>
@@ -444,8 +442,8 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="putAwayNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="putAwayLineNoP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="pickNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="pickLineNoP" type="int" />
             <element minOccurs="1" maxOccurs="1" name="qtyP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="isUpdateP" type="int" />
             <element minOccurs="1" maxOccurs="1" name="scannedUoMCodeP" type="string" />
@@ -456,6 +454,25 @@
       <element name="UpdatePickLineQty_Result">
         <complexType>
           <sequence />
+        </complexType>
+      </element>
+      <element name="RegisterWhsDocument">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentTypeP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="whsDocumentNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="RegisterWhsDocument_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
+          </sequence>
         </complexType>
       </element>
       <element name="GetWarehouseShipments">
@@ -521,7 +538,6 @@
             <element minOccurs="1" maxOccurs="1" name="qtyP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="isUpdateP" type="int" />
             <element minOccurs="1" maxOccurs="1" name="trackingCSVStringP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="normCSVStringP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="scannedUoMCodeP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="qtyInScannedUoMP" type="string" />
           </sequence>
@@ -552,23 +568,6 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="nAVLineNoP" type="int" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetItemFromAnotherBin">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="linesCSV" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="docNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="lineNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="userID" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetItemFromAnotherBin_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="linesCSV" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -605,23 +604,18 @@
           </sequence>
         </complexType>
       </element>
-      <element name="RegisterWhsDocument">
+      <element name="SetDocumentStatus">
         <complexType>
           <sequence>
-            <element minOccurs="1" maxOccurs="1" name="userIdP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="sublocationCodeP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="documentTypeP" type="int" />
-            <element minOccurs="1" maxOccurs="1" name="whsDocumentNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
           </sequence>
         </complexType>
       </element>
-      <element name="RegisterWhsDocument_Result">
+      <element name="SetDocumentStatus_Result">
         <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
-          </sequence>
+          <sequence />
         </complexType>
       </element>
       <element name="GetItemBinContent">
@@ -701,11 +695,11 @@
   <message name="LogIn_Result">
     <part name="parameters" element="tns:LogIn_Result" />
   </message>
-  <message name="SetDocumentStatus">
-    <part name="parameters" element="tns:SetDocumentStatus" />
+  <message name="TestIsAppVersionValid">
+    <part name="parameters" element="tns:TestIsAppVersionValid" />
   </message>
-  <message name="SetDocumentStatus_Result">
-    <part name="parameters" element="tns:SetDocumentStatus_Result" />
+  <message name="TestIsAppVersionValid_Result">
+    <part name="parameters" element="tns:TestIsAppVersionValid_Result" />
   </message>
   <message name="GetQuote">
     <part name="parameters" element="tns:GetQuote" />
@@ -749,17 +743,17 @@
   <message name="GetItemLagerList_Result">
     <part name="parameters" element="tns:GetItemLagerList_Result" />
   </message>
-  <message name="GetItems">
-    <part name="parameters" element="tns:GetItems" />
-  </message>
-  <message name="GetItems_Result">
-    <part name="parameters" element="tns:GetItems_Result" />
-  </message>
   <message name="GetLocationsForQuote">
     <part name="parameters" element="tns:GetLocationsForQuote" />
   </message>
   <message name="GetLocationsForQuote_Result">
     <part name="parameters" element="tns:GetLocationsForQuote_Result" />
+  </message>
+  <message name="GetItems">
+    <part name="parameters" element="tns:GetItems" />
+  </message>
+  <message name="GetItems_Result">
+    <part name="parameters" element="tns:GetItems_Result" />
   </message>
   <message name="GetCustomers">
     <part name="parameters" element="tns:GetCustomers" />
@@ -845,6 +839,12 @@
   <message name="UpdatePickLineQty_Result">
     <part name="parameters" element="tns:UpdatePickLineQty_Result" />
   </message>
+  <message name="RegisterWhsDocument">
+    <part name="parameters" element="tns:RegisterWhsDocument" />
+  </message>
+  <message name="RegisterWhsDocument_Result">
+    <part name="parameters" element="tns:RegisterWhsDocument_Result" />
+  </message>
   <message name="GetWarehouseShipments">
     <part name="parameters" element="tns:GetWarehouseShipments" />
   </message>
@@ -875,12 +875,6 @@
   <message name="BinToBinMovement_Result">
     <part name="parameters" element="tns:BinToBinMovement_Result" />
   </message>
-  <message name="GetItemFromAnotherBin">
-    <part name="parameters" element="tns:GetItemFromAnotherBin" />
-  </message>
-  <message name="GetItemFromAnotherBin_Result">
-    <part name="parameters" element="tns:GetItemFromAnotherBin_Result" />
-  </message>
   <message name="DeleteReclassificationLines">
     <part name="parameters" element="tns:DeleteReclassificationLines" />
   </message>
@@ -893,11 +887,11 @@
   <message name="PostReclassification_Result">
     <part name="parameters" element="tns:PostReclassification_Result" />
   </message>
-  <message name="RegisterWhsDocument">
-    <part name="parameters" element="tns:RegisterWhsDocument" />
+  <message name="SetDocumentStatus">
+    <part name="parameters" element="tns:SetDocumentStatus" />
   </message>
-  <message name="RegisterWhsDocument_Result">
-    <part name="parameters" element="tns:RegisterWhsDocument_Result" />
+  <message name="SetDocumentStatus_Result">
+    <part name="parameters" element="tns:SetDocumentStatus_Result" />
   </message>
   <message name="GetItemBinContent">
     <part name="parameters" element="tns:GetItemBinContent" />
@@ -928,9 +922,9 @@
       <input name="LogIn" message="tns:LogIn" />
       <output name="LogIn_Result" message="tns:LogIn_Result" />
     </operation>
-    <operation name="SetDocumentStatus">
-      <input name="SetDocumentStatus" message="tns:SetDocumentStatus" />
-      <output name="SetDocumentStatus_Result" message="tns:SetDocumentStatus_Result" />
+    <operation name="TestIsAppVersionValid">
+      <input name="TestIsAppVersionValid" message="tns:TestIsAppVersionValid" />
+      <output name="TestIsAppVersionValid_Result" message="tns:TestIsAppVersionValid_Result" />
     </operation>
     <operation name="GetQuote">
       <input name="GetQuote" message="tns:GetQuote" />
@@ -960,13 +954,13 @@
       <input name="GetItemLagerList" message="tns:GetItemLagerList" />
       <output name="GetItemLagerList_Result" message="tns:GetItemLagerList_Result" />
     </operation>
-    <operation name="GetItems">
-      <input name="GetItems" message="tns:GetItems" />
-      <output name="GetItems_Result" message="tns:GetItems_Result" />
-    </operation>
     <operation name="GetLocationsForQuote">
       <input name="GetLocationsForQuote" message="tns:GetLocationsForQuote" />
       <output name="GetLocationsForQuote_Result" message="tns:GetLocationsForQuote_Result" />
+    </operation>
+    <operation name="GetItems">
+      <input name="GetItems" message="tns:GetItems" />
+      <output name="GetItems_Result" message="tns:GetItems_Result" />
     </operation>
     <operation name="GetCustomers">
       <input name="GetCustomers" message="tns:GetCustomers" />
@@ -1024,6 +1018,10 @@
       <input name="UpdatePickLineQty" message="tns:UpdatePickLineQty" />
       <output name="UpdatePickLineQty_Result" message="tns:UpdatePickLineQty_Result" />
     </operation>
+    <operation name="RegisterWhsDocument">
+      <input name="RegisterWhsDocument" message="tns:RegisterWhsDocument" />
+      <output name="RegisterWhsDocument_Result" message="tns:RegisterWhsDocument_Result" />
+    </operation>
     <operation name="GetWarehouseShipments">
       <input name="GetWarehouseShipments" message="tns:GetWarehouseShipments" />
       <output name="GetWarehouseShipments_Result" message="tns:GetWarehouseShipments_Result" />
@@ -1044,10 +1042,6 @@
       <input name="BinToBinMovement" message="tns:BinToBinMovement" />
       <output name="BinToBinMovement_Result" message="tns:BinToBinMovement_Result" />
     </operation>
-    <operation name="GetItemFromAnotherBin">
-      <input name="GetItemFromAnotherBin" message="tns:GetItemFromAnotherBin" />
-      <output name="GetItemFromAnotherBin_Result" message="tns:GetItemFromAnotherBin_Result" />
-    </operation>
     <operation name="DeleteReclassificationLines">
       <input name="DeleteReclassificationLines" message="tns:DeleteReclassificationLines" />
       <output name="DeleteReclassificationLines_Result" message="tns:DeleteReclassificationLines_Result" />
@@ -1056,9 +1050,9 @@
       <input name="PostReclassification" message="tns:PostReclassification" />
       <output name="PostReclassification_Result" message="tns:PostReclassification_Result" />
     </operation>
-    <operation name="RegisterWhsDocument">
-      <input name="RegisterWhsDocument" message="tns:RegisterWhsDocument" />
-      <output name="RegisterWhsDocument_Result" message="tns:RegisterWhsDocument_Result" />
+    <operation name="SetDocumentStatus">
+      <input name="SetDocumentStatus" message="tns:SetDocumentStatus" />
+      <output name="SetDocumentStatus_Result" message="tns:SetDocumentStatus_Result" />
     </operation>
     <operation name="GetItemBinContent">
       <input name="GetItemBinContent" message="tns:GetItemBinContent" />
@@ -1088,12 +1082,12 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="SetDocumentStatus">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SetDocumentStatus" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="SetDocumentStatus">
+    <operation name="TestIsAppVersionValid">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:TestIsAppVersionValid" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="TestIsAppVersionValid">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
-      <output name="SetDocumentStatus_Result">
+      <output name="TestIsAppVersionValid_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -1160,21 +1154,21 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="GetItems">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItems" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetItems">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GetItems_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="GetLocationsForQuote">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetLocationsForQuote" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetLocationsForQuote">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="GetLocationsForQuote_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetItems">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItems" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetItems">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetItems_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -1304,6 +1298,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="RegisterWhsDocument">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:RegisterWhsDocument" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="RegisterWhsDocument">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="RegisterWhsDocument_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="GetWarehouseShipments">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetWarehouseShipments" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetWarehouseShipments">
@@ -1349,15 +1352,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="GetItemFromAnotherBin">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:GetItemFromAnotherBin" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetItemFromAnotherBin">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GetItemFromAnotherBin_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="DeleteReclassificationLines">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:DeleteReclassificationLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="DeleteReclassificationLines">
@@ -1376,12 +1370,12 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="RegisterWhsDocument">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:RegisterWhsDocument" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="RegisterWhsDocument">
+    <operation name="SetDocumentStatus">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SetDocumentStatus" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SetDocumentStatus">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
-      <output name="RegisterWhsDocument_Result">
+      <output name="SetDocumentStatus_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -1424,7 +1418,7 @@
   </binding>
   <service name="MobileWMSSync">
     <port name="MobileWMSSync_Port" binding="tns:MobileWMSSync_Binding">
-      <address location="http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="http://192.168.10.72:7397/NAVNasService/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>

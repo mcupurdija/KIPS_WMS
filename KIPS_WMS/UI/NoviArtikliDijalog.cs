@@ -50,12 +50,12 @@ namespace KIPS_WMS.UI
                     if (foundItem.Count > 0)
                     {
                         SQLiteHelper.nonQuery(DbStatements.UpdateItemsStatement,
-                            new object[] { item.ItemBarcode, item.ItemNo, item.ItemDescription, item.ItemVariant, item.ItemUnitOfMeasure });
+                            new object[] { item.ItemBarcode, item.ItemNo, item.ItemDescription, item.ItemVariant, item.ItemUnitOfMeasure, item.UnitOfMeasureCoefficient, item.ItemTrackingType });
                     }
                     else
                     {
                         SQLiteHelper.insertQuery(DbStatements.InsertItemsStatement,
-                            new object[] { item.ItemBarcode, item.ItemNo, item.ItemDescription, item.ItemVariant, item.ItemUnitOfMeasure });
+                            new object[] { item.ItemBarcode, item.ItemNo, item.ItemDescription, item.ItemVariant, item.ItemUnitOfMeasure, item.UnitOfMeasureCoefficient, item.ItemTrackingType });
                     }
                 }
             }
