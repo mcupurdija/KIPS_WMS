@@ -39,15 +39,15 @@
             this.lCustSyncDate = new System.Windows.Forms.Label();
             this.lItemSyncDate = new System.Windows.Forms.Label();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
-            this.imageList1 = new System.Windows.Forms.ImageList();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.SuspendLayout();
             // 
             // lStatus
             // 
             this.lStatus.Location = new System.Drawing.Point(3, 57);
             this.lStatus.Name = "lStatus";
-            this.lStatus.Size = new System.Drawing.Size(233, 91);
+            this.lStatus.Size = new System.Drawing.Size(233, 85);
             // 
             // bLoad
             // 
@@ -81,13 +81,13 @@
             // 
             // lCustSyncDate
             // 
-            this.lCustSyncDate.Location = new System.Drawing.Point(3, 148);
+            this.lCustSyncDate.Location = new System.Drawing.Point(3, 142);
             this.lCustSyncDate.Name = "lCustSyncDate";
             this.lCustSyncDate.Size = new System.Drawing.Size(233, 20);
             // 
             // lItemSyncDate
             // 
-            this.lItemSyncDate.Location = new System.Drawing.Point(3, 168);
+            this.lItemSyncDate.Location = new System.Drawing.Point(3, 162);
             this.lItemSyncDate.Name = "lItemSyncDate";
             this.lItemSyncDate.Size = new System.Drawing.Size(233, 20);
             // 
@@ -98,15 +98,15 @@
             this.toolBar1.Name = "toolBar1";
             this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageSize = new System.Drawing.Size(36, 70);
-            this.imageList1.Images.Clear();
-            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
-            // 
             // toolBarButton1
             // 
             this.toolBarButton1.ImageIndex = 0;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageSize = new System.Drawing.Size(70, 36);
+            this.imageList1.Images.Clear();
+            this.imageList1.Images.Add(((System.Drawing.Image)(resources.GetObject("resource"))));
             // 
             // CsvImport
             // 

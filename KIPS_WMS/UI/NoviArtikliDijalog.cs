@@ -44,7 +44,7 @@ namespace KIPS_WMS.UI
 
                 foreach (ItemModel item in items)
                 {
-                    List<Object> foundItem = SQLiteHelper.oneRowQuery(DbStatements.FindItemsStatementComplete,
+                    List<Object> foundItem = SQLiteHelper.oneRowQuery(DbStatements.FindItemsStatementBarcode,
                         new object[] { item.ItemBarcode });
 
                     if (foundItem.Count > 0)

@@ -44,7 +44,7 @@ namespace KIPS_WMS.UI
 
                 foreach (CustomerModel customer in customers)
                 {
-                    List<Object> foundCustomer = SQLiteHelper.oneRowQuery(DbStatements.FindCustomersStatementComplete,
+                    List<Object> foundCustomer = SQLiteHelper.oneRowQuery(DbStatements.FindCustomersStatementBarcode,
                         new object[] { customer.CustomerBarcode });
 
                     if (foundCustomer.Count > 0)

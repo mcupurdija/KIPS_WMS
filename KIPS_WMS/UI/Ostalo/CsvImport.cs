@@ -87,7 +87,7 @@ namespace KIPS_WMS.UI.Ostalo
                     }
                 }
 
-                DateTime today = DateTime.ParseExact(_csvImports[0].Field2, "dd.MM.yyyy.", null);
+                DateTime today = DateTime.ParseExact(_csvImports[0].Field1, "dd.MM.yyyy.", null);
 
                 SQLiteHelper.nonQuery(DbStatements.UpdateSyncDateCustomers, new object[] {today.ToString("yyyy-MM-dd")});
                 SQLiteHelper.nonQuery(DbStatements.UpdateSyncDateItems, new object[] {today.ToString("yyyy-MM-dd")});
@@ -97,7 +97,7 @@ namespace KIPS_WMS.UI.Ostalo
 
                 tbFile.Text = String.Empty;
                 lStatus.Text =
-                    String.Format(Resources.UspesnaSinhronizacija,
+                    String.Format("Sinhronizacija je uspešno završena.\nUkupno kupaca: {0}\nUkupno artikala: {1}",
                         customerCount, itemCount);
             }
             catch (Exception ex)

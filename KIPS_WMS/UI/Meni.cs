@@ -59,25 +59,15 @@ namespace KIPS_WMS.UI
 
         private void bPonude_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             try
             {
-                if (Utils.CheckDate())
-                {
-                    _ws.TestIsAppVersionValid(Utils.AppVersion);
-                    new PonudePocetna().Show();
-                }
-                else
-                {
-                    ShowErrorMessage();
-                }
+                _ws.TestIsAppVersionValid(Utils.AppVersion);
+                new PonudePocetna().Show();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Utils.GeneralExceptionProcessing(ex);
             }
-=======
-            new PonudePocetna().Show();
->>>>>>> 77d23b2eaeb66c9ba1f6aedf381f4b50a05d09f9
         }
 
         private void bLagerLista_Click(object sender, EventArgs e)
@@ -160,26 +150,26 @@ namespace KIPS_WMS.UI
 
         private void cUnosBarkoda_Click(object sender, EventArgs e)
         {
-//            if (Utils.CheckDate())
-//            {
-//                
-//            }
-//            else
-//            {
-//                ShowErrorMessage();
-//            }
+            //            if (Utils.CheckDate())
+            //            {
+            //                
+            //            }
+            //            else
+            //            {
+            //                ShowErrorMessage();
+            //            }
         }
 
         private void cCrossDocking_Click(object sender, EventArgs e)
         {
-//            if (Utils.CheckDate())
-//            {
-//                
-//            }
-//            else
-//            {
-//                ShowErrorMessage();
-//            }
+            //            if (Utils.CheckDate())
+            //            {
+            //                
+            //            }
+            //            else
+            //            {
+            //                ShowErrorMessage();
+            //            }
         }
 
         private void cUvozPodataka_Click(object sender, EventArgs e)
