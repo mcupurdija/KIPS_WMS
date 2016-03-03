@@ -6,7 +6,7 @@
         public const string DeleteItemsStatement = "DELETE FROM Items";
 
         public const string InsertCustomersStatement = "INSERT INTO Customers (Customer_barcode, Customer_code, Customer_name) VALUES ('{0}', '{1}', '{2}')";
-        public const string InsertItemsStatement = "INSERT INTO Items (Item_barcode, Item_code, Item_description, Item_variant, Item_unit_of_measure) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')";
+        public const string InsertItemsStatement = "INSERT INTO Items (Item_barcode, Item_code, Item_description, Item_variant, Item_unit_of_measure, Item_quantity, Item_tracking) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')";
 
         public const string FindCustomersStatementBarcode = "SELECT * FROM Customers Where Customer_barcode = '{0}'";
         public const string FindCustomersStatementComplete = "SELECT * FROM Customers Where Customer_barcode = '{0}' OR Customer_code LIKE '%{0}%' OR Customer_name LIKE '%{0}%'";
@@ -17,10 +17,13 @@
         public const string FindItemUnitOfMeasureQuantity = "SELECT Item_quantity FROM Items Where Item_code = '{0}' AND Item_unit_of_measure = '{1}'";
 
         public const string UpdateCustomersStatement = "UPDATE Customers SET Customer_code='{1}', Customer_name='{2}' WHERE Customer_barcode='{0}'";
-        public const string UpdateItemsStatement = "UPDATE Items SET Item_code='{1}', Item_description='{2}', Item_variant='{3}', Item_unit_of_measure='{4}' WHERE Item_barcode='{0}'";
+        public const string UpdateItemsStatement = "UPDATE Items SET Item_code='{1}', Item_description='{2}', Item_variant='{3}', Item_unit_of_measure='{4}', Item_quantity='{5}', Item_tracking='{6}' WHERE Item_barcode='{0}'";
 
         public const string GetSyncDateCustomers = "SELECT SyncData_customers FROM SyncData";
         public const string GetSyncDateItems = "SELECT SyncData_items FROM SyncData";
+
+        public const string UpdateSyncDateCustomers = "UPDATE SyncData SET SyncData_customers='{0}' WHERE SyncDataID=1";
+        public const string UpdateSyncDateItems = "UPDATE SyncData SET SyncData_items='{0}' WHERE SyncDataID=1";
 
         public const string GetQuoteHeaderStatement = "SELECT QuoteHeader FROM SyncData WHERE SyncDataID=1";
         public const string GetQuoteLinesStatement = "SELECT QuoteLines FROM SyncData WHERE SyncDataID=1";

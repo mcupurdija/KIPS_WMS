@@ -59,6 +59,7 @@ namespace KIPS_WMS.UI
 
         private void bPonude_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             try
             {
                 if (Utils.CheckDate())
@@ -74,6 +75,9 @@ namespace KIPS_WMS.UI
             catch (Exception ex) {
                 Utils.GeneralExceptionProcessing(ex);
             }
+=======
+            new PonudePocetna().Show();
+>>>>>>> 77d23b2eaeb66c9ba1f6aedf381f4b50a05d09f9
         }
 
         private void bLagerLista_Click(object sender, EventArgs e)

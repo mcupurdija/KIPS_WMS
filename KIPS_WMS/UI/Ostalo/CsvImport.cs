@@ -16,6 +16,13 @@ namespace KIPS_WMS.UI.Ostalo
             InitializeComponent();
         }
 
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+
+            DisplayDates();
+        }
+
         private void bSelect_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -27,8 +34,8 @@ namespace KIPS_WMS.UI.Ostalo
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    var engine = new FileHelperEngine(typeof(CsvImportModel));
-                    _csvImports = (CsvImportModel[])engine.ReadFile(fileName);
+                    var engine = new FileHelperEngine(typeof (CsvImportModel));
+                    _csvImports = (CsvImportModel[]) engine.ReadFile(fileName);
                 }
                 catch (Exception ex)
                 {
@@ -70,11 +77,23 @@ namespace KIPS_WMS.UI.Ostalo
                             break;
                         case Utils.CsvImportItems:
                             SQLiteHelper.insertQuery(DbStatements.InsertItemsStatement,
-                                new object[] {import.Field1, import.Field2, import.Field3, import.Field4, import.Field5});
+                                new object[]
+                                {
+                                    import.Field1, import.Field2, import.Field3, import.Field4, import.Field5,
+                                    import.Field6, import.Field7
+                                });
                             itemCount++;
                             break;
                     }
                 }
+
+                DateTime today = DateTime.ParseExact(_csvImports[0].Field2, "dd.MM.yyyy.", null);
+
+                SQLiteHelper.nonQuery(DbStatements.UpdateSyncDateCustomers, new object[] {today.ToString("yyyy-MM-dd")});
+                SQLiteHelper.nonQuery(DbStatements.UpdateSyncDateItems, new object[] {today.ToString("yyyy-MM-dd")});
+
+                lCustSyncDate.Text = string.Format("Kupci ažurirani: {0}", today.ToString("dd.MM.yyyy."));
+                lItemSyncDate.Text = string.Format("Artikli ažurirani: {0}", today.ToString("dd.MM.yyyy."));
 
                 tbFile.Text = String.Empty;
                 lStatus.Text =
@@ -89,6 +108,31 @@ namespace KIPS_WMS.UI.Ostalo
             {
                 Cursor.Current = Cursors.Default;
             }
+        }
+
+        private void DisplayDates()
+        {
+            try
+            {
+                var customersDateString =
+                    (string) SQLiteHelper.simpleQuery(DbStatements.GetSyncDateItems, new object[] {});
+                var itemsDateString = (string) SQLiteHelper.simpleQuery(DbStatements.GetSyncDateItems, new object[] {});
+                DateTime customersDate = Convert.ToDateTime(customersDateString);
+                DateTime itemsDate = Convert.ToDateTime(itemsDateString);
+
+                lCustSyncDate.Text = string.Format("Kupci ažurirani: {0}", customersDate.ToString("dd.MM.yyyy."));
+                lItemSyncDate.Text = string.Format("Artikli ažurirani: {0}", itemsDate.ToString("dd.MM.yyyy."));
+            }
+            catch (Exception)
+            {
+                lCustSyncDate.Text = string.Empty;
+                lItemSyncDate.Text = string.Empty;
+            }
+        }
+
+        private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+        {
+            Close();
         }
     }
 }

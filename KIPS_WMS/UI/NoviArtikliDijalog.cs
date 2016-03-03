@@ -58,6 +58,8 @@ namespace KIPS_WMS.UI
                             new object[] { item.ItemBarcode, item.ItemNo, item.ItemDescription, item.ItemVariant, item.ItemUnitOfMeasure, item.UnitOfMeasureCoefficient, item.ItemTrackingType });
                     }
                 }
+
+                SQLiteHelper.nonQuery(DbStatements.UpdateSyncDateItems, new object[] { DateTime.Now.ToString("yyyy-MM-dd") });
             }
             catch (Exception ex)
             {

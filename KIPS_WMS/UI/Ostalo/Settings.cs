@@ -17,6 +17,13 @@ namespace KIPS_WMS.UI.Ostalo
             GetAvailablePrinters();
         }
 
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+
+            lVersion.Text = Utils.AppVersion;
+        }
+
         public void GetAvailablePrinters()
         {
             try
