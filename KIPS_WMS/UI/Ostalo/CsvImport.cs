@@ -11,6 +11,10 @@ namespace KIPS_WMS.UI.Ostalo
     public partial class CsvImport : Form
     {
         private CsvImportModel[] _csvImports;
+        private DateTime _customersSyncDate;
+        private DateTime _importDate;
+        private DateTime _itemsSyncDate;
+        private bool _updateCustomers = true, _updateItems = true;
 
         public CsvImport()
         {
@@ -61,6 +65,10 @@ namespace KIPS_WMS.UI.Ostalo
             {
                 Cursor.Current = Cursors.WaitCursor;
 
+                _importDate = DateTime.ParseExact(_csvImports[0].Field1, "dd.MM.yyyy.", null);
+                _updateCustomers = _importDate >= _customersSyncDate;
+                _updateItems = _importDate >= _itemsSyncDate;
+
                 int customerCount = 0;
                 int itemCount = 0;
 
@@ -69,23 +77,34 @@ namespace KIPS_WMS.UI.Ostalo
                     switch (import.TableNo)
                     {
                         case Utils.CsvImportCustomers:
-                            UpsertCustomer(import);
-                            customerCount++;
+                            if (_updateCustomers)
+                            {
+                                UpsertCustomer(import);
+                                customerCount++;
+                            }
                             break;
                         case Utils.CsvImportItems:
-                            UpsertItem(import);
-                            itemCount++;
+                            if (_updateItems)
+                            {
+                                UpsertItem(import);
+                                itemCount++;
+                            }
                             break;
                     }
                 }
 
-                DateTime today = DateTime.ParseExact(_csvImports[0].Field1, "dd.MM.yyyy.", null);
-
-                SQLiteHelper.nonQuery(DbStatements.UpdateSyncDateCustomers, new object[] {today.ToString("yyyy-MM-dd")});
-                SQLiteHelper.nonQuery(DbStatements.UpdateSyncDateItems, new object[] {today.ToString("yyyy-MM-dd")});
-
-                lCustSyncDate.Text = string.Format("Kupci ažurirani: {0}", today.ToString("dd.MM.yyyy."));
-                lItemSyncDate.Text = string.Format("Artikli ažurirani: {0}", today.ToString("dd.MM.yyyy."));
+                if (_updateCustomers)
+                {
+                    SQLiteHelper.nonQuery(DbStatements.UpdateSyncDateCustomers,
+                        new object[] {_importDate.ToString("yyyy-MM-dd")});
+                    lCustSyncDate.Text = string.Format("Kupci ažurirani: {0}", _importDate.ToString("dd.MM.yyyy."));
+                }
+                if (_updateItems)
+                {
+                    SQLiteHelper.nonQuery(DbStatements.UpdateSyncDateItems,
+                        new object[] {_importDate.ToString("yyyy-MM-dd")});
+                    lItemSyncDate.Text = string.Format("Artikli ažurirani: {0}", _importDate.ToString("dd.MM.yyyy."));
+                }
 
                 tbFile.Text = String.Empty;
                 lStatus.Text =
@@ -145,11 +164,11 @@ namespace KIPS_WMS.UI.Ostalo
                 var customersDateString =
                     (string) SQLiteHelper.simpleQuery(DbStatements.GetSyncDateItems, new object[] {});
                 var itemsDateString = (string) SQLiteHelper.simpleQuery(DbStatements.GetSyncDateItems, new object[] {});
-                DateTime customersDate = Convert.ToDateTime(customersDateString);
-                DateTime itemsDate = Convert.ToDateTime(itemsDateString);
+                _customersSyncDate = Convert.ToDateTime(customersDateString);
+                _itemsSyncDate = Convert.ToDateTime(itemsDateString);
 
-                lCustSyncDate.Text = string.Format("Kupci ažurirani: {0}", customersDate.ToString("dd.MM.yyyy."));
-                lItemSyncDate.Text = string.Format("Artikli ažurirani: {0}", itemsDate.ToString("dd.MM.yyyy."));
+                lCustSyncDate.Text = string.Format("Kupci ažurirani: {0}", _customersSyncDate.ToString("dd.MM.yyyy."));
+                lItemSyncDate.Text = string.Format("Artikli ažurirani: {0}", _itemsSyncDate.ToString("dd.MM.yyyy."));
             }
             catch (Exception)
             {
