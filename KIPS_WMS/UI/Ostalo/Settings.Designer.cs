@@ -144,7 +144,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 188);
             this.Controls.Add(this.lVersion);
             this.Controls.Add(this.toolBar1);
