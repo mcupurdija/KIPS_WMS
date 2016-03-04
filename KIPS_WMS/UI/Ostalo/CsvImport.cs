@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Data;
@@ -71,17 +72,11 @@ namespace KIPS_WMS.UI.Ostalo
                     switch (import.TableNo)
                     {
                         case Utils.CsvImportCustomers:
-                            SQLiteHelper.insertQuery(DbStatements.InsertCustomersStatement,
-                                new object[] {import.Field1, import.Field2, import.Field4});
+                            UpsertCustomer(import);
                             customerCount++;
                             break;
                         case Utils.CsvImportItems:
-                            SQLiteHelper.insertQuery(DbStatements.InsertItemsStatement,
-                                new object[]
-                                {
-                                    import.Field1, import.Field2, import.Field3, import.Field4, import.Field5,
-                                    import.Field6, import.Field7
-                                });
+                            UpsertItem(import);
                             itemCount++;
                             break;
                     }
@@ -107,6 +102,42 @@ namespace KIPS_WMS.UI.Ostalo
             finally
             {
                 Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void UpsertCustomer(CsvImportModel customer)
+        {
+            List<Object> foundCustomer = SQLiteHelper.oneRowQuery(DbStatements.FindCustomersStatementBarcode,
+                new object[] {customer.Field1});
+
+            if (foundCustomer.Count > 0)
+            {
+                SQLiteHelper.nonQuery(DbStatements.UpdateCustomersStatement,
+                    new object[] {customer.Field1, customer.Field2, customer.Field4});
+            }
+            else
+            {
+                SQLiteHelper.insertQuery(DbStatements.InsertCustomersStatement,
+                    new object[] {customer.Field1, customer.Field2, customer.Field4});
+            }
+        }
+
+        private void UpsertItem(CsvImportModel item)
+        {
+            List<Object> foundItem = SQLiteHelper.oneRowQuery(DbStatements.FindItemsStatementBarcode,
+                new object[] {item.Field1});
+
+            if (foundItem.Count > 0)
+            {
+                SQLiteHelper.nonQuery(DbStatements.UpdateItemsStatement,
+                    new object[]
+                    {item.Field1, item.Field2, item.Field4, item.Field3, item.Field5, item.Field6, item.Field7});
+            }
+            else
+            {
+                SQLiteHelper.insertQuery(DbStatements.InsertItemsStatement,
+                    new object[]
+                    {item.Field1, item.Field2, item.Field4, item.Field3, item.Field5, item.Field6, item.Field7});
             }
         }
 
