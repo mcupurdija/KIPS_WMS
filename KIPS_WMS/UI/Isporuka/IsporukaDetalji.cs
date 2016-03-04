@@ -39,6 +39,7 @@ namespace KIPS_WMS.UI.Isporuka
             _selectedLine = selectedLine;
             WarehouseShipmentLines = warehouseShipmentLines;
 
+            DisplayData(barcode);
             if (_loginData.SkeniranjeBarkodaNaIsporuci == 0 || _loginData.ObavezanRegal == 0)
             {
                 tbRegal.Visible = false;
@@ -52,7 +53,7 @@ namespace KIPS_WMS.UI.Isporuka
 
             //            _selectedLine.UnitOfMeasureCode = "PAK";
 
-            DisplayData(barcode);
+            
         }
 
         protected override void OnActivated(EventArgs e)

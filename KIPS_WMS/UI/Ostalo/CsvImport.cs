@@ -61,9 +61,6 @@ namespace KIPS_WMS.UI.Ostalo
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                SQLiteHelper.nonQuery(DbStatements.DeleteCustomersStatement, new object[] {});
-                SQLiteHelper.nonQuery(DbStatements.DeleteItemsStatement, new object[] {});
-
                 int customerCount = 0;
                 int itemCount = 0;
 

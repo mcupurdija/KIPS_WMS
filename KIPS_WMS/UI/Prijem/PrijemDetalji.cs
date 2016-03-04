@@ -37,6 +37,7 @@ namespace KIPS_WMS.UI.Prijem
             _receiptNo = receiptNo;
             _selectedLine = selectedLine;
             WarehouseReceiptLines = warehouseReceiptLines;
+
             DisplayData(barcode);  
             if (_loginData.SkeniranjeBarkodaNaPrijemu == 0 || _loginData.ObavezanRegal == 0)
             {
