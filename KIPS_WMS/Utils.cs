@@ -41,7 +41,7 @@ namespace KIPS_WMS
         public const int DocumentTypeIzdvajanje = 4;
 
 
-        public const string AppVersion = "1.0.1";
+        public const string AppVersion = "1.0.2";
 
 
         public static string GetCurrentDirectory()
