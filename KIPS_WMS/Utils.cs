@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Text;
 using System.Web.Services.Protocols;
 using System.Windows.Forms;
 using KIPS_WMS.Model;
@@ -24,7 +25,7 @@ namespace KIPS_WMS
         public const int PrintTypeIgnore = 3;
 
         public const string GoProNavWsUrl = "http://sqlserver:7047/Wurth/ws/Wurth/Codeunit/MobileWMSSync";
-        public const string KipsNavWsUrlTest = "http://192.168.10.72:6047/TEST/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync";
+        public const string KipsNavWsUrlTest = "http://192.168.10.72:5047/RAZVOJ/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync";
         public const string KipsNavWsUrlProdukcija = "http://192.168.10.72:7397/NAVNasService/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync";
         public static NetworkCredential GoProCredentials = new NetworkCredential("wurthtest", "remote", "gopro");
         public static NetworkCredential KipsCredentials = new NetworkCredential("gopro", "Sifra123", "KIPS");
@@ -34,6 +35,7 @@ namespace KIPS_WMS
         public const string PrintServerApiPath = PrintServerAddress + "KIPSPrintServer/api/Print";
         public const string PrintServerApiTestPath = PrintServerAddress + "KIPSPrintServer/api/Test";
         public const string DateApiPath = PrintServerAddress + "KIPSPrintServer/api/App";
+        public const string DeviceApiPath = PrintServerAddress + "KIPSPrintServer/api/Devices";
 
         public const int DocumentTypePrijem = 1;
         public const int DocumentTypeIsporuka = 2;
@@ -126,6 +128,47 @@ namespace KIPS_WMS
             }
 
             return false;
+        }
+
+        public static string CheckUserCount(DeviceModel model)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                WebRequest request = WebRequest.Create(DeviceApiPath);
+                request.Method = "POST";
+
+                string body = JsonHelper.Serialize(model);
+                byte[] byteArray = Encoding.UTF8.GetBytes(body);
+
+                request.ContentType = "application/json";
+                request.ContentLength = byteArray.Length;
+
+                using (Stream dataStream = request.GetRequestStream())
+                {
+                    dataStream.Write(byteArray, 0, byteArray.Length);
+                }
+
+                using (WebResponse response = request.GetResponse())
+                {
+                    if (((HttpWebResponse)response).StatusDescription == HttpStatusCode.OK.ToString())
+                    {
+                        var responseData = JsonHelper.Deserialize<DeviceModel>(response.GetResponseStream());
+                        return responseData.Serial;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+
+            return null;
         }
     }
 }

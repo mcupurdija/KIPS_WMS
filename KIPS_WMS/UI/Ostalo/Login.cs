@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Model;
@@ -62,6 +61,13 @@ namespace KIPS_WMS.UI.Ostalo
                 return;
             }
 
+            string userCount = Utils.CheckUserCount(new DeviceModel(Device.GetDeviceId()));
+            if (userCount != null)
+            {
+                MessageBox.Show(userCount, Resources.Greska);
+                return;
+            }
+
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -70,8 +76,8 @@ namespace KIPS_WMS.UI.Ostalo
 
                 _ws.LogIn(username, password, ref loginDataCsv);
 
-                var engine = new FileHelperEngine(typeof(LoginModel));
-                _loginData = ((LoginModel[])engine.ReadString(loginDataCsv)).ToList();
+                var engine = new FileHelperEngine(typeof (LoginModel));
+                _loginData = ((LoginModel[]) engine.ReadString(loginDataCsv)).ToList();
 
                 Cursor.Current = Cursors.Default;
 

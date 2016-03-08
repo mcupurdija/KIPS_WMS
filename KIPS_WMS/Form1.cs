@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 using FileHelpers;
 using KIPS_WMS.Model;
@@ -96,5 +98,6 @@ namespace KIPS_WMS
         {
 
         }
+        
     }
 }
