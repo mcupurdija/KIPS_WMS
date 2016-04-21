@@ -61,12 +61,13 @@ namespace KIPS_WMS.UI.Ostalo
                 return;
             }
 
-            string userCount = Utils.CheckUserCount(new DeviceModel(Device.GetDeviceId()));
-            if (userCount != null)
-            {
-                MessageBox.Show(userCount, Resources.Greska);
-                return;
-            }
+            // PROVERA BROJA KORISNIKA
+//            string userCount = Utils.CheckUserCount(new DeviceModel(Device.GetDeviceId()));
+//            if (userCount != null)
+//            {
+//                MessageBox.Show(userCount, Resources.Greska);
+//                return;
+//            }
 
             try
             {

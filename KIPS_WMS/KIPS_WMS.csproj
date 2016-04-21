@@ -79,8 +79,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Device.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Model\BinModel.cs" />
+    <Compile Include="Model\DeviceModel.cs" />
     <Compile Include="Model\WarehouseShipmentLineModel.cs" />
     <Compile Include="Model\WarehouseShipmentModel.cs" />
     <Compile Include="Model\WarehousePickLineModel.cs" />
