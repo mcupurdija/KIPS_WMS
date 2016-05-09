@@ -43,6 +43,7 @@
             this.cUnosBarkoda = new System.Windows.Forms.MenuItem();
             this.cCrossDocking = new System.Windows.Forms.MenuItem();
             this.cUvozPodataka = new System.Windows.Forms.MenuItem();
+            this.cUcitajNoveArtikle = new System.Windows.Forms.MenuItem();
             this.cPodesavanja = new System.Windows.Forms.MenuItem();
             this.toolBar1 = new System.Windows.Forms.ToolBar();
             this.toolBarButton1 = new System.Windows.Forms.ToolBarButton();
@@ -106,12 +107,12 @@
             // 
             // bBarkodTest
             // 
-            this.bBarkodTest.Enabled = false;
             this.bBarkodTest.Location = new System.Drawing.Point(3, 111);
             this.bBarkodTest.Name = "bBarkodTest";
             this.bBarkodTest.Size = new System.Drawing.Size(114, 30);
             this.bBarkodTest.TabIndex = 6;
             this.bBarkodTest.Text = "Barkod test";
+            this.bBarkodTest.Click += new System.EventHandler(this.bBarkodTest_Click);
             // 
             // bKontrolnaCena
             // 
@@ -146,6 +147,7 @@
             this.contextMenu1.MenuItems.Add(this.cUnosBarkoda);
             this.contextMenu1.MenuItems.Add(this.cCrossDocking);
             this.contextMenu1.MenuItems.Add(this.cUvozPodataka);
+            this.contextMenu1.MenuItems.Add(this.cUcitajNoveArtikle);
             this.contextMenu1.MenuItems.Add(this.cPodesavanja);
             // 
             // cUnosBarkoda
@@ -162,6 +164,11 @@
             // 
             this.cUvozPodataka.Text = "Uvoz podataka";
             this.cUvozPodataka.Click += new System.EventHandler(this.cUvozPodataka_Click);
+            // 
+            // cUcitajNoveArtikle
+            // 
+            this.cUcitajNoveArtikle.Text = "Učitaj nove artikle";
+            this.cUcitajNoveArtikle.Click += new System.EventHandler(this.cUcitajNoveArtikle_Click);
             // 
             // cPodesavanja
             // 
@@ -237,5 +244,6 @@
         private System.Windows.Forms.ToolBarButton toolBarButton1;
         private System.Windows.Forms.ToolBarButton toolBarButton2;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.MenuItem cUcitajNoveArtikle;
     }
 }

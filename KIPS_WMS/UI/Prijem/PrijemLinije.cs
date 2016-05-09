@@ -257,8 +257,8 @@ namespace KIPS_WMS.UI.Prijem
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-
-                _ws.SetDocumentStatus(Utils.DocumentTypePrijem, _receiptNo, 1);
+                string poruka = String.Empty;
+                _ws.SetDocumentStatus(Utils.DocumentTypePrijem, _receiptNo, 1, ref poruka);
 
                 listBox1.Dispose();
                 Close();
@@ -285,8 +285,8 @@ namespace KIPS_WMS.UI.Prijem
                     try
                     {
                         Cursor.Current = Cursors.WaitCursor;
-
-                        _ws.SetDocumentStatus(Utils.DocumentTypePrijem, _receiptNo, 1);
+                        string poruka = String.Empty;
+                        _ws.SetDocumentStatus(Utils.DocumentTypePrijem, _receiptNo, 1, ref poruka);
 
                         listBox1.Dispose();
                         Close();
@@ -313,13 +313,25 @@ namespace KIPS_WMS.UI.Prijem
             }
         }
 
-        private void PrijemLinije_KeyPress(object sender, KeyPressEventArgs e)
+        private void PrijemLinije_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Escape)
+            if (e.KeyCode == Keys.Escape)
             {
                 DialogResult = DialogResult.Yes;
                 listBox1.Dispose();
                 Close();
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (_selectedLine != null)
+                {
+                    ShowLineDetailsForm(null);
+                    e.Handled = true;
+                }
+                else
+                {
+                    MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
+                }
             }
         }
 

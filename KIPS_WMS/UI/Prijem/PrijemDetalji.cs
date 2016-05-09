@@ -253,13 +253,17 @@ namespace KIPS_WMS.UI.Prijem
             string normativeLines = "";
             try
             {
-
                 if (decimal.Parse(quantity, culture) < 0) return;
                 if (decimal.Parse(uomQuantity, culture) < 0) return;
 
-                if (Convert.ToInt32(_selectedLine.TrackingType) != 0)
-                {
-                    var pracenje = new Pracenje(_selectedLine.ItemNo, decimal.Parse(quantity, culture), Convert.ToInt32(_selectedLine.TrackingType));
+                var _dbQuantity = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity,
+                        new object[] { _selectedLine.ItemNo, _selectedLine.UnitOfMeasureCode });
+                string _itemQuantity = _dbQuantity.ToString(); 
+                decimal kolicina = decimal.Parse(tbKolicina.Text, culture) * decimal.Parse(_itemQuantity, culture);
+
+                if (Convert.ToInt32(_selectedLine.TrackingType) != 0 && kolicina!=0)
+                {           
+                    var pracenje = new Pracenje(_selectedLine.ItemNo, kolicina, Convert.ToInt32(_selectedLine.TrackingType));
                     DialogResult result = pracenje.ShowDialog();
                     if (result == DialogResult.OK)
                     {

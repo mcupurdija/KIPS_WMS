@@ -243,7 +243,7 @@ namespace KIPS_WMS.UI.Skladistenje
 
                     tbRegal.Text = newBinCode.ToUpper();
                     _selectedLine.BinCode = newBinCode.ToUpper();
-                    DisplayData(null, false);
+                    //DisplayData(null, false);
                 }
 
                 CultureInfo culture = Utils.GetLocalCulture();

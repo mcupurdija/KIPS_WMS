@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using KIPS_WMS.Model;
 using KIPS_WMS.Properties;
+using KIPS_WMS.UI.BarkodTest;
 using KIPS_WMS.UI.Isporuka;
 using KIPS_WMS.UI.Izdvajanje;
 using KIPS_WMS.UI.Ostalo;
@@ -211,6 +212,18 @@ namespace KIPS_WMS.UI
         public static void ShowErrorMessage()
         {
             MessageBox.Show("Server na adresi 192.168.10.18 trenutno nije dostupan, molimo kontaktirajte administratora", Resources.Greska);
+        }
+
+        private void cUcitajNoveArtikle_Click(object sender, EventArgs e)
+        {
+            var loadingForm = new NoviArtikliDijalog();
+            DialogResult result = loadingForm.ShowDialog();
+        }
+
+        private void bBarkodTest_Click(object sender, EventArgs e)
+        {
+            var barkodTest = new BarkodTest.BarkodTest();
+            DialogResult result = barkodTest.ShowDialog();
         }
     }
 }

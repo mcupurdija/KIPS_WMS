@@ -99,9 +99,9 @@ namespace KIPS_WMS.UI.Skladistenje
                 _filteredPutAwayLines = filterText != null
                     ? _warehousePutAwayLines.FindAll(
                         x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
-                    : _warehousePutAwayLines;                
+                    : _warehousePutAwayLines;
             }
-            
+
             var listItem = new ListItem();
             for (int i = 0; i < _filteredPutAwayLines.Count; i++)
             {
@@ -342,13 +342,24 @@ namespace KIPS_WMS.UI.Skladistenje
             }
         }
 
-        private void SkladistenjeLinije_KeyPress(object sender, KeyPressEventArgs e)
+        private void SkladistenjeLinije_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Escape)
+            if (e.KeyCode == Keys.Escape)
             {
                 DialogResult = DialogResult.Yes;
                 listBox1.Dispose();
                 Close();
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (_selectedLine != null)
+                {
+                    ShowLineDetailsForm(null);
+                }
+                else if (tbPronadji.Text.Trim().Length == 0)
+                {
+                    MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
+                }
             }
         }
     }

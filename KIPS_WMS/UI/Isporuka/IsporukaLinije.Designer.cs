@@ -159,7 +159,7 @@ namespace KIPS_WMS.UI.Isporuka
             this.MinimizeBox = false;
             this.Name = "IsporukaLinije";
             this.Text = "IsporukaLinije";
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IsporukaLinije_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.IsporukaLinije_KeyUp);
             this.ResumeLayout(false);
 
         }

@@ -159,7 +159,7 @@ namespace KIPS_WMS.UI.Prijem
             this.MinimizeBox = false;
             this.Name = "PrijemLinije";
             this.Text = "PrijemLinije";
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrijemLinije_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PrijemLinije_KeyUp);
             this.ResumeLayout(false);
 
         }
