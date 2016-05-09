@@ -258,7 +258,7 @@ namespace KIPS_WMS.UI.Prijem
             {
                 Cursor.Current = Cursors.WaitCursor;
                 string poruka = String.Empty;
-                _ws.SetDocumentStatus(Utils.DocumentTypePrijem, _receiptNo, 1, ref poruka);
+                _ws.SetDocumentStatus(Utils.DocumentTypePrijem, _receiptNo, 1);
 
                 listBox1.Dispose();
                 Close();
@@ -286,7 +286,7 @@ namespace KIPS_WMS.UI.Prijem
                     {
                         Cursor.Current = Cursors.WaitCursor;
                         string poruka = String.Empty;
-                        _ws.SetDocumentStatus(Utils.DocumentTypePrijem, _receiptNo, 1, ref poruka);
+                        _ws.SetDocumentStatus(Utils.DocumentTypePrijem, _receiptNo, 1);
 
                         listBox1.Dispose();
                         Close();

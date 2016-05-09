@@ -604,65 +604,18 @@
           </sequence>
         </complexType>
       </element>
-      <element name="a42a42a42a42a42InventoryJnla42a42a42a42a42">
-        <complexType>
-          <sequence />
-        </complexType>
-      </element>
-      <element name="a42a42a42a42a42InventoryJnla42a42a42a42a42_Result">
-        <complexType>
-          <sequence />
-        </complexType>
-      </element>
-      <element name="InsertInventoryEntry">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="locationCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="binCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="itemNoP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="itemBarcodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="qtyAsTxtP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="unitOfMeasureP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="trackingCodeP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="expDateAsTxtP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="userIDP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="processDateAsTxtP" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="processTimeAsTxtP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="InsertInventoryEntry_Result">
-        <complexType>
-          <sequence />
-        </complexType>
-      </element>
-      <element name="InsertInventoryCSV">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="inventoryCSVP" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="InsertInventoryCSV_Result">
-        <complexType>
-          <sequence />
-        </complexType>
-      </element>
       <element name="SetDocumentStatus">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="documentTypeP" type="int" />
             <element minOccurs="1" maxOccurs="1" name="documentNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
-            <element minOccurs="1" maxOccurs="1" name="noteP" type="string" />
           </sequence>
         </complexType>
       </element>
       <element name="SetDocumentStatus_Result">
         <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="noteP" type="string" />
-          </sequence>
+          <sequence />
         </complexType>
       </element>
       <element name="GetItemBinContent">
@@ -934,24 +887,6 @@
   <message name="PostReclassification_Result">
     <part name="parameters" element="tns:PostReclassification_Result" />
   </message>
-  <message name="a42a42a42a42a42InventoryJnla42a42a42a42a42">
-    <part name="parameters" element="tns:a42a42a42a42a42InventoryJnla42a42a42a42a42" />
-  </message>
-  <message name="a42a42a42a42a42InventoryJnla42a42a42a42a42_Result">
-    <part name="parameters" element="tns:a42a42a42a42a42InventoryJnla42a42a42a42a42_Result" />
-  </message>
-  <message name="InsertInventoryEntry">
-    <part name="parameters" element="tns:InsertInventoryEntry" />
-  </message>
-  <message name="InsertInventoryEntry_Result">
-    <part name="parameters" element="tns:InsertInventoryEntry_Result" />
-  </message>
-  <message name="InsertInventoryCSV">
-    <part name="parameters" element="tns:InsertInventoryCSV" />
-  </message>
-  <message name="InsertInventoryCSV_Result">
-    <part name="parameters" element="tns:InsertInventoryCSV_Result" />
-  </message>
   <message name="SetDocumentStatus">
     <part name="parameters" element="tns:SetDocumentStatus" />
   </message>
@@ -1114,18 +1049,6 @@
     <operation name="PostReclassification">
       <input name="PostReclassification" message="tns:PostReclassification" />
       <output name="PostReclassification_Result" message="tns:PostReclassification_Result" />
-    </operation>
-    <operation name="a42a42a42a42a42InventoryJnla42a42a42a42a42">
-      <input name="a42a42a42a42a42InventoryJnla42a42a42a42a42" message="tns:a42a42a42a42a42InventoryJnla42a42a42a42a42" />
-      <output name="a42a42a42a42a42InventoryJnla42a42a42a42a42_Result" message="tns:a42a42a42a42a42InventoryJnla42a42a42a42a42_Result" />
-    </operation>
-    <operation name="InsertInventoryEntry">
-      <input name="InsertInventoryEntry" message="tns:InsertInventoryEntry" />
-      <output name="InsertInventoryEntry_Result" message="tns:InsertInventoryEntry_Result" />
-    </operation>
-    <operation name="InsertInventoryCSV">
-      <input name="InsertInventoryCSV" message="tns:InsertInventoryCSV" />
-      <output name="InsertInventoryCSV_Result" message="tns:InsertInventoryCSV_Result" />
     </operation>
     <operation name="SetDocumentStatus">
       <input name="SetDocumentStatus" message="tns:SetDocumentStatus" />
@@ -1447,33 +1370,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="a42a42a42a42a42InventoryJnla42a42a42a42a42">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:a42a42a42a42a42InventoryJnla42a42a42a42a42" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="a42a42a42a42a42InventoryJnla42a42a42a42a42">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="a42a42a42a42a42InventoryJnla42a42a42a42a42_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="InsertInventoryEntry">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:InsertInventoryEntry" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="InsertInventoryEntry">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="InsertInventoryEntry_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="InsertInventoryCSV">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:InsertInventoryCSV" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="InsertInventoryCSV">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="InsertInventoryCSV_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="SetDocumentStatus">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SetDocumentStatus" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="SetDocumentStatus">
@@ -1522,7 +1418,7 @@
   </binding>
   <service name="MobileWMSSync">
     <port name="MobileWMSSync_Port" binding="tns:MobileWMSSync_Binding">
-      <address location="http://192.168.10.72:5047/RAZVOJ/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="http://192.168.10.20:7077/KIPS_NAV_90_PROD_WS/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>
