@@ -159,7 +159,7 @@ namespace KIPS_WMS.UI.Skladistenje
             this.MinimizeBox = false;
             this.Name = "SkladistenjeLinije";
             this.Text = "Skladištenje";
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SkladistenjeLinije_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SkladistenjeLinije_KeyUp);
             this.ResumeLayout(false);
 
         }

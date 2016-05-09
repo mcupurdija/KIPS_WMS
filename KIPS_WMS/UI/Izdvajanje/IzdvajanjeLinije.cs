@@ -54,9 +54,9 @@ namespace KIPS_WMS.UI.Izdvajanje
                 _ws.GetWarehousePickLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin,
                     _pickNo, ref warehousePicksCsv);
 
-                var engine = new FileHelperEngine(typeof (WarehousePickLineModel));
+                var engine = new FileHelperEngine(typeof(WarehousePickLineModel));
                 _warehousePickLines =
-                    ((WarehousePickLineModel[]) engine.ReadString(warehousePicksCsv)).ToList();
+                    ((WarehousePickLineModel[])engine.ReadString(warehousePicksCsv)).ToList();
 
                 DisplayData(null, false);
             }
@@ -91,25 +91,25 @@ namespace KIPS_WMS.UI.Izdvajanje
             if (fromScanner)
             {
                 _filteredPickLines = filterText != null
-                    ? _warehousePickLines.FindAll(x => x.ItemNo.Equals(filterText))
-                    : _warehousePickLines;
+                    ? _warehousePickLines.FindAll(x => x.ItemNo.Equals(filterText)).OrderBy(x => x.QuantityOutstanding).ThenBy(x => x.BinCode).ToList()
+                    : _warehousePickLines.OrderBy(x => x.QuantityOutstanding).ThenBy(x => x.BinCode).ToList();
             }
             else
             {
                 _filteredPickLines = filterText != null
                     ? _warehousePickLines.FindAll(
-                        x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
-                    : _warehousePickLines;
+                        x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText)).OrderBy(x => x.QuantityOutstanding).ThenBy(x => x.BinCode).ToList()
+                    : _warehousePickLines.OrderBy(x => x.QuantityOutstanding).ThenBy(x => x.BinCode).ToList();
             }
             var listItem = new ListItem();
-            
+
             for (int i = 0; i < _filteredPickLines.Count; i++)
             {
                 listBox1.Items.Add(listItem);
             }
             if (listBox1.Items.Count > 5)
             {
-                listBox1.Items.Add(new ListItem {Tag = 0});
+                listBox1.Items.Add(new ListItem { Tag = 0 });
             }
 
             tbPronadji.Focus();
@@ -133,7 +133,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             if (e.KeyCode != Keys.Enter) return;
 
             List<object[]> query = SQLiteHelper.multiRowQuery(DbStatements.FindItemsStatementBarcode,
-                new object[] {tbPronadji.Text.Trim()});
+                new object[] { tbPronadji.Text.Trim() });
             if (query.Count == 1)
             {
                 _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
@@ -207,7 +207,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             }
             else
             {
-                e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
+                e.DrawBackground(index % 2 == 0 ? SystemColors.Control : Color.White);
                 brush = new SolidBrush(Color.Black);
             }
 
@@ -224,10 +224,10 @@ namespace KIPS_WMS.UI.Izdvajanje
 
             e.Graphics.DrawString(firstLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 10, e.Bounds.Top,
-                new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
             e.Graphics.DrawString(secondLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 10,
-                e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                e.Bounds.Top + 20, new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
         }
 
         public static Color GetLineStatusColor(string outstanding, string toReceive)
@@ -342,13 +342,24 @@ namespace KIPS_WMS.UI.Izdvajanje
             }
         }
 
-        private void IzdvajanjeLinije_KeyPress(object sender, KeyPressEventArgs e)
+        private void IzdvajanjeLinije_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Escape)
+            if (e.KeyCode == Keys.Escape)
             {
                 DialogResult = DialogResult.Yes;
                 listBox1.Dispose();
                 Close();
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (_selectedLine != null)
+                {
+                    ShowLineDetailsForm(null);
+                }
+                else
+                {
+                    MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
+                }
             }
         }
     }

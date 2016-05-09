@@ -52,7 +52,7 @@ namespace KIPS_WMS.UI.Isporuka
                 _ws.GetWarehouseShipmentLines(RegistryUtils.GetLastUsername(), loginData.Magacin, loginData.Podmagacin,
                     _shipmentNo, ref warehouseShipmentsCsv);
 
-                var engine = new FileHelperEngine(typeof (WarehouseShipmentLineModel));
+                var engine = new FileHelperEngine(typeof(WarehouseShipmentLineModel));
                 _warehouseShipmentLines =
                     ((WarehouseShipmentLineModel[])engine.ReadString(warehouseShipmentsCsv)).ToList();
 
@@ -86,7 +86,8 @@ namespace KIPS_WMS.UI.Isporuka
 
             _selectedLine = null;
             listBox1.SelectedIndex = -1;
-            if (fromScanner) {
+            if (fromScanner)
+            {
                 _filteredShipmentLines = filterText != null
                         ? _warehouseShipmentLines.FindAll(x => x.ItemNo.Equals(filterText))
                         : _warehouseShipmentLines;
@@ -98,14 +99,14 @@ namespace KIPS_WMS.UI.Isporuka
                     : _warehouseShipmentLines;
             }
             var listItem = new ListItem();
-            
+
             for (int i = 0; i < _filteredShipmentLines.Count; i++)
             {
                 listBox1.Items.Add(listItem);
             }
             if (listBox1.Items.Count > 5)
             {
-                listBox1.Items.Add(new ListItem {Tag = 0});
+                listBox1.Items.Add(new ListItem { Tag = 0 });
             }
 
             tbPronadji.Focus();
@@ -135,7 +136,8 @@ namespace KIPS_WMS.UI.Isporuka
                 _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
                 DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
             }
-            else{
+            else
+            {
                 DisplayData(tbPronadji.Text.Trim(), true);
             }
         }
@@ -202,7 +204,7 @@ namespace KIPS_WMS.UI.Isporuka
             }
             else
             {
-                e.DrawBackground(index%2 == 0 ? SystemColors.Control : Color.White);
+                e.DrawBackground(index % 2 == 0 ? SystemColors.Control : Color.White);
                 brush = new SolidBrush(Color.Black);
             }
 
@@ -217,10 +219,10 @@ namespace KIPS_WMS.UI.Isporuka
 
             e.Graphics.DrawString(firstLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Bold), brush, e.Bounds.Left + 10, e.Bounds.Top,
-                new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
             e.Graphics.DrawString(secondLine,
                 new Font(FontFamily.GenericSansSerif, 8F, FontStyle.Regular), brush, e.Bounds.Left + 10,
-                e.Bounds.Top + 20, new StringFormat {FormatFlags = StringFormatFlags.NoWrap});
+                e.Bounds.Top + 20, new StringFormat { FormatFlags = StringFormatFlags.NoWrap });
         }
 
         public static Color GetLineStatusColor(string outstanding, string toReceive)
@@ -256,8 +258,8 @@ namespace KIPS_WMS.UI.Isporuka
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-
-                _ws.SetDocumentStatus(Utils.DocumentTypeIsporuka, _shipmentNo, 1);
+                string poruka = String.Empty;
+                _ws.SetDocumentStatus(Utils.DocumentTypeIsporuka, _shipmentNo, 1, ref poruka);
 
                 listBox1.Dispose();
                 Close();
@@ -283,12 +285,28 @@ namespace KIPS_WMS.UI.Isporuka
                 case 1:
                     try
                     {
-                        Cursor.Current = Cursors.WaitCursor;
+                        //Cursor.Current = Cursors.WaitCursor;
 
-                        _ws.SetDocumentStatus(Utils.DocumentTypeIsporuka, _shipmentNo, 1);
+                        string poruka = String.Empty;
+                        _ws.SetDocumentStatus(Utils.DocumentTypeIsporuka, _shipmentNo, 1, ref poruka);
 
-                        listBox1.Dispose();
-                        Close();
+                        if (poruka.Length > 0)
+                        {
+                            var porukaDijalog = new PorukaDijalog(poruka);
+                            DialogResult result = porukaDijalog.ShowDialog();
+
+                            if (result == DialogResult.Yes)
+                            {
+                                listBox1.Dispose();
+                                Close();
+                            }
+                        }
+                        else
+                        {
+                            listBox1.Dispose();
+                            Close();
+                        }
+
                     }
                     catch (Exception ex)
                     {
@@ -296,7 +314,7 @@ namespace KIPS_WMS.UI.Isporuka
                     }
                     finally
                     {
-                        Cursor.Current = Cursors.Default;
+                        //Cursor.Current = Cursors.Default;
                     }
                     break;
                 case 2:
@@ -312,14 +330,26 @@ namespace KIPS_WMS.UI.Isporuka
             }
         }
 
-        private void IsporukaLinije_KeyPress(object sender, KeyPressEventArgs e)
+        private void IsporukaLinije_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Escape)
+            if (e.KeyCode == Keys.Escape)
             {
+                DialogResult = DialogResult.Yes;
                 listBox1.Dispose();
                 Close();
             }
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (_selectedLine != null)
+                {
+                    ShowLineDetailsForm(null);
+                }
+                else
+                {
+                    MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
+                }
+            }
         }
-        
+
     }
 }

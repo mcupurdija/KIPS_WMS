@@ -159,7 +159,7 @@ namespace KIPS_WMS.UI.Izdvajanje
             this.MinimizeBox = false;
             this.Name = "IzdvajanjeLinije";
             this.Text = "Izdvajanje";
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IzdvajanjeLinije_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.IzdvajanjeLinije_KeyUp);
             this.ResumeLayout(false);
 
         }
