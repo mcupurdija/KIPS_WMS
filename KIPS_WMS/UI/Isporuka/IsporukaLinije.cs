@@ -259,7 +259,7 @@ namespace KIPS_WMS.UI.Isporuka
             {
                 Cursor.Current = Cursors.WaitCursor;
                 string poruka = String.Empty;
-                _ws.SetDocumentStatus(Utils.DocumentTypeIsporuka, _shipmentNo, 1);
+                _ws.SetDocumentStatus(Utils.DocumentTypeIsporuka, _shipmentNo, 1, ref poruka);
 
                 listBox1.Dispose();
                 Close();
@@ -288,7 +288,7 @@ namespace KIPS_WMS.UI.Isporuka
                         //Cursor.Current = Cursors.WaitCursor;
 
                         string poruka = String.Empty;
-                        _ws.SetDocumentStatus(Utils.DocumentTypeIsporuka, _shipmentNo, 1);
+                        _ws.SetDocumentStatus(Utils.DocumentTypeIsporuka, _shipmentNo, 1, ref poruka);
 
                         if (poruka.Length > 0)
                         {

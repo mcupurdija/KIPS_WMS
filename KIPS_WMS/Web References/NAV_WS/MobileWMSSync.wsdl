@@ -610,12 +610,15 @@
             <element minOccurs="1" maxOccurs="1" name="documentTypeP" type="int" />
             <element minOccurs="1" maxOccurs="1" name="documentNoP" type="string" />
             <element minOccurs="1" maxOccurs="1" name="statusP" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="noteP" type="string" />
           </sequence>
         </complexType>
       </element>
       <element name="SetDocumentStatus_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="noteP" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="GetItemBinContent">
@@ -1418,7 +1421,7 @@
   </binding>
   <service name="MobileWMSSync">
     <port name="MobileWMSSync_Port" binding="tns:MobileWMSSync_Binding">
-      <address location="http://192.168.10.20:7077/KIPS_NAV_90_PROD_WS/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="http://192.168.10.20:6047/KIPS_NAV_90_DEV/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>

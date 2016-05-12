@@ -28,8 +28,7 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         public MobileWMSSync() {
-            this.Url = "http://192.168.10.20:7077/KIPS_NAV_90_PROD_WS/WS/KIPS%20d.o.o/Codeunit/MobileWMSS" +
-                "ync";
+            this.Url = "http://192.168.10.20:6047/KIPS_NAV_90_DEV/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync";
         }
         
         /// <remarks/>
@@ -991,24 +990,28 @@ namespace KIPS_WMS.NAV_WS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SetDocumentStatus", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="SetDocumentStatus_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SetDocumentStatus(int documentTypeP, string documentNoP, int statusP) {
-            this.Invoke("SetDocumentStatus", new object[] {
+        public void SetDocumentStatus(int documentTypeP, string documentNoP, int statusP, ref string noteP) {
+            object[] results = this.Invoke("SetDocumentStatus", new object[] {
                         documentTypeP,
                         documentNoP,
-                        statusP});
+                        statusP,
+                        noteP});
+            noteP = ((string)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginSetDocumentStatus(int documentTypeP, string documentNoP, int statusP, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginSetDocumentStatus(int documentTypeP, string documentNoP, int statusP, string noteP, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("SetDocumentStatus", new object[] {
                         documentTypeP,
                         documentNoP,
-                        statusP}, callback, asyncState);
+                        statusP,
+                        noteP}, callback, asyncState);
         }
         
         /// <remarks/>
-        public void EndSetDocumentStatus(System.IAsyncResult asyncResult) {
-            this.EndInvoke(asyncResult);
+        public void EndSetDocumentStatus(System.IAsyncResult asyncResult, out string noteP) {
+            object[] results = this.EndInvoke(asyncResult);
+            noteP = ((string)(results[0]));
         }
         
         /// <remarks/>
