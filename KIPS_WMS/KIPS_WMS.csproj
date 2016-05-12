@@ -600,10 +600,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://192.168.10.20:7077/KIPS_NAV_90_PROD_WS/WS/KIPS%2520d.o.o./Codeunit/MobileWMSSync">
+    <WebReferenceUrl Include="http://192.168.10.20:6047/KIPS_NAV_90_DEV/WS/KIPS d.o.o./Codeunit/MobileWMSSync">
       <UrlBehavior>Static</UrlBehavior>
       <RelPath>Web References\NAV_WS\</RelPath>
-      <UpdateFromURL>http://192.168.10.20:7077/KIPS_NAV_90_PROD_WS/WS/KIPS%2520d.o.o./Codeunit/MobileWMSSync</UpdateFromURL>
+      <UpdateFromURL>http://192.168.10.20:6047/KIPS_NAV_90_DEV/WS/KIPS d.o.o./Codeunit/MobileWMSSync</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

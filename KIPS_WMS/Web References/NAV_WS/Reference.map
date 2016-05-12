@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://192.168.10.20:7077/KIPS_NAV_90_PROD_WS/WS/KIPS d.o.o/Codeunit/MobileWMSSync" filename="MobileWMSSync.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://192.168.10.20:6047/KIPS_NAV_90_DEV/WS/KIPS d.o.o/Codeunit/MobileWMSSync" filename="MobileWMSSync.wsdl" />
   </Results>
 </DiscoveryClientResultsFile>
