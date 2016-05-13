@@ -328,7 +328,7 @@ namespace KIPS_WMS.UI.Prijem
                     ShowLineDetailsForm(null);
                     e.Handled = true;
                 }
-                else
+                else if (tbPronadji.Text.Trim().Length == 0)
                 {
                     MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
                 }

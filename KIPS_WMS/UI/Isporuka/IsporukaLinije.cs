@@ -344,7 +344,7 @@ namespace KIPS_WMS.UI.Isporuka
                 {
                     ShowLineDetailsForm(null);
                 }
-                else
+                else if (tbPronadji.Text.Trim().Length == 0)
                 {
                     MessageBox.Show(Resources.OdaberiteLiniju, Resources.Greska);
                 }
