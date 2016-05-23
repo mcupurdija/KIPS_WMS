@@ -139,3 +139,4 @@ C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.exe
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.pdb
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Isporuka.PorukaDijalog.resources
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.BarkodTest.BarkodTest.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Popis.NoviPopis.resources

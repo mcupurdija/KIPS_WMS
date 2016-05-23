@@ -262,9 +262,14 @@ namespace KIPS_WMS.UI.Isporuka
                 if (decimal.Parse(quantity, culture) < 0) return;
                 if (decimal.Parse(uomQuantity, culture) < 0) return;
 
+                var _dbQuantity = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity,
+                        new object[] { _selectedLine.ItemNo, _selectedLine.UnitOfMeasureCode });
+                string _itemQuantity = _dbQuantity != null ? _dbQuantity.ToString() : "1";
+                decimal kolicina = decimal.Parse(tbKolicina.Text, culture) * decimal.Parse(_itemQuantity, culture);
+
                 if (Convert.ToInt32(_selectedLine.TrackingType) != 0)
                 {
-                    var pracenje = new Pracenje(_selectedLine.ItemNo, decimal.Parse(quantity),
+                    var pracenje = new Pracenje(_selectedLine.ItemNo, kolicina,
                         Convert.ToInt32(_selectedLine.TrackingType));
                     DialogResult result = pracenje.ShowDialog();
                     if (result == DialogResult.OK)

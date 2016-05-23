@@ -83,6 +83,7 @@
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Model\BinModel.cs" />
     <Compile Include="Model\DeviceModel.cs" />
+    <Compile Include="Model\InventoryItemModel.cs" />
     <Compile Include="Model\WarehouseShipmentLineModel.cs" />
     <Compile Include="Model\WarehouseShipmentModel.cs" />
     <Compile Include="Model\WarehousePickLineModel.cs" />
@@ -330,6 +331,10 @@
       <DependentUpon>Settings.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Popis\NoviPopis.resx">
+      <DependentUpon>NoviPopis.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Preklasifikacija\OdabirArtiklaDijalog.resx">
       <DependentUpon>OdabirArtiklaDijalog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -480,6 +485,12 @@
     </Compile>
     <Compile Include="UI\Ostalo\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Popis\NoviPopis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Popis\NoviPopis.Designer.cs">
+      <DependentUpon>NoviPopis.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Preklasifikacija\OdabirArtiklaDijalog.cs">
       <SubType>Form</SubType>

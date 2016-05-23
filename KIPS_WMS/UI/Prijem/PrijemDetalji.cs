@@ -38,20 +38,21 @@ namespace KIPS_WMS.UI.Prijem
             _selectedLine = selectedLine;
             WarehouseReceiptLines = warehouseReceiptLines;
 
-            DisplayData(barcode);  
+            DisplayData(barcode);
             if (_loginData.SkeniranjeBarkodaNaPrijemu == 0 || _loginData.ObavezanRegal == 0)
             {
                 tbRegal.Visible = false;
                 label1.Visible = false;
                 tbKolicina.Focus();
             }
-            else {
+            else
+            {
                 tbRegal.Focus();
             }
 
             //            _selectedLine.UnitOfMeasureCode = "PAK";
 
-                      
+
         }
 
         protected override void OnActivated(EventArgs e)
@@ -70,7 +71,7 @@ namespace KIPS_WMS.UI.Prijem
                 listBox1.Items.Add(listItem);
             }
 
-//            tbRegal.Text = String.Empty;
+            //            tbRegal.Text = String.Empty;
             tbJedinicaKolicina.Text = String.Empty;
             tbKolicina.Text = "1";
 
@@ -258,11 +259,11 @@ namespace KIPS_WMS.UI.Prijem
 
                 var _dbQuantity = SQLiteHelper.simpleQuery(DbStatements.FindItemUnitOfMeasureQuantity,
                         new object[] { _selectedLine.ItemNo, _selectedLine.UnitOfMeasureCode });
-                string _itemQuantity = _dbQuantity.ToString(); 
+                string _itemQuantity = _dbQuantity != null ? _dbQuantity.ToString() : "1";
                 decimal kolicina = decimal.Parse(tbKolicina.Text, culture) * decimal.Parse(_itemQuantity, culture);
 
-                if (Convert.ToInt32(_selectedLine.TrackingType) != 0 && kolicina!=0)
-                {           
+                if (Convert.ToInt32(_selectedLine.TrackingType) != 0 && kolicina != 0)
+                {
                     var pracenje = new Pracenje(_selectedLine.ItemNo, kolicina, Convert.ToInt32(_selectedLine.TrackingType));
                     DialogResult result = pracenje.ShowDialog();
                     if (result == DialogResult.OK)

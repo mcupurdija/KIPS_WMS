@@ -10,6 +10,7 @@ using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Properties;
 using KIPS_WMS.Web;
 using OpenNETCF.Windows.Forms;
+using System.Globalization;
 
 namespace KIPS_WMS.UI.Prijem
 {
@@ -22,6 +23,7 @@ namespace KIPS_WMS.UI.Prijem
         private List<WarehouseReceiptLineModel> _filteredReceiptLines;
         private WarehouseReceiptLineModel _selectedLine;
         private List<WarehouseReceiptLineModel> _warehouseReceiptLines;
+        CultureInfo culture = Utils.GetLocalCulture();
 
         public PrijemLinije(string receiptNo)
         {
@@ -97,8 +99,36 @@ namespace KIPS_WMS.UI.Prijem
                     ? _warehouseReceiptLines.FindAll(x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
                     : _warehouseReceiptLines;
             }
+            List<WarehouseReceiptLineModel> sortedListRed = new List<WarehouseReceiptLineModel>();
+            List<WarehouseReceiptLineModel> sortedListYellow = new List<WarehouseReceiptLineModel>();
+            List<WarehouseReceiptLineModel> sortedListGreen = new List<WarehouseReceiptLineModel>();
+            List<WarehouseReceiptLineModel> sortedListBlue = new List<WarehouseReceiptLineModel>();
+
+            for (int i = 0; i < _filteredReceiptLines.Count; i++)
+            {
+                if (decimal.Parse(_filteredReceiptLines[i].QuantityToReceive, culture) == 0)
+                {
+                    sortedListRed.Add(_filteredReceiptLines[i]);
+                }
+                else if (decimal.Parse(_filteredReceiptLines[i].QuantityOutstanding, culture) > decimal.Parse(_filteredReceiptLines[i].QuantityToReceive, culture))
+                {
+                    sortedListYellow.Add(_filteredReceiptLines[i]);
+                }
+                else if (decimal.Parse(_filteredReceiptLines[i].QuantityOutstanding, culture) == decimal.Parse(_filteredReceiptLines[i].QuantityToReceive, culture))
+                {
+                    sortedListGreen.Add(_filteredReceiptLines[i]);
+                }
+                else
+                {
+                    sortedListBlue.Add(_filteredReceiptLines[i]);
+                }
+            }
+            _filteredReceiptLines = sortedListRed.OrderBy(x => x.ItemNo)
+                                        .Concat(sortedListYellow.OrderBy(x => x.ItemNo))
+                                        .Concat(sortedListGreen.OrderBy(x => x.ItemNo))
+                                        .Concat(sortedListBlue.OrderBy(x => x.ItemNo)).ToList();
             var listItem = new ListItem();
-            
+
             for (int i = 0; i < _filteredReceiptLines.Count; i++)
             {
                 listBox1.Items.Add(listItem);
@@ -136,7 +166,8 @@ namespace KIPS_WMS.UI.Prijem
                 _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
                 DisplayData(query[0][DatabaseModel.ItemDbModel.ItemCode].ToString(), true);
             }
-            else {
+            else
+            {
                 DisplayData(tbPronadji.Text.Trim(), true);
             }
         }

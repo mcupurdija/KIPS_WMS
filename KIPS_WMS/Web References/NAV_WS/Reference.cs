@@ -989,6 +989,79 @@ namespace KIPS_WMS.NAV_WS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:a42a42a42a42a42InventoryJnl" +
+            "a42a42a42a42a42", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="a42a42a42a42a42InventoryJnla42a42a42a42a42_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void a42a42a42a42a42InventoryJnla42a42a42a42a42() {
+            this.Invoke("a42a42a42a42a42InventoryJnla42a42a42a42a42", new object[0]);
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult Begina42a42a42a42a42InventoryJnla42a42a42a42a42(System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("a42a42a42a42a42InventoryJnla42a42a42a42a42", new object[0], callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void Enda42a42a42a42a42InventoryJnla42a42a42a42a42(System.IAsyncResult asyncResult) {
+            this.EndInvoke(asyncResult);
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:InsertInventoryEntry", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="InsertInventoryEntry_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertInventoryEntry(string locationCodeP, string binCodeP, string itemNoP, string itemBarcodeP, string qtyAsTxtP, string unitOfMeasureP, string trackingCodeP, string expDateAsTxtP, string userIDP, string processDateAsTxtP, string processTimeAsTxtP) {
+            this.Invoke("InsertInventoryEntry", new object[] {
+                        locationCodeP,
+                        binCodeP,
+                        itemNoP,
+                        itemBarcodeP,
+                        qtyAsTxtP,
+                        unitOfMeasureP,
+                        trackingCodeP,
+                        expDateAsTxtP,
+                        userIDP,
+                        processDateAsTxtP,
+                        processTimeAsTxtP});
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginInsertInventoryEntry(string locationCodeP, string binCodeP, string itemNoP, string itemBarcodeP, string qtyAsTxtP, string unitOfMeasureP, string trackingCodeP, string expDateAsTxtP, string userIDP, string processDateAsTxtP, string processTimeAsTxtP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("InsertInventoryEntry", new object[] {
+                        locationCodeP,
+                        binCodeP,
+                        itemNoP,
+                        itemBarcodeP,
+                        qtyAsTxtP,
+                        unitOfMeasureP,
+                        trackingCodeP,
+                        expDateAsTxtP,
+                        userIDP,
+                        processDateAsTxtP,
+                        processTimeAsTxtP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndInsertInventoryEntry(System.IAsyncResult asyncResult) {
+            this.EndInvoke(asyncResult);
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:InsertInventoryCSV", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="InsertInventoryCSV_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertInventoryCSV(string inventoryCSVP) {
+            this.Invoke("InsertInventoryCSV", new object[] {
+                        inventoryCSVP});
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginInsertInventoryCSV(string inventoryCSVP, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("InsertInventoryCSV", new object[] {
+                        inventoryCSVP}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndInsertInventoryCSV(System.IAsyncResult asyncResult) {
+            this.EndInvoke(asyncResult);
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync:SetDocumentStatus", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", ResponseElementName="SetDocumentStatus_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileWMSSync", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void SetDocumentStatus(int documentTypeP, string documentNoP, int statusP, ref string noteP) {
             object[] results = this.Invoke("SetDocumentStatus", new object[] {

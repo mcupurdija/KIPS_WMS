@@ -231,4 +231,7 @@
   <data name="PrekoracenaKolicina" xml:space="preserve">
     <value>Prekoračena količina</value>
   </data>
+  <data name="Regal" xml:space="preserve">
+    <value>Regal</value>
+  </data>
 </root>

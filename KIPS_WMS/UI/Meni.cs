@@ -13,16 +13,20 @@ using KIPS_WMS.UI.Prijem;
 using KIPS_WMS.UI.Skladistenje;
 using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Web;
+using KIPS_WMS.UI.Popis;
+using System.Collections.Generic;
 
 namespace KIPS_WMS.UI
 {
     public partial class Meni : Form
     {
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
+        private List<InventoryItemModel> _inventory;
 
         public Meni()
         {
             InitializeComponent();
+            _inventory = new List<InventoryItemModel>();
             LoginModel login = RegistryUtils.GetLoginData();
 
             if (login.RadiSkladistenje == 0)
@@ -133,7 +137,12 @@ namespace KIPS_WMS.UI
 
         private void bPopis_Click(object sender, EventArgs e)
         {
+            var popis = new NoviPopis(_inventory);
+            DialogResult result = popis.ShowDialog();
 
+            if (result == DialogResult.OK) {
+                _inventory = popis._inventoryItems;
+            }
         }
 
         private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)

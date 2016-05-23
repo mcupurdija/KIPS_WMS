@@ -10,6 +10,7 @@ using KIPS_WMS.NAV_WS;
 using KIPS_WMS.Properties;
 using KIPS_WMS.Web;
 using OpenNETCF.Windows.Forms;
+using System.Globalization;
 
 namespace KIPS_WMS.UI.Isporuka
 {
@@ -21,6 +22,7 @@ namespace KIPS_WMS.UI.Isporuka
         private List<WarehouseShipmentLineModel> _filteredShipmentLines;
         private WarehouseShipmentLineModel _selectedLine;
         private List<WarehouseShipmentLineModel> _warehouseShipmentLines;
+        CultureInfo culture = Utils.GetLocalCulture();
 
         public IsporukaLinije(string shipmentNo)
         {
@@ -98,6 +100,35 @@ namespace KIPS_WMS.UI.Isporuka
                     ? _warehouseShipmentLines.FindAll(x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText))
                     : _warehouseShipmentLines;
             }
+
+            List<WarehouseShipmentLineModel> sortedListRed = new List<WarehouseShipmentLineModel>();
+            List<WarehouseShipmentLineModel> sortedListYellow = new List<WarehouseShipmentLineModel>();
+            List<WarehouseShipmentLineModel> sortedListGreen = new List<WarehouseShipmentLineModel>();
+            List<WarehouseShipmentLineModel> sortedListBlue = new List<WarehouseShipmentLineModel>();
+
+            for (int i = 0; i < _filteredShipmentLines.Count; i++)
+            {
+                if (decimal.Parse(_filteredShipmentLines[i].QuantityToReceive, culture) == 0)
+                {
+                    sortedListRed.Add(_filteredShipmentLines[i]);
+                }
+                else if (decimal.Parse(_filteredShipmentLines[i].QuantityOutstanding, culture) > decimal.Parse(_filteredShipmentLines[i].QuantityToReceive, culture))
+                {
+                    sortedListYellow.Add(_filteredShipmentLines[i]);
+                }
+                else if (decimal.Parse(_filteredShipmentLines[i].QuantityOutstanding, culture) == decimal.Parse(_filteredShipmentLines[i].QuantityToReceive, culture))
+                {
+                    sortedListGreen.Add(_filteredShipmentLines[i]);
+                }
+                else
+                {
+                    sortedListBlue.Add(_filteredShipmentLines[i]);
+                }
+            }
+            _filteredShipmentLines = sortedListRed.OrderBy(x => x.ItemNo)
+                                        .Concat(sortedListYellow.OrderBy(x => x.ItemNo))
+                                        .Concat(sortedListGreen.OrderBy(x => x.ItemNo))
+                                        .Concat(sortedListBlue.OrderBy(x => x.ItemNo)).ToList();
             var listItem = new ListItem();
 
             for (int i = 0; i < _filteredShipmentLines.Count; i++)
