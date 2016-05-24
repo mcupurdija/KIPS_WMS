@@ -76,7 +76,7 @@ namespace KIPS_WMS.UI.Popis
             item.LocationCode = login.Magacin;
             item.UserCode = RegistryUtils.GetLastUsername();
             item.CurrentDate = DateTime.Now.ToString("dd.MM.yyyy");
-            item.CurrentDate = DateTime.Now.ToString("HH:mm");
+            item.CurrentTime = DateTime.Now.ToString("HH:mm");
 
             if (tbPracenje.Text.Trim().Length == 0)
             {

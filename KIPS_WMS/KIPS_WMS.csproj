@@ -630,7 +630,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="kips.ico" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Web References\NAV_WS\MobileWMSSync.wsdl" />
     <None Include="Web References\NAV_WS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
