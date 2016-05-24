@@ -86,6 +86,8 @@ C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.exe
 C:\Users\mcupurdija\Documents\Visual Studio 2008\Projects\KIPS_WMS\KIPS_WMS\obj\Debug\KIPS_WMS.pdb
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.BarkodTest.BarkodTest.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Isporuka.PorukaDijalog.resources
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Isporuka.IsporukaDetalji.resources
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Isporuka.IsporukaLinije.resources
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Isporuka.IsporukaPocetna.resources
@@ -114,6 +116,7 @@ C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.P
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.SlanjeDijalog.resources
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ponude.StampaDijalog.resources
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Ostalo.Settings.resources
+C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Popis.NoviPopis.resources
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Preklasifikacija.OdabirArtiklaDijalog.resources
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Preklasifikacija.Pracenje.resources
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Preklasifikacija.PreklasifikacijaDetalji.resources
@@ -137,6 +140,3 @@ C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\bin\Debug\KIPS_WMS.exe
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\bin\Debug\KIPS_WMS.pdb
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.exe
 C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.pdb
-C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Isporuka.PorukaDijalog.resources
-C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.BarkodTest.BarkodTest.resources
-C:\Users\petar.milisavljevic\Documents\Projects\KIPS_WMS\obj\Debug\KIPS_WMS.UI.Popis.NoviPopis.resources
