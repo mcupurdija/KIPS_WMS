@@ -82,8 +82,8 @@
     <Compile Include="Device.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Model\BinModel.cs" />
+    <Compile Include="Model\ItemInventoryModel.cs" />
     <Compile Include="Model\DeviceModel.cs" />
-    <Compile Include="Model\InventoryItemModel.cs" />
     <Compile Include="Model\WarehouseShipmentLineModel.cs" />
     <Compile Include="Model\WarehouseShipmentModel.cs" />
     <Compile Include="Model\WarehousePickLineModel.cs" />
@@ -630,6 +630,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="kips.ico" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Web References\NAV_WS\MobileWMSSync.wsdl" />
     <None Include="Web References\NAV_WS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

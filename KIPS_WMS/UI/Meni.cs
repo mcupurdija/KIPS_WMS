@@ -21,12 +21,12 @@ namespace KIPS_WMS.UI
     public partial class Meni : Form
     {
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
-        private List<InventoryItemModel> _inventory;
+        private List<ItemInventoryModel> _inventory;
 
         public Meni()
         {
             InitializeComponent();
-            _inventory = new List<InventoryItemModel>();
+            _inventory = new List<ItemInventoryModel>();
             LoginModel login = RegistryUtils.GetLoginData();
 
             if (login.RadiSkladistenje == 0)
@@ -141,7 +141,7 @@ namespace KIPS_WMS.UI
             DialogResult result = popis.ShowDialog();
 
             if (result == DialogResult.OK) {
-                _inventory = popis._inventoryItems;
+                _inventory = popis._inventory;
             }
         }
 
