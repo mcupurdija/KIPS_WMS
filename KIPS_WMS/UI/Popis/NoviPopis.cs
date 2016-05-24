@@ -19,9 +19,10 @@ namespace KIPS_WMS.UI.Popis
         private readonly MobileWMSSync _ws = WebServiceFactory.GetWebService();
         private readonly CultureInfo _culture = Utils.GetLocalCulture();
         public List<ItemInventoryModel> _inventory;
-        private string _barcode;
-        private string _code;
-        private string _itemUom;
+        private string _barcode = "";
+        private string _code = "";
+        private string _itemUom = "";
+        private string _trackingType = "";
 
         public NoviPopis(List<ItemInventoryModel> inventory)
         {
@@ -55,7 +56,7 @@ namespace KIPS_WMS.UI.Popis
                 MessageBox.Show("Nije unet regal.", Resources.Greska);
                 return;
             }
-            if (_barcode.Length == 0)
+            if (_barcode.Length == 0 || _code.Length == 0 || tbPronadji.Text.Trim().Length == 0)
             {
                 MessageBox.Show("Nije unet artikal.", Resources.Greska);
                 return;
@@ -64,6 +65,12 @@ namespace KIPS_WMS.UI.Popis
             {
                 MessageBox.Show("Nije uneta količina.", Resources.Greska);
                 return;
+            }
+            if (_trackingType.Length > 0 && _trackingType != "0") {
+                if (tbPracenje.Text.Trim().Length == 0) {
+                    MessageBox.Show("Nije uneto praćenje.", Resources.Greska);
+                    return;
+                }
             }
             ItemInventoryModel item = new ItemInventoryModel();
             item.BinCode = tbRegal.Text.Trim();
@@ -160,6 +167,7 @@ namespace KIPS_WMS.UI.Popis
                     _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
                     _code = query[0][DatabaseModel.ItemDbModel.ItemCode].ToString();
                     _itemUom = query[0][DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
+                    _trackingType = query[0][DatabaseModel.ItemDbModel.ItemTracking].ToString();
 
                     tbJM.Text = _itemUom;
 
@@ -174,6 +182,7 @@ namespace KIPS_WMS.UI.Popis
                         _barcode = query[0][DatabaseModel.ItemDbModel.ItemBarcode].ToString();
                         _code = query[0][DatabaseModel.ItemDbModel.ItemCode].ToString();
                         _itemUom = query[0][DatabaseModel.ItemDbModel.ItemUnitOfMeasure].ToString();
+                        _trackingType = query[0][DatabaseModel.ItemDbModel.ItemTracking].ToString();
 
                         tbJM.Text = _itemUom;
 
@@ -300,6 +309,8 @@ namespace KIPS_WMS.UI.Popis
                     tbPracenje.Text = "";
                     tbJM.Text = "";
                     _inventory = new List<ItemInventoryModel>();
+
+                    MessageBox.Show("Popisna lista uspešno poslata.");
 
                     DialogResult = DialogResult.OK;
                     Close();
