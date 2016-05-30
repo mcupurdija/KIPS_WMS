@@ -29,6 +29,7 @@ namespace KIPS_WMS
         public const string KipsNavWsUrlProdukcija = "http://192.168.10.72:7397/NAVNasService/WS/KIPS%20d.o.o/Codeunit/MobileWMSSync";
         public const string KipsNavWsUrlProdukcija2016 = "http://192.168.10.20:7077/KIPS_NAV_90_PROD_WS/WS/KIPS%20d.o.o./Codeunit/MobileWMSSync";
         public const string KipsNavWsUrlDev2016 = "http://192.168.10.20:6047/KIPS_NAV_90_DEV/WS/KIPS d.o.o./Codeunit/MobileWMSSync";
+        public const string KipsNavWsUrlTest2016 = "http://192.168.10.20:7057/KIPS_NAV_90_TEST/WS/KIPS%20d.o.o./Codeunit/MobileWMSSync";
         public static NetworkCredential GoProCredentials = new NetworkCredential("wurthtest", "remote", "gopro");
         public static NetworkCredential KipsCredentials = new NetworkCredential("gopro", "Sifra123", "KIPS");
 
@@ -45,7 +46,7 @@ namespace KIPS_WMS
         public const int DocumentTypeIzdvajanje = 4;
 
 
-        public const string AppVersion = "1.0.3";
+        public const string AppVersion = "1.0.4";
 
 
         public static string GetCurrentDirectory()

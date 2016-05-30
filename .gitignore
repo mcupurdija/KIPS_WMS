@@ -1,1 +1,3 @@
-KIPS_WMS/bin/
+/KIPS_WMS/bin/**
+/KIPS_WMS_CAB/Debug/**
+/KIPS_WMS_CAB/Release/**
