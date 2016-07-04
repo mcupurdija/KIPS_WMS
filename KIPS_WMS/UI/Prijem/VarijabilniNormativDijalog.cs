@@ -72,13 +72,18 @@ namespace KIPS_WMS.UI.Prijem
                     if (result == DialogResult.Yes)
                     {
                         _normativeLines.Add(new SendNormativeModel("1", "", "", tbKolicinaOsnovnaJedinicaMere.Text));
-                        DialogResult = DialogResult.OK;
+                        DialogResult = DialogResult.Yes;
                         Close();
                     }
                     else
                     {
                         tbKolicinaOsnovnaJedinicaMere.Focus();
                     }
+                }
+                else {
+                    _normativeLines.Add(new SendNormativeModel("1", "", "", tbKolicinaOsnovnaJedinicaMere.Text));
+                    DialogResult = DialogResult.Yes;
+                    Close();
                 }
             }
             catch (Exception ex)

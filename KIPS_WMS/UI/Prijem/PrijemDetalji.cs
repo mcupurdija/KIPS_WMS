@@ -278,7 +278,7 @@ namespace KIPS_WMS.UI.Prijem
                     var varijabilniNormativ = new VarijabilniNormativDijalog(_selectedLine, decimal.Parse(quantity, culture));
                     DialogResult result = varijabilniNormativ.ShowDialog();
 
-                    if (result == DialogResult.OK)
+                    if (result == DialogResult.Yes)
                     {
                         var engine = new FileHelperEngine(typeof(SendNormativeModel));
                         normativeLines = engine.WriteString(varijabilniNormativ._normativeLines);

@@ -23,6 +23,7 @@ namespace KIPS_WMS.UI.Izdvajanje
         private List<WarehousePickLineModel> _filteredPickLines;
         private WarehousePickLineModel _selectedLine;
         private List<WarehousePickLineModel> _warehousePickLines;
+        CultureInfo culture = Utils.GetLocalCulture();
 
         public IzdvajanjeLinije(string pickNo)
         {
@@ -101,6 +102,22 @@ namespace KIPS_WMS.UI.Izdvajanje
                         x => x.ItemNo.Contains(filterText) || x.ItemDescription.Contains(filterText)).OrderBy(x => x.QuantityOutstanding).ThenBy(x => x.BinCode).ToList()
                     : _warehousePickLines.OrderBy(x => x.QuantityOutstanding).ThenBy(x => x.BinCode).ToList();
             }
+            List<WarehousePickLineModel> sortedListWithItems = new List<WarehousePickLineModel>();
+            List<WarehousePickLineModel> sortedListWithoutItems = new List<WarehousePickLineModel>();
+
+            for (int i = 0; i < _filteredPickLines.Count; i++)
+            {
+                if (decimal.Parse(_filteredPickLines[i].QuantityOutstanding, culture) > 0)
+                {
+                    sortedListWithItems.Add(_filteredPickLines[i]);
+                }
+                else if (decimal.Parse(_filteredPickLines[i].QuantityOutstanding, culture) == 0)
+                {
+                    sortedListWithoutItems.Add(_filteredPickLines[i]);
+                }
+            }
+            _filteredPickLines = sortedListWithItems.OrderBy(x => x.BinCode)
+                                        .Concat(sortedListWithoutItems.OrderBy(x => x.BinCode)).ToList();
             var listItem = new ListItem();
 
             for (int i = 0; i < _filteredPickLines.Count; i++)
