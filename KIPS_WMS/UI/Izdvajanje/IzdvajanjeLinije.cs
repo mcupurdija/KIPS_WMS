@@ -107,11 +107,11 @@ namespace KIPS_WMS.UI.Izdvajanje
 
             for (int i = 0; i < _filteredPickLines.Count; i++)
             {
-                if (decimal.Parse(_filteredPickLines[i].QuantityOutstanding, culture) > 0)
+                if (decimal.Parse(_filteredPickLines[i].QuantityOutstanding, culture) > 0 && _filteredPickLines[i].BinCode.Trim().Length != 0)
                 {
                     sortedListWithItems.Add(_filteredPickLines[i]);
                 }
-                else if (decimal.Parse(_filteredPickLines[i].QuantityOutstanding, culture) == 0)
+                else
                 {
                     sortedListWithoutItems.Add(_filteredPickLines[i]);
                 }

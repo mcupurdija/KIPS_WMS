@@ -99,6 +99,10 @@ namespace KIPS_WMS.UI.Prijem
             {
                 decimal diff = Convert.ToDecimal(tbKolicinaOsnovnaJedinicaMere.Text, culture) / _quantity;
                 tbFaktorKonverzije.Text = diff.ToString("#,0.####", culture);
+                if (e.KeyCode == Keys.Enter)
+                {
+                    bPosalji_Click(sender, e);
+                }
             }
             catch (Exception ex)
             {
