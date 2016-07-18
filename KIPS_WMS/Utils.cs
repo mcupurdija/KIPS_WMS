@@ -15,6 +15,10 @@ namespace KIPS_WMS
 {
     public static class Utils
     {
+
+        public const string AppVersion = "1.0.5";
+
+
         public const string UnknownCustomerCode = "FL00001";
 
         public const int CsvImportCustomers = 1;
@@ -44,9 +48,6 @@ namespace KIPS_WMS
         public const int DocumentTypeIsporuka = 2;
         public const int DocumentTypeSkladistenje = 3;
         public const int DocumentTypeIzdvajanje = 4;
-
-
-        public const string AppVersion = "1.0.4";
 
 
         public static string GetCurrentDirectory()
