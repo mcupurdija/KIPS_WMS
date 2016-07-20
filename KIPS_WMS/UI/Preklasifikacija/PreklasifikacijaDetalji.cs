@@ -227,7 +227,7 @@ namespace KIPS_WMS.UI.Preklasifikacija
                         _itemNo = items[0][DatabaseModel.ItemDbModel.ItemCode].ToString();
                         _itemQuantity = items[0][DatabaseModel.ItemDbModel.ItemQuantity].ToString();
                         _itemTrackingType = items[0][DatabaseModel.ItemDbModel.ItemTracking].ToString();
-                        _itemVariant = items[0][DatabaseModel.ItemDbModel.ItemVariant].ToString();
+                        _itemVariant = items[0][DatabaseModel.ItemDbModel.ItemVariant] == null ? "" : items[0][DatabaseModel.ItemDbModel.ItemVariant].ToString();
 
                         lbNaziv.Text = Resources.NazivArtika + ": " + _itemName;
                         lbJM.Text = _itemUnitOfMeasure;
