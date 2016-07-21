@@ -105,10 +105,26 @@ namespace KIPS_WMS.UI.Izdvajanje
             List<WarehousePickLineModel> sortedListWithItems = new List<WarehousePickLineModel>();
             List<WarehousePickLineModel> sortedListWithoutItems = new List<WarehousePickLineModel>();
 
+            List<WarehousePickLineModel> sortedListRed = new List<WarehousePickLineModel>();
+            List<WarehousePickLineModel> sortedListYellow = new List<WarehousePickLineModel>();
+            List<WarehousePickLineModel> sortedListGreen = new List<WarehousePickLineModel>();
+
             for (int i = 0; i < _filteredPickLines.Count; i++)
             {
                 if (decimal.Parse(_filteredPickLines[i].QuantityOutstanding, culture) > 0 && _filteredPickLines[i].BinCode.Trim().Length != 0)
                 {
+                    if (decimal.Parse(_filteredPickLines[i].QuantityToReceive, culture) == 0)
+                    {
+                        sortedListRed.Add(_filteredPickLines[i]);
+                    }
+                    else if (decimal.Parse(_filteredPickLines[i].QuantityOutstanding, culture) > decimal.Parse(_filteredPickLines[i].QuantityToReceive, culture))
+                    {
+                        sortedListYellow.Add(_filteredPickLines[i]);
+                    }
+                    else if (decimal.Parse(_filteredPickLines[i].QuantityOutstanding, culture) == decimal.Parse(_filteredPickLines[i].QuantityToReceive, culture))
+                    {
+                        sortedListGreen.Add(_filteredPickLines[i]);
+                    }
                     sortedListWithItems.Add(_filteredPickLines[i]);
                 }
                 else
@@ -116,8 +132,11 @@ namespace KIPS_WMS.UI.Izdvajanje
                     sortedListWithoutItems.Add(_filteredPickLines[i]);
                 }
             }
-            _filteredPickLines = sortedListWithItems.OrderBy(x => x.BinCode)
+            _filteredPickLines = sortedListRed.OrderBy(x => x.BinCode)
+                                        .Concat(sortedListYellow.OrderBy(x => x.BinCode))
+                                        .Concat(sortedListGreen.OrderBy(x => x.BinCode))
                                         .Concat(sortedListWithoutItems.OrderBy(x => x.BinCode)).ToList();
+
             var listItem = new ListItem();
 
             for (int i = 0; i < _filteredPickLines.Count; i++)
