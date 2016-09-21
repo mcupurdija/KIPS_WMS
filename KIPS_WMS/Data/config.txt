@@ -1,0 +1,3 @@
+username=gopro
+password=Sifra123
+domain=KIPS
