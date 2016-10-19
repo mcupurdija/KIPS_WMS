@@ -16,7 +16,7 @@ namespace KIPS_WMS
     public static class Utils
     {
 
-        public const string AppVersion = "1.0.7";
+        public const string AppVersion = "1.0.8";
 
 
         public const string UnknownCustomerCode = "FL00001";
